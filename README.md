@@ -1,7 +1,7 @@
 # Stripe Agent Toolkit
 
 The Stripe Agent Toolkit enables popular agent frameworks including LangChain,
-CrewAI, and Vercel's AI SDK, to integrate with Stripe APIs through function calling. The
+CrewAI, CAMEL, and Vercel's AI SDK, to integrate with Stripe APIs through function calling. The
 library is not exhaustive of the entire Stripe API. It includes support for both Python and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
 
 Included below are basic instructions, but refer to the [Python](/python) and [TypeScript](/typescript) packages for more information.
@@ -41,7 +41,7 @@ stripe_agent_toolkit = StripeAgentToolkit(
 )
 ```
 
-The toolkit works with LangChain and CrewAI and can be passed as a list of tools. For example:
+The toolkit works with LangChain, CrewAI and CAMEL and can be passed as a list of tools. For example:
 
 ```python
 from crewai import Agent

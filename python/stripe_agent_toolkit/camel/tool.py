@@ -7,24 +7,42 @@ from __future__ import annotations
 from typing import Any, Optional, Type
 from pydantic import BaseModel
 
-from camel.tools import BaseTool
-
 from ..api import StripeAPI
 
 
-class StripeTool(BaseTool):
+class StripeTool:
     """Tool for interacting with the Stripe API."""
 
-    stripe_api: StripeAPI
-    method: str
-    name: str = ""
-    description: str = ""
-    args_schema: Optional[Type[BaseModel]] = None
-
-    def _run(
+    def __init__(
         self,
-        *args: Any,
+        name: str,
+        description: str,
+        method: str,
+        stripe_api: StripeAPI,
+        args_schema: Optional[Type[BaseModel]] = None,
+    ):
+        super().__init__()
+        self.name = name
+        self.description = description
+        self.method = method
+        self.stripe_api = stripe_api
+        self.args_schema = args_schema
+        self.__name__ = method
+
+    def __call__(
+        self,
         **kwargs: Any,
     ) -> str:
         """Use the Stripe API to run an operation."""
-        return self.stripe_api.run(self.method, *args, **kwargs)
+        if self.args_schema:
+            # Validate and transform arguments using the schema
+            validated_args = self.args_schema(**kwargs)
+            return self.stripe_api.run(self.method, **validated_args.dict())
+        return self.stripe_api.run(self.method, **kwargs)
+
+    def _run(
+        self,
+        **kwargs: Any,
+    ) -> str:
+        """Use the Stripe API to run an operation."""
+        return self.__call__(**kwargs)

@@ -7,9 +7,9 @@ from ..api import StripeAPI
 from ..tools import tools
 from ..configuration import Configuration, is_tool_allowed
 from .tool import StripeTool
+from camel.toolkits import BaseToolkit
 
-
-class StripeAgentToolkit:
+class StripeAgentToolkit(BaseToolkit):
     _tools: List = PrivateAttr(default=[])
 
     def __init__(

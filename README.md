@@ -1,5 +1,7 @@
 # Stripe Agent Toolkit
 
+[![smithery badge](https://smithery.ai/badge/@stripe/agent-toolkit)](https://smithery.ai/server/@stripe/agent-toolkit)
+
 The Stripe Agent Toolkit enables popular agent frameworks including LangChain,
 CrewAI, Vercel's AI SDK, and Model Context Protocol (MCP) to integrate with Stripe APIs through function calling. The
 library is not exhaustive of the entire Stripe API. It includes support for both Python and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
@@ -179,6 +181,14 @@ const model = wrapLanguageModel({
 ```
 
 ## Model Context Protocol
+
+### Installing via Smithery
+
+To install Stripe Agent Toolkit for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@stripe/agent-toolkit):
+
+```bash
+npx -y @smithery/cli install @stripe/agent-toolkit --client claude
+```
 
 The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/). See `/typescript/examples/modelcontextprotocol` for an example. The same configuration options are available, and the server can be run with all supported transports.
 

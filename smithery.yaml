@@ -1,0 +1,26 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+
+build:
+  dockerBuildPath: typescript
+startCommand:
+  type: stdio
+  configSchema:
+    # JSON Schema defining the configuration options for the MCP.
+    type: object
+    required:
+      - stripeSecretKey
+    properties:
+      stripeSecretKey:
+        type: string
+        description: The secret key for the Stripe account to be used with the agent
+          toolkit.
+  commandFunction:
+    # A function that produces the CLI command to start the MCP on stdio.
+    |-
+    (config) => ({
+      command: 'node',
+      args: ['dist/modelcontextprotocol/index.js'],
+      env: {
+        STRIPE_SECRET_KEY: config.stripeSecretKey
+      }
+    })

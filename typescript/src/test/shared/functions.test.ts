@@ -11,7 +11,13 @@ import {
   finalizeInvoice,
   retrieveBalance,
   createRefund,
+  searchDocumentation,
 } from '../../shared/functions';
+import {internalStripeFetch} from '../../shared/helpers';
+
+jest.mock('../../shared/helpers', () => ({
+  internalStripeFetch: jest.fn(),
+}));
 
 const Stripe = jest.fn().mockImplementation(() => ({
   customers: {
@@ -565,5 +571,70 @@ describe('createRefund', () => {
       stripeAccount: context.account,
     });
     expect(result).toEqual(mockRefund);
+  });
+});
+
+describe('searchDocumentation', () => {
+  it('should search for Stripe documentation and return sources', async () => {
+    const question = 'How to create Stripe checkout session?';
+    const requestBody = {
+      question: question,
+      language: 'ruby',
+    };
+
+    const mockDocumentation = {
+      question: question,
+      status: 'success',
+      sources: [
+        {
+          type: 'docs',
+          url: 'https://docs.stripe.com/payments/checkout/how-checkout-works',
+          title: 'How checkout works',
+          content: '...',
+        },
+      ],
+    };
+
+    const context = {};
+
+    (internalStripeFetch as jest.Mock).mockResolvedValue(mockDocumentation);
+
+    const result = await searchDocumentation(stripe, context, requestBody);
+
+    expect(internalStripeFetch).toHaveBeenCalledWith(
+      'https://ai.stripe.com/search',
+      'POST',
+      requestBody
+    );
+
+    // We sanitize the response to remove the status field
+    const {status, ...sanitizedResponse} = mockDocumentation;
+    expect(result).toEqual(sanitizedResponse);
+  });
+
+  it('should return failure string if search failed', async () => {
+    const question = 'What is the meaning of life?';
+    const requestBody = {
+      question: question,
+    };
+
+    const mockError = {
+      error: 'Invalid query',
+      message:
+        'Unable to process your question. Please rephrase it to be more specific.',
+    };
+
+    const context = {};
+
+    (internalStripeFetch as jest.Mock).mockResolvedValue(mockError);
+
+    const result = await searchDocumentation(stripe, context, requestBody);
+
+    expect(internalStripeFetch).toHaveBeenCalledWith(
+      'https://ai.stripe.com/search',
+      'POST',
+      requestBody
+    );
+    expect(result).toEqual('Failed to search documentation');
   });
 });

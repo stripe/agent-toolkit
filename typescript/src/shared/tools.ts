@@ -13,6 +13,7 @@ import {
   finalizeInvoicePrompt,
   retrieveBalancePrompt,
   createRefundPrompt,
+  searchDocumentationPrompt,
 } from './prompts';
 
 import {
@@ -28,6 +29,7 @@ import {
   finalizeInvoiceParameters,
   retrieveBalanceParameters,
   createRefundParameters,
+  searchDocumentationParameters,
 } from './parameters';
 
 export type Tool = {
@@ -172,6 +174,17 @@ const tools: Tool[] = [
     actions: {
       refunds: {
         create: true,
+      },
+    },
+  },
+  {
+    method: 'search_documentation',
+    name: 'Search Documentation',
+    description: searchDocumentationPrompt,
+    parameters: searchDocumentationParameters,
+    actions: {
+      search: {
+        read: true,
       },
     },
   },

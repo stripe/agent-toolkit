@@ -13,8 +13,11 @@ import {
   finalizeInvoiceParameters,
   retrieveBalanceParameters,
   createRefundParameters,
+  searchDocumentationParameters,
 } from './parameters';
 import type {Context} from './configuration';
+import {SearchDocumentationResponse} from './types';
+import {internalStripeFetch} from './helpers';
 
 export const createCustomer = async (
   stripe: Stripe,
@@ -232,5 +235,30 @@ export const createRefund = async (
     return refund;
   } catch (error) {
     return 'Failed to create refund';
+  }
+};
+
+export const searchDocumentation = async (
+  stripe: Stripe,
+  context: Context,
+  params: z.infer<typeof searchDocumentationParameters>
+) => {
+  try {
+    const endpoint = 'https://ai.stripe.com/search';
+    const response = await internalStripeFetch<
+      z.infer<typeof searchDocumentationParameters>,
+      SearchDocumentationResponse
+    >(endpoint, 'POST', params);
+    // Handle bad queries
+    if (!response.status || response.status !== 'success') {
+      throw new Error('Bad query');
+    }
+    // Sanitize response
+    const sanitizedResponse = Object.fromEntries(
+      Object.entries(response).filter(([key]) => key !== 'status')
+    );
+    return sanitizedResponse;
+  } catch (error) {
+    return 'Failed to search documentation';
   }
 };

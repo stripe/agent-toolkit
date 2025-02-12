@@ -86,3 +86,11 @@ It takes three arguments:
 - amount (int, optional): The amount to refund in cents.
 - reason (str, optional): The reason for the refund.
 `;
+
+export const searchDocumentationPrompt = `
+This tool will take in a question input, search and retrieve relevant Stripe documentation to answer the question.
+
+It takes two arguments:
+- question (str): The question to ask about Stripe documentation.
+- language (str, optional): The programming language to search for in the the documentation.
+`;

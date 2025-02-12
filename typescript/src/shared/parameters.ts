@@ -113,3 +113,15 @@ export const createRefundParameters = z.object({
     .optional()
     .describe('The amount to refund in cents.'),
 });
+
+export const searchDocumentationParameters = z.object({
+  question: z
+    .string()
+    .describe('The question to ask about Stripe documentation.'),
+  language: z
+    .string()
+    .optional()
+    .describe(
+      'The programming language to search for in the the documentation.'
+    ),
+});

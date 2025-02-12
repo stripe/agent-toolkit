@@ -11,7 +11,8 @@ export type Object =
   | 'products'
   | 'prices'
   | 'balance'
-  | 'refunds';
+  | 'refunds'
+  | 'search';
 
 export type Permission = 'create' | 'update' | 'read';
 

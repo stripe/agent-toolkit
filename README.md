@@ -180,7 +180,17 @@ const model = wrapLanguageModel({
 
 ## Model Context Protocol
 
-The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/). See `/typescript/examples/modelcontextprotocol` for an example. The same configuration options are available, and the server can be run with all supported transports.
+The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/).
+
+To run the Stripe MCP server using npx, use the following command:
+
+```bash
+npx -y @stripe/mcp --tools=all --api-key=<YOUR-STRIPE-SECRET-KEY>
+```
+
+Replace `<YOUR-STRIPE-SECRET-KEY>` with your actual Stripe secret key. Or, you could set the STRIPE_SECRET_KEY in your environment variables.
+
+Alternatively, you can set up your own MCP server. For example:
 
 ```typescript
 import { StripeAgentToolkit } from "@stripe/agent-toolkit/modelcontextprotocol";

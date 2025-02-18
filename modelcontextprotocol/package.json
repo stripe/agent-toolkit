@@ -1,0 +1,33 @@
+{
+  "name": "@stripe/mcp",
+  "version": "0.1.0",
+  "homepage": "https://github.com/stripe/agent-toolkit",
+  "description": "A command line tool for setting up Stripe MCP server",
+  "main": "index.js",
+  "bin": {
+    "stripe-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "VERSION",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('dist/index.js', '755')\""
+  },
+  "packageManager": "pnpm@9.11.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@stripe/agent-toolkit": "latest"
+  },
+  "keywords": [],
+  "author": "Stripe <support@stripe.com> (https://stripe.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.13.4"
+  }
+}

@@ -9,8 +9,13 @@ type ToolkitConfig = {
   };
 };
 
-const acceptedKeys = ["api-key", "tools"];
-const acceptedTools = [
+type Options = {
+  tools?: string[];
+  apiKey?: string;
+};
+
+const ACCEPTED_ARGS = ["api-key", "tools"];
+const ACCEPTED_TOOLS = [
   "customers.create",
   "customers.read",
   "products.create",
@@ -26,45 +31,46 @@ const acceptedTools = [
   "documentation.read",
 ];
 
-function parseArgs(args: string[]) {
-  const options: any = {};
+function parseArgs(args: string[]): Options {
+  const options: Options = {};
 
   args.forEach((arg) => {
     if (arg.startsWith("--")) {
       const [key, value] = arg.slice(2).split("=");
 
-      // Check if the key is accepted
-      if (!acceptedKeys.includes(key)) {
+      if (key == "tools") {
+        options["tools"] = value.split(",");
+      } else if (key == "api-key") {
+        // Validate api-key format
+        if (!value.startsWith("sk_")) {
+          throw new Error('API key must start with "sk_".');
+        }
+        options["apiKey"] = value;
+      } else {
         throw new Error(
-          `Invalid argument: ${key}. Accepted arguments are: ${acceptedKeys.join(
+          `Invalid argument: ${key}. Accepted arguments are: ${ACCEPTED_ARGS.join(
             ", "
           )}`
         );
       }
-
-      options[key] = value;
     }
   });
 
-  // Check if both required arguments are present
+  // Check if required tools arguments is present
   if (!options["tools"]) {
     throw new Error("The --tools arguments must be provided.");
   }
 
-  // Validate api-key format
-  if (options["api-key"] && !options["api-key"].startsWith("sk_")) {
-    throw new Error('API key must start with "sk_".');
-  }
-
   // Validate tools against accepted enum values
-  const toolsArray = options["tools"].split(",");
-  toolsArray.forEach((tool: string) => {
+  options["tools"].forEach((tool: string) => {
     if (tool == "all") {
       return;
     }
-    if (!acceptedTools.includes(tool.trim())) {
+    if (!ACCEPTED_TOOLS.includes(tool.trim())) {
       throw new Error(
-        `Invalid tool: ${tool}. Accepted tools are: ${acceptedTools.join(", ")}`
+        `Invalid tool: ${tool}. Accepted tools are: ${ACCEPTED_TOOLS.join(
+          ", "
+        )}`
       );
     }
   });
@@ -75,8 +81,8 @@ function parseArgs(args: string[]) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
 
-  // Set the environment variable
-  const apiKey = args["api-key"] || process.env.STRIPE_SECRET_KEY;
+  // Check if API key is either provided in args or set in environment variables
+  const apiKey = args["apiKey"] || process.env.STRIPE_SECRET_KEY;
   if (!apiKey) {
     throw new Error(
       "Stripe API key not provided. Please either pass it as an argument --api-key=$KEY or set the STRIPE_SECRET_KEY environment variable."
@@ -84,17 +90,19 @@ async function main() {
   }
 
   // Create the StripeAgentToolkit instance
-  const tools = args["tools"].split(",");
+  const selectedTools = args["tools"]!;
   const configuration: ToolkitConfig = { actions: {} };
 
-  // Handle all
-  if (tools.includes("all")) {
-    acceptedTools.forEach((tool) => {
+  if (selectedTools.includes("all")) {
+    ACCEPTED_TOOLS.forEach((tool) => {
       const [product, action] = tool.split(".");
-      configuration.actions[product] = { [action]: true };
+      configuration.actions[product] = {
+        ...configuration.actions[product],
+        [action]: true,
+      };
     });
   } else {
-    tools.forEach((tool: any) => {
+    selectedTools.forEach((tool: any) => {
       const [product, action] = tool.split(".");
       configuration.actions[product] = { [action]: true };
     });
@@ -107,7 +115,7 @@ async function main() {
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  // console.log will output to standard I/O which will confuse the server and print errors
+  // We use console.error instead of console.log since console.log will output to stdio, which will confuse the MCP server
   console.error("Stripe MCP Server running on stdio");
 }
 

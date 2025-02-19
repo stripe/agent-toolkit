@@ -185,10 +185,10 @@ The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https:
 To run the Stripe MCP server using npx, use the following command:
 
 ```bash
-npx -y @stripe/mcp --tools=all --api-key=<YOUR-STRIPE-SECRET-KEY>
+npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
 ```
 
-Replace `<YOUR-STRIPE-SECRET-KEY>` with your actual Stripe secret key. Or, you could set the STRIPE_SECRET_KEY in your environment variables.
+Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Or, you could set the STRIPE_SECRET_KEY in your environment variables.
 
 Alternatively, you can set up your own MCP server. For example:
 

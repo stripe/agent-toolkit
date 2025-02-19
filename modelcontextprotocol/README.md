@@ -7,10 +7,14 @@ The Stripe [Model Context Protocol](https://modelcontextprotocol.com/) server al
 To run the Stripe MCP server using npx, use the following command:
 
 ```bash
-npx -y @stripe/mcp --tools=all --api-key=<YOUR-STRIPE-SECRET-KEY>
+# To set up all available tools
+npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
+
+# To set up specific tools
+npx -y @stripe/mcp --tools=customers.create,customers.read,products.create --api-key=YOUR_STRIPE_SECRET_KEY
 ```
 
-Replace `<YOUR-STRIPE-SECRET-KEY>` with your actual Stripe secret key. Alternatively, you could set the STRIPE_SECRET_KEY in your environment variables.
+Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Alternatively, you could set the STRIPE_SECRET_KEY in your environment variables.
 
 ### Available tools
 
@@ -29,3 +33,21 @@ Replace `<YOUR-STRIPE-SECRET-KEY>` with your actual Stripe secret key. Alternati
 | `balance.read`        | Retrieve balance information |
 | `refunds.create`      | Create a new refund          |
 | `documentation.read`  | Search Stripe documentation  |
+
+## Debugging the Server
+
+To debug your server, you can use the [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector).
+
+Run the following command in your terminal:
+
+```bash
+# Start MCP Inspector and server with all tools
+npx @modelcontextprotocol/inspector npx @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
+```
+
+### Instructions
+
+1. Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe API secret key.
+2. Run the command to start both the MCP Inspector and Stripe MCP server.
+3. Open the MCP Inspector UI in your browser to see the list of tools you selected.
+4. You can test each tool individually to debug your server.

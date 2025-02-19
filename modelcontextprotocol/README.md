@@ -12,9 +12,12 @@ npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
 
 # To set up specific tools
 npx -y @stripe/mcp --tools=customers.create,customers.read,products.create --api-key=YOUR_STRIPE_SECRET_KEY
+
+# To configure a Stripe connected account
+npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY --stripe-account=CONNECTED_ACCOUNT_ID
 ```
 
-Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Alternatively, you could set the STRIPE_SECRET_KEY in your environment variables.
+Make sure to replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Alternatively, you could set the STRIPE_SECRET_KEY in your environment variables.
 
 ### Available tools
 
@@ -48,6 +51,6 @@ npx @modelcontextprotocol/inspector npx @stripe/mcp --tools=all --api-key=YOUR_S
 ### Instructions
 
 1. Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe API secret key.
-2. Run the command to start both the MCP Inspector and Stripe MCP server.
-3. Open the MCP Inspector UI in your browser to see the list of tools you selected.
-4. You can test each tool individually to debug your server.
+2. Run the command to start the MCP Inspector.
+3. Open the MCP Inspector UI in your browser and click Connect to start the MCP server.
+4. You can see the list of tools you selected and test each tool individually.

@@ -7,14 +7,18 @@ type ToolkitConfig = {
   actions: {
     [product: string]: { [action: string]: boolean };
   };
+  context?: {
+    account: string;
+  };
 };
 
 type Options = {
   tools?: string[];
   apiKey?: string;
+  stripeAccount?: string;
 };
 
-const ACCEPTED_ARGS = ["api-key", "tools"];
+const ACCEPTED_ARGS = ["api-key", "tools", "stripe-account"];
 const ACCEPTED_TOOLS = [
   "customers.create",
   "customers.read",
@@ -41,11 +45,16 @@ function parseArgs(args: string[]): Options {
       if (key == "tools") {
         options["tools"] = value.split(",");
       } else if (key == "api-key") {
-        // Validate api-key format
         if (!value.startsWith("sk_")) {
           throw new Error('API key must start with "sk_".');
         }
         options["apiKey"] = value;
+      } else if (key == "stripe-account") {
+        // Validate api-key format
+        if (!value.startsWith("acct_")) {
+          throw new Error('Stripe account must start with "acct_".');
+        }
+        options["stripeAccount"] = value;
       } else {
         throw new Error(
           `Invalid argument: ${key}. Accepted arguments are: ${ACCEPTED_ARGS.join(
@@ -75,22 +84,23 @@ function parseArgs(args: string[]): Options {
     }
   });
 
-  return options;
-}
-
-async function main() {
-  const args = parseArgs(process.argv.slice(2));
-
   // Check if API key is either provided in args or set in environment variables
-  const apiKey = args["apiKey"] || process.env.STRIPE_SECRET_KEY;
+  const apiKey = options["apiKey"] || process.env.STRIPE_SECRET_KEY;
   if (!apiKey) {
     throw new Error(
       "Stripe API key not provided. Please either pass it as an argument --api-key=$KEY or set the STRIPE_SECRET_KEY environment variable."
     );
   }
+  options["apiKey"] = apiKey;
+
+  return options;
+}
+
+async function main() {
+  const options = parseArgs(process.argv.slice(2));
 
   // Create the StripeAgentToolkit instance
-  const selectedTools = args["tools"]!;
+  const selectedTools = options["tools"]!;
   const configuration: ToolkitConfig = { actions: {} };
 
   if (selectedTools.includes("all")) {
@@ -108,8 +118,13 @@ async function main() {
     });
   }
 
+  // Append stripe account to configuration if provided
+  if (options["stripeAccount"]) {
+    configuration["context"] = { account: options["stripeAccount"] };
+  }
+
   const server = new StripeAgentToolkit({
-    secretKey: apiKey,
+    secretKey: options["apiKey"]!,
     configuration: configuration,
   });
 

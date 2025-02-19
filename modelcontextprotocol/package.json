@@ -22,12 +22,17 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.4.1",
     "@stripe/agent-toolkit": "latest"
   },
   "keywords": [],
   "author": "Stripe <support@stripe.com> (https://stripe.com/)",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^22.13.4"
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.4",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2"
   }
 }

@@ -35,7 +35,7 @@ const ACCEPTED_TOOLS = [
   "documentation.read",
 ];
 
-function parseArgs(args: string[]): Options {
+export function parseArgs(args: string[]): Options {
   const options: Options = {};
 
   args.forEach((arg) => {
@@ -96,7 +96,7 @@ function parseArgs(args: string[]): Options {
   return options;
 }
 
-async function main() {
+export async function main() {
   const options = parseArgs(process.argv.slice(2));
 
   // Create the StripeAgentToolkit instance
@@ -134,7 +134,9 @@ async function main() {
   console.error("Stripe MCP Server running on stdio");
 }
 
-main().catch((error) => {
-  console.error("Fatal error in main():", error);
-  throw new Error("Fatal error in main()");
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error("Fatal error in main():", error);
+    throw new Error("Fatal error in main()");
+  });
+}

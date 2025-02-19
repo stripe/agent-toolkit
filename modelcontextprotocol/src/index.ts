@@ -2,6 +2,7 @@
 
 import {StripeAgentToolkit} from '@stripe/agent-toolkit/modelcontextprotocol';
 import {StdioServerTransport} from '@modelcontextprotocol/sdk/server/stdio.js';
+import {green, red, yellow} from 'colors';
 
 type ToolkitConfig = {
   actions: {
@@ -96,6 +97,11 @@ export function parseArgs(args: string[]): Options {
   return options;
 }
 
+function handleError(error: any) {
+  console.error(red('\n🚨  Error initializing Stripe MCP server:\n'));
+  console.error(yellow(`   ${error.message}\n`));
+}
+
 export async function main() {
   const options = parseArgs(process.argv.slice(2));
 
@@ -131,12 +137,11 @@ export async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   // We use console.error instead of console.log since console.log will output to stdio, which will confuse the MCP server
-  console.error('Stripe MCP Server running on stdio');
+  console.error(green('✅ Stripe MCP Server running on stdio'));
 }
 
 if (require.main === module) {
   main().catch((error) => {
-    console.error('Fatal error in main():', error);
-    throw new Error('Fatal error in main()');
+    handleError(error);
   });
 }

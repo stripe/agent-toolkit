@@ -25,7 +25,8 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.4.1",
-    "@stripe/agent-toolkit": "latest"
+    "@stripe/agent-toolkit": "latest",
+    "colors": "^1.4.0"
   },
   "keywords": [
     "mcp",

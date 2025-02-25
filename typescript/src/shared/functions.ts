@@ -13,10 +13,12 @@ import {
   finalizeInvoiceParameters,
   retrieveBalanceParameters,
   createRefundParameters,
-  searchDocumentationParameters,
   listPaymentIntentsParameters,
+  createCheckoutSessionParameters,
+  expireCheckoutSessionParameters,
+  searchDocumentationParameters,
 } from './parameters';
-import type {Context} from './configuration';
+import type {Context, UI} from './configuration';
 
 export const createCustomer = async (
   stripe: Stripe,
@@ -258,6 +260,42 @@ export const listPaymentIntents = async (
     }));
   } catch (error) {
     return 'Failed to list payment intents';
+  }
+};
+
+export const createCheckoutSession = async (
+  stripe: Stripe,
+  ui: UI,
+  params: z.infer<typeof createCheckoutSessionParameters>
+) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      ...params,
+      mode: 'payment',
+      ui_mode: ui.mode,
+      redirect_on_completion: ui.return_url ? 'always' : 'never',
+    });
+    return {
+      id: session.id,
+      status: session.status,
+    };
+  } catch (error) {
+    return 'Failed to create checkout session';
+  }
+};
+
+export const expireCheckoutSession = async (
+  stripe: Stripe,
+  params: z.infer<typeof expireCheckoutSessionParameters>
+) => {
+  try {
+    const session = await stripe.checkout.sessions.expire(params.session);
+    return {
+      id: session.id,
+      status: session.status,
+    };
+  } catch (error) {
+    return 'Failed to expire checkout session';
   }
 };
 

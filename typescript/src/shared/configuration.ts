@@ -13,6 +13,8 @@ export type Object =
   | 'balance'
   | 'refunds'
   | 'paymentIntents'
+  | 'checkoutSessions'
+  | 'balance'
   | 'documentation';
 
 export type Permission = 'create' | 'update' | 'read';
@@ -34,11 +36,20 @@ export type Context = {
   account?: string;
 };
 
+// UI are settings that are applied to how the integration makes
+// requests to Stripe that relate to UI experiences such as Checkout.
+export type UI = {
+  mode?: 'embedded' | 'hosted';
+  return_url?: string;
+  success_url?: string;
+};
+
 // Configuration provides various settings and options for the integration
 // to tune and manage how it behaves.
 export type Configuration = {
   actions?: Actions;
   context?: Context;
+  ui?: UI;
 };
 
 export const isToolAllowed = (

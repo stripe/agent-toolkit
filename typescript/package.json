@@ -61,7 +61,7 @@
   "peerDependencies": {
     "@langchain/core": "^0.3.6",
     "@modelcontextprotocol/sdk": "^1.4.1",
-    "ai": "^3.4.7 || ^4.0.0"
+    "ai": "^3.4.33 || ^4.1.46"
   },
   "workspaces": [
     ".",

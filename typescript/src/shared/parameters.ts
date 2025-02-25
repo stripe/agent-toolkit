@@ -130,6 +130,25 @@ export const listPaymentIntentsParameters = z.object({
     ),
 });
 
+export const createCheckoutSessionParameters = z.object({
+  line_items: z
+    .array(
+      z.object({
+        price: z.string().describe('The ID of the price to include.'),
+        quantity: z.number().int().describe('The quantity of the item.'),
+      })
+    )
+    .min(1)
+    .max(100)
+    .describe(
+      'List of up to 100 line items to include in the checkout session.'
+    ),
+});
+
+export const expireCheckoutSessionParameters = z.object({
+  session: z.string().describe('The ID of the checkout session to expire.'),
+});
+
 export const searchDocumentationParameters = z.object({
   question: z
     .string()

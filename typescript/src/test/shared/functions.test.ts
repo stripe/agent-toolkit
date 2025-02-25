@@ -11,11 +11,15 @@ import {
   finalizeInvoice,
   retrieveBalance,
   createRefund,
-  searchDocumentation,
   listPaymentIntents,
+  createCheckoutSession,
+  expireCheckoutSession,
+  searchDocumentation,
 } from '../../shared/functions';
 import {z} from 'zod';
 import {searchDocumentationParameters} from '../../shared/parameters';
+
+import type {UI} from '../../shared/configuration';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   customers: {
@@ -49,6 +53,12 @@ const Stripe = jest.fn().mockImplementation(() => ({
   },
   refunds: {
     create: jest.fn(),
+  },
+  checkout: {
+    sessions: {
+      create: jest.fn(),
+      expire: jest.fn(),
+    },
   },
 }));
 
@@ -651,6 +661,67 @@ describe('listPaymentIntents', () => {
       }
     );
     expect(result).toEqual(mockPaymentIntents);
+  });
+});
+
+describe('createCheckoutSession', () => {
+  it('should create a checkout session and return it', async () => {
+    const ui: UI = {mode: 'embedded'};
+    const params = {
+      line_items: [
+        {
+          price: 'price_123456',
+          quantity: 1,
+        },
+      ],
+    };
+
+    const mockCheckoutSession = {
+      id: 'cs_123456',
+      status: 'open',
+      client_secret: 'client_secret_real',
+    };
+
+    stripe.checkout.sessions.create.mockResolvedValue(mockCheckoutSession);
+
+    const result = await createCheckoutSession(stripe, ui, params);
+
+    expect(stripe.checkout.sessions.create).toHaveBeenCalledWith({
+      ...params,
+      mode: 'payment',
+      ui_mode: ui.mode,
+      redirect_on_completion: 'never',
+    });
+
+    if (typeof result === 'string') {
+      throw new Error('Failed to create checkout session');
+    }
+
+    expect(result.id).toEqual(mockCheckoutSession.id);
+    expect(result.status).toEqual(mockCheckoutSession.status);
+  });
+});
+
+describe('expireCheckoutSession', () => {
+  it('should expire a checkout session', async () => {
+    const params = {
+      session: 'cs_123456',
+    };
+
+    const mockCheckoutSession = {
+      id: 'cs_123456',
+      status: 'expired',
+    };
+
+    stripe.checkout.sessions.expire.mockResolvedValue(mockCheckoutSession);
+
+    const result = await expireCheckoutSession(stripe, params);
+
+    expect(stripe.checkout.sessions.expire).toHaveBeenCalledWith(
+      mockCheckoutSession.id
+    );
+
+    expect(result).toEqual(mockCheckoutSession);
   });
 });
 

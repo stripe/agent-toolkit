@@ -16,7 +16,11 @@ class StripeAgentToolkit implements BaseToolkit {
     secretKey: string;
     configuration: Configuration;
   }) {
-    this._stripe = new StripeAPI(secretKey, configuration.context);
+    this._stripe = new StripeAPI(
+      secretKey,
+      configuration.context,
+      configuration.ui
+    );
 
     const filteredTools = tools.filter((tool) =>
       isToolAllowed(tool, configuration)

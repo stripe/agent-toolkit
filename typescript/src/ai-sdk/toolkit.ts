@@ -7,7 +7,6 @@ import type {
   Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware,
 } from 'ai';
 import StripeTool from './tool';
-
 type StripeMiddlewareConfig = {
   billing?: {
     type?: 'token';
@@ -31,7 +30,11 @@ class StripeAgentToolkit {
     secretKey: string;
     configuration: Configuration;
   }) {
-    this._stripe = new StripeAPI(secretKey, configuration.context);
+    this._stripe = new StripeAPI(
+      secretKey,
+      configuration.context,
+      configuration.ui
+    );
     this.tools = {};
 
     const filteredTools = tools.filter((tool) =>

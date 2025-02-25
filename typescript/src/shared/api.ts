@@ -12,18 +12,22 @@ import {
   finalizeInvoice,
   retrieveBalance,
   createRefund,
-  searchDocumentation,
   listPaymentIntents,
+  createCheckoutSession,
+  expireCheckoutSession,
+  searchDocumentation,
 } from './functions';
 
-import type {Context} from './configuration';
+import type {Context, UI} from './configuration';
 
 class StripeAPI {
   stripe: Stripe;
 
   context: Context;
 
-  constructor(secretKey: string, context?: Context) {
+  ui: UI;
+
+  constructor(secretKey: string, context?: Context, ui?: UI) {
     const stripeClient = new Stripe(secretKey, {
       appInfo: {
         name: 'stripe-agent-toolkit-typescript',
@@ -33,6 +37,7 @@ class StripeAPI {
     });
     this.stripe = stripeClient;
     this.context = context || {};
+    this.ui = ui || {};
   }
 
   async createMeterEvent({
@@ -58,74 +63,52 @@ class StripeAPI {
 
   async run(method: string, arg: any) {
     if (method === 'create_customer') {
-      const output = JSON.stringify(
-        await createCustomer(this.stripe, this.context, arg)
-      );
+      const output = await createCustomer(this.stripe, this.context, arg);
       return output;
     } else if (method === 'list_customers') {
-      const output = JSON.stringify(
-        await listCustomers(this.stripe, this.context, arg)
-      );
+      const output = await listCustomers(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_product') {
-      const output = JSON.stringify(
-        await createProduct(this.stripe, this.context, arg)
-      );
+      const output = await createProduct(this.stripe, this.context, arg);
       return output;
     } else if (method === 'list_products') {
-      const output = JSON.stringify(
-        await listProducts(this.stripe, this.context, arg)
-      );
+      const output = await listProducts(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_price') {
-      const output = JSON.stringify(
-        await createPrice(this.stripe, this.context, arg)
-      );
+      const output = await createPrice(this.stripe, this.context, arg);
       return output;
     } else if (method === 'list_prices') {
-      const output = JSON.stringify(
-        await listPrices(this.stripe, this.context, arg)
-      );
+      const output = await listPrices(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_payment_link') {
-      const output = JSON.stringify(
-        await createPaymentLink(this.stripe, this.context, arg)
-      );
+      const output = await createPaymentLink(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_invoice') {
-      const output = JSON.stringify(
-        await createInvoice(this.stripe, this.context, arg)
-      );
+      const output = await createInvoice(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_invoice_item') {
-      const output = JSON.stringify(
-        await createInvoiceItem(this.stripe, this.context, arg)
-      );
+      const output = await createInvoiceItem(this.stripe, this.context, arg);
       return output;
     } else if (method === 'finalize_invoice') {
-      const output = JSON.stringify(
-        await finalizeInvoice(this.stripe, this.context, arg)
-      );
+      const output = await finalizeInvoice(this.stripe, this.context, arg);
       return output;
     } else if (method === 'retrieve_balance') {
-      const output = JSON.stringify(
-        await retrieveBalance(this.stripe, this.context, arg)
-      );
+      const output = await retrieveBalance(this.stripe, this.context, arg);
       return output;
     } else if (method === 'create_refund') {
-      const output = JSON.stringify(
-        await createRefund(this.stripe, this.context, arg)
-      );
+      const output = await createRefund(this.stripe, this.context, arg);
+      return output;
+    } else if (method === 'create_checkout_session') {
+      const output = await createCheckoutSession(this.stripe, this.ui, arg);
+      return output;
+    } else if (method === 'expire_checkout_session') {
+      const output = await expireCheckoutSession(this.stripe, arg);
       return output;
     } else if (method === 'list_payment_intents') {
-      const output = JSON.stringify(
-        await listPaymentIntents(this.stripe, this.context, arg)
-      );
+      const output = await listPaymentIntents(this.stripe, this.context, arg);
       return output;
     } else if (method == 'search_documentation') {
-      const output = JSON.stringify(
-        await searchDocumentation(this.stripe, this.context, arg)
-      );
+      const output = await searchDocumentation(this.stripe, this.context, arg);
       return output;
     } else {
       throw new Error('Invalid method ' + method);

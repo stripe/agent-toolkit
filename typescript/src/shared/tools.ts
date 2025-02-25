@@ -13,8 +13,10 @@ import {
   finalizeInvoicePrompt,
   retrieveBalancePrompt,
   createRefundPrompt,
-  searchDocumentationPrompt,
   listPaymentIntentsPrompt,
+  createCheckoutSessionPrompt,
+  expireCheckoutSessionPrompt,
+  searchDocumentationPrompt,
 } from './prompts';
 
 import {
@@ -30,8 +32,10 @@ import {
   finalizeInvoiceParameters,
   retrieveBalanceParameters,
   createRefundParameters,
-  searchDocumentationParameters,
   listPaymentIntentsParameters,
+  createCheckoutSessionParameters,
+  expireCheckoutSessionParameters,
+  searchDocumentationParameters,
 } from './parameters';
 
 export type Tool = {
@@ -187,6 +191,28 @@ const tools: Tool[] = [
     actions: {
       paymentIntents: {
         read: true,
+      },
+    },
+  },
+  {
+    method: 'create_checkout_session',
+    name: 'Create Checkout Session',
+    description: createCheckoutSessionPrompt,
+    parameters: createCheckoutSessionParameters,
+    actions: {
+      checkoutSessions: {
+        create: true,
+      },
+    },
+  },
+  {
+    method: 'expire_checkout_session',
+    name: 'Expire Checkout Session',
+    description: expireCheckoutSessionPrompt,
+    parameters: expireCheckoutSessionParameters,
+    actions: {
+      checkoutSessions: {
+        update: true,
       },
     },
   },

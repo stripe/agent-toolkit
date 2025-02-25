@@ -95,6 +95,20 @@ It takes two arguments:
 - limit (int, optional): The number of payment intents to return.
 `;
 
+export const createCheckoutSessionPrompt = `
+This tool will create a checkout session in Stripe.
+
+It takes one argument:
+- line_items (array): List of up to 100 line items to include in the checkout session.
+`;
+
+export const expireCheckoutSessionPrompt = `
+This tool will expire a checkout session in Stripe.
+
+It takes one argument:
+- session (str): The ID of the checkout session to expire.
+`;
+
 export const searchDocumentationPrompt = `
 This tool will take in a user question about integrating with Stripe in their application, then search and retrieve relevant Stripe documentation to answer the question.
 

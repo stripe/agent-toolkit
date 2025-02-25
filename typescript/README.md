@@ -109,6 +109,31 @@ const model = wrapLanguageModel({
 
 This works with both `generateText` and `generateStream` from the Vercel AI SDK.
 
+#### UI
+
+You can leverage Stripe Checkout to collect payments from your users. By including the `checkoutSessions` action, you can enable your agent to create checkout sessions, and can specify the appearance and behavior in the `ui` configuration.
+
+```typescript
+const stripeAgentToolkit = new StripeAgentToolkit({
+  secretKey: process.env.STRIPE_SECRET_KEY!,
+  configuration: {
+    actions: {
+      checkoutSessions: {
+        create: true,
+      },
+    },
+    ui: {
+      checkout: {
+        mode: 'payment',
+        ui_mode: 'embedded',
+      },
+    },
+  },
+});
+```
+
+This will generate a new checkout session and return the identifier. You can then use this identifier to retrieve the session details through a normal API request. In your application, you can then either redirect the user to the checkout session if using the `ui_mode: "hosted"` or embed the checkout session in your application if using the `ui_mode: "embedded"` option. To learn more about how to implement Stripe Checkout, see the [documentation](https://docs.stripe.com/checkout).
+
 ## Model Context Protocol
 
 The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/). See `/examples/modelcontextprotocol` for an example. The same configuration options are available, and the server can be run with all supported transports.

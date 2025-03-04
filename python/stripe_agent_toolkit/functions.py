@@ -307,3 +307,45 @@ def create_refund(
                 refund_data["stripe_account"] = account
 
     return stripe.Refund.create(**refund_data)
+
+
+def search_documentation(
+    context: Context,
+    question: str,
+    language: Optional[str] = None,
+):
+    """
+    Search Stripe documentation for answers to integration questions.
+
+    Parameters:
+        question (str): The user question to search for in the documentation.
+        language (str, optional): The programming language to filter results by.
+
+    Returns:
+        dict: The search results containing relevant documentation sources.
+    """
+    import requests
+
+    endpoint = 'https://ai.stripe.com/search'
+    headers = {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'fetch'
+    }
+    
+    search_data = {"query": question}
+    if language:
+        search_data["language"] = language
+    if context.get("account") is not None:
+        account = context.get("account")
+        if account is not None:
+            search_data["stripe_account"] = account
+
+    try:
+        response = requests.post(endpoint, json=search_data, headers=headers)
+        response.raise_for_status()  # Raises an HTTPError for bad responses (4xx, 5xx)
+        
+        data = response.json()
+        return data.get('sources', [])
+    except requests.exceptions.RequestException as e:
+        print(f"Error searching documentation: {str(e)}")
+        return "Failed to search documentation"

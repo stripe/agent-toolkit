@@ -26,7 +26,8 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.4.1",
     "@stripe/agent-toolkit": "latest",
-    "colors": "^1.4.0"
+    "colors": "^1.4.0",
+    "typescript": "^5.7.3"
   },
   "keywords": [
     "mcp",

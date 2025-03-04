@@ -13,6 +13,7 @@ from .prompts import (
     FINALIZE_INVOICE_PROMPT,
     RETRIEVE_BALANCE_PROMPT,
     CREATE_REFUND_PROMPT,
+    SEARCH_DOCUMENTATION_PROMPT,
 )
 
 from .schema import (
@@ -28,6 +29,7 @@ from .schema import (
     FinalizeInvoice,
     RetrieveBalance,
     CreateRefund,
+    SearchDocumentation,
 )
 
 tools: List[Dict] = [
@@ -160,6 +162,17 @@ tools: List[Dict] = [
         "actions": {
             "refunds": {
                 "create": True,
+            }
+        },
+    },
+    {
+        "method": "search_documentation",
+        "name": "Search Documentation",
+        "description": SEARCH_DOCUMENTATION_PROMPT,
+        "args_schema": SearchDocumentation,
+        "actions": {
+            "documentation": {
+                "read": True,
             }
         },
     },

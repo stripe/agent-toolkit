@@ -162,3 +162,17 @@ class CreateRefund(BaseModel):
         ...,
         description="The amount to refund in cents.",
     )
+
+
+class SearchDocumentation(BaseModel):
+    """Schema for the ``search_documentation`` operation."""
+
+    question: str = Field(
+        ...,
+        description="The user question about integrating with Stripe will be used to search the documentation.",
+    )
+    language: Optional[str] = Field(
+        None,
+        description="The programming language to search for in the the documentation.",
+        enum=["dotnet", "go", "java", "node", "php", "ruby", "python", "curl"],
+    )

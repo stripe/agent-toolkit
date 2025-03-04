@@ -14,7 +14,9 @@ from stripe_agent_toolkit.functions import (
     finalize_invoice,
     retrieve_balance,
     create_refund,
+    search_documentation,
 )
+import requests
 
 
 class TestStripeFunctions(unittest.TestCase):
@@ -612,6 +614,110 @@ class TestStripeFunctions(unittest.TestCase):
             )
 
             self.assertEqual(result, {"id": mock_refund["id"]})
+
+    def test_search_documentation(self):
+        mock_response = mock.Mock()
+        mock_response.json.return_value = {
+            "sources": [
+                {
+                    "title": "How to create a payment intent",
+                    "url": "https://stripe.com/docs/payments/payment-intents",
+                    "content": "Payment intents guide..."
+                }
+            ]
+        }
+        mock_response.raise_for_status.return_value = None
+        mock_response.ok = True
+
+        with mock.patch("requests.post") as mock_post:
+            mock_post.return_value = mock_response
+            
+            result = search_documentation(
+                context={},
+                question="How do I create a payment intent?",
+                language="python"
+            )
+
+            mock_post.assert_called_with(
+                "https://ai.stripe.com/search",
+                json={"query": "How do I create a payment intent?", "language": "python"},
+                headers={
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "fetch"
+                }
+            )
+
+            self.assertEqual(result, [
+                {
+                    "title": "How to create a payment intent",
+                    "url": "https://stripe.com/docs/payments/payment-intents",
+                    "content": "Payment intents guide..."
+                }
+            ])
+
+    def test_search_documentation_error(self):
+        with mock.patch("requests.post") as mock_post:
+            mock_post.side_effect = requests.exceptions.RequestException("Network error")
+            
+            result = search_documentation(
+                context={},
+                question="How do I create a payment intent?",
+            )
+
+            mock_post.assert_called_with(
+                "https://ai.stripe.com/search",
+                json={"query": "How do I create a payment intent?"},
+                headers={
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "fetch"
+                }
+            )
+
+            self.assertEqual(result, "Failed to search documentation")
+
+    def test_search_documentation_with_context(self):
+        mock_response = mock.Mock()
+        mock_response.json.return_value = {
+            "sources": [
+                {
+                    "title": "Connect account documentation",
+                    "url": "https://stripe.com/docs/connect",
+                    "content": "Connect guide..."
+                }
+            ]
+        }
+        mock_response.raise_for_status.return_value = None
+        mock_response.ok = True
+
+        with mock.patch("requests.post") as mock_post:
+            mock_post.return_value = mock_response
+            
+            result = search_documentation(
+                context={"account": "acct_123"},
+                question="How do I use Connect accounts?",
+                language="python"
+            )
+
+            mock_post.assert_called_with(
+                "https://ai.stripe.com/search",
+                json={
+                    "query": "How do I use Connect accounts?",
+                    "language": "python",
+                    "stripe_account": "acct_123"
+                },
+                headers={
+                    "Content-Type": "application/json",
+                    "X-Requested-With": "fetch"
+                }
+            )
+
+            self.assertEqual(result, [
+                {
+                    "title": "Connect account documentation",
+                    "url": "https://stripe.com/docs/connect",
+                    "content": "Connect guide..."
+                }
+            ])
 
 
 if __name__ == "__main__":

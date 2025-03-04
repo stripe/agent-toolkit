@@ -17,6 +17,9 @@ importers:
       colors:
         specifier: ^1.4.0
         version: 1.4.0
+      typescript:
+        specifier: ^5.7.3
+        version: 5.7.3
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.6

@@ -61,6 +61,23 @@ class ListProducts(BaseModel):
     )
 
 
+class RecurringPrice(BaseModel):
+    """Schema for the recurring components of a price."""
+    
+    interval: str = Field(
+        ...,
+        description="Specifies billing frequency. Either day, week, month or year."
+    )
+    interval_count: Optional[int] = Field(
+        None,
+        description="The number of intervals between subscription billings. For example, interval='month' and interval_count=3 bills every 3 months."
+    )
+    usage_type: Optional[str] = Field(
+        None,
+        description="Configures how the quantity per period should be determined. Can be either metered or licensed."
+    )
+
+
 class CreatePrice(BaseModel):
     """Schema for the ``create_price`` operation."""
 
@@ -74,6 +91,10 @@ class CreatePrice(BaseModel):
     currency: str = Field(
         ...,
         description="The currency of the price.",
+    )
+    recurring: Optional[RecurringPrice] = Field(
+        None,
+        description="The recurring components of a price such as interval and usage_type. Example: {'interval': 'month', 'interval_count': 1, 'usage_type': 'licensed'}"
     )
 
 

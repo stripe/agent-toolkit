@@ -32,10 +32,11 @@ It takes one optional argument:
 export const createPricePrompt = (_context: Context = {}) => `
 This tool will create a price in Stripe. If a product has not already been specified, a product should be created first.
 
-It takes three arguments:
+It takes four arguments:
 - product (str): The ID of the product to create the price for.
 - unit_amount (int): The unit amount of the price in cents.
 - currency (str): The currency of the price.
+- recurring (dict, optional): The recurring components of a price such as interval and usage_type. Example: {"interval": "month"} for monthly recurring billing.
 `;
 
 export const listPricesPrompt = (_context: Context = {}) => `

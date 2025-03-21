@@ -62,6 +62,23 @@ export const createPriceParameters = (_context: Context = {}) =>
       .int()
       .describe('The unit amount of the price in cents.'),
     currency: z.string().describe('The currency of the price.'),
+    recurring: z
+      .object({
+        interval: z
+          .enum(['day', 'week', 'month', 'year'])
+          .describe('Specifies billing frequency. Either day, week, month or year.'),
+        interval_count: z
+          .number()
+          .int()
+          .optional()
+          .describe('The number of intervals between subscription billings. For example, interval=month and interval_count=3 bills every 3 months.'),
+        usage_type: z
+          .enum(['licensed', 'metered'])
+          .optional()
+          .describe('Configures how the quantity per period should be determined. Can be either metered or licensed.')
+      })
+      .optional()
+      .describe('The recurring components of a price such as interval and usage_type.')
   });
 
 export const listPricesParameters = (_context: Context = {}): z.AnyZodObject =>

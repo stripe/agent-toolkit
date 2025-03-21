@@ -95,16 +95,61 @@ describe('createPriceParameters', () => {
     const parameters = createPriceParameters({});
 
     const fields = Object.keys(parameters.shape);
-    expect(fields).toEqual(['product', 'unit_amount', 'currency']);
-    expect(fields.length).toBe(3);
+    expect(fields).toEqual(['product', 'unit_amount', 'currency', 'recurring']);
+    expect(fields.length).toBe(4);
   });
 
   it('should return the correct parameters if customer is specified', () => {
     const parameters = createPriceParameters({customer: 'cus_123'});
 
     const fields = Object.keys(parameters.shape);
-    expect(fields).toEqual(['product', 'unit_amount', 'currency']);
-    expect(fields.length).toBe(3);
+    expect(fields).toEqual(['product', 'unit_amount', 'currency', 'recurring']);
+    expect(fields.length).toBe(4);
+  });
+
+  it('should validate recurring parameters correctly', () => {
+    const parameters = createPriceParameters({});
+    
+    // Valid recurring parameters
+    const validData = {
+      product: 'prod_123',
+      unit_amount: 1000,
+      currency: 'usd',
+      recurring: {
+        interval: 'month'
+      }
+    };
+    
+    const result = parameters.safeParse(validData);
+    expect(result.success).toBe(true);
+    
+    // Invalid interval
+    const invalidInterval = {
+      product: 'prod_123',
+      unit_amount: 1000,
+      currency: 'usd',
+      recurring: {
+        interval: 'invalid'
+      }
+    };
+    
+    const invalidResult = parameters.safeParse(invalidInterval);
+    expect(invalidResult.success).toBe(false);
+    
+    // Valid with optional fields
+    const withOptionalFields = {
+      product: 'prod_123',
+      unit_amount: 1000,
+      currency: 'usd',
+      recurring: {
+        interval: 'month',
+        interval_count: 3,
+        usage_type: 'licensed'
+      }
+    };
+    
+    const optionalResult = parameters.safeParse(withOptionalFields);
+    expect(optionalResult.success).toBe(true);
   });
 });
 
@@ -196,6 +241,7 @@ describe('createInvoiceItemParameters', () => {
     expect(fields.length).toBe(2);
   });
 });
+
 describe('finalizeInvoiceParameters', () => {
   it('should return the correct parameters if no context', () => {
     const parameters = finalizeInvoiceParameters({});

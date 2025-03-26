@@ -16,6 +16,7 @@ import {
   createRefundPrompt,
   searchDocumentationPrompt,
   listPaymentIntentsPrompt,
+  searchStripeResourcesPrompt,
 } from './prompts';
 
 import {
@@ -34,6 +35,7 @@ import {
   createRefundParameters,
   searchDocumentationParameters,
   listPaymentIntentsParameters,
+  searchStripeResourcesParameters,
 } from './parameters';
 
 import type {Context} from './configuration';
@@ -212,6 +214,32 @@ const tools = (context: Context): Tool[] => [
     parameters: searchDocumentationParameters(context),
     actions: {
       documentation: {
+        read: true,
+      },
+    },
+  },
+  {
+    method: 'search_stripe_resources',
+    name: 'Search Stripe Resources',
+    description: searchStripeResourcesPrompt(context),
+    parameters: searchStripeResourcesParameters(context),
+    actions: {
+      customers: {
+        read: true,
+      },
+      invoices: {
+        read: true,
+      },
+      paymentIntents: {
+        read: true,
+      },
+      prices: {
+        read: true,
+      },
+      products: {
+        read: true,
+      },
+      subscriptions: {
         read: true,
       },
     },

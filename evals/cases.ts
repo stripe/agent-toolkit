@@ -91,7 +91,7 @@ test({
   fn: ({ toolCalls, messages }) => [
     llmCriteriaMet(
       messages,
-      "The message should include a successful payment link creation response"
+      "The message should indicate a payment link was created"
     ),
     expectToolCall(toolCalls, ["create_payment_link"]),
   ],
@@ -132,6 +132,32 @@ test(async () => {
           );
         })(),
         `messages only includes customers payment intent ${joelsPayment.id}`
+      ),
+    ],
+  };
+});
+
+test(async () => {
+  const joels = await stripe.customers.list({
+    email: "joel@example.com",
+  });
+  const id = joels.data[0].id;
+  return {
+    prompt: "how many payments has 'joel@example.com' made?",
+    fn: ({ toolCalls, messages }) => [
+      expectToolCall(toolCalls, ["search_stripe_resources"]),
+      expectToolCall(toolCalls, ["list_payment_intents"]),
+      assert(
+        (function () {
+          return (
+            toolCalls.find(
+              (t) =>
+                t.function.name === "list_payment_intents" &&
+                t.function.arguments.includes(id)
+            ) !== undefined
+          );
+        })(),
+        `list_payment_intent was called with customer payment intent ${id}`
       ),
     ],
   };

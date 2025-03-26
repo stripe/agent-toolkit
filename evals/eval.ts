@@ -47,6 +47,9 @@ async function task(evalInput: EvalInput): Promise<EvalOutput> {
           create: true,
           read: true,
         },
+        subscriptions: {
+          read: true,
+        },
         balance: {
           read: true,
         },

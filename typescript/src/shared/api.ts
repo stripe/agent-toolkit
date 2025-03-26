@@ -13,6 +13,7 @@ import {
   finalizeInvoice,
   retrieveBalance,
   createRefund,
+  searchStripeResources,
   searchDocumentation,
   listPaymentIntents,
 } from './functions';
@@ -131,6 +132,11 @@ class StripeAPI {
     } else if (method == 'search_documentation') {
       const output = JSON.stringify(
         await searchDocumentation(this.stripe, this.context, arg)
+      );
+      return output;
+    } else if (method == 'search_stripe_resources') {
+      const output = JSON.stringify(
+        await searchStripeResources(this.stripe, this.context, arg)
       );
       return output;
     } else {

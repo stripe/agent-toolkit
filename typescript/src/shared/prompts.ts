@@ -131,6 +131,17 @@ ${customerArg}
 `;
 };
 
+export const searchStripeResourcesPrompt = (context: Context = {}) => {
+  return `
+This tool can be used to query specific Stripe resources using a custom Stripe query syntax.
+It only is able to search charges, customers, invoices, payment intents, prices, products, and subscriptions.
+
+It takes two arguments:
+- resource (str): charges, customers, invoices, payment intents, prices, products, or subscriptions
+- query (str): The query in Stripe's custom query syntax to query metadata for
+`;
+};
+
 export const searchDocumentationPrompt = (_context: Context = {}) => `
 This tool will take in a user question about integrating with Stripe in their application, then search and retrieve relevant Stripe documentation to answer the question.
 

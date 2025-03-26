@@ -16,6 +16,7 @@ import {
   createRefundParameters,
   searchDocumentationParameters,
   listPaymentIntentsParameters,
+  searchStripeResourcesParameters,
 } from './parameters';
 import type {Context} from './configuration';
 
@@ -293,6 +294,85 @@ export const listPaymentIntents = async (
     }));
   } catch (error) {
     return 'Failed to list payment intents';
+  }
+};
+
+export const searchStripeResources = async (
+  stripe: Stripe,
+  context: Context,
+  params: z.infer<ReturnType<typeof searchStripeResourcesParameters>>
+) => {
+  try {
+    const resource = params.resource;
+
+    let results: any[] = [];
+
+    if (resource == 'customers') {
+      const raw = await stripe.customers.search({
+        query: params.query,
+      });
+      results = raw.data.map((customer) => ({
+        id: customer.id,
+        name: customer.name,
+        email: customer.email,
+      }));
+    } else if (resource == 'invoices') {
+      const raw = await stripe.invoices.search({
+        query: params.query,
+      });
+      results = raw.data.map((invoice) => ({
+        id: invoice.id,
+        customer: invoice.customer,
+      }));
+    } else if (resource == 'payment_intents') {
+      const raw = await stripe.paymentIntents.search({
+        query: params.query,
+      });
+      results = raw.data.map((paymentIntent) => ({
+        id: paymentIntent.id,
+        customer: paymentIntent.customer,
+        description: paymentIntent.description,
+        amount: paymentIntent.amount,
+      }));
+    } else if (resource == 'prices') {
+      const raw = await stripe.prices.search({
+        query: params.query,
+      });
+      results = raw.data.map((price) => ({
+        id: price.id,
+        product: price.product,
+        amount: price.unit_amount,
+        currency: price.currency,
+      }));
+    } else if (resource == 'products') {
+      const raw = await stripe.products.search({
+        query: params.query,
+      });
+      results = raw.data.map((product) => ({
+        id: product.id,
+        name: product.name,
+      }));
+    } else if (resource == 'subscriptions') {
+      const raw = await stripe.subscriptions.search({
+        query: params.query,
+      });
+      results = raw.data.map((subscription) => ({
+        id: subscription.id,
+        customer: subscription.customer,
+      }));
+    } else if (resource == 'charges') {
+      const raw = await stripe.charges.search({
+        query: params.query,
+      });
+      results = raw.data.map((charge) => ({
+        id: charge.id,
+        customer: charge.customer,
+      }));
+    }
+
+    return results;
+  } catch (error) {
+    return 'Failed to search Stripe resources';
   }
 };
 

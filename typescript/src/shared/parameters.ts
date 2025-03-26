@@ -208,6 +208,135 @@ export const listPaymentIntentsParameters = (
     return schema;
   }
 };
+
+export const searchStripeResourcesParameters = (
+  _context: Context = {}
+): z.AnyZodObject =>
+  z.object({
+    resource: z
+      .enum([
+        'charges',
+        'customers',
+        'invoices',
+        'payment_intents',
+        'prices',
+        'products',
+        'subscriptions',
+      ])
+      .describe(
+        'This is the Stripe resource to search for. Each Stripe resource object has different metadata that can be queried.'
+      ),
+    query: z.string()
+      .describe(`This is a custom query syntax to search Stripe resources
+
+      Query structure and terminology:
+      A query clause consists of a field followed by an operator followed by a value:
+      clause: email:"amy@rocketrides.io"
+      field: email
+      operator: :
+      value: amy@rocketrides.io
+
+      You can combine up to 10 query clauses in a search by either separating them with a space, or using the AND or OR keywords (case insensitive). You can’t combine AND and OR in the same query. Furthermore, there’s no option to use parentheses to give priority to certain logic operators. By default, the API combines clauses with AND logic.
+      The example query email:"amy@rocketrides.io" metadata["key"]:"value" matches records where both the email address is amy@rocketrides.io, and the metadata in the record includes key with a value of value.
+
+      Every search field supports exact matching with a :. Certain fields such as email and name support substring matching. Certain other fields such as amount support numeric comparators like > and <.
+      You must use quotation marks around string values. Quotation marks are optional for numeric values.
+      You can escape quotes inside of quotes with a backslash (\\).
+
+
+      ## Query fields for Charges
+      * amount                                        
+      * billing_details.address.postal_code           
+      * created                                       
+      * currency                                      
+      * customer                                      
+      * disputed                                      
+      * metadata                                      
+      * payment_method_details.{{SOURCE}}.last4       
+      * payment_method_details.{{SOURCE}}.exp_month   
+      * payment_method_details.{{SOURCE}}.exp_year    
+      * payment_method_details.{{SOURCE}}.brand       
+      * payment_method_details.{{SOURCE}}.fingerprint 
+      * refunded                                      
+      * status                                        
+
+      ## Query fields for Customers
+      * created  
+      * email    
+      * metadata 
+      * name     
+      * phone    
+
+      ### Query fields for Invoices
+      * created                     
+      * currency                    
+      * customer                    
+      * last_finalization_error_code 
+      * last_finalization_error_type 
+      * metadata                    
+      * number                      
+      * receipt_number              
+      * status                      
+      * subscription                
+      * total                       
+      
+      ## Query fields for PaymentIntents
+      * amount  
+      * created 
+      * currency 
+      * customer 
+      * metadata 
+      * status  
+
+      ### Query fields for Prices
+      * active    
+      * currency  
+      * lookup_key 
+      * metadata  
+      * product   
+      * type      
+
+      ### Query fields for Products
+      * active     
+      * description 
+      * metadata   
+      * name       
+      * shippable  
+      * url        
+
+      ### Query fields for Subscriptions
+      * created    
+      * metadata   
+      * status     
+      * canceled_at 
+
+
+      Examples:
+
+      Input: Look up charges matching a custom metadata value.
+      Output: metadata['order_id']:'1234567890'
+
+      Input: Look up charges matching the last 4 digits of the card used for the payment.
+      Output: payment_method_details.card.last4:4242
+
+      Input: Look up customers matching an email.
+      Output: email:'sally@rocketrides.io'
+
+      Input: Look up PaymentIntents not in the USD currency.
+      Output: -currency:'usd'
+
+      Input: Filter invoice objects with a total greater than 1000.
+      Output: total>1000
+
+      Input: Filter payments with a amount over $100.
+      Reasoning: Stripe "amount" field is in cents, so we use 1000 instead of 100
+      Output: amount>1000
+
+      Input: Look up charges matching a combination of metadata and currency.
+      Output: metadata['key']:'value' AND currency:'usd'
+      `),
+  });
+
 export const searchDocumentationParameters = (
   _context: Context = {}
 ): z.AnyZodObject =>

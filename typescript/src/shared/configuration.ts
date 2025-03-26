@@ -13,6 +13,7 @@ export type Object =
   | 'balance'
   | 'refunds'
   | 'paymentIntents'
+  | 'subscriptions'
   | 'documentation';
 
 export type Permission = 'create' | 'update' | 'read';

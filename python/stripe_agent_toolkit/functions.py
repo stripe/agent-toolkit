@@ -100,15 +100,23 @@ def list_products(context: Context, limit: Optional[int] = None):
 
 
 def create_price(
-    context: Context, product: str, currency: str, unit_amount: int
+    context: Context, product: str, currency: str, unit_amount: int, recurring: Optional[dict] = None
 ):
     """
     Create a price.
 
     Parameters:
-        product (str): The ID of the product.
+        product (str): The ID of the product to create the price for.
         currency (str): The currency of the price.
-        unit_amount (int): The unit amount of the price.
+        unit_amount (int): The unit amount of the price in cents.
+        recurring (dict, optional): The recurring components of a price such as interval and usage_type.
+                                   Example: {'interval': 'month', 'interval_count': 1, 'usage_type': 'licensed'}
+                                   
+                                   - interval (str): Specifies billing frequency. Either day, week, month or year.
+                                   - interval_count (int, optional): The number of intervals between subscription billings.
+                                     For example, interval='month' and interval_count=3 bills every 3 months.
+                                   - usage_type (str, optional): Configures how the quantity per period should be determined.
+                                     Can be either 'licensed' or 'metered'.
 
     Returns:
         stripe.Price: The created price.
@@ -118,10 +126,44 @@ def create_price(
         "currency": currency,
         "unit_amount": unit_amount,
     }
+    
+    # Add recurring parameter if provided
+    if recurring is not None:
+        # Validate recurring parameters
+        if "interval" not in recurring:
+            raise ValueError("The 'interval' field is required in the recurring parameter")
+        
+        # Validate interval value
+        valid_intervals = ["day", "week", "month", "year"]
+        if recurring["interval"] not in valid_intervals:
+            raise ValueError(f"Invalid interval value. Must be one of: {', '.join(valid_intervals)}")
+        
+        # Validate usage_type if provided
+        if "usage_type" in recurring:
+            valid_usage_types = ["licensed", "metered"]
+            if recurring["usage_type"] not in valid_usage_types:
+                raise ValueError(f"Invalid usage_type value. Must be one of: {', '.join(valid_usage_types)}")
+        
+        # Ensure recurring is properly formatted as a dictionary
+        # This is important because the API expects a specific format
+        recurring_data = {}
+        if "interval" in recurring:
+            recurring_data["interval"] = recurring["interval"]
+        if "interval_count" in recurring:
+            recurring_data["interval_count"] = recurring["interval_count"]
+        if "usage_type" in recurring:
+            recurring_data["usage_type"] = recurring["usage_type"]
+        
+        price_data["recurring"] = recurring_data
+        
     if context.get("account") is not None:
         account = context.get("account")
         if account is not None:
             price_data["stripe_account"] = account
+
+    # Print the data being sent to the API for debugging
+    import json
+    print(f"Sending to Stripe API: {json.dumps(price_data, indent=2)}")
 
     return stripe.Price.create(**price_data)
 

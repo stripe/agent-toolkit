@@ -1,24 +1,10 @@
-FROM node:22.12-alpine AS builder
+# syntax=docker/dockerfile:1
+# check=experimental=all
 
-# Must be entire project because `prepare` script is run during `npm install` and requires all files.
-COPY . /app
-
+FROM node:22.12-alpine@sha256:51eff88af6dff26f59316b6e356188ffa2c422bd3c3b76f2556a2e7e89d080bd
+RUN npm install -g typescript pnpm
 WORKDIR /app
-
-RUN --mount=type=cache,target=/root/.npm npm install
-
-RUN --mount=type=cache,target=/root/.npm-production npm ci --ignore-scripts --omit-dev
-
-FROM node:22-alpine AS release
-
-COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/package.json /app/package.json
-COPY --from=builder /app/package-lock.json /app/package-lock.json
-
-ENV NODE_ENV=production
-
-WORKDIR /app
-
-RUN npm ci --ignore-scripts --omit-dev
-
+COPY . .
+RUN --mount=type=cache,target=/root/.local \
+    pnpm install --frozen-lockfile && pnpm run build
 ENTRYPOINT ["node", "/app/dist/index.js"]

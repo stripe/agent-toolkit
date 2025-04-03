@@ -1,12 +1,14 @@
 import {
   cancelSubscription,
   listSubscriptions,
+  updateSubscription,
 } from '@/shared/subscriptions/functions';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   subscriptions: {
     list: jest.fn(),
     cancel: jest.fn(),
+    update: jest.fn(),
   },
 }));
 
@@ -188,5 +190,113 @@ describe('cancelSubscription', () => {
     const result = await cancelSubscription(stripe, context, params);
 
     expect(result).toBe('Failed to cancel subscription');
+  });
+});
+
+describe('updateSubscription', () => {
+  it('should update a subscription and return the result', async () => {
+    const mockSubscription = {
+      id: 'sub_123456',
+      customer: 'cus_123456',
+      status: 'active',
+      current_period_start: 1609459200,
+      current_period_end: 1612137600,
+      items: {
+        data: [
+          {
+            id: 'si_123',
+            price: 'price_123',
+            quantity: 1,
+          },
+        ],
+      },
+    };
+
+    const context = {};
+    const params = {
+      subscription: 'sub_123456',
+      items: [
+        {
+          id: 'si_123',
+          quantity: 2,
+        },
+      ],
+    };
+
+    stripe.subscriptions.update.mockResolvedValue(mockSubscription);
+    const result = await updateSubscription(stripe, context, params);
+
+    expect(stripe.subscriptions.update).toHaveBeenCalledWith(
+      'sub_123456',
+      {
+        items: [
+          {
+            id: 'si_123',
+            quantity: 2,
+          },
+        ],
+      },
+      undefined
+    );
+    expect(result).toEqual(mockSubscription);
+  });
+
+  it('should handle errors gracefully', async () => {
+    const context = {};
+    const params = {
+      subscription: 'sub_123456',
+      items: [
+        {
+          id: 'si_123',
+          quantity: 2,
+        },
+      ],
+    };
+
+    stripe.subscriptions.update.mockRejectedValue(new Error('API Error'));
+    const result = await updateSubscription(stripe, context, params);
+
+    expect(result).toBe('Failed to update subscription');
+  });
+
+  it('should specify the connected account if included in context', async () => {
+    const mockSubscription = {
+      id: 'sub_123456',
+      customer: 'cus_123456',
+      status: 'active',
+      current_period_start: 1609459200,
+      current_period_end: 1612137600,
+      items: {
+        data: [
+          {
+            id: 'si_123',
+            price: 'price_123',
+            quantity: 1,
+          },
+        ],
+      },
+    };
+
+    const context = {
+      account: 'acct_123456',
+    };
+    const params = {
+      subscription: 'sub_123456',
+      cancel_at_period_end: true,
+    };
+
+    stripe.subscriptions.update.mockResolvedValue(mockSubscription);
+    const result = await updateSubscription(stripe, context, params);
+
+    expect(stripe.subscriptions.update).toHaveBeenCalledWith(
+      'sub_123456',
+      {
+        cancel_at_period_end: true,
+      },
+      {
+        stripeAccount: context.account,
+      }
+    );
+    expect(result).toEqual(mockSubscription);
   });
 });

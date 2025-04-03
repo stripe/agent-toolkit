@@ -1,6 +1,7 @@
 import {
   listSubscriptionsPrompt,
   cancelSubscriptionPrompt,
+  updateSubscriptionPrompt,
 } from '@/shared/subscriptions/prompts';
 
 describe('listSubscriptionsPrompt', () => {
@@ -32,6 +33,21 @@ describe('cancelSubscriptionPrompt', () => {
     const prompt = cancelSubscriptionPrompt({});
 
     expect(prompt).toContain('This tool will cancel a subscription in Stripe');
-    expect(prompt).toContain('- subscriptionId (str, required)');
+    expect(prompt).toContain('- subscription (str, required)');
+  });
+});
+
+describe('updateSubscriptionPrompt', () => {
+  it('should return the correct prompt', () => {
+    const prompt = updateSubscriptionPrompt({});
+
+    expect(prompt).toContain(
+      'This tool will update an existing subscription in Stripe'
+    );
+    expect(prompt).toContain('- subscription (str, required)');
+    expect(prompt).toContain('- proration_behavior (str, optional)');
+    expect(prompt).toContain('- items (array, optional)');
+    expect(prompt).toContain('- cancel_at_period_end (bool, optional)');
+    expect(prompt).toContain('- default_payment_method (str, optional)');
   });
 });

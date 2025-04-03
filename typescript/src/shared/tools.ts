@@ -23,6 +23,7 @@ import {listPaymentIntentsPrompt} from '@/shared/paymentIntents/prompts';
 import {
   cancelSubscriptionPrompt,
   listSubscriptionsPrompt,
+  updateSubscriptionPrompt,
 } from '@/shared/subscriptions/prompts';
 
 import {
@@ -51,6 +52,7 @@ import {listPaymentIntentsParameters} from '@/shared/paymentIntents/parameters';
 import {
   cancelSubscriptionParameters,
   listSubscriptionsParameters,
+  updateSubscriptionParameters,
 } from '@/shared/subscriptions/parameters';
 
 import type {Context} from './configuration';
@@ -238,6 +240,17 @@ const tools = (context: Context): Tool[] => [
     name: 'Cancel Subscription',
     description: cancelSubscriptionPrompt(context),
     parameters: cancelSubscriptionParameters(context),
+    actions: {
+      subscriptions: {
+        update: true,
+      },
+    },
+  },
+  {
+    method: 'update_subscription',
+    name: 'Update Subscription',
+    description: updateSubscriptionPrompt(context),
+    parameters: updateSubscriptionParameters(context),
     actions: {
       subscriptions: {
         update: true,

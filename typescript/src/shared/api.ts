@@ -16,6 +16,7 @@ import {listPaymentIntents} from '@/shared/paymentIntents/functions';
 import {
   listSubscriptions,
   cancelSubscription,
+  updateSubscription,
 } from '@/shared/subscriptions/functions';
 
 import type {Context} from './configuration';
@@ -132,6 +133,11 @@ class StripeAPI {
     } else if (method === 'list_subscriptions') {
       const output = JSON.stringify(
         await listSubscriptions(this.stripe, this.context, arg)
+      );
+      return output;
+    } else if (method === 'update_subscription') {
+      const output = JSON.stringify(
+        await updateSubscription(this.stripe, this.context, arg)
       );
       return output;
     } else if (method === 'cancel_subscription') {

@@ -205,4 +205,53 @@ test(async () => {
   };
 });
 
+// New test for update subscription
+test(async () => {
+  const customer = await stripe.customers.create({
+    name: "User Example",
+    email: "user@example.com",
+    payment_method: "pm_card_visa",
+  });
+
+  const product = await stripe.products.create({
+    name: "Basic Plan",
+    description: "A test subscription product",
+  });
+
+  const basicPrice = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 1000,
+    currency: "usd",
+    recurring: { interval: "month" },
+  });
+
+  const premiumPrice = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 2000,
+    currency: "usd",
+    recurring: { interval: "month" },
+  });
+
+  const subscription = await stripe.subscriptions.create({
+    customer: customer.id,
+    items: [{ price: basicPrice.id, quantity: 1 }],
+  });
+
+  return {
+    prompt: `Upgrade the user's subscription to the premium plan`,
+    toolkitConfig: {
+      context: {
+        customer: customer.id,
+      },
+    },
+    fn: ({ toolCalls, messages }) => [
+      expectToolCall(toolCalls, ["list_subscriptions", "update_subscription"]),
+      llmCriteriaMet(
+        messages,
+        "The message should include a successful subscription update response"
+      ),
+    ],
+  };
+});
+
 export const getEvalTestCases = async () => Promise.all(_testCases);

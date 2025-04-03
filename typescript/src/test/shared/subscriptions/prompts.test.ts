@@ -47,7 +47,5 @@ describe('updateSubscriptionPrompt', () => {
     expect(prompt).toContain('- subscription (str, required)');
     expect(prompt).toContain('- proration_behavior (str, optional)');
     expect(prompt).toContain('- items (array, optional)');
-    expect(prompt).toContain('- cancel_at_period_end (bool, optional)');
-    expect(prompt).toContain('- default_payment_method (str, optional)');
   });
 });

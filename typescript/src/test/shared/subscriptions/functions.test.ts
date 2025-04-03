@@ -166,7 +166,7 @@ describe('cancelSubscription', () => {
 
     const context = {};
     const params = {
-      subscriptionId: 'sub_123456',
+      subscription: 'sub_123456',
     };
 
     stripe.subscriptions.cancel.mockResolvedValue(mockSubscription);
@@ -183,7 +183,7 @@ describe('cancelSubscription', () => {
   it('should handle errors gracefully', async () => {
     const context = {};
     const params = {
-      subscriptionId: 'sub_123456',
+      subscription: 'sub_123456',
     };
 
     stripe.subscriptions.cancel.mockRejectedValue(new Error('API Error'));

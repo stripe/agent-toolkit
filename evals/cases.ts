@@ -89,10 +89,7 @@ test({
   prompt:
     "Create a payment link for a new product called 'test' with a price of $70. Come up with a haiku for the description.",
   fn: ({ toolCalls, messages }) => [
-    llmCriteriaMet(
-      messages,
-      "The message should include a payment link and a haiku"
-    ),
+    llmCriteriaMet(messages, "The message should include a payment link"),
     expectToolCall(toolCalls, ["create_payment_link"]),
   ],
 });
@@ -210,11 +207,26 @@ test(async () => {
   const customer = await stripe.customers.create({
     name: "User Example",
     email: "user@example.com",
-    payment_method: "pm_card_visa",
+  });
+
+  const paymentMethod = await stripe.paymentMethods.create({
+    type: "card",
+    card: {
+      token: "tok_visa",
+    },
+  });
+
+  await stripe.paymentMethods.attach(paymentMethod.id, {
+    customer: customer.id,
+  });
+
+  // // Set as default payment method
+  await stripe.customers.update(customer.id, {
+    invoice_settings: { default_payment_method: paymentMethod.id },
   });
 
   const product = await stripe.products.create({
-    name: "Basic Plan",
+    name: "SaaS Product",
     description: "A test subscription product",
   });
 

@@ -35,6 +35,8 @@ const ACCEPTED_TOOLS = [
   'balance.read',
   'refunds.create',
   'paymentIntents.read',
+  'subscriptions.read',
+  'subscriptions.update',
   'documentation.read',
 ];
 

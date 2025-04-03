@@ -41,22 +41,24 @@ Add the following to your `claude_desktop_config.json`. See [here](https://model
 
 ## Available tools
 
-| Tool                  | Description                     |
-| --------------------- | ------------------------------- |
-| `customers.create`    | Create a new customer           |
-| `customers.read`      | Read customer information       |
-| `products.create`     | Create a new product            |
-| `products.read`       | Read product information        |
-| `prices.create`       | Create a new price              |
-| `prices.read`         | Read price information          |
-| `paymentLinks.create` | Create a new payment link       |
-| `invoices.create`     | Create a new invoice            |
-| `invoices.update`     | Update an existing invoice      |
-| `invoiceItems.create` | Create a new invoice item       |
-| `balance.read`        | Retrieve balance information    |
-| `refunds.create`      | Create a new refund             |
-| `paymentIntents.read` | Read payment intent information |
-| `documentation.read`  | Search Stripe documentation     |
+| Tool                   | Description                     |
+| ---------------------- | ------------------------------- |
+| `customers.create`     | Create a new customer           |
+| `customers.read`       | Read customer information       |
+| `products.create`      | Create a new product            |
+| `products.read`        | Read product information        |
+| `prices.create`        | Create a new price              |
+| `prices.read`          | Read price information          |
+| `paymentLinks.create`  | Create a new payment link       |
+| `invoices.create`      | Create a new invoice            |
+| `invoices.update`      | Update an existing invoice      |
+| `invoiceItems.create`  | Create a new invoice item       |
+| `balance.read`         | Retrieve balance information    |
+| `refunds.create`       | Create a new refund             |
+| `paymentIntents.read`  | Read payment intent information |
+| `subscriptions.read`   | Read subscription information   |
+| `subscriptions.update` | Update subscription information |
+| `documentation.read`   | Search Stripe documentation     |
 
 ## Debugging the Server
 

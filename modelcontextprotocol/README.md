@@ -39,6 +39,27 @@ Add the following to your `claude_desktop_config.json`. See [here](https://model
 }
 ```
 
+of if you're using Docker
+
+```
+{
+    “mcpServers”: {
+        “stripe”: {
+            “command”: “docker",
+            “args”: [
+                “run”,
+                "--rm",
+                "-i",
+                “mcp/stripe”,
+                “--tools=all”,
+                “--api-key=STRIPE_SECRET_KEY”
+            ]
+        }
+    }
+}
+
+```
+
 ## Available tools
 
 | Tool                   | Description                     |
@@ -75,6 +96,21 @@ Run the following command in your terminal:
 ```bash
 # Start MCP Inspector and server with all tools
 npx @modelcontextprotocol/inspector node dist/index.js --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
+```
+
+### Build using Docker
+
+First build the server
+
+```
+docker build -t mcp/stripe .
+```
+
+Run the following command in your terminal:
+
+```bash
+docker run -p 3000:3000 -p 5173:5173 -v /var/run/docker.sock:/var/run/docker.sock mcp/inspector docker run --rm -i mcp/stripe --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
+
 ```
 
 ### Instructions

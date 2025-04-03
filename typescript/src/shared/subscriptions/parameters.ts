@@ -43,3 +43,50 @@ export const listSubscriptionsParameters = (
     return schema;
   }
 };
+
+export const cancelSubscriptionParameters = (
+  _context: Context = {}
+): z.AnyZodObject => {
+  return z.object({
+    subscription: z.string().describe('The ID of the subscription to cancel.'),
+  });
+};
+
+export const updateSubscriptionParameters = (
+  _context: Context = {}
+): z.AnyZodObject => {
+  return z.object({
+    subscription: z.string().describe('The ID of the subscription to update.'),
+    proration_behavior: z
+      .enum(['create_prorations', 'none', 'always_invoice', 'none_implicit'])
+      .optional()
+      .describe(
+        'Determines how to handle prorations when the subscription items change.'
+      ),
+    items: z
+      .array(
+        z.object({
+          id: z
+            .string()
+            .optional()
+            .describe('The ID of the subscription item to modify.'),
+          price: z
+            .string()
+            .optional()
+            .describe('The ID of the price to switch to.'),
+          quantity: z
+            .number()
+            .int()
+            .min(1)
+            .optional()
+            .describe('The quantity of the plan to subscribe to.'),
+          deleted: z
+            .boolean()
+            .optional()
+            .describe('Whether to delete this item.'),
+        })
+      )
+      .optional()
+      .describe('A list of subscription items to update, add, or remove.'),
+  });
+};

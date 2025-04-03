@@ -79,7 +79,7 @@ test({
 
 test({
   prompt:
-    "Create a customer with a name of a Philadelphia Eagles player and email. Charge them $100.",
+    "Create a customer with a name of a Philadelphia Eagles player and email (you can make it up). Charge them $100.",
   fn: ({ toolCalls, messages }) => [
     expectToolCall(toolCalls, ["create_customer"]),
   ],
@@ -89,22 +89,8 @@ test({
   prompt:
     "Create a payment link for a new product called 'test' with a price of $70. Come up with a haiku for the description.",
   fn: ({ toolCalls, messages }) => [
-    llmCriteriaMet(
-      messages,
-      "The message should include a successful payment link creation response"
-    ),
+    llmCriteriaMet(messages, "The message should include a payment link"),
     expectToolCall(toolCalls, ["create_payment_link"]),
-  ],
-});
-
-test({
-  prompt: "List all subscriptions",
-  fn: ({ toolCalls, messages }) => [
-    llmCriteriaMet(
-      messages,
-      "The message should include a list of subscriptions"
-    ),
-    expectToolCall(toolCalls, ["list_subscriptions"]),
   ],
 });
 
@@ -143,6 +129,138 @@ test(async () => {
           );
         })(),
         `messages only includes customers payment intent ${joelsPayment.id}`
+      ),
+    ],
+  };
+});
+
+test({
+  prompt: "List all subscriptions",
+  fn: ({ toolCalls, messages }) => [
+    llmCriteriaMet(
+      messages,
+      "The message should include a list of subscriptions"
+    ),
+    expectToolCall(toolCalls, ["list_subscriptions"]),
+  ],
+});
+
+test(async () => {
+  const customer = await stripe.customers.create({
+    name: "Joel E",
+    email: "joel@example.com",
+    payment_method: "pm_card_visa",
+  });
+
+  const paymentMethod = await stripe.paymentMethods.create({
+    type: "card",
+    card: {
+      token: "tok_visa",
+    },
+  });
+
+  await stripe.paymentMethods.attach(paymentMethod.id, {
+    customer: customer.id,
+  });
+
+  // // Set as default payment method
+  await stripe.customers.update(customer.id, {
+    invoice_settings: { default_payment_method: paymentMethod.id },
+  });
+
+  const product = await stripe.products.create({
+    name: "Subscription Product",
+    description: "A test subscription product",
+  });
+
+  const price = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 1000,
+    currency: "usd",
+    recurring: { interval: "month" },
+  });
+
+  await stripe.subscriptions.create({
+    customer: customer.id,
+    items: [{ price: price.id }],
+  });
+
+  return {
+    prompt: `Cancel the users subscription`,
+    toolkitConfig: {
+      context: {
+        customer: customer.id,
+      },
+    },
+    fn: ({ toolCalls, messages }) => [
+      expectToolCall(toolCalls, ["list_subscriptions", "cancel_subscription"]),
+      llmCriteriaMet(
+        messages,
+        "The message should include a successful subscription cancellation response"
+      ),
+    ],
+  };
+});
+
+// New test for update subscription
+test(async () => {
+  const customer = await stripe.customers.create({
+    name: "User Example",
+    email: "user@example.com",
+  });
+
+  const paymentMethod = await stripe.paymentMethods.create({
+    type: "card",
+    card: {
+      token: "tok_visa",
+    },
+  });
+
+  await stripe.paymentMethods.attach(paymentMethod.id, {
+    customer: customer.id,
+  });
+
+  // // Set as default payment method
+  await stripe.customers.update(customer.id, {
+    invoice_settings: { default_payment_method: paymentMethod.id },
+  });
+
+  const product = await stripe.products.create({
+    name: "SaaS Product",
+    description: "A test subscription product",
+  });
+
+  const basicPrice = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 1000,
+    currency: "usd",
+    recurring: { interval: "month" },
+  });
+
+  const premiumPrice = await stripe.prices.create({
+    product: product.id,
+    unit_amount: 2000,
+    currency: "usd",
+    recurring: { interval: "month" },
+  });
+
+  const subscription = await stripe.subscriptions.create({
+    customer: customer.id,
+    items: [{ price: basicPrice.id, quantity: 1 }],
+  });
+
+  return {
+    prompt: `Upgrade the user's subscription to the premium plan`,
+    toolkitConfig: {
+      context: {
+        customer: customer.id,
+      },
+    },
+    fn: ({ toolCalls, messages }) => [
+      expectToolCall(toolCalls, ["list_subscriptions", "update_subscription"]),
+      llmCriteriaMet(
+        messages,
+        "The message should include a successful subscription update response. The subscription should have been updated to the premium plan and have only one item."
       ),
     ],
   };

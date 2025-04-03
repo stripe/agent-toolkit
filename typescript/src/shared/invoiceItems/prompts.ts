@@ -2,7 +2,7 @@ import type {Context} from '@/shared/configuration';
 
 export const createInvoiceItemPrompt = (context: Context = {}) => {
   const customerArg = context.customer
-    ? ''
+    ? `The customer is already set in the context: ${context.customer}.`
     : `- customer (str): The ID of the customer to create the invoice item for.\n`;
 
   return `

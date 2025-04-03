@@ -2,7 +2,7 @@ require("dotenv").config();
 
 import { ClosedQA } from "autoevals";
 import every from "lodash/every";
-import { openai } from "./openai";
+import braintrustOpenai from "./braintrust_openai";
 import { EvalOutput } from "./eval";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
 import { ChatCompletionMessageToolCall } from "openai/resources/chat/completions.mjs";
@@ -103,7 +103,7 @@ export async function semanticContains({
     Answer with just "yes" or "no".
     `;
 
-  const completion = await openai.chat.completions.create({
+  const completion = await braintrustOpenai.chat.completions.create({
     model: "gpt-4o",
     messages: [
       { role: "system", content: system },
@@ -149,7 +149,7 @@ export const llmCriteriaMet = async (
     .join("\n");
 
   const closedQA = await ClosedQA({
-    client: openai,
+    client: braintrustOpenai,
     input: "According to the provided criterion is the submission correct?",
     criteria,
     output: assistantMessages,

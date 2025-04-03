@@ -20,7 +20,11 @@ import {retrieveBalancePrompt} from '@/shared/balance/prompts';
 import {createRefundPrompt} from '@/shared/refunds/prompts';
 import {searchDocumentationPrompt} from '@/shared/documentation/prompts';
 import {listPaymentIntentsPrompt} from '@/shared/paymentIntents/prompts';
-import {listSubscriptionsPrompt} from '@/shared/subscriptions/prompts';
+import {
+  cancelSubscriptionPrompt,
+  listSubscriptionsPrompt,
+  updateSubscriptionPrompt,
+} from '@/shared/subscriptions/prompts';
 
 import {
   createCustomerParameters,
@@ -45,7 +49,11 @@ import {retrieveBalanceParameters} from '@/shared/balance/parameters';
 import {createRefundParameters} from '@/shared/refunds/parameters';
 import {searchDocumentationParameters} from '@/shared/documentation/parameters';
 import {listPaymentIntentsParameters} from '@/shared/paymentIntents/parameters';
-import {listSubscriptionsParameters} from '@/shared/subscriptions/parameters';
+import {
+  cancelSubscriptionParameters,
+  listSubscriptionsParameters,
+  updateSubscriptionParameters,
+} from '@/shared/subscriptions/parameters';
 
 import type {Context} from './configuration';
 
@@ -224,6 +232,28 @@ const tools = (context: Context): Tool[] => [
     actions: {
       subscriptions: {
         read: true,
+      },
+    },
+  },
+  {
+    method: 'cancel_subscription',
+    name: 'Cancel Subscription',
+    description: cancelSubscriptionPrompt(context),
+    parameters: cancelSubscriptionParameters(context),
+    actions: {
+      subscriptions: {
+        update: true,
+      },
+    },
+  },
+  {
+    method: 'update_subscription',
+    name: 'Update Subscription',
+    description: updateSubscriptionPrompt(context),
+    parameters: updateSubscriptionParameters(context),
+    actions: {
+      subscriptions: {
+        update: true,
       },
     },
   },

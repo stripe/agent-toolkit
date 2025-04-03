@@ -13,10 +13,12 @@ const httpAgent = process.env.SOCKET_PROXY_PATH
   : undefined;
 
 // This wrap function adds useful tracing in Braintrust
-export const openai = wrapOpenAI(
+const openai: any = wrapOpenAI(
   new OpenAI({
     baseURL: process.env.OPENAI_BASE_URL,
     apiKey: process.env.OPENAI_API_KEY,
     httpAgent,
   })
 );
+
+export default openai;

@@ -27,12 +27,12 @@ It takes the following arguments:
 
 export const updateSubscriptionPrompt = (_context: Context = {}): string => {
   return `
-This tool will update an existing subscription in Stripe.
+This tool will update an existing subscription in Stripe. If changing an existing subscription item, the existing subscription item has to be set to deleted and the new one has to be added.
 
 It takes the following arguments:
 - subscription (str, required): The ID of the subscription to update.
 - proration_behavior (str, optional): Determines how to handle prorations when the subscription items change. Options: 'create_prorations', 'none', 'always_invoice', 'none_implicit'.
-- items (array, optional): A list of subscription items to update, add, or remove. If changing the price, the existing subscription item has to be set to deleted and the new one has to be added. Each item can have the following properties:
+- items (array, optional): A list of subscription items to update, add, or remove. Each item can have the following properties:
   - id (str, optional): The ID of the subscription item to modify.
   - price (str, optional): The ID of the price to switch to.
   - quantity (int, optional): The quantity of the plan to subscribe to.

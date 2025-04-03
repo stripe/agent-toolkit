@@ -260,7 +260,7 @@ test(async () => {
       expectToolCall(toolCalls, ["list_subscriptions", "update_subscription"]),
       llmCriteriaMet(
         messages,
-        "The message should include a successful subscription update response"
+        "The message should include a successful subscription update response. The subscription should have been updated to the premium plan and have only one item."
       ),
     ],
   };

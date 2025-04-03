@@ -1,4 +1,7 @@
-import {listSubscriptionsParameters} from '@/shared/subscriptions/parameters';
+import {
+  cancelSubscriptionParameters,
+  listSubscriptionsParameters,
+} from '@/shared/subscriptions/parameters';
 
 describe('listSubscriptionsParameters', () => {
   it('should return the correct parameters if no context', () => {
@@ -15,5 +18,13 @@ describe('listSubscriptionsParameters', () => {
     const fields = Object.keys(parameters.shape);
     expect(fields).toEqual(['price', 'status', 'limit']);
     expect(fields.length).toBe(3);
+  });
+});
+
+describe('cancelSubscriptionParameters', () => {
+  it('should return the correct parameters', () => {
+    const parameters = cancelSubscriptionParameters({});
+    const fields = Object.keys(parameters.shape);
+    expect(fields).toEqual(['subscriptionId']);
   });
 });

@@ -1,4 +1,7 @@
-import {listSubscriptionsPrompt} from '@/shared/subscriptions/prompts';
+import {
+  listSubscriptionsPrompt,
+  cancelSubscriptionPrompt,
+} from '@/shared/subscriptions/prompts';
 
 describe('listSubscriptionsPrompt', () => {
   it('should return the correct prompt with no context', () => {
@@ -21,5 +24,14 @@ describe('listSubscriptionsPrompt', () => {
     expect(prompt).toContain('- price (str, optional)');
     expect(prompt).toContain('- status (str, optional)');
     expect(prompt).toContain('- limit (int, optional)');
+  });
+});
+
+describe('cancelSubscriptionPrompt', () => {
+  it('should return the correct prompt', () => {
+    const prompt = cancelSubscriptionPrompt({});
+
+    expect(prompt).toContain('This tool will cancel a subscription in Stripe');
+    expect(prompt).toContain('- subscriptionId (str, required)');
   });
 });

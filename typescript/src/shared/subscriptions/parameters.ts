@@ -43,3 +43,11 @@ export const listSubscriptionsParameters = (
     return schema;
   }
 };
+
+export const cancelSubscriptionParameters = (
+  _context: Context = {}
+): z.AnyZodObject => {
+  return z.object({
+    subscription: z.string().describe('The ID of the subscription to cancel.'),
+  });
+};

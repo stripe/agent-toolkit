@@ -1,12 +1,14 @@
 require("dotenv").config();
 
 import { StripeAgentToolkit } from "../typescript/src/openai";
-import type { ChatCompletionMessageParam } from "openai/resources";
+import type {
+  ChatCompletion,
+  ChatCompletionMessageParam,
+} from "openai/resources";
 import { Eval } from "braintrust";
 import { AssertionScorer, EvalCaseFunction, EvalInput } from "./scorer";
 import { getEvalTestCases } from "./cases";
-import { openai } from "./openai";
-import OpenAI from "openai";
+import braintrustOpenai from "./braintrust_openai";
 
 // This is the core "workhorse" function that accepts an input and returns a response
 // which calls stripe agent tookit
@@ -49,6 +51,7 @@ async function task(evalInput: EvalInput): Promise<EvalOutput> {
         },
         subscriptions: {
           read: true,
+          update: true,
         },
         balance: {
           read: true,
@@ -65,13 +68,13 @@ async function task(evalInput: EvalInput): Promise<EvalOutput> {
     },
   ];
 
-  let completion: OpenAI.Chat.Completions.ChatCompletion;
+  let completion: ChatCompletion;
 
   const tools = stripeAgentToolkit.getTools();
 
   while (true) {
     // eslint-disable-next-line no-await-in-loop
-    completion = await openai.chat.completions.create({
+    completion = await braintrustOpenai.chat.completions.create({
       model: "gpt-4o",
       messages,
       tools,

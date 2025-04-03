@@ -2,7 +2,7 @@ import type {Context} from '@/shared/configuration';
 
 export const createInvoicePrompt = (context: Context = {}) => {
   const customerArg = context.customer
-    ? ''
+    ? `The customer is already set in the context: ${context.customer}.`
     : `- customer (str): The ID of the customer to create the invoice for.\n`;
 
   return `
@@ -16,7 +16,7 @@ ${customerArg}
 
 export const listInvoicesPrompt = (context: Context = {}) => {
   const customerArg = context.customer
-    ? ''
+    ? `The customer is already set in the context: ${context.customer}.`
     : `- customer (str, optional): The ID of the customer to list invoices for.\n`;
 
   return `

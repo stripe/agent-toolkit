@@ -1,8 +1,12 @@
-import {listSubscriptions} from '@/shared/subscriptions/functions';
+import {
+  cancelSubscription,
+  listSubscriptions,
+} from '@/shared/subscriptions/functions';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   subscriptions: {
     list: jest.fn(),
+    cancel: jest.fn(),
   },
 }));
 
@@ -136,5 +140,53 @@ describe('listSubscriptions', () => {
     const result = await listSubscriptions(stripe, context, params);
 
     expect(result).toBe('Failed to list subscriptions');
+  });
+});
+
+describe('cancelSubscription', () => {
+  it('should cancel a subscription and return the result', async () => {
+    const mockSubscription = {
+      id: 'sub_123456',
+      customer: 'cus_123456',
+      status: 'active',
+      current_period_start: 1609459200,
+      current_period_end: 1612137600,
+      items: {
+        data: [
+          {
+            id: 'si_123',
+            price: 'price_123',
+            quantity: 1,
+          },
+        ],
+      },
+    };
+
+    const context = {};
+    const params = {
+      subscriptionId: 'sub_123456',
+    };
+
+    stripe.subscriptions.cancel.mockResolvedValue(mockSubscription);
+    const result = await cancelSubscription(stripe, context, params);
+
+    expect(stripe.subscriptions.cancel).toHaveBeenCalledWith(
+      'sub_123456',
+      {},
+      undefined
+    );
+    expect(result).toEqual(mockSubscription);
+  });
+
+  it('should handle errors gracefully', async () => {
+    const context = {};
+    const params = {
+      subscriptionId: 'sub_123456',
+    };
+
+    stripe.subscriptions.cancel.mockRejectedValue(new Error('API Error'));
+    const result = await cancelSubscription(stripe, context, params);
+
+    expect(result).toBe('Failed to cancel subscription');
   });
 });

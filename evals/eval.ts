@@ -29,6 +29,10 @@ async function task(evalInput: EvalInput): Promise<EvalOutput> {
           create: true,
           read: true,
         },
+        coupons: {
+          create: true,
+          read: true,
+        },
         customers: {
           create: true,
           read: true,

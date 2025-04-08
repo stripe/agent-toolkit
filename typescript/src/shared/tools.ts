@@ -25,6 +25,7 @@ import {
   listSubscriptionsPrompt,
   updateSubscriptionPrompt,
 } from '@/shared/subscriptions/prompts';
+import {createCouponPrompt, listCouponsPrompt} from '@/shared/coupons/prompts';
 
 import {
   createCustomerParameters,
@@ -54,6 +55,10 @@ import {
   listSubscriptionsParameters,
   updateSubscriptionParameters,
 } from '@/shared/subscriptions/parameters';
+import {
+  createCouponParameters,
+  listCouponsParameters,
+} from '@/shared/coupons/parameters';
 
 import type {Context} from './configuration';
 
@@ -264,6 +269,28 @@ const tools = (context: Context): Tool[] => [
     parameters: searchDocumentationParameters(context),
     actions: {
       documentation: {
+        read: true,
+      },
+    },
+  },
+  {
+    method: 'create_coupon',
+    name: 'Create Coupon',
+    description: createCouponPrompt(context),
+    parameters: createCouponParameters(context),
+    actions: {
+      coupons: {
+        create: true,
+      },
+    },
+  },
+  {
+    method: 'list_coupons',
+    name: 'List Coupons',
+    description: listCouponsPrompt(context),
+    parameters: listCouponsParameters(context),
+    actions: {
+      coupons: {
         read: true,
       },
     },

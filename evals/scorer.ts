@@ -7,6 +7,7 @@ import { EvalOutput } from "./eval";
 import { ChatCompletionMessageParam } from "openai/resources/chat/completions.mjs";
 import { ChatCompletionMessageToolCall } from "openai/resources/chat/completions.mjs";
 import { Configuration as StripeAgentToolkitConfig } from "../typescript/src/shared/configuration";
+import isEqual from "lodash/isEqual";
 
 /*
  * EvalInput is what is passed into the agent.
@@ -136,6 +137,33 @@ export const expectToolCall = (
     assertion_type: "expectToolCall",
     expected: expectedToolCalls.join(", "),
     actualValue: actualToolCallNames.join(", "),
+  };
+};
+
+export const expectToolCallArgs = (
+  actualToolCalls: ChatCompletionMessageToolCall[],
+  expectedArgs: Array<{ name: string; arguments: any }>
+): AssertionResult => {
+  const actualToolCallNamesAndArgs = actualToolCalls.map((tc) => ({
+    name: tc.function.name,
+    arguments: JSON.parse(tc.function.arguments),
+  }));
+
+  const pass = actualToolCallNamesAndArgs.some((tc) => {
+    return expectedArgs.some((ea) => {
+      return ea.name === tc.name && isEqual(ea.arguments, tc.arguments);
+    });
+  });
+
+  return {
+    status: pass ? "passed" : "failed",
+    assertion_type: "expectToolCallArgs",
+    expected: expectedArgs
+      .map((ea) => `${ea.name}: ${JSON.stringify(ea.arguments)}`)
+      .join(", "),
+    actualValue: actualToolCallNamesAndArgs
+      .map((tc) => `${tc.name}: ${JSON.stringify(tc.arguments)}`)
+      .join(", "),
   };
 };
 

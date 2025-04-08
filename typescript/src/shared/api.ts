@@ -20,6 +20,7 @@ import {
 } from '@/shared/subscriptions/functions';
 
 import type {Context} from './configuration';
+import {createCoupon, listCoupons} from './coupons/functions';
 
 const TOOLKIT_HEADER = 'stripe-agent-toolkit-typescript';
 const MCP_HEADER = 'stripe-mcp';
@@ -69,6 +70,16 @@ class StripeAPI {
     if (method === 'create_customer') {
       const output = JSON.stringify(
         await createCustomer(this.stripe, this.context, arg)
+      );
+      return output;
+    } else if (method === 'create_coupon') {
+      const output = JSON.stringify(
+        await createCoupon(this.stripe, this.context, arg)
+      );
+      return output;
+    } else if (method === 'list_coupons') {
+      const output = JSON.stringify(
+        await listCoupons(this.stripe, this.context, arg)
       );
       return output;
     } else if (method === 'list_customers') {

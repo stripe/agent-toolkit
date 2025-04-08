@@ -22,6 +22,8 @@ type Options = {
 
 const ACCEPTED_ARGS = ['api-key', 'tools', 'stripe-account'];
 const ACCEPTED_TOOLS = [
+  'coupons.create',
+  'coupons.read',
   'customers.create',
   'customers.read',
   'products.create',

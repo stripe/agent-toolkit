@@ -1,23 +1,22 @@
 import Stripe from 'stripe';
-import {createCustomer, listCustomers} from './customers/functions';
-import {createProduct, listProducts} from './products/functions';
-import {createPrice, listPrices} from './prices/functions';
-import {createPaymentLink} from './paymentLinks/functions';
-import {
-  createInvoice,
-  listInvoices,
-  finalizeInvoice,
-} from '@/shared/invoices/functions';
-import {createInvoiceItem} from '@/shared/invoiceItems/functions';
-import {retrieveBalance} from '@/shared/balance/functions';
-import {createRefund} from '@/shared/refunds/functions';
-import {searchDocumentation} from '@/shared/documentation/functions';
-import {listPaymentIntents} from '@/shared/paymentIntents/functions';
-import {
-  listSubscriptions,
-  cancelSubscription,
-  updateSubscription,
-} from '@/shared/subscriptions/functions';
+import {execute as createCustomer} from './customers/create';
+import {execute as listCustomers} from './customers/list';
+import {execute as retrieveBalance} from './balance/retrieve';
+import {execute as createInvoiceItem} from './invoiceItems/create';
+import {execute as createInvoice} from './invoices/create';
+import {execute as listInvoices} from './invoices/list';
+import {execute as finalizeInvoice} from './invoices/finalize';
+import {execute as createPaymentLink} from './paymentLinks/create';
+import {execute as listPaymentIntents} from './paymentIntents/list';
+import {execute as createProduct} from './products/create';
+import {execute as listProducts} from './products/list';
+import {execute as createPrice} from './prices/create';
+import {execute as listPrices} from './prices/list';
+import {execute as createRefund} from './refunds/create';
+import {execute as listSubscriptions} from './subscriptions/list';
+import {execute as cancelSubscription} from './subscriptions/cancel';
+import {execute as updateSubscription} from './subscriptions/update';
+import {execute as searchDocumentation} from './documentation/search';
 
 import type {Context} from './configuration';
 

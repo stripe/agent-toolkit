@@ -11,9 +11,17 @@
     "module": "NodeNext",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["**/*.ts"],
-  "exclude": ["node_modules", "examples"]
+  "include": [
+    "**/*.ts",
+    "../scripts/generate-schemas.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "examples"
+  ]
 }

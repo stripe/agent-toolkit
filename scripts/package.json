@@ -1,0 +1,22 @@
+{
+  "name": "agent-toolkit-scripts",
+  "version": "0.0.0",
+  "description": "helper scripts for Stripe Agent Toolkit",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate-schemas": "tsx generate-schemas.ts"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "commander": "^12.0.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.19",
+    "@types/axios": "^0.14.0",
+    "@types/commander": "^2.12.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

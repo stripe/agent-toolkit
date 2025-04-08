@@ -227,6 +227,8 @@ main().catch((error) => {
 
 - [Create a customer](https://docs.stripe.com/api/customers/create)
 - [List all customers](https://docs.stripe.com/api/customers/list)
+- [Create a coupon](https://docs.stripe.com/api/coupons/create)
+- [List all coupons](https://docs.stripe.com/api/coupons/list)
 - [Create a product](https://docs.stripe.com/api/products/create)
 - [List all products](https://docs.stripe.com/api/products/list)
 - [Create a price](https://docs.stripe.com/api/prices/create)

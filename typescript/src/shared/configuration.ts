@@ -14,7 +14,8 @@ export type Object =
   | 'refunds'
   | 'paymentIntents'
   | 'subscriptions'
-  | 'documentation';
+  | 'documentation'
+  | 'coupons';
 
 export type Permission = 'create' | 'update' | 'read';
 

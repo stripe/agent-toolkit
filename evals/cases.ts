@@ -5,6 +5,7 @@ import {
   EvalCaseFunction,
   EvalInput,
   expectToolCall,
+  expectToolCallArgs,
   llmCriteriaMet,
 } from "./scorer";
 import { Configuration as StripeAgentToolkitConfig } from "../typescript/src/shared/configuration";
@@ -142,6 +143,45 @@ test({
       "The message should include a list of subscriptions"
     ),
     expectToolCall(toolCalls, ["list_subscriptions"]),
+  ],
+});
+
+test({
+  prompt: "Create a coupon called SUMMER25 that gives 25% off",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["create_coupon"]),
+    llmCriteriaMet(
+      messages,
+      "The message should include a coupon creation response"
+    ),
+  ],
+});
+
+test({
+  prompt: "Create a coupon called WINTERTEN that gives $10 off",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["create_coupon"]),
+    expectToolCallArgs(toolCalls, [
+      {
+        name: "create_coupon",
+        arguments: {
+          amount_off: 1000,
+          currency: "USD",
+          name: "WINTERTEN",
+        },
+      },
+    ]),
+    llmCriteriaMet(
+      messages,
+      "The message should include a coupon creation response"
+    ),
+  ],
+});
+
+test({
+  prompt: "List all coupons",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["list_coupons"]),
   ],
 });
 

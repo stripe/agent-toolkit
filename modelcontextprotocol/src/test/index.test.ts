@@ -124,7 +124,7 @@ describe('parseArgs function', () => {
         '--tools=customers.create,products.read,fake.tool',
       ];
       expect(() => parseArgs(args)).toThrow(
-        'Invalid tool: fake.tool. Accepted tools are: customers.create, customers.read, products.create, products.read, prices.create, prices.read, paymentLinks.create, invoices.create, invoices.update, invoiceItems.create, balance.read, refunds.create, paymentIntents.read, subscriptions.read, subscriptions.update, documentation.read'
+        /Invalid tool: fake\.tool\. Accepted tools are: .*$/
       );
     });
   });
@@ -212,6 +212,10 @@ describe('main function', () => {
 
 const ALL_ACTIONS = {
   customers: {
+    create: true,
+    read: true,
+  },
+  coupons: {
     create: true,
     read: true,
   },

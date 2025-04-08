@@ -17,8 +17,7 @@
     }
   },
   "include": [
-    "**/*.ts",
-    "../scripts/generate-schemas.ts"
+    "**/*.ts"
   ],
   "exclude": [
     "node_modules",

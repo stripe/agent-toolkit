@@ -21,6 +21,7 @@ import {
 
 import type {Context} from './configuration';
 import {createCoupon, listCoupons} from './coupons/functions';
+import tools, {Tool} from './tools';
 
 const TOOLKIT_HEADER = 'stripe-agent-toolkit-typescript';
 const MCP_HEADER = 'stripe-mcp';
@@ -29,6 +30,8 @@ class StripeAPI {
   stripe: Stripe;
 
   context: Context;
+
+  tools: Tool[];
 
   constructor(secretKey: string, context?: Context) {
     const stripeClient = new Stripe(secretKey, {
@@ -43,6 +46,7 @@ class StripeAPI {
     });
     this.stripe = stripeClient;
     this.context = context || {};
+    this.tools = tools(this.context);
   }
 
   async createMeterEvent({
@@ -67,104 +71,10 @@ class StripeAPI {
   }
 
   async run(method: string, arg: any) {
-    if (method === 'create_customer') {
+    const tool = this.tools.find((t) => t.method === method);
+    if (tool) {
       const output = JSON.stringify(
-        await createCustomer(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_coupon') {
-      const output = JSON.stringify(
-        await createCoupon(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_coupons') {
-      const output = JSON.stringify(
-        await listCoupons(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_customers') {
-      const output = JSON.stringify(
-        await listCustomers(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_product') {
-      const output = JSON.stringify(
-        await createProduct(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_products') {
-      const output = JSON.stringify(
-        await listProducts(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_price') {
-      const output = JSON.stringify(
-        await createPrice(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_prices') {
-      const output = JSON.stringify(
-        await listPrices(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_payment_link') {
-      const output = JSON.stringify(
-        await createPaymentLink(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_invoice') {
-      const output = JSON.stringify(
-        await createInvoice(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_invoices') {
-      const output = JSON.stringify(
-        await listInvoices(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_invoice_item') {
-      const output = JSON.stringify(
-        await createInvoiceItem(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'finalize_invoice') {
-      const output = JSON.stringify(
-        await finalizeInvoice(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'retrieve_balance') {
-      const output = JSON.stringify(
-        await retrieveBalance(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'create_refund') {
-      const output = JSON.stringify(
-        await createRefund(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_payment_intents') {
-      const output = JSON.stringify(
-        await listPaymentIntents(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'list_subscriptions') {
-      const output = JSON.stringify(
-        await listSubscriptions(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'update_subscription') {
-      const output = JSON.stringify(
-        await updateSubscription(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'cancel_subscription') {
-      const output = JSON.stringify(
-        await cancelSubscription(this.stripe, this.context, arg)
-      );
-      return output;
-    } else if (method === 'search_documentation') {
-      const output = JSON.stringify(
-        await searchDocumentation(this.stripe, this.context, arg)
+        await tool.execute(this.stripe, this.context, arg)
       );
       return output;
     } else {

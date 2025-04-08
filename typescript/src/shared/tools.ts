@@ -61,6 +61,28 @@ import {
 } from '@/shared/coupons/parameters';
 
 import type {Context} from './configuration';
+import Stripe from 'stripe';
+import {createCustomer, listCustomers} from './customers/functions';
+import {createProduct, listProducts} from './products/functions';
+import {createPaymentLink} from './paymentLinks/functions';
+import {
+  createInvoice,
+  finalizeInvoice,
+  listInvoices,
+} from './invoices/functions';
+import {createInvoiceItem} from './invoiceItems/functions';
+import {retrieveBalance} from './balance/functions';
+import {createRefund} from './refunds/functions';
+import {listPaymentIntents} from './paymentIntents/functions';
+import {
+  cancelSubscription,
+  updateSubscription,
+} from './subscriptions/functions';
+import {listSubscriptions} from './subscriptions/functions';
+import {listCoupons} from './coupons/functions';
+import {createCoupon} from './coupons/functions';
+import {searchDocumentation} from './documentation/functions';
+import {createPrice, listPrices} from './prices/functions';
 
 export type Tool = {
   method: string;
@@ -72,6 +94,7 @@ export type Tool = {
       [action: string]: boolean;
     };
   };
+  execute: (stripe: Stripe, context: Context, params: any) => Promise<any>;
 };
 
 const tools = (context: Context): Tool[] => [
@@ -85,6 +108,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createCustomer,
   },
   {
     method: 'list_customers',
@@ -96,6 +120,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listCustomers,
   },
   {
     method: 'create_product',
@@ -107,6 +132,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createProduct,
   },
   {
     method: 'list_products',
@@ -118,6 +144,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listProducts,
   },
   {
     method: 'create_price',
@@ -129,6 +156,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createPrice,
   },
   {
     method: 'list_prices',
@@ -140,6 +168,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listPrices,
   },
   {
     method: 'create_payment_link',
@@ -151,6 +180,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createPaymentLink,
   },
   {
     method: 'create_invoice',
@@ -162,6 +192,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createInvoice,
   },
   {
     method: 'list_invoices',
@@ -173,6 +204,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listInvoices,
   },
   {
     method: 'create_invoice_item',
@@ -184,6 +216,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createInvoiceItem,
   },
   {
     method: 'finalize_invoice',
@@ -195,6 +228,7 @@ const tools = (context: Context): Tool[] => [
         update: true,
       },
     },
+    execute: finalizeInvoice,
   },
   {
     method: 'retrieve_balance',
@@ -206,6 +240,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: retrieveBalance,
   },
   {
     method: 'create_refund',
@@ -217,6 +252,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createRefund,
   },
   {
     method: 'list_payment_intents',
@@ -228,6 +264,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listPaymentIntents,
   },
   {
     method: 'list_subscriptions',
@@ -239,6 +276,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listSubscriptions,
   },
   {
     method: 'cancel_subscription',
@@ -250,6 +288,7 @@ const tools = (context: Context): Tool[] => [
         update: true,
       },
     },
+    execute: cancelSubscription,
   },
   {
     method: 'update_subscription',
@@ -261,6 +300,7 @@ const tools = (context: Context): Tool[] => [
         update: true,
       },
     },
+    execute: updateSubscription,
   },
   {
     method: 'search_documentation',
@@ -272,6 +312,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: searchDocumentation,
   },
   {
     method: 'create_coupon',
@@ -283,6 +324,7 @@ const tools = (context: Context): Tool[] => [
         create: true,
       },
     },
+    execute: createCoupon,
   },
   {
     method: 'list_coupons',
@@ -294,6 +336,7 @@ const tools = (context: Context): Tool[] => [
         read: true,
       },
     },
+    execute: listCoupons,
   },
 ];
 

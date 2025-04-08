@@ -10,6 +10,7 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      execute: async (a: any, b: any, c: any) => {},
       actions: {
         customers: {
           create: true,
@@ -46,6 +47,7 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      execute: async (a: any, b: any, c: any) => {},
       actions: {
         customers: {
           create: true,
@@ -82,6 +84,7 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      execute: async (a: any, b: any, c: any) => {},
       actions: {
         paymentLinks: {
           create: true,

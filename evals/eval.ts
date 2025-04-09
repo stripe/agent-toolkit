@@ -60,6 +60,10 @@ async function task(evalInput: EvalInput): Promise<EvalOutput> {
         balance: {
           read: true,
         },
+        disputes: {
+          read: true,
+          update: true,
+        },
       },
       ...evalInput.toolkitConfigOverride,
     },

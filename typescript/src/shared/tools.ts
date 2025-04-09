@@ -26,6 +26,10 @@ import {
   updateSubscriptionPrompt,
 } from '@/shared/subscriptions/prompts';
 import {createCouponPrompt, listCouponsPrompt} from '@/shared/coupons/prompts';
+import {
+  updateDisputePrompt,
+  listDisputesPrompt,
+} from '@/shared/disputes/prompts';
 
 import {
   createCustomerParameters,
@@ -59,6 +63,10 @@ import {
   createCouponParameters,
   listCouponsParameters,
 } from '@/shared/coupons/parameters';
+import {
+  updateDisputeParameters,
+  listDisputesParameters,
+} from '@/shared/disputes/parameters';
 
 import type {Context} from './configuration';
 import Stripe from 'stripe';
@@ -83,6 +91,7 @@ import {listCoupons} from './coupons/functions';
 import {createCoupon} from './coupons/functions';
 import {searchDocumentation} from './documentation/functions';
 import {createPrice, listPrices} from './prices/functions';
+import {updateDispute, listDisputes} from './disputes/functions';
 
 export type Tool = {
   method: string;
@@ -337,6 +346,30 @@ const tools = (context: Context): Tool[] => [
       },
     },
     execute: listCoupons,
+  },
+  {
+    method: 'update_dispute',
+    name: 'Update Dispute',
+    description: updateDisputePrompt(context),
+    parameters: updateDisputeParameters(context),
+    actions: {
+      disputes: {
+        update: true,
+      },
+    },
+    execute: updateDispute,
+  },
+  {
+    method: 'list_disputes',
+    name: 'List Disputes',
+    description: listDisputesPrompt(context),
+    parameters: listDisputesParameters(context),
+    actions: {
+      disputes: {
+        read: true,
+      },
+    },
+    execute: listDisputes,
   },
 ];
 

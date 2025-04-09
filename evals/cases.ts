@@ -306,4 +306,11 @@ test(async () => {
   };
 });
 
+test({
+  prompt: "List all disputes",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["list_disputes"]),
+  ],
+});
+
 export const getEvalTestCases = async () => Promise.all(_testCases);

@@ -5,6 +5,7 @@ import type {Tool} from './tools';
 // prevents the related "tool" from being considered.
 export type Object =
   | 'customers'
+  | 'disputes'
   | 'invoices'
   | 'invoiceItems'
   | 'paymentLinks'

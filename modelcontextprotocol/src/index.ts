@@ -39,6 +39,8 @@ const ACCEPTED_TOOLS = [
   'paymentIntents.read',
   'subscriptions.read',
   'subscriptions.update',
+  'disputes.read',
+  'disputes.update',
   'documentation.read',
 ];
 

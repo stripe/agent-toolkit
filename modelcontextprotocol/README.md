@@ -79,6 +79,8 @@ of if you're using Docker
 | `paymentIntents.read`  | Read payment intent information |
 | `subscriptions.read`   | Read subscription information   |
 | `subscriptions.update` | Update subscription information |
+| `coupons.create`       | Create a new coupon             |
+| `coupons.read`         | Read coupon information         |
 | `documentation.read`   | Search Stripe documentation     |
 
 ## Debugging the Server

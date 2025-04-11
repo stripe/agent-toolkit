@@ -10,13 +10,7 @@ export const updateDispute = async (
 ) => {
   try {
     const updateParams: Stripe.DisputeUpdateParams = {
-      evidence: {
-        cancellation_policy_disclosure:
-          params.evidence__cancellation_policy_disclosure,
-        duplicate_charge_explanation:
-          params.evidence__duplicate_charge_explanation,
-        uncategorized_text: params.evidence__uncategorized_text,
-      },
+      evidence: params.evidence,
       submit: params.submit,
     };
 

@@ -19,5 +19,4 @@ This tool will fetch a list of disputes in Stripe.
 It takes the following arguments:
 - charge (string, optional): Only return disputes associated to the charge specified by this charge ID.
 - payment_intent (string, optional): Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID.
-- limit (int, optional): A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
 `;

@@ -18,7 +18,7 @@ describe('updateDispute', () => {
     const params = {
       dispute: 'dp_123456',
       evidence: {
-        product_description: 'Test product',
+        uncategorized_text: 'Test product',
       },
       submit: true,
     };
@@ -45,7 +45,7 @@ describe('updateDispute', () => {
     const params = {
       dispute: 'dp_123456',
       evidence: {
-        product_description: 'Test product',
+        uncategorized_text: 'Test product',
       },
       submit: true,
     };

@@ -9,9 +9,19 @@ export const updateDispute = async (
   params: z.infer<ReturnType<typeof updateDisputeParameters>>
 ) => {
   try {
-    const {dispute, ...updateParams} = params;
+    const updateParams: Stripe.DisputeUpdateParams = {
+      evidence: {
+        cancellation_policy_disclosure:
+          params.evidence__cancellation_policy_disclosure,
+        duplicate_charge_explanation:
+          params.evidence__duplicate_charge_explanation,
+        uncategorized_text: params.evidence__uncategorized_text,
+      },
+      submit: params.submit,
+    };
+
     const updatedDispute = await stripe.disputes.update(
-      dispute,
+      params.dispute,
       updateParams,
       context.account ? {stripeAccount: context.account} : undefined
     );

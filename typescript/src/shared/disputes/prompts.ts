@@ -8,7 +8,10 @@ When you receive a dispute, contacting your customer is always the best first st
 It takes the following arguments:
 - dispute (string): The ID of the dispute to update
 - evidence (object, optional): Evidence to upload for the dispute. Updating any field will submit all fields for review.
-- metadata (object, optional): Set of key-value pairs that you can attach to the dispute.
+    - cancellation_policy_disclosure (string, optional): An explanation of how and when the customer was shown your refund policy prior to purchase.
+    - cancellation_rebuttal (string, optional): A justification for why the customer’s subscription was not canceled.
+    - duplicate_charge_explanation (string, optional): An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.
+    - uncategorized_text (string, optional): Any additional evidence or statements.
 - submit (boolean, optional): Whether to immediately submit evidence to the bank. If false, evidence is staged on the dispute.
 `;
 

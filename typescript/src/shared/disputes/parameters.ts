@@ -6,16 +6,33 @@ export const updateDisputeParameters = (_context: Context = {}) =>
   z.object({
     dispute: z.string().describe('The ID of the dispute to update'),
     evidence: z
-      .object({})
+      .object({
+        cancellation_policy_disclosure: z
+          .string()
+          .max(20000)
+          .describe(
+            'An explanation of how and when the customer was shown your refund policy prior to purchase.'
+          ),
+        cancellation_rebuttal: z
+          .string()
+          .max(20000)
+          .describe(
+            'A justification for why the customer’s subscription was not canceled. (ID of a file upload)'
+          ),
+        duplicate_charge_explanation: z
+          .string()
+          .max(20000)
+          .describe(
+            'An explanation of the difference between the disputed charge versus the prior charge that appears to be a duplicate.'
+          ),
+        uncategorized_text: z
+          .string()
+          .max(20000)
+          .describe('Any additional evidence or statements.'),
+      })
       .optional()
       .describe(
         'Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review.'
-      ),
-    metadata: z
-      .record(z.string())
-      .optional()
-      .describe(
-        'Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.'
       ),
     submit: z
       .boolean()

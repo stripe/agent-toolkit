@@ -242,6 +242,8 @@ main().catch((error) => {
 - [Update a subscription](https://docs.stripe.com/api/subscriptions/update)
 - [Cancel a subscription](https://docs.stripe.com/api/subscriptions/cancel)
 - [Create a refund](https://docs.stripe.com/api/refunds/create)
+- [List all disputes](https://docs.stripe.com/api/disputes/list)
+- [Update a dispute](https://docs.stripe.com/api/disputes/update)
 
 [python-sdk]: https://github.com/stripe/stripe-python
 [node-sdk]: https://github.com/stripe/stripe-node

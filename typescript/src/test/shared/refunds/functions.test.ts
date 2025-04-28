@@ -1,4 +1,4 @@
-import {createRefund} from '@/shared/refunds/functions';
+import {createRefund} from '@/shared/refunds/createRefund';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   refunds: {

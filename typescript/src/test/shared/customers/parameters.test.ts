@@ -1,7 +1,5 @@
-import {
-  createCustomerParameters,
-  listCustomersParameters,
-} from '@/shared/customers/parameters';
+import {createCustomerParameters} from '@/shared/customers/createCustomer';
+import {listCustomersParameters} from '@/shared/customers/listCustomers';
 
 describe('createCustomerParameters', () => {
   it('should return the correct parameters if no context', () => {

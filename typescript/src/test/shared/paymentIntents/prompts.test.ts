@@ -1,4 +1,4 @@
-import {listPaymentIntentsPrompt} from '@/shared/paymentIntents/prompts';
+import {listPaymentIntentsPrompt} from '@/shared/paymentIntents/listPaymentIntents';
 
 describe('listPaymentIntentsPrompt', () => {
   it('should return the correct prompt', () => {

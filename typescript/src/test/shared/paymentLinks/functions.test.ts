@@ -1,4 +1,4 @@
-import {createPaymentLink} from '@/shared/paymentLinks/functions';
+import {createPaymentLink} from '@/shared/paymentLinks/createPaymentLink';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   paymentLinks: {

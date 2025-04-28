@@ -1,4 +1,4 @@
-import {retrieveBalanceParameters} from '@/shared/balance/parameters';
+import {retrieveBalanceParameters} from '@/shared/balance/retrieveBalance';
 
 describe('retrieveBalanceParameters', () => {
   it('should return the correct parameters if no context', () => {

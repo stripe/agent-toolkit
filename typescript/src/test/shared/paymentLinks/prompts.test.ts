@@ -1,4 +1,4 @@
-import {createPaymentLinkPrompt} from '@/shared/paymentLinks/prompts';
+import {createPaymentLinkPrompt} from '@/shared/paymentLinks/createPaymentLink';
 
 describe('createPaymentLinkPrompt', () => {
   it('should return the correct prompt', () => {

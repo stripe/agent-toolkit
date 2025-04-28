@@ -1,4 +1,4 @@
-import {createInvoiceItemPrompt} from '@/shared/invoiceItems/prompts';
+import {createInvoiceItemPrompt} from '@/shared/invoiceItems/createInvoiceItem';
 
 describe('createInvoiceItemPrompt', () => {
   it('should return the correct prompt when no customer is specified', () => {

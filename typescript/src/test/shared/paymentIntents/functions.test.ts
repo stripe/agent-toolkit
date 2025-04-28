@@ -1,4 +1,4 @@
-import {listPaymentIntents} from '@/shared/paymentIntents/functions';
+import {listPaymentIntents} from '@/shared/paymentIntents/listPaymentIntents';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   paymentIntents: {

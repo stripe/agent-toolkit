@@ -1,7 +1,5 @@
-import {
-  createProductParameters,
-  listProductsParameters,
-} from '@/shared/products/parameters';
+import {createProductParameters} from '@/shared/products/createProduct';
+import {listProductsParameters} from '@/shared/products/listProducts';
 
 describe('createProductParameters', () => {
   it('should return the correct parameters if no context', () => {

@@ -1,4 +1,4 @@
-import {createInvoiceItemParameters} from '@/shared/invoiceItems/parameters';
+import {createInvoiceItemParameters} from '@/shared/invoiceItems/createInvoiceItem';
 
 describe('createInvoiceItemParameters', () => {
   it('should return the correct parameters if no context', () => {

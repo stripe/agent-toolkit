@@ -1,8 +1,6 @@
-import {
-  cancelSubscription,
-  listSubscriptions,
-  updateSubscription,
-} from '@/shared/subscriptions/functions';
+import {listSubscriptions} from '@/shared/subscriptions/listSubscriptions';
+import {cancelSubscription} from '@/shared/subscriptions/cancelSubscription';
+import {updateSubscription} from '@/shared/subscriptions/updateSubscription';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   subscriptions: {

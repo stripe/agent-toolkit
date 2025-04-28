@@ -1,8 +1,6 @@
-import {
-  cancelSubscriptionParameters,
-  listSubscriptionsParameters,
-  updateSubscriptionParameters,
-} from '@/shared/subscriptions/parameters';
+import {listSubscriptionsParameters} from '@/shared/subscriptions/listSubscriptions';
+import {cancelSubscriptionParameters} from '@/shared/subscriptions/cancelSubscription';
+import {updateSubscriptionParameters} from '@/shared/subscriptions/updateSubscription';
 
 describe('listSubscriptionsParameters', () => {
   it('should return the correct parameters if no context', () => {

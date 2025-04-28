@@ -1,8 +1,6 @@
-import {
-  createInvoiceParameters,
-  listInvoicesParameters,
-  finalizeInvoiceParameters,
-} from '@/shared/invoices/parameters';
+import {createInvoiceParameters} from '@/shared/invoices/createInvoice';
+import {listInvoicesParameters} from '@/shared/invoices/listInvoices';
+import {finalizeInvoiceParameters} from '@/shared/invoices/finalizeInvoice';
 
 describe('createInvoiceParameters', () => {
   it('should return the correct parameters if no context', () => {

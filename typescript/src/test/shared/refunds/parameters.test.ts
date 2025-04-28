@@ -1,4 +1,4 @@
-import {createRefundParameters} from '@/shared/refunds/parameters';
+import {createRefundParameters} from '@/shared/refunds/createRefund';
 
 describe('createRefundParameters', () => {
   it('should return the correct parameters if no context', () => {

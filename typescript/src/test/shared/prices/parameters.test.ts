@@ -1,7 +1,5 @@
-import {
-  createPriceParameters,
-  listPricesParameters,
-} from '@/shared/prices/parameters';
+import {createPriceParameters} from '@/shared/prices/createPrice';
+import {listPricesParameters} from '@/shared/prices/listPrices';
 
 describe('createPriceParameters', () => {
   it('should return the correct parameters if no context', () => {

@@ -4,8 +4,7 @@ import type {Context} from '@/shared/configuration';
 import type {Tool} from '@/shared/tools';
 
 export const updateSubscriptionPrompt = (_context: Context = {}): string => {
-  return `
-  This tool will update an existing subscription in Stripe. If changing an existing subscription item, the existing subscription item has to be set to deleted and the new one has to be added.
+  return `This tool will update an existing subscription in Stripe. If changing an existing subscription item, the existing subscription item has to be set to deleted and the new one has to be added.
   
   It takes the following arguments:
   - subscription (str, required): The ID of the subscription to update.

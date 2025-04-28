@@ -60,8 +60,8 @@ export const searchDocumentation = async (
 };
 
 const tool = (context: Context): Tool => ({
-  method: 'search_documentation',
-  name: 'Search Documentation',
+  method: 'search_stripe_documentation',
+  name: 'Search Stripe Documentation',
   description: searchDocumentationPrompt(context),
   parameters: searchDocumentationParameters(context),
   actions: {

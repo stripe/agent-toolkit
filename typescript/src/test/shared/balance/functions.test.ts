@@ -1,4 +1,4 @@
-import {retrieveBalance} from '@/shared/balance/functions';
+import {retrieveBalance} from '@/shared/balance/retrieveBalance';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   balance: {

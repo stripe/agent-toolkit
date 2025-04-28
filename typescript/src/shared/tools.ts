@@ -15,6 +15,11 @@ import {
   listInvoicesPrompt,
   finalizeInvoicePrompt,
 } from '@/shared/invoices/prompts';
+
+import retrieveBalanceTool from '@/shared/balance/retrieveBalance';
+import listCouponsTool from '@/shared/coupons/listCoupons';
+import createCouponTool from '@/shared/coupons/createCoupon';
+
 import {createInvoiceItemPrompt} from '@/shared/invoiceItems/prompts';
 import {retrieveBalancePrompt} from '@/shared/balance/prompts';
 import {createRefundPrompt} from '@/shared/refunds/prompts';
@@ -239,18 +244,7 @@ const tools = (context: Context): Tool[] => [
     },
     execute: finalizeInvoice,
   },
-  {
-    method: 'retrieve_balance',
-    name: 'Retrieve Balance',
-    description: retrieveBalancePrompt(context),
-    parameters: retrieveBalanceParameters(context),
-    actions: {
-      balance: {
-        read: true,
-      },
-    },
-    execute: retrieveBalance,
-  },
+  retrieveBalanceTool(context),
   {
     method: 'create_refund',
     name: 'Create Refund',
@@ -323,30 +317,8 @@ const tools = (context: Context): Tool[] => [
     },
     execute: searchDocumentation,
   },
-  {
-    method: 'create_coupon',
-    name: 'Create Coupon',
-    description: createCouponPrompt(context),
-    parameters: createCouponParameters(context),
-    actions: {
-      coupons: {
-        create: true,
-      },
-    },
-    execute: createCoupon,
-  },
-  {
-    method: 'list_coupons',
-    name: 'List Coupons',
-    description: listCouponsPrompt(context),
-    parameters: listCouponsParameters(context),
-    actions: {
-      coupons: {
-        read: true,
-      },
-    },
-    execute: listCoupons,
-  },
+  listCouponsTool(context),
+  createCouponTool(context),
   {
     method: 'update_dispute',
     name: 'Update Dispute',

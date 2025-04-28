@@ -1,26 +1,6 @@
 import Stripe from 'stripe';
-import {createCustomer, listCustomers} from './customers/functions';
-import {createProduct, listProducts} from './products/functions';
-import {createPrice, listPrices} from './prices/functions';
-import {createPaymentLink} from './paymentLinks/functions';
-import {
-  createInvoice,
-  listInvoices,
-  finalizeInvoice,
-} from '@/shared/invoices/functions';
-import {createInvoiceItem} from '@/shared/invoiceItems/functions';
-import {retrieveBalance} from '@/shared/balance/functions';
-import {createRefund} from '@/shared/refunds/functions';
-import {searchDocumentation} from '@/shared/documentation/functions';
-import {listPaymentIntents} from '@/shared/paymentIntents/functions';
-import {
-  listSubscriptions,
-  cancelSubscription,
-  updateSubscription,
-} from '@/shared/subscriptions/functions';
 
 import type {Context} from './configuration';
-import {createCoupon, listCoupons} from './coupons/functions';
 import tools, {Tool} from './tools';
 
 const TOOLKIT_HEADER = 'stripe-agent-toolkit-typescript';

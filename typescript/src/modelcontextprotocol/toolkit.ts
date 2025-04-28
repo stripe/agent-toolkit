@@ -35,7 +35,7 @@ class StripeAgentToolkit extends McpServer {
 
     filteredTools.forEach((tool) => {
       this.tool(
-        tool.method,
+        `stripe_${tool.method}`,
         tool.description,
         tool.parameters.shape,
         async (arg: any, _extra: RequestHandlerExtra) => {

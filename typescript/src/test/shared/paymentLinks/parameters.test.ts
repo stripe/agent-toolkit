@@ -1,4 +1,4 @@
-import {createPaymentLinkParameters} from '@/shared/paymentLinks/parameters';
+import {createPaymentLinkParameters} from '@/shared/paymentLinks/createPaymentLink';
 
 describe('createPaymentLinkParameters', () => {
   it('should return the correct parameters if no context', () => {

@@ -1,4 +1,5 @@
-import {createPrice, listPrices} from '@/shared/prices/functions';
+import {createPrice} from '@/shared/prices/createPrice';
+import {listPrices} from '@/shared/prices/listPrices';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   prices: {

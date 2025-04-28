@@ -1,4 +1,4 @@
-import {createInvoiceItem} from '@/shared/invoiceItems/functions';
+import {createInvoiceItem} from '@/shared/invoiceItems/createInvoiceItem';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   invoiceItems: {

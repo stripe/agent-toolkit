@@ -1,4 +1,5 @@
-import {updateDispute, listDisputes} from '@/shared/disputes/functions';
+import {updateDispute} from '@/shared/disputes/updateDispute';
+import {listDisputes} from '@/shared/disputes/listDisputes';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   disputes: {

@@ -1,4 +1,5 @@
-import {createCustomer, listCustomers} from '@/shared/customers/functions';
+import {createCustomer} from '@/shared/customers/createCustomer';
+import {listCustomers} from '@/shared/customers/listCustomers';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   customers: {

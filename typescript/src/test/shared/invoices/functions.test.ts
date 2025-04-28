@@ -1,8 +1,6 @@
-import {
-  createInvoice,
-  listInvoices,
-  finalizeInvoice,
-} from '@/shared/invoices/functions';
+import {createInvoice} from '@/shared/invoices/createInvoice';
+import {listInvoices} from '@/shared/invoices/listInvoices';
+import {finalizeInvoice} from '@/shared/invoices/finalizeInvoice';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   invoices: {

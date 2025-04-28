@@ -1,4 +1,4 @@
-import {listPaymentIntentsParameters} from '@/shared/paymentIntents/parameters';
+import {listPaymentIntentsParameters} from '@/shared/paymentIntents/listPaymentIntents';
 
 describe('listPaymentIntentsParameters', () => {
   it('should return the correct parameters if no context', () => {

@@ -1,8 +1,6 @@
-import {
-  createInvoicePrompt,
-  listInvoicesPrompt,
-  finalizeInvoicePrompt,
-} from '@/shared/invoices/prompts';
+import {createInvoicePrompt} from '@/shared/invoices/createInvoice';
+import {listInvoicesPrompt} from '@/shared/invoices/listInvoices';
+import {finalizeInvoicePrompt} from '@/shared/invoices/finalizeInvoice';
 
 describe('createInvoicePrompt', () => {
   it('should return the correct prompt when no customer is specified', () => {

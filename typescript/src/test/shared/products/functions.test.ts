@@ -1,4 +1,5 @@
-import {createProduct, listProducts} from '@/shared/products/functions';
+import {createProduct} from '@/shared/products/createProduct';
+import {listProducts} from '@/shared/products/listProducts';
 
 const Stripe = jest.fn().mockImplementation(() => ({
   products: {

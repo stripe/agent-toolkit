@@ -1,4 +1,4 @@
-import {searchDocumentationParameters} from '@/shared/documentation/parameters';
+import {searchDocumentationParameters} from '@/shared/documentation/searchDocumentation';
 
 describe('searchDocumentationParameters', () => {
   it('should return the correct parameters if no context', () => {

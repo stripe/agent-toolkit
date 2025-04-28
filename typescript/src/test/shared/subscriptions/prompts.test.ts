@@ -1,8 +1,6 @@
-import {
-  listSubscriptionsPrompt,
-  cancelSubscriptionPrompt,
-  updateSubscriptionPrompt,
-} from '@/shared/subscriptions/prompts';
+import {listSubscriptionsPrompt} from '@/shared/subscriptions/listSubscriptions';
+import {cancelSubscriptionPrompt} from '@/shared/subscriptions/cancelSubscription';
+import {updateSubscriptionPrompt} from '@/shared/subscriptions/updateSubscription';
 
 describe('listSubscriptionsPrompt', () => {
   it('should return the correct prompt with no context', () => {

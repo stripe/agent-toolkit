@@ -1,6 +1,7 @@
 {
   "name": "@stripe/agent-toolkit",
   "version": "0.6.1",
+  "type": "module",
   "homepage": "https://github.com/stripe/agent-toolkit",
   "scripts": {
     "build": "tsup",
@@ -31,6 +32,11 @@
       "types": "./modelcontextprotocol/index.d.ts",
       "require": "./modelcontextprotocol/index.js",
       "import": "./modelcontextprotocol/index.mjs"
+    },
+    "./cloudflare": {
+      "types": "./cloudflare/index.d.ts",
+      "require": "./cloudflare/index.js",
+      "import": "./cloudflare/index.mjs"
     }
   },
   "packageManager": "pnpm@9.11.0",
@@ -69,7 +75,8 @@
     "openai": "^4.86.1",
     "@langchain/core": "^0.3.6",
     "@modelcontextprotocol/sdk": "^1.4.1",
-    "ai": "^3.4.7 || ^4.0.0"
+    "ai": "^3.4.7 || ^4.0.0",
+    "agents": "^0.0.66"
   },
   "workspaces": [
     ".",
@@ -80,6 +87,7 @@
     "langchain/**/*",
     "modelcontextprotocol/**/*",
     "openai/**/*",
+    "cloudflare/**/*",
     "LICENSE",
     "README.md",
     "VERSION",

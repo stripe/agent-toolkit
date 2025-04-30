@@ -11,16 +11,9 @@
     "module": "NodeNext",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "examples"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "examples"]
 }

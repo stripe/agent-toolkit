@@ -3,13 +3,12 @@ import {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import Stripe from 'stripe';
-
-const {McpAgent} = require('agents/mcp');
+import {McpAgent} from 'agents/mcp';
 
 type Env = any;
 
 export type PaymentState = {
-  stripe?: {
+  stripe: {
     paidToolCalls: string[];
     subscriptions: string[];
     customerId: string;
@@ -37,6 +36,7 @@ export abstract class experimental_PaidMcpAgent<
   };
 
   stripe(): Stripe {
+    // @ts-ignore
     return new Stripe(this.env.STRIPE_SECRET_KEY, {
       appInfo: {
         name: 'agent-toolkit/cloudflare',
@@ -48,10 +48,8 @@ export abstract class experimental_PaidMcpAgent<
 
   async getCurrentCustomerID() {
     if (this.state?.stripe?.customerId) {
-      return;
+      return this.state.stripe.customerId || '';
     }
-
-    console.log('Creating customer or loading', this.props.userEmail);
 
     const customers = await this.stripe().customers.list({
       email: this.props.userEmail,
@@ -69,10 +67,6 @@ export abstract class experimental_PaidMcpAgent<
     }
 
     return customerId;
-  }
-
-  onStateUpdate(state: State) {
-    console.log({stateUpdate: state});
   }
 
   paidTool<Args extends ZodRawShape>(
@@ -101,16 +95,8 @@ export abstract class experimental_PaidMcpAgent<
     const callback = async (args: any, extra: any): Promise<CallToolResult> => {
       let customerId = state?.stripe?.customerId;
       if (!customerId) {
-        console.log('No customer - creating or retrieving one');
-        const customer = await this.getCurrentCustomerID();
-        if (customer) {
-          customerId = customer;
-        }
+        customerId = (await this.getCurrentCustomerID()) || '';
       }
-
-      console.log(
-        `In tool ${toolName} with customerId ${customerId}, paid tool calls ${state?.stripe?.paidToolCalls}`
-      );
 
       const stripeState = state?.stripe || this.INITIAL_STRIPE_STATE.stripe;
       stripeState.customerId = customerId;
@@ -128,8 +114,7 @@ export abstract class experimental_PaidMcpAgent<
           if (session.payment_status === 'paid') {
             paidForTool = true;
 
-            // why does state restart every time the server is restarted?
-
+            // @ts-ignore
             this.setState({
               ...state,
               stripe: {
@@ -147,9 +132,6 @@ export abstract class experimental_PaidMcpAgent<
             sub.items.data.find((item) => item.price.id === priceId)
           );
           if (activeSub) {
-            console.log(
-              'User has active subscription for this tool already, considering it paid.'
-            );
             paidForTool = true;
           }
         }
@@ -171,7 +153,6 @@ export abstract class experimental_PaidMcpAgent<
               mode: 'subscription',
               customer: customerId || undefined,
             });
-            console.log('Created stripe checkout session', session);
 
             const newState: State = {
               ...((state || {}) as State),
@@ -223,7 +204,6 @@ export abstract class experimental_PaidMcpAgent<
             mode: 'subscription',
             customer: customerId || undefined,
           });
-          console.log('Created stripe checkout session', session);
 
           const newState: State = {
             ...((state || {}) as State),

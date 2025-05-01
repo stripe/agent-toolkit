@@ -7,9 +7,6 @@
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "allowJs": true,
-    "paths": {
-      "@stripe/agent-toolkit/cloudflare": ["../../src/cloudflare/index.ts"]
-    },
     "checkJs": false,
     "noEmit": true,
     "isolatedModules": true,

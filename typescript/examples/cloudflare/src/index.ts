@@ -24,8 +24,6 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
 
   initialState: State = {};
 
-  paymentSuccessRedirectEndpoint = '/payment/success';
-
   async init() {
     this.server.tool('add', {a: z.number(), b: z.number()}, ({a, b}) => {
       return {

@@ -97,12 +97,12 @@ export abstract class experimental_PaidMcpAgent<
     // Why is state undefined sometimes??
     const state = this.state as undefined | typeof this.state;
 
-    let redirectUrl = this.paymentSuccessRedirectEndpoint;
+    let redirectUrl = this.successUrl;
     if (redirectUrl.startsWith('/')) {
       // Figure out how to actual get the base url of the mcpServer somehow instead
       // of hardcoding it:
       const baseUrl = 'http://localhost:4242';
-      redirectUrl = `${baseUrl}${this.paymentSuccessRedirectEndpoint}`;
+      redirectUrl = `${baseUrl}${this.successUrl}`;
     }
 
     // eslint-disable-next-line complexity

@@ -38,7 +38,7 @@ class StripeAgentToolkit extends McpServer {
         tool.method,
         tool.description,
         tool.parameters.shape,
-        async (arg: any, _extra: RequestHandlerExtra) => {
+        async (arg: any, _extra: RequestHandlerExtra<any, any>) => {
           const result = await this._stripe.run(tool.method, arg);
           return {
             content: [

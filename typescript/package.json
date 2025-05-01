@@ -4,7 +4,7 @@
   "homepage": "https://github.com/stripe/agent-toolkit",
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf langchain ai-sdk modelcontextprotocol openai",
+    "clean": "rm -rf langchain ai-sdk modelcontextprotocol openai cloudflare",
     "lint": "eslint \"./**/*.ts*\"",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check",
@@ -31,6 +31,11 @@
       "types": "./modelcontextprotocol/index.d.ts",
       "require": "./modelcontextprotocol/index.js",
       "import": "./modelcontextprotocol/index.mjs"
+    },
+    "./cloudflare": {
+      "types": "./cloudflare/index.d.ts",
+      "require": "./cloudflare/index.js",
+      "import": "./cloudflare/index.mjs"
     }
   },
   "packageManager": "pnpm@9.11.0",
@@ -58,7 +63,7 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "stripe": "^17.5.0",
@@ -68,8 +73,9 @@
   "peerDependencies": {
     "openai": "^4.86.1",
     "@langchain/core": "^0.3.6",
-    "@modelcontextprotocol/sdk": "^1.4.1",
-    "ai": "^3.4.7 || ^4.0.0"
+    "@modelcontextprotocol/sdk": "^1.10.2",
+    "ai": "^3.4.7 || ^4.0.0",
+    "agents": "^0.0.66"
   },
   "workspaces": [
     ".",
@@ -80,6 +86,7 @@
     "langchain/**/*",
     "modelcontextprotocol/**/*",
     "openai/**/*",
+    "cloudflare/**/*",
     "LICENSE",
     "README.md",
     "VERSION",

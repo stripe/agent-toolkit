@@ -308,4 +308,23 @@ export default [...compat.extends("plugin:prettier/recommended"), {
     rules: {
         "@typescript-eslint/explicit-function-return-type": "off",
     },
+}, {
+    files: ["examples/cloudflare/**/*.ts", "examples/cloudflare/**/*.js", "examples/cloudflare/**/*.mjs"],
+    ignores: [],
+    rules: {
+        // Disable all rules for cloudflare examples
+        ...Object.fromEntries(
+            Object.keys(typescriptEslint.rules).map(rule => [`@typescript-eslint/${rule}`, "off"])
+        ),
+        // Disable all base rules
+        "no-unused-vars": "off",
+        "no-undef": "off",
+        "no-console": "off",
+        "require-await": "off",
+        "prettier/prettier": "off",
+        "func-style": "off",
+        "no-warning-comments": "off",
+        "no-constant-condition": "off",
+        // Add any other rules you want to disable
+    }
 }];

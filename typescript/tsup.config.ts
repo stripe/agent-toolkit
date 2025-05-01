@@ -29,4 +29,12 @@ export default defineConfig([
     dts: true,
     sourcemap: true,
   },
+  {
+    entry: ['src/cloudflare/index.ts'],
+    outDir: 'cloudflare',
+    format: ['cjs', 'esm'],
+    dts: true,
+    sourcemap: true,
+    external: ['cloudflare:workers'],
+  },
 ]);

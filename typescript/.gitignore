@@ -131,3 +131,10 @@ dist
 .pnp.*
 
 .turbo
+
+
+/cloudflare/
+/openai/
+/ai-sdk/
+/langchain/
+/modelcontextprotocol/

@@ -18,7 +18,7 @@
     "wrangler": "^4.13.0"
   },
   "dependencies": {
-    "@cloudflare/workers-oauth-provider": "^0.0.4",
+    "@cloudflare/workers-oauth-provider": "^0.0.5",
     "@modelcontextprotocol/sdk": "^1.10.2",
     "@stripe/agent-toolkit": "latest",
     "@types/node": "^22.15.2",

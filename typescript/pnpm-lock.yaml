@@ -89,7 +89,7 @@ importers:
         version: 0.0.63(zod@3.24.3)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.6.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
+        version: 0.7.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       ai:
         specifier: ^3.4.7 || ^4.0.0
         version: 4.3.12(react@18.3.1)(zod@3.24.3)
@@ -104,14 +104,14 @@ importers:
   examples/cloudflare:
     dependencies:
       '@cloudflare/workers-oauth-provider':
-        specifier: ^0.0.4
-        version: 0.0.4
+        specifier: ^0.0.5
+        version: 0.0.5
       '@modelcontextprotocol/sdk':
         specifier: ^1.10.2
         version: 1.10.2
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.0(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
+        version: 0.7.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       '@types/node':
         specifier: ^22.15.2
         version: 22.15.3
@@ -163,7 +163,7 @@ importers:
         version: 0.3.5(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(ws@8.18.0)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.6.1(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
+        version: 0.7.1(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -179,7 +179,7 @@ importers:
     dependencies:
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.6.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
+        version: 0.7.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -542,8 +542,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-oauth-provider@0.0.4':
-    resolution: {integrity: sha512-6VOfn+22VDHOYlE1kokZzQIxzCjwi9dha+vESSroULYAl5o/17w7S1IlRMcZlAapKGD/a3UdId0cM7tUDEaR5g==}
+  '@cloudflare/workers-oauth-provider@0.0.5':
+    resolution: {integrity: sha512-t1x5KAzsubCvb4APnJ93z407X1x7SGj/ga5ziRnwIb/iLy4PMkT/hgd1y5z7Bbsdy5Fy6mywhCP4lym24bX66w==}
 
   '@cloudflare/workers-types@4.20250430.0':
     resolution: {integrity: sha512-JWAX7ZhQ7KjkdJwASgG58MZ/pQ15brlnZ9/0YBwDQ0hrJ/LaK392aTRFlj2r/PRKDZ5dOuujRywNYaNpfeFiEA==}
@@ -1438,17 +1438,8 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@stripe/agent-toolkit@0.6.1':
-    resolution: {integrity: sha512-tOqANOba6zzzBGAawAA0vxpCWYc7AzZPiu2aYGsLNzwEjfa7I/sLnfCdLbhEDK0DC7wr3/w3OPO6ZiunrkdVFQ==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      '@langchain/core': ^0.3.6
-      '@modelcontextprotocol/sdk': ^1.4.1
-      ai: ^3.4.7 || ^4.0.0
-      openai: ^4.86.1
-
-  '@stripe/agent-toolkit@0.7.0':
-    resolution: {integrity: sha512-LkO1CAql2hYfOtgThE/igiWyIHC1oVi88q3FFKRVa0whdUSrWpl4jKYQ7AHsG2NqbiwMH3bMvwKK1+LM/dAiSQ==}
+  '@stripe/agent-toolkit@0.7.1':
+    resolution: {integrity: sha512-e0Bh7cu7QWWOA4WfYGUvvt8S/11qep3jAMtInETubz7HluhJBL3PsCkjA4qALmRO8via8YQT95dodkTOMqWqRg==}
     engines: {node: '>=18'}
     peerDependencies:
       '@langchain/core': ^0.3.6
@@ -3273,6 +3264,11 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
+  nanoid@3.3.11:
+    resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+
   nanoid@3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -3298,6 +3294,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -3696,6 +3693,11 @@ packages:
 
   semver@7.6.3:
     resolution: {integrity: sha512-oVekP1cKtI+CTDvHWYFUcMtsK/00wmAEfyqKfNdARm8u1wNVhSgaX7A8d4UuIlUI5e84iEwOhs7ZPYRmzU9U6A==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.7.1:
+    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -4631,7 +4633,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20250424.0':
     optional: true
 
-  '@cloudflare/workers-oauth-provider@0.0.4':
+  '@cloudflare/workers-oauth-provider@0.0.5':
     dependencies:
       '@cloudflare/workers-types': 4.20250430.0
 
@@ -5384,29 +5386,20 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@stripe/agent-toolkit@0.6.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))':
+  '@stripe/agent-toolkit@0.7.1(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))':
     dependencies:
       '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       '@modelcontextprotocol/sdk': 1.10.2
+      agents: 0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1)
       ai: 4.3.12(react@18.3.1)(zod@3.24.3)
       openai: 4.86.1(ws@8.18.0)(zod@3.24.3)
       stripe: 17.5.0
       zod: 3.24.3
       zod-to-json-schema: 3.24.3(zod@3.24.3)
 
-  '@stripe/agent-toolkit@0.6.1(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))':
+  '@stripe/agent-toolkit@0.7.1(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))':
     dependencies:
       '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
-      '@modelcontextprotocol/sdk': 1.10.2
-      ai: 4.3.12(react@18.3.1)(zod@3.24.3)
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.3)
-      stripe: 17.5.0
-      zod: 3.24.3
-      zod-to-json-schema: 3.24.3(zod@3.24.3)
-
-  '@stripe/agent-toolkit@0.7.0(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3)))(@modelcontextprotocol/sdk@1.10.2)(agents@0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.3))(openai@4.86.1(ws@8.18.0)(zod@3.24.3))':
-    dependencies:
-      '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.3))
       '@modelcontextprotocol/sdk': 1.10.2
       agents: 0.0.66(@cloudflare/workers-types@4.20250430.0)(react@18.3.1)
       ai: 4.3.12(react@18.3.1)(zod@3.24.3)
@@ -5590,7 +5583,7 @@ snapshots:
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.6.3
+      semver: 7.7.1
       ts-api-utils: 1.4.3(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
@@ -7655,6 +7648,9 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
+  nanoid@3.3.11:
+    optional: true
+
   nanoid@3.3.6: {}
 
   nanoid@3.3.8: {}
@@ -7894,7 +7890,7 @@ snapshots:
 
   postcss@8.4.49:
     dependencies:
-      nanoid: 3.3.8
+      nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
     optional: true
@@ -8073,6 +8069,8 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.6.3: {}
+
+  semver@7.7.1: {}
 
   send@1.2.0:
     dependencies:

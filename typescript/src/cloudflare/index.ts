@@ -97,14 +97,6 @@ export abstract class experimental_PaidMcpAgent<
     // Why is state undefined sometimes??
     const state = this.state as undefined | typeof this.state;
 
-    let redirectUrl = this.successUrl;
-    if (redirectUrl.startsWith('/')) {
-      // Figure out how to actual get the base url of the mcpServer somehow instead
-      // of hardcoding it:
-      const baseUrl = 'http://localhost:4242';
-      redirectUrl = `${baseUrl}${this.successUrl}`;
-    }
-
     // eslint-disable-next-line complexity
     const callback = async (args: any, extra: any): Promise<CallToolResult> => {
       let customerId = state?.stripe?.customerId;
@@ -123,7 +115,7 @@ export abstract class experimental_PaidMcpAgent<
       const stripeState = state?.stripe || this.INITIAL_STRIPE_STATE.stripe;
       stripeState.customerId = customerId;
 
-      let paidForTool = stripeState.paidToolCalls?.includes(toolName);
+      let paidForTool = false;
 
       if (!paidForTool) {
         const checkoutSession =

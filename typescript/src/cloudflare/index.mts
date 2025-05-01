@@ -7,13 +7,22 @@ import {McpAgent} from 'agents/mcp';
 
 type Env = any;
 
+type StripeState = {
+  paidToolCalls: string[];
+  subscriptions: string[];
+  customerId: string;
+  paidToolsToCheckoutSession: Record<string, string | null>;
+};
+
+const INITIAL_STRIPE_STATE: StripeState = {
+  customerId: '',
+  paidToolCalls: [],
+  subscriptions: [],
+  paidToolsToCheckoutSession: {},
+};
+
 export type PaymentState = {
-  stripe: {
-    paidToolCalls: string[];
-    subscriptions: string[];
-    customerId: string;
-    paidToolsToCheckoutSession: Record<string, string | null>;
-  };
+  stripe?: StripeState;
 };
 
 export type PaymentProps = {
@@ -26,15 +35,6 @@ export abstract class experimental_PaidMcpAgent<
   State extends PaymentState,
   Props extends PaymentProps,
 > extends McpAgent<Bindings, State, Props> {
-  INITIAL_STRIPE_STATE: PaymentState = {
-    stripe: {
-      customerId: '',
-      paidToolCalls: [],
-      subscriptions: [],
-      paidToolsToCheckoutSession: {},
-    },
-  };
-
   stripe(): Stripe {
     // @ts-ignore
     return new Stripe(this.env.STRIPE_SECRET_KEY, {
@@ -98,7 +98,7 @@ export abstract class experimental_PaidMcpAgent<
         customerId = (await this.getCurrentCustomerID()) || '';
       }
 
-      const stripeState = state?.stripe || this.INITIAL_STRIPE_STATE.stripe;
+      const stripeState = state?.stripe || INITIAL_STRIPE_STATE;
       stripeState.customerId = customerId;
 
       let paidForTool = false;

@@ -1,6 +1,6 @@
-# PaidMcpAgent
+# MCP Payments
 
-`PaidMcpAgent` extends [Cloudflare's `McpAgent`](https://github.com/cloudflare/agents) to make it simple to require payment to use tools. For a full end-to-end example, see [/examples/cloudflare](../../examples/cloudflare/).
+`PaidMcpAgent` extends [Cloudflare's `McpAgent`](https://github.com/cloudflare/agents) to make it simple to require payment to use tools, whether subscription or usage-based. For a full end-to-end example, see [/examples/cloudflare](../../examples/cloudflare/).
 
 ## Usage
 

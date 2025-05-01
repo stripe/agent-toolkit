@@ -20,6 +20,7 @@
   "dependencies": {
     "@cloudflare/workers-oauth-provider": "^0.0.4",
     "@modelcontextprotocol/sdk": "^1.10.2",
+    "@stripe/agent-toolkit": "latest",
     "@types/node": "^22.15.2",
     "add": "^2.0.6",
     "agents": "^0.0.66",

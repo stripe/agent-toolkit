@@ -6,6 +6,10 @@
 
 ### Setup
 
+```
+npm install @stripe/agent-toolkit
+```
+
 Modify your existing MCP server by extending with `PaidMcpAgent` instead of `McpAgent`.
 
 ```ts

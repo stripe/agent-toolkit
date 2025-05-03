@@ -47,8 +47,8 @@ export async function registerPaidTool<Args extends ZodRawShape>(
 ) {
   const stripe = new Stripe(options.stripeSecretKey, {
     appInfo: {
-      name: 'stripe-agent-toolkit-mcp-payments',
-      version: '0.7.4',
+      name: 'stripe-agent-toolkit-ai-sdk',
+      version: '0.7.3',
       url: 'https://github.com/stripe/agent-toolkit',
     },
   });

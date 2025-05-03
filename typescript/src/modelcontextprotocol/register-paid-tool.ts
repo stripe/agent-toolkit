@@ -42,7 +42,7 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   toolName: string,
   toolDescription: string,
   paramsSchema: Args,
-  // eslint-disable-next-line complexity
+  // @ts-ignore
   paidCallback: ToolCallback<Args>,
   options: PaidToolOptions
 ) {

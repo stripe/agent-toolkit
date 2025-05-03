@@ -42,13 +42,14 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   toolName: string,
   toolDescription: string,
   paramsSchema: Args,
+  // eslint-disable-next-line complexity
   paidCallback: ToolCallback<Args>,
   options: PaidToolOptions
 ) {
   const stripe = new Stripe(options.stripeSecretKey, {
     appInfo: {
       name: 'stripe-agent-toolkit-mcp-payments',
-      version: '0.7.4',
+      version: '0.7.5',
       url: 'https://github.com/stripe/agent-toolkit',
     },
   });

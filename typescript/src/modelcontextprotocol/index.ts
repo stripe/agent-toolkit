@@ -1,2 +1,3 @@
 import StripeAgentToolkit from './toolkit';
-export {StripeAgentToolkit};
+import { registerPaidTool } from './register-paid-tool';
+export {StripeAgentToolkit, registerPaidTool};

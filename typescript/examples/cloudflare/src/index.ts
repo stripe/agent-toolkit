@@ -43,7 +43,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
         };
       },
       {
-        priceId: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
+        priceId: process.env.STRIPE_ONETIME_SUBSCRIPTION_PRICE_ID,
         successUrl: 'http://localhost:4242/payment/success',
         paymentReason:
           'You must pay a subscription to add two big numbers together.',
@@ -61,9 +61,9 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
         };
       },
       {
-        priceId: 'price_1RJdGWR1bGyW9S0UucbYBFBZ',
+        priceId: process.env.STRIPE_USAGE_BASED_SUBSCRIPTION_PRICE_ID,
         successUrl: 'http://localhost:4242/payment/success',
-        meterEvent: 'image_generation',
+        meterEvent: process.env.STRIPE_METER_EVENT_NAME,
         paymentReason:
           'You get 3 free generations, then we charge 10 cents per generation.',
       }
@@ -81,4 +81,6 @@ export default new OAuthProvider({
   authorizeEndpoint: '/authorize',
   tokenEndpoint: '/token',
   clientRegistrationEndpoint: '/register',
+  // リダイレクトURIを明示的に設定
+  redirectUris: ['http://localhost:4242/authorize']
 });

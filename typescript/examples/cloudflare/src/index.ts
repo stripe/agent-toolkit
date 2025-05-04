@@ -81,6 +81,4 @@ export default new OAuthProvider({
   authorizeEndpoint: '/authorize',
   tokenEndpoint: '/token',
   clientRegistrationEndpoint: '/register',
-  // リダイレクトURIを明示的に設定
-  redirectUris: ['http://localhost:4242/authorize']
 });

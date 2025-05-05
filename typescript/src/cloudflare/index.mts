@@ -50,17 +50,18 @@ export abstract class experimental_PaidMcpAgent<
     if (this.state?.stripe?.customerId) {
       return this.state.stripe.customerId || '';
     }
+    const { userEmail } = this.props;
 
-    const customers = await this.stripe().customers.list({
-      email: this.props.userEmail,
-    });
+    const customers = userEmail ? await this.stripe().customers.list({
+      email: userEmail,
+    }) : {data: []}
 
-    let customerId: null | string = null;
-    if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-    } else {
+    let customerId: null | string = customers.data.find((customer) => {
+        return customer.email === userEmail
+      })?.id || null;
+    if (!customerId) {
       const customer = await this.stripe().customers.create({
-        email: this.props.userEmail,
+        email: userEmail,
       });
 
       customerId = customer.id;

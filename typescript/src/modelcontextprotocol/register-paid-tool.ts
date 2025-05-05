@@ -65,8 +65,13 @@ export async function registerPaidTool<Args extends ZodRawShape>(
 
     let customerId: null | string = null;
     if (customers.data.length > 0) {
-      customerId = customers.data[0].id;
-    } else {
+      customerId =
+        customers.data.find((customer) => {
+          return customer.email === options.userEmail;
+        })?.id || null;
+    }
+
+    if (!customerId) {
       const customer = await stripe.customers.create({
         email: options.userEmail,
       });

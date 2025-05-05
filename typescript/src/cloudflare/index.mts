@@ -40,7 +40,7 @@ export abstract class experimental_PaidMcpAgent<
     return new Stripe(this.env.STRIPE_SECRET_KEY, {
       appInfo: {
         name: 'stripe-agent-toolkit-cloudflare',
-        version: '0.7.5',
+        version: '0.7.6',
         url: 'https://github.com/stripe/agent-toolkit',
       },
     });
@@ -50,14 +50,17 @@ export abstract class experimental_PaidMcpAgent<
     if (this.state?.stripe?.customerId) {
       return this.state.stripe.customerId || '';
     }
-    const { userEmail } = this.props;
+    const {userEmail} = this.props;
 
-    const customers = userEmail ? await this.stripe().customers.list({
-      email: userEmail,
-    }) : {data: []}
+    const customers = userEmail
+      ? await this.stripe().customers.list({
+          email: userEmail,
+        })
+      : {data: []};
 
-    let customerId: null | string = customers.data.find((customer) => {
-        return customer.email === userEmail
+    let customerId: null | string =
+      customers.data.find((customer) => {
+        return customer.email === userEmail;
       })?.id || null;
     if (!customerId) {
       const customer = await this.stripe().customers.create({

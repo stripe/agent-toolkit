@@ -94,12 +94,26 @@ describe('registerPaidTool', () => {
   it('should create a new customer if one does not exist', async () => {
     mockStripe.customers.list.mockResolvedValue({data: []});
     mockStripe.customers.create.mockResolvedValue({id: 'cus_123'});
-    mockStripe.subscriptions.list.mockResolvedValue({data: []});
+    mockStripe.subscriptions.list.mockResolvedValue({
+      data: [
+        {
+          items: {
+            data: [
+              {
+                price: {
+                  id: 'price_123',
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
+    mockStripe.checkout.sessions.list.mockResolvedValue({data: []});
     mockStripe.checkout.sessions.create.mockResolvedValue({
       id: 'cs_123',
       url: 'https://checkout.stripe.com/123',
     });
-    mockStripe.subscriptions.list.mockResolvedValue({data: []});
 
     const toolName = 'testTool';
     const callback = jest.fn();

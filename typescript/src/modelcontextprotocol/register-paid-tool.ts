@@ -162,7 +162,6 @@ export async function registerPaidTool<Args extends ZodRawShape>(
     return paidCallback(args, extra);
   };
 
-  // @ts-ignore: ToolCallback signature compatibility
   mcpServer.tool(
     toolName,
     toolDescription,

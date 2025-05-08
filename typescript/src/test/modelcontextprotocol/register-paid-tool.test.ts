@@ -1,5 +1,5 @@
 import {z} from 'zod';
-import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {registerPaidTool} from '../../modelcontextprotocol/register-paid-tool';
 import Stripe from 'stripe';
 import type {
@@ -36,6 +36,7 @@ describe('registerPaidTool', () => {
         sessions: {
           create: jest.fn(),
           retrieve: jest.fn(),
+          list: jest.fn(),
         },
       },
       subscriptions: {
@@ -98,6 +99,7 @@ describe('registerPaidTool', () => {
       id: 'cs_123',
       url: 'https://checkout.stripe.com/123',
     });
+    mockStripe.subscriptions.list.mockResolvedValue({data: []});
 
     const toolName = 'testTool';
     const callback = jest.fn();

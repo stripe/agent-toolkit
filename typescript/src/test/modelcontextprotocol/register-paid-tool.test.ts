@@ -152,7 +152,12 @@ describe('registerPaidTool', () => {
       id: 'cs_123',
       url: 'https://checkout.stripe.com/123',
     });
-    mockStripe.subscriptions.list.mockResolvedValue({data: []});
+    mockStripe.subscriptions.list.mockResolvedValue({
+      data: [], // No active subscriptions
+    });
+    mockStripe.checkout.sessions.list.mockResolvedValue({
+      data: [], // No paid sessions
+    });
 
     const toolName = 'testTool';
     const callback = jest.fn();
@@ -177,19 +182,25 @@ describe('registerPaidTool', () => {
 
     expect(mockStripe.checkout.sessions.create).toHaveBeenCalledWith({
       success_url: 'https://example.com/success',
-      line_items: [{price: 'price_123', quantity: 1}],
+      line_items: [
+        {
+          price: 'price_123',
+          quantity: 1,
+        },
+      ],
       mode: 'subscription',
       customer: 'cus_123',
+      metadata: {toolName},
     });
-
     expect(result).toEqual({
       content: [
         {
           type: 'text',
-          text: expect.stringContaining('Payment required!'),
+          text: 'Payment required! Test payment: https://checkout.stripe.com/123',
         },
       ],
     });
+    expect(callback).not.toHaveBeenCalled();
   });
 
   it('should handle usage-based billing when meterEvent is provided', async () => {
@@ -199,7 +210,22 @@ describe('registerPaidTool', () => {
     mockStripe.checkout.sessions.retrieve.mockResolvedValue({
       payment_status: 'paid',
     });
-
+    mockStripe.subscriptions.list.mockResolvedValue({
+      data: [
+        {
+          items: {
+            data: [
+              {
+                price: {
+                  id: 'price_123',
+                },
+              },
+            ],
+          },
+        },
+      ],
+    });
+    mockStripe.checkout.sessions.list.mockResolvedValue({data: []});
     const toolName = 'testTool';
     const callback = jest.fn().mockResolvedValue({
       content: [{type: 'text', text: 'Success'}],

@@ -81,6 +81,8 @@ of if you're using Docker
 | `subscriptions.update` | Update subscription information |
 | `coupons.create`       | Create a new coupon             |
 | `coupons.read`         | Read coupon information         |
+| `disputes.update`      | Update an existing dispute      |
+| `disputes.read`        | Read disputes information       |
 | `documentation.read`   | Search Stripe documentation     |
 
 ## Debugging the Server

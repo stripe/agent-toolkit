@@ -40,7 +40,7 @@ export abstract class experimental_PaidMcpAgent<
     return new Stripe(this.env.STRIPE_SECRET_KEY, {
       appInfo: {
         name: 'stripe-agent-toolkit-cloudflare',
-        version: '0.7.6',
+        version: '0.7.7',
         url: 'https://github.com/stripe/agent-toolkit',
       },
     });

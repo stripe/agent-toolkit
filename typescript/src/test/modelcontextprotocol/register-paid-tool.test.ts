@@ -15,8 +15,6 @@ const mockSecretKey = 'sk_test_123';
 describe('registerPaidTool', () => {
   let mockMcpServer: jest.Mocked<McpServer>;
   let mockStripe: jest.Mocked<any>;
-  let mockState: any;
-  let mockSetState: jest.Mock;
   let mockExtra: RequestHandlerExtra<ServerRequest, ServerNotification>;
 
   beforeEach(() => {
@@ -52,17 +50,6 @@ describe('registerPaidTool', () => {
 
     (Stripe as unknown as jest.Mock).mockImplementation(() => mockStripe);
 
-    // Mock state and setState
-    mockState = {
-      stripe: {
-        customerId: '',
-        paidToolCalls: [],
-        subscriptions: [],
-        paidToolsToCheckoutSession: {},
-      },
-    };
-    mockSetState = jest.fn();
-
     // Mock request handler extra
     mockExtra = {
       signal: new AbortController().signal,
@@ -91,8 +78,6 @@ describe('registerPaidTool', () => {
         paymentReason: 'Test payment',
         successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
-        state: mockState,
-        setState: mockSetState,
         userEmail: 'test@example.com',
       }
     );
@@ -128,8 +113,6 @@ describe('registerPaidTool', () => {
         paymentReason: 'Test payment',
         successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
-        state: mockState,
-        setState: mockSetState,
         userEmail: 'test@example.com',
       }
     );
@@ -169,8 +152,6 @@ describe('registerPaidTool', () => {
         paymentReason: 'Test payment',
         successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
-        state: mockState,
-        setState: mockSetState,
         userEmail: 'test@example.com',
       }
     );
@@ -220,15 +201,6 @@ describe('registerPaidTool', () => {
         successUrl: 'https://example.com/success',
         meterEvent: 'test.event',
         stripeSecretKey: mockSecretKey,
-        state: {
-          stripe: {
-            ...mockState.stripe,
-            paidToolsToCheckoutSession: {
-              [toolName]: 'cs_123',
-            },
-          },
-        },
-        setState: mockSetState,
         userEmail: 'test@example.com',
       }
     );

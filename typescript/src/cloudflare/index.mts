@@ -83,11 +83,13 @@ export abstract class experimental_PaidMcpAgent<
       paymentReason,
       successUrl,
       meterEvent,
+      subscriptionData,
     }: {
       priceId: string;
       paymentReason: string;
       successUrl: string;
       meterEvent?: string;
+      subscriptionData?: Stripe.Checkout.SessionCreateParams.SubscriptionData;
     }
   ) {
     const mcpServer: McpServer = this.server as unknown as McpServer;
@@ -154,6 +156,7 @@ export abstract class experimental_PaidMcpAgent<
                   quantity: 1,
                 },
               ],
+              subscription_data: subscriptionData,
               mode: 'subscription',
               customer: customerId || undefined,
             });
@@ -206,6 +209,7 @@ export abstract class experimental_PaidMcpAgent<
               },
             ],
             mode: 'subscription',
+            subscription_data: subscriptionData,
             customer: customerId || undefined,
           });
 

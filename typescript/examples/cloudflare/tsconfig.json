@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "lib": ["es2021"],
+    "lib": [
+      "es2021"
+    ],
     "jsx": "react-jsx",
     "module": "es2022",
     "moduleResolution": "Bundler",
@@ -20,6 +22,7 @@
   "include": [
     "worker-configuration.d.ts",
     "src/**/*.ts",
-    "../../../src/cloudflare/index.ts"
+    "../../../src/cloudflare/index.ts",
+    "../../../cloudflare/index.js",
   ]
 }

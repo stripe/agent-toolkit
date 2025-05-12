@@ -1,9 +1,13 @@
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {z} from 'zod';
+// import {
+//   PaymentState,
+//   experimental_PaidMcpAgent as PaidMcpAgent,
+// } from '@stripe/agent-toolkit/cloudflare';
 import {
   PaymentState,
   experimental_PaidMcpAgent as PaidMcpAgent,
-} from '@stripe/agent-toolkit/cloudflare';
+} from '../../../cloudflare/index';
 import {generateImage} from './imageGenerator';
 import {OAuthProvider} from '@cloudflare/workers-oauth-provider';
 import app from './app';
@@ -33,6 +37,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
 
     this.paidTool(
       'big_add',
+      'Add two numbers together',
       {
         a: z.number(),
         b: z.number(),
@@ -43,8 +48,16 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
         };
       },
       {
-        priceId: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
-        successUrl: 'http://localhost:4242/payment/success',
+        checkout: {
+          success_url: 'http://localhost:4242/payment/success',
+          line_items: [
+            {
+              price: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
+              quantity: 1,
+            },
+          ],
+          mode: 'subscription',
+        },
         paymentReason:
           'You must pay a subscription to add two big numbers together.',
       }
@@ -52,6 +65,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
 
     this.paidTool(
       'generate_emoji',
+      'Generate an emoji given a single word (the `object` parameter describing the emoji)',
       {
         object: z.string().describe('one word'),
       },
@@ -61,8 +75,16 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
         };
       },
       {
-        priceId: 'price_1RJdGWR1bGyW9S0UucbYBFBZ',
-        successUrl: 'http://localhost:4242/payment/success',
+        checkout: {
+          success_url: 'http://localhost:4242/payment/success',
+          line_items: [
+            {
+              price: 'price_1RJdGWR1bGyW9S0UucbYBFBZ',
+              quantity: 1,
+            },
+          ],
+          mode: 'subscription',
+        },
         meterEvent: 'image_generation',
         paymentReason:
           'You get 3 free generations, then we charge 10 cents per generation.',

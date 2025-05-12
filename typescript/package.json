@@ -75,7 +75,7 @@
     "@langchain/core": "^0.3.6",
     "@modelcontextprotocol/sdk": "^1.10.2",
     "ai": "^3.4.7 || ^4.0.0",
-    "agents": "^0.0.66"
+    "agents": "^0.0.84"
   },
   "workspaces": [
     ".",

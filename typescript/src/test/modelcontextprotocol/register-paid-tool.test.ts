@@ -125,10 +125,18 @@ describe('registerPaidTool', () => {
       {testParam: z.string()},
       callback,
       {
-        priceId: 'price_123',
         paymentReason: 'Test payment',
-        successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
+        checkout: {
+          success_url: 'https://example.com/success',
+          line_items: [
+            {
+              price: 'price_123',
+              quantity: 1,
+            },
+          ],
+          mode: 'subscription',
+        },
         userEmail: 'test@example.com',
       }
     );

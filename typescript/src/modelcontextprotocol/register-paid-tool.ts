@@ -1,11 +1,7 @@
 import {z, type ZodRawShape} from 'zod';
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
-import type {
-  CallToolResult,
-  ServerNotification,
-  ServerRequest,
-} from '@modelcontextprotocol/sdk/types.js';
+import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import Stripe from 'stripe';
 
 /*
@@ -24,23 +20,13 @@ export type PaidToolOptions = {
   updateState?: (state: any) => void;
 };
 
-// Using the regular ToolCallback type results in
-// error TS2589: Type instantiation is excessively deep and possibly infinite.
-type SimpleToolCallback<T extends ZodRawShape> = (
-  args: z.infer<z.ZodObject<T>>,
-  extra: any
-) => CallToolResult | Promise<CallToolResult>;
-
-export async function registerPaidTool<
-  Args extends ZodRawShape,
-  // This constraint ensures callback has the right shape without deep instantiation
-  Callback extends SimpleToolCallback<Args>,
->(
+export async function registerPaidTool<Args extends ZodRawShape>(
   mcpServer: McpServer,
   toolName: string,
   toolDescription: string,
   paramsSchema: Args,
-  paidCallback: Callback,
+  // @ts-ignore: The typescript compiler complains this is an infinitely deep type
+  paidCallback: ToolCallback<Args>,
   options: PaidToolOptions
 ) {
   const priceId = options.checkout.line_items?.find((li) => li.price)?.price;
@@ -142,7 +128,6 @@ export async function registerPaidTool<
           checkoutUrl: session.url,
           paymentReason: options.paymentReason,
         },
-        error: null,
       };
       return {
         content: [

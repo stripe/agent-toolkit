@@ -80,7 +80,6 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
           line_items: [
             {
               price: 'price_1RJdGWR1bGyW9S0UucbYBFBZ',
-              quantity: 1,
             },
           ],
           mode: 'subscription',

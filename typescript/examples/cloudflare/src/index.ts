@@ -1,13 +1,9 @@
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {z} from 'zod';
-// import {
-//   PaymentState,
-//   experimental_PaidMcpAgent as PaidMcpAgent,
-// } from '@stripe/agent-toolkit/cloudflare';
 import {
   PaymentState,
   experimental_PaidMcpAgent as PaidMcpAgent,
-} from '../../../cloudflare/index';
+} from '@stripe/agent-toolkit/cloudflare';
 import {generateImage} from './imageGenerator';
 import {OAuthProvider} from '@cloudflare/workers-oauth-provider';
 import app from './app';

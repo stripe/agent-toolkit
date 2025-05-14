@@ -35,6 +35,33 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
       };
     });
 
+    // One-time payment, then the tool is usable forever
+    this.paidTool(
+      'get_advanced_bot_protection',
+      'Add advanced bot protection to your account',
+      {},
+      () => {
+        return {
+          content: [{type: 'text', text: `Result: ${a + b}`}],
+        };
+      },
+      {
+        checkout: {
+          success_url: 'http://localhost:4242/payment/success',
+          line_items: [
+            {
+              price: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
+              quantity: 1,
+            },
+          ],
+          mode: 'payment',
+        },
+        paymentReason:
+          'You must pay a one-time payment to add advanced bot protection to your account.',
+      }
+    );
+
+    // Subscription, then the tool is usable as long as the subscription is active
     this.paidTool(
       'big_add',
       'Add two numbers together',
@@ -63,6 +90,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
       }
     );
 
+    // Usage-based metered payments (Each tool call requires a payment)
     this.paidTool(
       'generate_emoji',
       'Generate an emoji given a single word (the `object` parameter describing the emoji)',

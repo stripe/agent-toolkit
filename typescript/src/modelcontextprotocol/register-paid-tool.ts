@@ -5,7 +5,7 @@ import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import Stripe from 'stripe';
 
 /*
- * This supports one-time payment, subscription, or usage-based payment.
+ * This supports one-time payment, subscription, usage-based metered payment.
  * For usage-based, set a `meterEvent`
  */
 export type PaidToolOptions = {
@@ -14,10 +14,6 @@ export type PaidToolOptions = {
   stripeSecretKey: string;
   userEmail: string;
   checkout: Stripe.Checkout.SessionCreateParams;
-
-  // Optional state and setState to store data between Stripe calls
-  state?: any;
-  updateState?: (state: any) => void;
 };
 
 export async function registerPaidTool<Args extends ZodRawShape>(
@@ -46,10 +42,6 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   });
 
   const getCurrentCustomerID = async () => {
-    if (options.state && options.updateState && options.state.customerId) {
-      return options.state.customerId;
-    }
-
     const customers = await stripe.customers.list({
       email: options.userEmail,
     });
@@ -65,12 +57,6 @@ export async function registerPaidTool<Args extends ZodRawShape>(
         email: options.userEmail,
       });
       customerId = customer.id;
-    }
-
-    if (options.state && options.updateState) {
-      options.updateState({
-        customerId,
-      });
     }
 
     return customerId;

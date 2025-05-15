@@ -33,12 +33,12 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
 
     // One-time payment, then the tool is usable forever
     this.paidTool(
-      'get_advanced_bot_protection',
-      'Add advanced bot protection to your account',
+      'buy_premium',
+      'Buy a premium account',
       {},
       () => {
         return {
-          content: [{type: 'text', text: `Result: ${a + b}`}],
+          content: [{type: 'text', text: `You now have a premium account!`}],
         };
       },
       {
@@ -46,14 +46,14 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
           success_url: 'http://localhost:4242/payment/success',
           line_items: [
             {
-              price: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
+              price: 'price_1RJJwjR1b4cWtS0UCIDTSU3V',
               quantity: 1,
             },
           ],
           mode: 'payment',
         },
         paymentReason:
-          'You must pay a one-time payment to add advanced bot protection to your account.',
+          'Open the checkout link in the browser to buy a premium account.',
       }
     );
 

@@ -3,7 +3,7 @@ import {z} from 'zod';
 import {
   PaymentState,
   experimental_PaidMcpAgent as PaidMcpAgent,
-} from '@stripe/agent-toolkit/cloudflare';
+} from '../../../cloudflare/index';
 import {generateImage} from './imageGenerator';
 import {OAuthProvider} from '@cloudflare/workers-oauth-provider';
 import app from './app';
@@ -119,8 +119,12 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
 // Export the OAuth handler as the default
 export default new OAuthProvider({
   apiRoute: '/sse',
-  // @ts-ignore
-  apiHandler: MyMCP.mount('/sse'),
+  apiHandlers: {
+    // @ts-ignore
+    '/sse': MyMCP.serveSSE('/sse'),
+    // @ts-ignore
+    '/mcp': MyMCP.serve('/mcp'),
+  },
   // @ts-ignore
   defaultHandler: app,
   authorizeEndpoint: '/authorize',

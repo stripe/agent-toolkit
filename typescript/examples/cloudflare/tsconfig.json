@@ -21,7 +21,6 @@
   },
   "include": [
     "worker-configuration.d.ts",
-    "src/**/*.ts",
-    "../../../cloudflare/index"
+    "src/**/*.ts"
   ]
 }

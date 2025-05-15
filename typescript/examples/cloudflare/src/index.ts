@@ -46,7 +46,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
           success_url: 'http://localhost:4242/payment/success',
           line_items: [
             {
-              price: 'price_1RJJwjR1b4cWtS0UCIDTSU3V',
+              price: process.env.STRIPE_ONE_TIME_PAYMENT_PRICE_ID,
               quantity: 1,
             },
           ],
@@ -75,7 +75,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
           success_url: 'http://localhost:4242/payment/success',
           line_items: [
             {
-              price: 'price_1RJJwjR1bGyW9S0UCIDTSU3V',
+              price: process.env.STRIPE_SUBSCRIPTION_PRICE_ID,
               quantity: 1,
             },
           ],
@@ -103,7 +103,7 @@ export class MyMCP extends PaidMcpAgent<Bindings, State, Props> {
           success_url: 'http://localhost:4242/payment/success',
           line_items: [
             {
-              price: 'price_1RJdGWR1bGyW9S0UucbYBFBZ',
+              price: process.env.STRIPE_USAGE_BASED_SUBSCRIPTION_PRICE_ID,
             },
           ],
           mode: 'subscription',

@@ -25,6 +25,7 @@ jobs:
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
+      - run: pnpm run install
       - run: pnpm run test
       - run: pnpm run build
       - run: npm publish --provenance --access public
@@ -52,6 +53,7 @@ jobs:
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
+      - run: pnpm run install
       - run: pnpm run test
       - run: pnpm run build
       - run: npm publish --provenance --access public

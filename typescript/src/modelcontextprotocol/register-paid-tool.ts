@@ -1,16 +1,19 @@
 import {z, type ZodRawShape} from 'zod';
-import type {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
 import Stripe from 'stripe';
 
+/*
+ * This supports one-time payment, subscription, usage-based metered payment.
+ * For usage-based, set a `meterEvent`
+ */
 export type PaidToolOptions = {
-  priceId: string;
   paymentReason: string;
-  successUrl: string;
   meterEvent?: string;
   stripeSecretKey: string;
   userEmail: string;
+  checkout: Stripe.Checkout.SessionCreateParams;
 };
 
 export async function registerPaidTool<Args extends ZodRawShape>(
@@ -18,10 +21,18 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   toolName: string,
   toolDescription: string,
   paramsSchema: Args,
-  // @ts-ignore
+  // @ts-ignore: The typescript compiler complains this is an infinitely deep type
   paidCallback: ToolCallback<Args>,
   options: PaidToolOptions
 ) {
+  const priceId = options.checkout.line_items?.find((li) => li.price)?.price;
+
+  if (!priceId) {
+    throw new Error(
+      'Price ID is required for a paid MCP tool. Learn more about prices: https://docs.stripe.com/products-prices/how-products-and-prices-work'
+    );
+  }
+
   const stripe = new Stripe(options.stripeSecretKey, {
     appInfo: {
       name: 'stripe-agent-toolkit-mcp-payments',
@@ -47,31 +58,36 @@ export async function registerPaidTool<Args extends ZodRawShape>(
       });
       customerId = customer.id;
     }
+
     return customerId;
   };
 
   const isToolPaidFor = async (toolName: string, customerId: string) => {
-    // Check for active subscription for the priceId
-    const subs = await stripe.subscriptions.list({
-      customer: customerId || '',
-      status: 'active',
-    });
-    const activeSub = subs.data.find((sub) =>
-      sub.items.data.find((item) => item.price.id === options.priceId)
-    );
-    if (activeSub) {
-      return true;
-    }
     // Check for paid checkout session for this tool (by metadata)
     const sessions = await stripe.checkout.sessions.list({
       customer: customerId,
-      limit: 10,
+      limit: 100,
     });
     const paidSession = sessions.data.find(
       (session) =>
         session.metadata?.toolName === toolName &&
         session.payment_status === 'paid'
     );
+
+    if (paidSession?.subscription) {
+      // Check for active subscription for the priceId
+      const subs = await stripe.subscriptions.list({
+        customer: customerId || '',
+        status: 'active',
+      });
+      const activeSub = subs.data.find((sub) =>
+        sub.items.data.find((item) => item.price.id === priceId)
+      );
+      if (activeSub) {
+        return true;
+      }
+    }
+
     if (paidSession) {
       return true;
     }
@@ -84,22 +100,26 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   ): Promise<CallToolResult | null> => {
     try {
       const session = await stripe.checkout.sessions.create({
-        success_url: options.successUrl,
-        line_items: [
-          {
-            price: options.priceId,
-            quantity: 1,
-          },
-        ],
-        mode: 'subscription',
+        ...options.checkout,
+        metadata: {
+          ...options.checkout.metadata,
+          toolName,
+        },
         customer: customerId || undefined,
-        metadata: {toolName},
       });
+      const result = {
+        status: 'payment_required',
+        data: {
+          paymentType,
+          checkoutUrl: session.url,
+          paymentReason: options.paymentReason,
+        },
+      };
       return {
         content: [
           {
             type: 'text',
-            text: `Payment required! ${options.paymentReason}: ${session.url}`,
+            text: JSON.stringify(result),
           } as {type: 'text'; text: string},
         ],
       };
@@ -123,7 +143,10 @@ export async function registerPaidTool<Args extends ZodRawShape>(
         content: [
           {
             type: 'text',
-            text: 'There was an error creating the checkout.',
+            text: JSON.stringify({
+              status: 'error',
+              error: errMsg,
+            }),
           } as {type: 'text'; text: string},
         ],
         isError: true,
@@ -159,15 +182,12 @@ export async function registerPaidTool<Args extends ZodRawShape>(
     if (paymentType === 'usageBased') {
       await recordUsage(customerId);
     }
+    // @ts-ignore: The typescript compiler complains this is an infinitely deep type
     return paidCallback(args, extra);
   };
 
-  mcpServer.tool(
-    toolName,
-    toolDescription,
-    paramsSchema,
-    callback as ToolCallback<Args>
-  );
+  // @ts-ignore: The typescript compiler complains this is an infinitely deep type
+  mcpServer.tool(toolName, toolDescription, paramsSchema, callback as any);
 
   await Promise.resolve();
 }

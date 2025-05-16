@@ -30,7 +30,7 @@ export default defineConfig([
     sourcemap: true,
   },
   {
-    entry: ['src/cloudflare/index.mts'],
+    entry: ['src/cloudflare/index.ts'],
     outDir: 'cloudflare',
     format: ['cjs', 'esm'],
     dts: true,

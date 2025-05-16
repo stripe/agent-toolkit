@@ -67,7 +67,7 @@ describe('registerPaidTool', () => {
     };
     const callback = jest.fn();
 
-    // @ts-ignore
+    // @ts-ignore: https://github.com/modelcontextprotocol/typescript-sdk/issues/494
     await registerPaidTool(
       mockMcpServer,
       toolName,
@@ -75,11 +75,14 @@ describe('registerPaidTool', () => {
       paramsSchema,
       callback,
       {
-        priceId: 'price_123',
         paymentReason: 'Test payment',
-        successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
         userEmail: 'test@example.com',
+        checkout: {
+          success_url: 'https://example.com/success',
+          line_items: [{price: 'price_123', quantity: 1}],
+          mode: 'subscription',
+        },
       }
     );
 
@@ -125,11 +128,14 @@ describe('registerPaidTool', () => {
       {testParam: z.string()},
       callback,
       {
-        priceId: 'price_123',
         paymentReason: 'Test payment',
-        successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
         userEmail: 'test@example.com',
+        checkout: {
+          success_url: 'https://example.com/success',
+          line_items: [{price: 'price_123', quantity: 1}],
+          mode: 'subscription',
+        },
       }
     );
 
@@ -169,11 +175,14 @@ describe('registerPaidTool', () => {
       {testParam: z.string()},
       callback,
       {
-        priceId: 'price_123',
         paymentReason: 'Test payment',
-        successUrl: 'https://example.com/success',
         stripeSecretKey: mockSecretKey,
         userEmail: 'test@example.com',
+        checkout: {
+          success_url: 'https://example.com/success',
+          line_items: [{price: 'price_123', quantity: 1}],
+          mode: 'subscription',
+        },
       }
     );
 
@@ -196,7 +205,14 @@ describe('registerPaidTool', () => {
       content: [
         {
           type: 'text',
-          text: 'Payment required! Test payment: https://checkout.stripe.com/123',
+          text: JSON.stringify({
+            status: 'payment_required',
+            data: {
+              paymentType: 'oneTimeSubscription',
+              checkoutUrl: 'https://checkout.stripe.com/123',
+              paymentReason: 'Test payment',
+            },
+          }),
         },
       ],
     });
@@ -204,11 +220,19 @@ describe('registerPaidTool', () => {
   });
 
   it('should handle usage-based billing when meterEvent is provided', async () => {
+    const toolName = 'testTool';
     mockStripe.customers.list.mockResolvedValue({
       data: [{id: 'cus_123', email: 'test@example.com'}],
     });
-    mockStripe.checkout.sessions.retrieve.mockResolvedValue({
-      payment_status: 'paid',
+    mockStripe.checkout.sessions.list.mockResolvedValue({
+      data: [
+        {
+          id: 'cs_123',
+          metadata: {toolName},
+          payment_status: 'paid',
+          subscription: 'sub_123',
+        },
+      ],
     });
     mockStripe.subscriptions.list.mockResolvedValue({
       data: [
@@ -225,8 +249,6 @@ describe('registerPaidTool', () => {
         },
       ],
     });
-    mockStripe.checkout.sessions.list.mockResolvedValue({data: []});
-    const toolName = 'testTool';
     const callback = jest.fn().mockResolvedValue({
       content: [{type: 'text', text: 'Success'}],
     });
@@ -238,12 +260,15 @@ describe('registerPaidTool', () => {
       {testParam: z.string()},
       callback,
       {
-        priceId: 'price_123',
         paymentReason: 'Test payment',
-        successUrl: 'https://example.com/success',
         meterEvent: 'test.event',
         stripeSecretKey: mockSecretKey,
         userEmail: 'test@example.com',
+        checkout: {
+          success_url: 'https://example.com/success',
+          line_items: [{price: 'price_123'}],
+          mode: 'subscription',
+        },
       }
     );
 

@@ -12,23 +12,23 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@cloudflare/workers-types": "^4.20250423.0",
+    "@cloudflare/workers-types": "^4.20250515.0",
     "typescript": "^5.8.3",
     "workers-mcp": "0.1.0-3",
-    "wrangler": "^4.13.0"
+    "wrangler": "^4.15.2"
   },
   "dependencies": {
     "@cloudflare/workers-oauth-provider": "^0.0.5",
-    "@modelcontextprotocol/sdk": "^1.10.2",
+    "@modelcontextprotocol/sdk": "1.11.3",
     "@stripe/agent-toolkit": "latest",
-    "@types/node": "^22.15.2",
+    "@types/node": "^22.15.18",
     "add": "^2.0.6",
-    "agents": "^0.0.66",
+    "agents": "^0.0.84",
     "dotenv": "^16.5.0",
     "emoji-from-text": "^1.1.13",
-    "hono": "^4.7.7",
-    "stripe": "^18.0.0",
-    "zod": "^3.24.3"
+    "hono": "^4.7.9",
+    "stripe": "^18.1.0",
+    "zod": "^3.24.4"
   },
   "pnpm": {}
 }

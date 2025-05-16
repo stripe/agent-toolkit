@@ -28,7 +28,7 @@ jobs:
       - run: pnpm install
       - run: pnpm run test
       - run: pnpm run build
-      - run: npm publish --provenance --access public
+      - run: npm publish --ignore-scripts --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -56,6 +56,6 @@ jobs:
       - run: pnpm install
       - run: pnpm run test
       - run: pnpm run build
-      - run: npm publish --provenance --access public
+      - run: npm publish --ignore-scripts --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

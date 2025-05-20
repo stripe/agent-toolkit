@@ -112,3 +112,19 @@ It takes two arguments:
 - customer (str): The ID of the customer to create the invoice item for.
 - return_url (str, optional): The default URL to return to afterwards.
 """
+
+LIST_PAYMENT_METHOD_CONFIGS_PROMPT = """
+This tool will fetch a list of Payment Method Configurations from Stripe.
+
+It takes one optional argument:
+- limit (int, optional): The number of configurations to return.
+"""
+
+UPDATE_PAYMENT_METHOD_CONFIG_PROMPT = """
+This tool will update a payment method configuration in Stripe.
+
+It takes three arguments:
+- configuration (str): The ID of the configuration to update.
+- payment_method (str): The payment method type to modify.
+- preference (str): Either 'on' or 'off'.
+"""

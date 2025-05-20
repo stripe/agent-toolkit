@@ -15,6 +15,7 @@ export type Object =
   | 'refunds'
   | 'paymentIntents'
   | 'subscriptions'
+  | 'paymentMethodConfigurations'
   | 'documentation'
   | 'coupons';
 

@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.4.1",
-    "@stripe/agent-toolkit": "^0.7.6",
+    "@stripe/agent-toolkit": "file:../typescript",
     "colors": "^1.4.0"
   },
   "keywords": [

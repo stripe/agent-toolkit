@@ -41,6 +41,8 @@ const ACCEPTED_TOOLS = [
   'subscriptions.update',
   'disputes.read',
   'disputes.update',
+  'paymentMethodConfigurations.read',
+  'paymentMethodConfigurations.update',
   'documentation.read',
 ];
 

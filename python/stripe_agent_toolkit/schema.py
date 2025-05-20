@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Literal
 from pydantic import BaseModel, Field
 
 
@@ -205,5 +205,35 @@ class CreateBillingPortalSession(BaseModel):
         None,
         description=(
             "The default URL to return to afterwards."
+        ),
+    )
+
+
+class ListPaymentMethodConfigs(BaseModel):
+    """Schema for the ``list_payment_method_configs`` operation."""
+
+    limit: Optional[int] = Field(
+        None,
+        description=(
+            "A limit on the number of objects to be returned."
+            " Limit can range between 1 and 100."
+        ),
+    )
+
+
+class UpdatePaymentMethodConfig(BaseModel):
+    """Schema for the ``update_payment_method_config`` operation."""
+
+    configuration: str = Field(
+        ..., description="The ID of the configuration to update."
+    )
+    payment_method: str = Field(
+        ..., description="The payment method type to modify."
+    )
+    preference: Literal["on", "off"] = Field(
+        ...,
+        description=(
+            "Display preference for the payment method."
+            " Must be 'on' or 'off'."
         ),
     )

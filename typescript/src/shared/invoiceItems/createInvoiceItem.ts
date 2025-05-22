@@ -56,7 +56,7 @@ export const createInvoiceItemPrompt = (context: Context = {}) => {
   return `
 This tool will create an invoice item in Stripe.
 
-It takes ${context.customer ? 'one' : 'two'} argument${context.customer ? '' : 's'}:
+It takes ${context.customer ? 'two' : 'three'} arguments'}:
 ${customerArg}
 - price (str): The ID of the price to create the invoice item for.
 - invoice (str): The ID of the invoice to create the invoice item for.

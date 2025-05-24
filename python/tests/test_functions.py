@@ -17,6 +17,8 @@ from stripe_agent_toolkit.functions import (
     create_refund,
     list_payment_intents,
     create_billing_portal_session,
+    list_payment_method_configs,
+    update_payment_method_config,
 )
 
 
@@ -891,6 +893,42 @@ class TestStripeFunctions(unittest.TestCase):
                 "url": mock_billing_portal_session["url"],
                 "customer": mock_billing_portal_session["customer"],
             })
+
+    def test_list_payment_method_configs(self):
+        with mock.patch("stripe.PaymentMethodConfiguration.list") as mock_function:
+            mock_configs = [
+                {"id": "pmc_123"},
+                {"id": "pmc_456"},
+            ]
+
+            mock_function.return_value = stripe.ListObject.construct_from(
+                {"data": [stripe.PaymentMethodConfiguration.construct_from(c, "sk") for c in mock_configs]},
+                "sk"
+            )
+
+            result = list_payment_method_configs(context={})
+
+            mock_function.assert_called_with()
+            self.assertEqual(result, mock_configs)
+
+    def test_update_payment_method_config(self):
+        with mock.patch("stripe.PaymentMethodConfiguration.update") as mock_function:
+            mock_config = {"id": "pmc_123"}
+            mock_function.return_value = stripe.PaymentMethodConfiguration.construct_from(mock_config, "sk")
+
+            result = update_payment_method_config(
+                context={},
+                configuration="pmc_123",
+                payment_method="link",
+                preference="on",
+            )
+
+            mock_function.assert_called_with(
+                "pmc_123",
+                link={"display_preference": {"preference": "on"}},
+            )
+
+            self.assertEqual(result, {"id": mock_config["id"]})
 
 if __name__ == "__main__":
     unittest.main()

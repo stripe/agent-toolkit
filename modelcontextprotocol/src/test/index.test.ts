@@ -250,6 +250,10 @@ const ALL_ACTIONS = {
   paymentIntents: {
     read: true,
   },
+  paymentMethodConfigurations: {
+    read: true,
+    update: true,
+  },
   disputes: {
     read: true,
     update: true,

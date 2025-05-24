@@ -79,6 +79,8 @@ of if you're using Docker
 | `paymentIntents.read`  | Read payment intent information |
 | `subscriptions.read`   | Read subscription information   |
 | `subscriptions.update` | Update subscription information |
+| `paymentMethodConfigurations.read` | List payment method configs |
+| `paymentMethodConfigurations.update` | Update payment method config |
 | `coupons.create`       | Create a new coupon             |
 | `coupons.read`         | Read coupon information         |
 | `disputes.update`      | Update an existing dispute      |

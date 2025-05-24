@@ -25,6 +25,8 @@ from .functions import (
     create_refund,
     list_payment_intents,
     create_billing_portal_session,
+    list_payment_method_configs,
+    update_payment_method_config,
 )
 
 
@@ -96,6 +98,14 @@ class StripeAPI(BaseModel):
         elif method == "list_payment_intents":
             return json.dumps(
                 list_payment_intents(self._context, *args, **kwargs)
+            )
+        elif method == "list_payment_method_configs":
+            return json.dumps(
+                list_payment_method_configs(self._context, *args, **kwargs)
+            )
+        elif method == "update_payment_method_config":
+            return json.dumps(
+                update_payment_method_config(self._context, *args, **kwargs)
             )
         elif method == "create_billing_portal_session":
             return json.dumps(

@@ -51,6 +51,7 @@ This tool will create a payment link in Stripe.
 It takes two arguments:
 - price (str): The ID of the price to create the payment link for.
 - quantity (int): The quantity of the product to include in the payment link.
+- redirect_url (string, optional): The URL the customer will be redirected to after the purchase is complete.
 """
 
 LIST_INVOICES_PROMPT = """

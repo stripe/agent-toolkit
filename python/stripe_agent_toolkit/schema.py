@@ -104,6 +104,10 @@ class CreatePaymentLink(BaseModel):
         ...,
         description="The quantity of the product to include.",
     )
+    redirect_url: Optional[str] = Field(
+        None,
+        description="The URL the customer will be redirected to after the purchase is complete.",
+    )
 
 
 class ListInvoices(BaseModel):

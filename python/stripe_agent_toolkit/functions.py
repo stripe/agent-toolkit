@@ -154,13 +154,14 @@ def list_prices(
     return stripe.Price.list(**prices_data).data
 
 
-def create_payment_link(context: Context, price: str, quantity: int):
+def create_payment_link(context: Context, price: str, quantity: int, redirect_url: Optional[str] = None):
     """
     Create a payment link.
 
     Parameters:
         price (str): The ID of the price.
         quantity (int): The quantity of the product.
+        redirect_url (string, optional): The URL the customer will be redirected to after the purchase is complete.
 
     Returns:
         stripe.PaymentLink: The created payment link.
@@ -172,6 +173,9 @@ def create_payment_link(context: Context, price: str, quantity: int):
         account = context.get("account")
         if account is not None:
             payment_link_data["stripe_account"] = account
+
+    if redirect_url:
+        payment_link_data["after_completion"] = {"type": "redirect", "redirect": {"url": redirect_url}}
 
     payment_link = stripe.PaymentLink.create(**payment_link_data)
 

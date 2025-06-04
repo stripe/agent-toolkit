@@ -66,7 +66,7 @@ const tool = (context: Context): Tool => ({
   parameters: searchDocumentationParameters(context),
   actions: {
     documentation: {
-      search: true,
+      read: true,
     },
   },
   execute: searchDocumentation,

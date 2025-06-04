@@ -14,6 +14,7 @@ import finalizeInvoiceTool from '@/shared/invoices/finalizeInvoice';
 import retrieveBalanceTool from '@/shared/balance/retrieveBalance';
 import listCouponsTool from '@/shared/coupons/listCoupons';
 import createCouponTool from '@/shared/coupons/createCoupon';
+import createInviteTool from '@/shared/invite/createInvite';
 import createRefundTool from '@/shared/refunds/createRefund';
 import listPaymentIntentsTool from '@/shared/paymentIntents/listPaymentIntents';
 import listSubscriptionsTool from '@/shared/subscriptions/listSubscriptions';
@@ -62,6 +63,7 @@ const tools = (context: Context): Tool[] => [
   createCouponTool(context),
   updateDisputeTool(context),
   listDisputesTool(context),
+  createInviteTool(context),
 ];
 
 export default tools;

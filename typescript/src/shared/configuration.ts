@@ -16,7 +16,8 @@ export type Object =
   | 'paymentIntents'
   | 'subscriptions'
   | 'documentation'
-  | 'coupons';
+  | 'coupons'
+  | 'invite';
 
 export type Permission = 'create' | 'update' | 'read';
 

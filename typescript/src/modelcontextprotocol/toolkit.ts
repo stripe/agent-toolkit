@@ -29,9 +29,10 @@ class StripeAgentToolkit extends McpServer {
     this._stripe = new StripeAPI(secretKey, configuration.context);
 
     const context = configuration.context || {};
-    const filteredTools = tools(context).filter((tool) =>
-      isToolAllowed(tool, configuration)
-    );
+    const filteredTools = tools(context);
+    // const filteredTools = tools(context).filter((tool) =>
+    //   isToolAllowed(tool, configuration)
+    // );
 
     filteredTools.forEach((tool) => {
       this.tool(

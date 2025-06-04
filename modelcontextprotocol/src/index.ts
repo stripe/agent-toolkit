@@ -42,6 +42,7 @@ const ACCEPTED_TOOLS = [
   'disputes.read',
   'disputes.update',
   'documentation.read',
+  'invite.create',
 ];
 
 export function parseArgs(args: string[]): Options {

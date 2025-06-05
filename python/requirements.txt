@@ -12,3 +12,5 @@ ruff==0.4.4
 stripe==11.0.0
 openai==1.66.0
 openai-agents==0.0.2
+strands-agent>=0.1.0
+strands-agents-tools

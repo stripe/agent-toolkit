@@ -9,6 +9,7 @@ This tool will create a payment link in Stripe.
 It takes two arguments:
 - price (str): The ID of the price to create the payment link for.
 - quantity (int): The quantity of the product to include in the payment link.
+- redirect_url (str, optional): The URL to redirect to after the payment is completed.
 `;
 
 export const createPaymentLink = async (
@@ -19,7 +20,17 @@ export const createPaymentLink = async (
   try {
     const paymentLink = await stripe.paymentLinks.create(
       {
-        line_items: [params],
+        line_items: [{price: params.price, quantity: params.quantity}],
+        ...(params.redirect_url
+          ? {
+              after_completion: {
+                type: 'redirect',
+                redirect: {
+                  url: params.redirect_url,
+                },
+              },
+            }
+          : undefined),
       },
       context.account ? {stripeAccount: context.account} : undefined
     );
@@ -39,6 +50,10 @@ export const createPaymentLinkParameters = (_context: Context = {}) =>
       .number()
       .int()
       .describe('The quantity of the product to include.'),
+    redirect_url: z
+      .string()
+      .optional()
+      .describe('The URL to redirect to after the payment is completed.'),
   });
 
 const tool = (context: Context): Tool => ({

@@ -49,7 +49,10 @@ export const createInvoice = async (
     }
 
     const invoice = await stripe.invoices.create(
-      params,
+      {
+        ...params,
+        collection_method: 'send_invoice',
+      },
       context.account ? {stripeAccount: context.account} : undefined
     );
 

@@ -56,9 +56,12 @@ describe('createInvoice', () => {
     const result = await createInvoice(stripe, context, params);
 
     expect(stripe.invoices.create).toHaveBeenCalledWith(
-      {...params, collection_method: 'send_invoice'},
-      stripeAccount: context.account,
-    });
+      {
+        ...params,
+        collection_method: 'send_invoice',
+      },
+      {stripeAccount: context.account}
+    );
     expect(result).toEqual(mockInvoice);
   });
 

@@ -32,7 +32,10 @@ describe('createInvoice', () => {
 
     const result = await createInvoice(stripe, context, params);
 
-    expect(stripe.invoices.create).toHaveBeenCalledWith(params, undefined);
+    expect(stripe.invoices.create).toHaveBeenCalledWith(
+      {...params, collection_method: 'send_invoice'},
+      undefined
+    );
     expect(result).toEqual(mockInvoice);
   });
 
@@ -52,9 +55,13 @@ describe('createInvoice', () => {
 
     const result = await createInvoice(stripe, context, params);
 
-    expect(stripe.invoices.create).toHaveBeenCalledWith(params, {
-      stripeAccount: context.account,
-    });
+    expect(stripe.invoices.create).toHaveBeenCalledWith(
+      {
+        ...params,
+        collection_method: 'send_invoice',
+      },
+      {stripeAccount: context.account}
+    );
     expect(result).toEqual(mockInvoice);
   });
 
@@ -77,6 +84,7 @@ describe('createInvoice', () => {
       {
         ...params,
         customer: context.customer,
+        collection_method: 'send_invoice',
       },
       undefined
     );

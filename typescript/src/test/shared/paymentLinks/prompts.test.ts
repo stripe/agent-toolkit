@@ -11,6 +11,9 @@ describe('createPaymentLinkPrompt', () => {
     expect(prompt).toContain(
       'quantity (int): The quantity of the product to include in the payment link.'
     );
+    expect(prompt).toContain(
+      'redirect_url (str, optional): The URL to redirect to after the payment is completed.'
+    );
   });
 
   it('should return the correct prompt with customer context', () => {
@@ -22,6 +25,9 @@ describe('createPaymentLinkPrompt', () => {
     );
     expect(prompt).toContain(
       'quantity (int): The quantity of the product to include in the payment link.'
+    );
+    expect(prompt).toContain(
+      'redirect_url (str, optional): The URL to redirect to after the payment is completed.'
     );
   });
 });

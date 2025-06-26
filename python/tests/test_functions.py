@@ -343,6 +343,24 @@ class TestStripeFunctions(unittest.TestCase):
 
             self.assertEqual(result, mock_payment_link)
 
+    def test_create_payment_link_with_redirect_url(self):
+        with mock.patch("stripe.PaymentLink.create") as mock_function:
+            mock_payment_link = {"id": "pl_123", "url": "https://example.com"}
+            mock_function.return_value = stripe.PaymentLink.construct_from(
+                mock_payment_link, "sk_test_123"
+            )
+
+            result = create_payment_link(
+                context={}, price="price_123", quantity=1, redirect_url="https://example.com"
+            )
+
+            mock_function.assert_called_with(
+                line_items=[{"price": "price_123", "quantity": 1, }],
+                after_completion={"type": "redirect", "redirect": {"url": "https://example.com"}}
+            )
+
+            self.assertEqual(result, mock_payment_link)
+
     def test_create_payment_link_with_context(self):
         with mock.patch("stripe.PaymentLink.create") as mock_function:
             mock_payment_link = {"id": "pl_123", "url": "https://example.com"}

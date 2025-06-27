@@ -18,7 +18,7 @@
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check",
     "test": "jest",
-    "build:dxt-extension": "npm run build && npx dxt pack"
+    "build-dxt-extension": "npm run build && npx dxt pack"
   },
   "packageManager": "pnpm@9.11.0",
   "engines": {

@@ -12,7 +12,7 @@
   "user_config": {
     "stripe_secret_key": {
       "type": "string",
-      "title": "Stripe Secret or Restricted Key",
+      "title": "Stripe Key",
       "description": "Your Stripe secret key. See https://docs.stripe.com/keys#create-restricted-api-secret-key to create one.",
       "multiple": false,
       "required": true

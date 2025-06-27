@@ -18,7 +18,7 @@
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check",
     "test": "jest",
-    "dxt-pack": "npm run build && dxt pack"
+    "build:dxt-extension": "npm run build && npx dxt pack"
   },
   "packageManager": "pnpm@9.11.0",
   "engines": {
@@ -37,6 +37,7 @@
   "author": "Stripe <support@stripe.com> (https://stripe.com/)",
   "license": "MIT",
   "devDependencies": {
+    "@anthropic-ai/dxt": "^0.1.0",
     "@eslint/compat": "^1.2.6",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.4",

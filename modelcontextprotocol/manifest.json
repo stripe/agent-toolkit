@@ -2,31 +2,28 @@
   "dxt_version": "0.1",
   "name": "@stripe/mcp",
   "display_name": "Stripe",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Manage resources in your Stripe account and search the Stripe knowledge base.",
   "author": {
-    "name": "adelechen",
-    "email": "adelechen@stripe.com"
+    "name": "Stripe",
+    "email": "support@stripe.com"
   },
-  "documentation": "https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol#readme",
+  "documentation": "https://docs.stripe.com/mcp",
   "user_config": {
     "stripe_secret_key": {
       "type": "string",
-      "title": "Stripe Key",
-      "description": "Your Stripe secret key. See https://docs.stripe.com/keys#create-restricted-api-secret-key to create one.",
+      "title": "Stripe key",
+      "description": "Your Stripe API key. We recommend using a restricted access key.",
       "multiple": false,
       "required": true
     }
   },
   "server": {
     "type": "node",
-    "entry_point": "dist/index.js",
+    "entry_point": "dxt-dist/index.js",
     "mcp_config": {
       "command": "node",
-      "args": [
-        "${__dirname}/dist/index.js",
-        "--tools=all"
-      ],
+      "args": ["${__dirname}/dxt-dist/index.js", "--tools=all"],
       "env": {
         "STRIPE_SECRET_KEY": "${user_config.stripe_secret_key}"
       }

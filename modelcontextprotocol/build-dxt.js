@@ -18,7 +18,7 @@ const buildConfig = {
   target: 'node18',
   format: 'cjs',
   external: [],
-  minify: false,
+  minify: true,
   sourcemap: false,
   metafile: false,
   write: true,

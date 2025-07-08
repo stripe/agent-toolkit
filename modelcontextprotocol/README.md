@@ -4,7 +4,7 @@ The Stripe [Model Context Protocol](https://modelcontextprotocol.com/) server al
 
 ## Setup
 
-To run the Stripe MCP server using npx, use the following command:
+Stripe hosts a remote MCP server at https://mcp.stripe.com. View the docs here. To run the Stripe MCP server locally using npx, use the following command:
 
 ```bash
 # To set up all available tools
@@ -64,26 +64,26 @@ of if you're using Docker
 
 | Tool                   | Description                     |
 | ---------------------- | ------------------------------- |
-| `customers.create`     | Create a new customer           |
-| `customers.read`       | Read customer information       |
-| `products.create`      | Create a new product            |
-| `products.read`        | Read product information        |
-| `prices.create`        | Create a new price              |
-| `prices.read`          | Read price information          |
-| `paymentLinks.create`  | Create a new payment link       |
-| `invoices.create`      | Create a new invoice            |
-| `invoices.update`      | Update an existing invoice      |
-| `invoiceItems.create`  | Create a new invoice item       |
 | `balance.read`         | Retrieve balance information    |
-| `refunds.create`       | Create a new refund             |
-| `paymentIntents.read`  | Read payment intent information |
-| `subscriptions.read`   | Read subscription information   |
-| `subscriptions.update` | Update subscription information |
 | `coupons.create`       | Create a new coupon             |
 | `coupons.read`         | Read coupon information         |
-| `disputes.update`      | Update an existing dispute      |
+| `customers.create`     | Create a new customer           |
+| `customers.read`       | Read customer information       |
 | `disputes.read`        | Read disputes information       |
+| `disputes.update`      | Update an existing dispute      |
 | `documentation.read`   | Search Stripe documentation     |
+| `invoiceItems.create`  | Create a new invoice item       |
+| `invoices.create`      | Create a new invoice            |
+| `invoices.update`      | Update an existing invoice      |
+| `paymentIntents.read`  | Read payment intent information |
+| `paymentLinks.create`  | Create a new payment link       |
+| `prices.create`        | Create a new price              |
+| `prices.read`          | Read price information          |
+| `products.create`      | Create a new product            |
+| `products.read`        | Read product information        |
+| `refunds.create`       | Create a new refund             |
+| `subscriptions.read`   | Read subscription information   |
+| `subscriptions.update` | Update subscription information |
 
 ## Debugging the Server
 

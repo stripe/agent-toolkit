@@ -142,54 +142,30 @@ export const expectToolCall = (
 
 export const expectToolCallArgs = (
   actualToolCalls: ChatCompletionMessageToolCall[],
-  expectedArgs: Array<{ name: string; arguments: any }>
+  expectedArgs: Array<{ name: string; arguments: any; shallow: boolean }>
 ): AssertionResult => {
   const actualToolCallNamesAndArgs = actualToolCalls.map((tc) => ({
     name: tc.function.name,
     arguments: JSON.parse(tc.function.arguments),
   }));
-
   const pass = actualToolCallNamesAndArgs.some((tc) => {
     return expectedArgs.some((ea) => {
-      return ea.name === tc.name && isEqual(ea.arguments, tc.arguments);
+      if (ea.name !== tc.name) {
+        return false;
+      }
+
+      if (ea.shallow === true) {
+        return Object.keys(ea.arguments).every((key) => {
+          return isEqual(ea.arguments[key], tc.arguments[key]);
+        });
+      } else {
+        return isEqual(ea.arguments, tc.arguments);
+      }
     });
   });
-
   return {
     status: pass ? "passed" : "failed",
     assertion_type: "expectToolCallArgs",
-    expected: expectedArgs
-      .map((ea) => `${ea.name}: ${JSON.stringify(ea.arguments)}`)
-      .join(", "),
-    actualValue: actualToolCallNamesAndArgs
-      .map((tc) => `${tc.name}: ${JSON.stringify(tc.arguments)}`)
-      .join(", "),
-  };
-};
-
-export const expectToolCallArgsContains = (
-  actualToolCalls: ChatCompletionMessageToolCall[],
-  expectedArgs: Array<{ name: string; arguments: any }>
-): AssertionResult => {
-  const actualToolCallNamesAndArgs = actualToolCalls.map((tc) => ({
-    name: tc.function.name,
-    arguments: JSON.parse(tc.function.arguments),
-  }));
-
-  const pass = actualToolCallNamesAndArgs.some((tc) => {
-    return expectedArgs.some((ea) => {
-      if (ea.name !== tc.name) return false;
-
-      // Check if all expected arguments exist in actual arguments with same values
-      return Object.keys(ea.arguments).every((key) => {
-        return isEqual(ea.arguments[key], tc.arguments[key]);
-      });
-    });
-  });
-
-  return {
-    status: pass ? "passed" : "failed",
-    assertion_type: "expectToolCallArgsContains",
     expected: expectedArgs
       .map((ea) => `${ea.name}: ${JSON.stringify(ea.arguments)}`)
       .join(", "),

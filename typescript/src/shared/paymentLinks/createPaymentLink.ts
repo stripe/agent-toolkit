@@ -53,7 +53,7 @@ export const createPaymentLinkParameters = (_context: Context = {}) =>
     redirect_url: z
       .string()
       .optional()
-      .describe('The URL to redirect to after the payment is completed.'),
+      .describe('The URL to redirect to after the payment is completed. '),
   });
 
 const tool = (context: Context): Tool => ({

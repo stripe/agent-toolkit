@@ -186,8 +186,7 @@ test({
           amount_off: 1000,
           currency: "USD",
           name: "WINTERTEN",
-        },
-        shallow: false,
+        }
       },
     ]),
     llmCriteriaMet(

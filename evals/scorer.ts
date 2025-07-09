@@ -142,7 +142,7 @@ export const expectToolCall = (
 
 export const expectToolCallArgs = (
   actualToolCalls: ChatCompletionMessageToolCall[],
-  expectedArgs: Array<{ name: string; arguments: any; shallow: boolean }>
+  expectedArgs: Array<{ name: string; arguments: any; shallow?: boolean }>
 ): AssertionResult => {
   const actualToolCallNamesAndArgs = actualToolCalls.map((tc) => ({
     name: tc.function.name,

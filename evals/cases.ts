@@ -95,6 +95,24 @@ test({
   ],
 });
 
+test({
+  prompt: 
+    "Create a payment link for a new product called 'test' with a price of $35.99, if the user completes the purchase they should be redirected to https://www.stripe.com",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["create_payment_link"]),
+    expectToolCallArgs(toolCalls, [
+      {
+        name: "create_payment_link",
+        arguments: {
+          redirect_url: "https://www.stripe.com",
+        },
+        shallow: true,
+      },
+    ]),
+    llmCriteriaMet(messages, "The message should include a payment link and indicate the redirect url"),
+  ],
+});
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 test(async () => {
@@ -168,7 +186,7 @@ test({
           amount_off: 1000,
           currency: "USD",
           name: "WINTERTEN",
-        },
+        }
       },
     ]),
     llmCriteriaMet(

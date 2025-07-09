@@ -142,19 +142,27 @@ export const expectToolCall = (
 
 export const expectToolCallArgs = (
   actualToolCalls: ChatCompletionMessageToolCall[],
-  expectedArgs: Array<{ name: string; arguments: any }>
+  expectedArgs: Array<{ name: string; arguments: any; shallow?: boolean }>
 ): AssertionResult => {
   const actualToolCallNamesAndArgs = actualToolCalls.map((tc) => ({
     name: tc.function.name,
     arguments: JSON.parse(tc.function.arguments),
   }));
-
   const pass = actualToolCallNamesAndArgs.some((tc) => {
     return expectedArgs.some((ea) => {
-      return ea.name === tc.name && isEqual(ea.arguments, tc.arguments);
+      if (ea.name !== tc.name) {
+        return false;
+      }
+
+      if (ea.shallow === true) {
+        return Object.keys(ea.arguments).every((key) => {
+          return isEqual(ea.arguments[key], tc.arguments[key]);
+        });
+      } else {
+        return isEqual(ea.arguments, tc.arguments);
+      }
     });
   });
-
   return {
     status: pass ? "passed" : "failed",
     assertion_type: "expectToolCallArgs",

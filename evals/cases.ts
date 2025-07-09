@@ -6,6 +6,7 @@ import {
   EvalInput,
   expectToolCall,
   expectToolCallArgs,
+  expectToolCallArgsContains,
   llmCriteriaMet,
 } from "./scorer";
 import { Configuration as StripeAgentToolkitConfig } from "../typescript/src/shared/configuration";
@@ -92,6 +93,23 @@ test({
   fn: ({ toolCalls, messages }) => [
     llmCriteriaMet(messages, "The message should include a payment link"),
     expectToolCall(toolCalls, ["create_payment_link"]),
+  ],
+});
+
+test({
+  prompt: 
+    "Create a payment link for a new product called 'test' with a price of $35.99, if the user completes the purchase they should be redirected to https://www.stripe.com",
+  fn: ({ toolCalls, messages }) => [
+    expectToolCall(toolCalls, ["create_payment_link"]),
+    expectToolCallArgsContains(toolCalls, [
+      {
+        name: "create_payment_link",
+        arguments: {
+          redirect_url: "https://www.stripe.com",
+        },
+      },
+    ]),
+    llmCriteriaMet(messages, "The message should include a payment link and indicate the redirect url"),
   ],
 });
 

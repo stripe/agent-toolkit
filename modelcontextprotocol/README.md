@@ -4,7 +4,7 @@ The Stripe [Model Context Protocol](https://modelcontextprotocol.com/) server al
 
 ## Setup
 
-Stripe hosts a remote MCP server at https://mcp.stripe.com. View the docs here. To run the Stripe MCP server locally using npx, use the following command:
+Stripe hosts a remote MCP server at https://mcp.stripe.com. View the docs [here](https://docs.stripe.com/mcp). To run the Stripe MCP server locally using npx, use the following command:
 
 ```bash
 # To set up all available tools

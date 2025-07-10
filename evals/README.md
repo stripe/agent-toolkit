@@ -19,7 +19,7 @@ We are using [Braintrust](https://www.braintrust.dev/) to run the evals.
 
 ## Framework
 
-There is a very lightweight testing framework built in to make adding new test cases easy that wraps Braintrust.
+There is a very lightweight built-in testing framework that wraps Braintrust to make adding new test cases easy.
 
 Add a new test case to `cases.ts`:
 
@@ -37,10 +37,10 @@ test({
 });
 ```
 
-The Typescript type defintions have documentation to help you. The `fn` function
+The Typescript type defintions has documentation to help you. The `fn` function
 will be called with the resulting output of your prompt. This should return an array of "assertions." These are like `expect` in Jest.
 
-This can be as simple as noting a tool was called exist or as complex as asking an LLM to do semantc similarities. See `scorer.ts` for a list of assertions.
+This can be as simple as noting a tool was called or as complex as asking an LLM to do semantic similarities. See `scorer.ts` for a list of assertions.
 
 Override the toolkit config by passing a `toolkitConfig` object.
 

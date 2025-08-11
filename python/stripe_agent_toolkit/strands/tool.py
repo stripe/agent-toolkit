@@ -28,16 +28,24 @@ def StripeTool(api, tool) -> StrandTool:
         else:
             actual_params = {}
 
-        # Call the Stripe API
-        result = api.run(tool["method"], **actual_params)
-
-        # Return in the format expected by strands
-        response = {
-            "content": [{"text": result}]
-        }
-
-        if tool_use_id:
-            response["toolUseId"] = tool_use_id
+        try:
+            # Call the Stripe API
+            result = api.run(tool["method"], **actual_params)
+            
+            # Return in the format expected by strands (ToolResult format)
+            response = {
+                "content": [{"text": result}],
+                "status": "success",  # Required field for ToolResult
+                "toolUseId": tool_use_id or "unknown"  # Always required
+            }
+            
+        except Exception as e:
+            # Handle errors with proper ToolResult format
+            response = {
+                "content": [{"text": f"Error: {str(e)}"}],
+                "status": "error",  # Required field for ToolResult
+                "toolUseId": tool_use_id or "unknown"  # Always required
+            }
 
         return response
 
@@ -50,5 +58,5 @@ def StripeTool(api, tool) -> StrandTool:
                 "json": parameters
             }
         },
-        callback=callback_wrapper
+        tool_func=callback_wrapper
     )

@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@modelcontextprotocol/sdk':
-        specifier: ^1.4.1
-        version: 1.5.0
+        specifier: ^1.17.1
+        version: 1.17.2
       '@stripe/agent-toolkit':
-        specifier: ^0.7.9
-        version: 0.7.9(@langchain/core@0.3.40(openai@4.97.0(zod@3.24.4)))(@modelcontextprotocol/sdk@1.5.0)(agents@0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0))(ai@4.3.15(react@19.0.0)(zod@3.24.4))(openai@4.97.0(zod@3.24.4))
+        specifier: ^0.7.11
+        version: 0.7.11(@langchain/core@0.3.40(openai@4.97.0(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.2)(agents@0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0))(ai@4.3.15(react@19.0.0)(zod@3.24.4))(openai@4.97.0(zod@3.24.4))
       colors:
         specifier: ^1.4.0
         version: 1.4.0
@@ -652,12 +652,8 @@ packages:
     resolution: {integrity: sha512-RGhJOTzJv6H+3veBAnDlH2KXuZ68CXMEg6B6DPTzL3IGDyd+vLxXG4FIttzUwjdeQKjrrFBwlXpJDl7bkoApzQ==}
     engines: {node: '>=18'}
 
-  '@modelcontextprotocol/sdk@1.11.0':
-    resolution: {integrity: sha512-k/1pb70eD638anoi0e8wUGAlbMJXyvdV4p62Ko+EZ7eBe1xMx8Uhak1R5DgfoofsK5IBBnRwsYGTaLZl+6/+RQ==}
-    engines: {node: '>=18'}
-
-  '@modelcontextprotocol/sdk@1.5.0':
-    resolution: {integrity: sha512-IJ+5iVVs8FCumIHxWqpwgkwOzyhtHVKy45s6Ug7Dv0MfRpaYisH8QQ87rIWeWdOzlk8sfhitZ7HCyQZk7d6b8w==}
+  '@modelcontextprotocol/sdk@1.17.2':
+    resolution: {integrity: sha512-EFLRNXR/ixpXQWu6/3Cu30ndDFIFNaqUXcTqsGebujeMan9FzhAaFFswLRiFj61rgygDRr8WO1N+UijjgRxX9g==}
     engines: {node: '>=18'}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -692,12 +688,12 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@stripe/agent-toolkit@0.7.9':
-    resolution: {integrity: sha512-HfoBhxLnuWaJZ6AxsmXBgwPtTJolxiUkgGtifgYS8weK0ubkCxS50V9sr7e62cqPVtCBcRP1tbLicU8H5rKzUw==}
+  '@stripe/agent-toolkit@0.7.11':
+    resolution: {integrity: sha512-8CXr1YONbrk/Guuh11zbn0renUAcFbcE2aUOhf1sNR9bMtNvhkZV6leT9Zzwf6tiGoNvDactK9700VpYgVBRVw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@langchain/core': ^0.3.6
-      '@modelcontextprotocol/sdk': ^1.10.2
+      '@modelcontextprotocol/sdk': ^1.17.1
       agents: ^0.0.84
       ai: ^3.4.7 || ^4.0.0
       openai: ^4.86.1
@@ -1433,16 +1429,8 @@ packages:
   eventemitter3@4.0.7:
     resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==}
 
-  eventsource-parser@3.0.0:
-    resolution: {integrity: sha512-T1C0XCUimhxVQzW4zFipdx0SficT651NnkR0ZSH3yQwh+mFMdLfgjABVi4YtMTtaL4s168593DaoaRLMqryavA==}
-    engines: {node: '>=18.0.0'}
-
   eventsource-parser@3.0.1:
     resolution: {integrity: sha512-VARTJ9CYeuQYb0pZEPbzi740OWFgpHe7AYJ2WFZVnUDUQp5Dk2yJUgF36YsZ81cOyxT0QxmXD2EQpapAouzWVA==}
-    engines: {node: '>=18.0.0'}
-
-  eventsource@3.0.5:
-    resolution: {integrity: sha512-LT/5J605bx5SNyE+ITBDiM3FxffBiq9un7Vx0EwMDM3vg8sWKx/tO2zC+LMqZ+smAM0F2hblaDZUVZF0te2pSw==}
     engines: {node: '>=18.0.0'}
 
   eventsource@3.0.6:
@@ -2892,18 +2880,10 @@ packages:
     resolution: {integrity: sha512-cYVsTjKl8b+FrnidjibDWskAv7UKOfcwaVZdp/it9n1s9fU3IkgDbhdIRKCW4JDsAlECJY0ytoVPT3sK6kideA==}
     engines: {node: '>=18'}
 
-  zod-to-json-schema@3.24.1:
-    resolution: {integrity: sha512-3h08nf3Vw3Wl3PK+q3ow/lIil81IT2Oa7YpQyUUDsEWbXveMesdfK1xBd2RhCkynwZndAxixji/7SYJJowr62w==}
-    peerDependencies:
-      zod: ^3.24.1
-
   zod-to-json-schema@3.24.5:
     resolution: {integrity: sha512-/AuWwMP+YqiPbsJx5D6TfgRTc4kTLjsh5SOcd4bLsfUg2RcEXrFMJl1DGgdHy2aCfsIA/cr/1JM0xcB2GZji8g==}
     peerDependencies:
       zod: ^3.24.1
-
-  zod@3.24.2:
-    resolution: {integrity: sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ==}
 
   zod@3.24.4:
     resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
@@ -3596,12 +3576,14 @@ snapshots:
     transitivePeerDependencies:
       - openai
 
-  '@modelcontextprotocol/sdk@1.11.0':
+  '@modelcontextprotocol/sdk@1.17.2':
     dependencies:
+      ajv: 6.12.6
       content-type: 1.0.5
       cors: 2.8.5
       cross-spawn: 7.0.6
       eventsource: 3.0.6
+      eventsource-parser: 3.0.1
       express: 5.1.0
       express-rate-limit: 7.5.0(express@5.1.0)
       pkce-challenge: 5.0.0
@@ -3610,14 +3592,6 @@ snapshots:
       zod-to-json-schema: 3.24.5(zod@3.24.4)
     transitivePeerDependencies:
       - supports-color
-
-  '@modelcontextprotocol/sdk@1.5.0':
-    dependencies:
-      content-type: 1.0.5
-      eventsource: 3.0.5
-      raw-body: 3.0.0
-      zod: 3.24.2
-      zod-to-json-schema: 3.24.1(zod@3.24.2)
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -3647,10 +3621,10 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@stripe/agent-toolkit@0.7.9(@langchain/core@0.3.40(openai@4.97.0(zod@3.24.4)))(@modelcontextprotocol/sdk@1.5.0)(agents@0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0))(ai@4.3.15(react@19.0.0)(zod@3.24.4))(openai@4.97.0(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.40(openai@4.97.0(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.2)(agents@0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0))(ai@4.3.15(react@19.0.0)(zod@3.24.4))(openai@4.97.0(zod@3.24.4))':
     dependencies:
       '@langchain/core': 0.3.40(openai@4.97.0(zod@3.24.4))
-      '@modelcontextprotocol/sdk': 1.5.0
+      '@modelcontextprotocol/sdk': 1.17.2
       agents: 0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0)
       ai: 4.3.15(react@19.0.0)(zod@3.24.4)
       openai: 4.97.0(zod@3.24.4)
@@ -3853,7 +3827,7 @@ snapshots:
 
   agents@0.0.66(@cloudflare/workers-types@4.20250507.0)(react@19.0.0):
     dependencies:
-      '@modelcontextprotocol/sdk': 1.11.0
+      '@modelcontextprotocol/sdk': 1.17.2
       ai: 4.3.15(react@19.0.0)(zod@3.24.4)
       cron-schedule: 5.0.4
       nanoid: 5.1.5
@@ -4535,13 +4509,7 @@ snapshots:
 
   eventemitter3@4.0.7: {}
 
-  eventsource-parser@3.0.0: {}
-
   eventsource-parser@3.0.1: {}
-
-  eventsource@3.0.5:
-    dependencies:
-      eventsource-parser: 3.0.0
 
   eventsource@3.0.6:
     dependencies:
@@ -6234,14 +6202,8 @@ snapshots:
 
   yoctocolors-cjs@2.1.2: {}
 
-  zod-to-json-schema@3.24.1(zod@3.24.2):
-    dependencies:
-      zod: 3.24.2
-
   zod-to-json-schema@3.24.5(zod@3.24.4):
     dependencies:
       zod: 3.24.4
-
-  zod@3.24.2: {}
 
   zod@3.24.4: {}

@@ -32,6 +32,7 @@ const ACCEPTED_TOOLS = [
   'prices.read',
   'paymentLinks.create',
   'invoices.create',
+  'invoices.read',
   'invoices.update',
   'invoiceItems.create',
   'balance.read',

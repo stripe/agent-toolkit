@@ -25,8 +25,8 @@
     "node": ">=18"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.4.1",
-    "@stripe/agent-toolkit": "^0.7.9",
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "@stripe/agent-toolkit": "^0.7.11",
     "colors": "^1.4.0"
   },
   "keywords": [

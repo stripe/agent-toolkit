@@ -74,6 +74,7 @@ of if you're using Docker
 | `documentation.read`   | Search Stripe documentation     |
 | `invoiceItems.create`  | Create a new invoice item       |
 | `invoices.create`      | Create a new invoice            |
+| `invoices.read`        | Read invoice information        |
 | `invoices.update`      | Update an existing invoice      |
 | `paymentIntents.read`  | Read payment intent information |
 | `paymentLinks.create`  | Create a new payment link       |

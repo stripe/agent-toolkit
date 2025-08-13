@@ -222,6 +222,7 @@ const ALL_ACTIONS = {
   invoices: {
     create: true,
     update: true,
+    read: true,
   },
   invoiceItems: {
     create: true,

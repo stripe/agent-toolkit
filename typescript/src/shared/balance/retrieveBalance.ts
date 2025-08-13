@@ -11,6 +11,14 @@ export const retrieveBalanceParameters = (
   _context: Context = {}
 ): z.AnyZodObject => z.object({});
 
+export const retrieveBalanceAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'Retrieve balance',
+});
+
 export const retrieveBalance = async (
   stripe: Stripe,
   context: Context,
@@ -33,6 +41,7 @@ const tool = (context: Context): Tool => ({
   name: 'Retrieve Balance',
   description: retrieveBalancePrompt(context),
   parameters: retrieveBalanceParameters(context),
+  annotations: retrieveBalanceAnnotations(),
   actions: {
     balance: {
       read: true,

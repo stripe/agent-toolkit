@@ -38,6 +38,14 @@ export const createInvoiceParameters = (
   }
 };
 
+export const createInvoiceAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create invoice',
+});
+
 export const createInvoice = async (
   stripe: Stripe,
   context: Context,
@@ -72,6 +80,7 @@ const tool = (context: Context): Tool => ({
   name: 'Create Invoice',
   description: createInvoicePrompt(context),
   parameters: createInvoiceParameters(context),
+  annotations: createInvoiceAnnotations(),
   actions: {
     invoices: {
       create: true,

@@ -61,18 +61,13 @@ export const createCouponParameters = (
       ),
   });
 
-export const listCouponsParameters = (_context: Context = {}) =>
-  z.object({
-    limit: z
-      .number()
-      .int()
-      .min(1)
-      .max(100)
-      .optional()
-      .describe(
-        'A limit on the number of objects to be returned. Limit can range between 1 and 100.'
-      ),
-  });
+export const createCouponAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create coupon',
+});
 
 export const createCoupon = async (
   stripe: Stripe,
@@ -96,6 +91,7 @@ const tool = (context: Context): Tool => ({
   name: 'Create Coupon',
   description: createCouponPrompt(context),
   parameters: createCouponParameters(context),
+  annotations: createCouponAnnotations(),
   actions: {
     coupons: {
       create: true,

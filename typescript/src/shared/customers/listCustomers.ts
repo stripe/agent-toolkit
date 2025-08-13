@@ -30,6 +30,14 @@ export const listCustomersParameters = (_context: Context = {}) =>
       ),
   });
 
+export const listCustomersAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List customers',
+});
+
 export const listCustomers = async (
   stripe: Stripe,
   context: Context,
@@ -52,6 +60,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Customers',
   description: listCustomersPrompt(context),
   parameters: listCustomersParameters(context),
+  annotations: listCustomersAnnotations(),
   actions: {
     customers: {
       read: true,

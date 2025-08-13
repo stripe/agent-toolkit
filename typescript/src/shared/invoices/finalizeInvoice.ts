@@ -39,11 +39,20 @@ export const finalizeInvoice = async (
   }
 };
 
+export const finalizeInvoiceAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Finalize invoice',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'finalize_invoice',
   name: 'Finalize Invoice',
   description: finalizeInvoicePrompt(context),
   parameters: finalizeInvoiceParameters(context),
+  annotations: finalizeInvoiceAnnotations(),
   actions: {
     invoices: {
       update: true,

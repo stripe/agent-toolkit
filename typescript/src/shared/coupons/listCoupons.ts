@@ -23,6 +23,14 @@ export const listCouponsParameters = (_context: Context = {}) =>
       ),
   });
 
+export const listCouponsAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List coupons',
+});
+
 export const listCoupons = async (
   stripe: Stripe,
   context: Context,
@@ -51,6 +59,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Coupons',
   description: listCouponsPrompt(context),
   parameters: listCouponsParameters(context),
+  annotations: listCouponsAnnotations(),
   actions: {
     coupons: {
       read: true,

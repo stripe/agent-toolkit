@@ -42,11 +42,20 @@ export const listProductsParameters = (
       ),
   });
 
+export const listProductsAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List products',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'list_products',
   name: 'List Products',
   description: listProductsPrompt(context),
   parameters: listProductsParameters(context),
+  annotations: listProductsAnnotations(),
   actions: {
     products: {
       read: true,

@@ -19,6 +19,14 @@ export const createCustomerParameters = (
     email: z.string().email().optional().describe('The email of the customer'),
   });
 
+export const createCustomerAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create customer',
+});
+
 export const createCustomer = async (
   stripe: Stripe,
   context: Context,
@@ -41,6 +49,7 @@ const tool = (context: Context): Tool => ({
   name: 'Create Customer',
   description: createCustomerPrompt(context),
   parameters: createCustomerParameters(context),
+  annotations: createCustomerAnnotations(),
   actions: {
     customers: {
       create: true,

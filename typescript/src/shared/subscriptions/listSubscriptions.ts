@@ -83,11 +83,20 @@ ${customerArg}
 `;
 };
 
+export const listSubscriptionsAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List subscriptions',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'list_subscriptions',
   name: 'List Subscriptions',
   description: listSubscriptionsPrompt(context),
   parameters: listSubscriptionsParameters(context),
+  annotations: listSubscriptionsAnnotations(),
   actions: {
     subscriptions: {
       read: true,

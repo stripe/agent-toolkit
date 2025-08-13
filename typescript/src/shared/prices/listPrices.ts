@@ -37,6 +37,14 @@ export const listPricesParameters = (_context: Context = {}): z.AnyZodObject =>
       ),
   });
 
+export const listPricesAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List prices',
+});
+
 export const listPricesPrompt = (_context: Context = {}) => `
 This tool will fetch a list of Prices from Stripe.
 
@@ -50,6 +58,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Prices',
   description: listPricesPrompt(context),
   parameters: listPricesParameters(context),
+  annotations: listPricesAnnotations(),
   actions: {
     prices: {
       read: true,

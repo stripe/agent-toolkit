@@ -53,6 +53,14 @@ export const updateDisputeParameters = (_context: Context = {}) =>
       ),
   });
 
+export const updateDisputeAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Update dispute',
+});
+
 export const updateDispute = async (
   stripe: Stripe,
   context: Context,
@@ -81,6 +89,7 @@ const tool = (context: Context): Tool => ({
   name: 'Update Dispute',
   description: updateDisputePrompt(context),
   parameters: updateDisputeParameters(context),
+  annotations: updateDisputeAnnotations(),
   actions: {
     disputes: {
       update: true,

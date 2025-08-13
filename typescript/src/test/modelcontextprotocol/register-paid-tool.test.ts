@@ -56,6 +56,7 @@ describe('registerPaidTool', () => {
       signal: new AbortController().signal,
       sendNotification: jest.fn(),
       sendRequest: jest.fn(),
+      requestId: '123',
     };
   });
 
@@ -140,6 +141,7 @@ describe('registerPaidTool', () => {
     );
 
     const registeredCallback = mockMcpServer.tool.mock.calls[0]?.[3];
+    // @ts-ignore: TypeScript can't disambiguate between params schema and annotations
     await registeredCallback({testParam: 'test'}, mockExtra);
 
     expect(mockStripe.customers.list).toHaveBeenCalledWith({
@@ -187,6 +189,7 @@ describe('registerPaidTool', () => {
     );
 
     const registeredCallback = mockMcpServer.tool.mock.calls[0]?.[3];
+    // @ts-ignore: TypeScript can't disambiguate between params schema and annotations
     const result = await registeredCallback({testParam: 'test'}, mockExtra);
 
     expect(mockStripe.checkout.sessions.create).toHaveBeenCalledWith({
@@ -273,6 +276,7 @@ describe('registerPaidTool', () => {
     );
 
     const registeredCallback = mockMcpServer.tool.mock.calls[0]?.[3];
+    // @ts-ignore: TypeScript can't disambiguate between params schema and annotations
     await registeredCallback({testParam: 'test'}, mockExtra);
 
     expect(mockStripe.billing.meterEvents.create).toHaveBeenCalledWith({

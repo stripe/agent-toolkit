@@ -38,6 +38,14 @@ export const listPaymentIntents = async (
   }
 };
 
+export const listPaymentIntentsAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List payment intents',
+});
+
 export const listPaymentIntentsParameters = (
   context: Context = {}
 ): z.AnyZodObject => {
@@ -69,6 +77,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Payment Intents',
   description: listPaymentIntentsPrompt(context),
   parameters: listPaymentIntentsParameters(context),
+  annotations: listPaymentIntentsAnnotations(),
   actions: {
     paymentIntents: {
       read: true,

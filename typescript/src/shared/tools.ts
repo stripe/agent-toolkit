@@ -31,6 +31,13 @@ export type Tool = {
   name: string;
   description: string;
   parameters: z.ZodObject<any, any, any, any>;
+  annotations: {
+    destructiveHint?: boolean;
+    idempotentHint?: boolean;
+    openWorldHint?: boolean;
+    readOnlyHint?: boolean;
+    title?: string;
+  };
   actions: {
     [key: string]: {
       [action: string]: boolean;

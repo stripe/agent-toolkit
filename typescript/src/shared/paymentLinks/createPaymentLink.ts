@@ -41,6 +41,14 @@ export const createPaymentLink = async (
   }
 };
 
+export const createPaymentLinkAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create payment link',
+});
+
 export const createPaymentLinkParameters = (_context: Context = {}) =>
   z.object({
     price: z
@@ -61,6 +69,7 @@ const tool = (context: Context): Tool => ({
   name: 'Create Payment Link',
   description: createPaymentLinkPrompt(context),
   parameters: createPaymentLinkParameters(context),
+  annotations: createPaymentLinkAnnotations(),
   actions: {
     paymentLinks: {
       create: true,

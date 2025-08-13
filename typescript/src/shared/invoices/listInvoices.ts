@@ -24,6 +24,14 @@ export const listInvoices = async (
   }
 };
 
+export const listInvoicesAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List invoices',
+});
+
 export const listInvoicesParameters = (
   context: Context = {}
 ): z.AnyZodObject => {
@@ -76,6 +84,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Invoices',
   description: listInvoicesPrompt(context),
   parameters: listInvoicesParameters(context),
+  annotations: listInvoicesAnnotations(),
   actions: {
     invoices: {
       read: true,

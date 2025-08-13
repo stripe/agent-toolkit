@@ -28,6 +28,14 @@ export const createInvoiceItem = async (
   }
 };
 
+export const createInvoiceItemAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create invoice item',
+});
+
 export const createInvoiceItemParameters = (
   context: Context = {}
 ): z.AnyZodObject => {
@@ -68,6 +76,7 @@ const tool = (context: Context): Tool => ({
   name: 'Create Invoice Item',
   description: createInvoiceItemPrompt(context),
   parameters: createInvoiceItemParameters(context),
+  annotations: createInvoiceItemAnnotations(),
   actions: {
     invoiceItems: {
       create: true,

@@ -76,11 +76,20 @@ export const updateSubscriptionParameters = (
   });
 };
 
+export const updateSubscriptionAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Update subscription',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'update_subscription',
   name: 'Update Subscription',
   description: updateSubscriptionPrompt(context),
   parameters: updateSubscriptionParameters(context),
+  annotations: updateSubscriptionAnnotations(),
   actions: {
     subscriptions: {
       update: true,

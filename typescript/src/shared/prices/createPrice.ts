@@ -41,11 +41,20 @@ export const createPriceParameters = (_context: Context = {}) =>
     currency: z.string().describe('The currency of the price.'),
   });
 
+export const createPriceAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create price',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'create_price',
   name: 'Create Price',
   description: createPricePrompt(context),
   parameters: createPriceParameters(context),
+  annotations: createPriceAnnotations(),
   actions: {
     prices: {
       create: true,

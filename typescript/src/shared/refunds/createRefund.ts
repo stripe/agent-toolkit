@@ -47,11 +47,20 @@ export const createRefundParameters = (
       .describe('The amount to refund in cents.'),
   });
 
+export const createRefundAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create refund',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'create_refund',
   name: 'Create Refund',
   description: createRefundPrompt(context),
   parameters: createRefundParameters(context),
+  annotations: createRefundAnnotations(),
   actions: {
     refunds: {
       create: true,

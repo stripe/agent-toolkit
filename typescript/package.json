@@ -1,6 +1,6 @@
 {
   "name": "@stripe/agent-toolkit",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "homepage": "https://github.com/stripe/agent-toolkit",
   "scripts": {
     "build": "tsup",
@@ -73,7 +73,7 @@
   "peerDependencies": {
     "openai": "^4.86.1",
     "@langchain/core": "^0.3.6",
-    "@modelcontextprotocol/sdk": "^1.10.2",
+    "@modelcontextprotocol/sdk": "^1.17.1",
     "ai": "^3.4.7 || ^4.0.0",
     "agents": "^0.0.84"
   },

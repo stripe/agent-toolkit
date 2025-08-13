@@ -39,11 +39,20 @@ It takes the following arguments:
 `;
 };
 
+export const cancelSubscriptionAnnotations = () => ({
+  destructiveHint: true,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Cancel subscription',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'cancel_subscription',
   name: 'Cancel Subscription',
   description: cancelSubscriptionPrompt(context),
   parameters: cancelSubscriptionParameters(context),
+  annotations: cancelSubscriptionAnnotations(),
   actions: {
     subscriptions: {
       update: true,

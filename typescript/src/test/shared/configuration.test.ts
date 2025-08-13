@@ -10,6 +10,13 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      annotations: {
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: true,
+        readOnlyHint: false,
+        title: 'Test',
+      },
       execute: async (a: any, b: any, c: any) => {},
       actions: {
         customers: {
@@ -47,6 +54,13 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      annotations: {
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: true,
+        readOnlyHint: false,
+        title: 'Test',
+      },
       execute: async (a: any, b: any, c: any) => {},
       actions: {
         customers: {
@@ -84,6 +98,13 @@ describe('isToolAllowed', () => {
       parameters: z.object({
         foo: z.string(),
       }),
+      annotations: {
+        destructiveHint: false,
+        idempotentHint: false,
+        openWorldHint: true,
+        readOnlyHint: false,
+        title: 'Test',
+      },
       execute: async (a: any, b: any, c: any) => {},
       actions: {
         paymentLinks: {

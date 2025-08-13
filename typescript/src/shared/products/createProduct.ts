@@ -36,11 +36,20 @@ export const createProductParameters = (_context: Context = {}) =>
       .describe('The description of the product.'),
   });
 
+export const createProductAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: false,
+  openWorldHint: true,
+  readOnlyHint: false,
+  title: 'Create product',
+});
+
 const tool = (context: Context): Tool => ({
   method: 'create_product',
   name: 'Create Product',
   description: createProductPrompt(context),
   parameters: createProductParameters(context),
+  annotations: createProductAnnotations(),
   actions: {
     products: {
       create: true,

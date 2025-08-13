@@ -37,6 +37,14 @@ export const listDisputesParameters = (_context: Context = {}) =>
       ),
   });
 
+export const listDisputesAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'List disputes',
+});
+
 export const listDisputes = async (
   stripe: Stripe,
   context: Context,
@@ -59,6 +67,7 @@ const tool = (context: Context): Tool => ({
   name: 'List Disputes',
   description: listDisputesPrompt(context),
   parameters: listDisputesParameters(context),
+  annotations: listDisputesAnnotations(),
   actions: {
     disputes: {
       read: true,

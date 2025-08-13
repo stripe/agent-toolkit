@@ -27,6 +27,14 @@ export const searchDocumentationParameters = (
       ),
   });
 
+export const searchDocumentationAnnotations = () => ({
+  destructiveHint: false,
+  idempotentHint: true,
+  openWorldHint: true,
+  readOnlyHint: true,
+  title: 'Search Stripe documentation',
+});
+
 export const searchDocumentation = async (
   _stripe: Stripe,
   context: Context,
@@ -64,6 +72,7 @@ const tool = (context: Context): Tool => ({
   name: 'Search Stripe Documentation',
   description: searchDocumentationPrompt(context),
   parameters: searchDocumentationParameters(context),
+  annotations: searchDocumentationAnnotations(),
   actions: {
     documentation: {
       read: true,

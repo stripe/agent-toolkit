@@ -89,7 +89,7 @@ importers:
         version: 0.0.63(zod@3.24.4)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       ai:
         specifier: ^3.4.7 || ^4.0.0
         version: 4.3.12(react@18.3.1)(zod@3.24.4)
@@ -111,7 +111,7 @@ importers:
         version: 1.11.3
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       '@types/node':
         specifier: ^22.15.18
         version: 22.15.18
@@ -128,8 +128,8 @@ importers:
         specifier: ^1.1.13
         version: 1.1.13
       hono:
-        specifier: ^4.7.9
-        version: 4.7.9
+        specifier: ^4.9.7
+        version: 4.9.7
       stripe:
         specifier: ^18.1.0
         version: 18.1.0(@types/node@22.15.18)
@@ -163,7 +163,7 @@ importers:
         version: 0.3.5(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.11(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -179,7 +179,7 @@ importers:
     dependencies:
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -1331,13 +1331,13 @@ packages:
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
 
-  '@stripe/agent-toolkit@0.7.7':
-    resolution: {integrity: sha512-BBDyP7cukCD41ipwX+u6SlEowyPOVT8l3CgwSM/jNq9IhOvEbCkRPKO6k1IeXZVqLWxlf7lyBtMo6hc+ISz9tA==}
+  '@stripe/agent-toolkit@0.7.11':
+    resolution: {integrity: sha512-8CXr1YONbrk/Guuh11zbn0renUAcFbcE2aUOhf1sNR9bMtNvhkZV6leT9Zzwf6tiGoNvDactK9700VpYgVBRVw==}
     engines: {node: '>=18'}
     peerDependencies:
       '@langchain/core': ^0.3.6
-      '@modelcontextprotocol/sdk': ^1.10.2
-      agents: ^0.0.66
+      '@modelcontextprotocol/sdk': ^1.17.1
+      agents: ^0.0.84
       ai: ^3.4.7 || ^4.0.0
       openai: ^4.86.1
 
@@ -2511,8 +2511,8 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
-  hono@4.7.9:
-    resolution: {integrity: sha512-/EsCoR5h7N4yu01TDu9GMCCJa6ZLk5ZJIWFFGNawAXmd1Tp53+Wir4xm0D2X19bbykWUlzQG0+BvPAji6p9E8Q==}
+  hono@4.9.7:
+    resolution: {integrity: sha512-t4Te6ERzIaC48W3x4hJmBwgNlLhmiEdEE5ViYb02ffw4ignHNHa5IBtPjmbKstmtKa8X6C35iWwK4HaqvrzG9w==}
     engines: {node: '>=16.9.0'}
 
   html-escaper@2.0.2:
@@ -3697,6 +3697,7 @@ packages:
   source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
@@ -5290,7 +5291,7 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.11.3
@@ -5301,7 +5302,7 @@ snapshots:
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.17.1
@@ -5312,7 +5313,7 @@ snapshots:
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.17.1
@@ -5323,7 +5324,7 @@ snapshots:
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.17.1
@@ -6697,7 +6698,7 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
-  hono@4.7.9: {}
+  hono@4.9.7: {}
 
   html-escaper@2.0.2: {}
 
@@ -8563,7 +8564,7 @@ snapshots:
       '@silvia-odwyer/photon-node': 0.3.4
       chalk: 5.4.1
       fs-extra: 11.3.0
-      hono: 4.7.9
+      hono: 4.9.7
       jsdoc-api: 9.3.4
       just-filter-object: 3.2.0
       just-map-values: 3.2.0

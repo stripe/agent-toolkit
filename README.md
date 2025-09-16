@@ -1,9 +1,19 @@
 # Stripe Agent Toolkit
 
-The Stripe Agent Toolkit enables popular agent frameworks including OpenAI's Agent SDK, LangChain, CrewAI, Vercel's AI SDK, and Model Context Protocol (MCP) to integrate with Stripe APIs through function calling. The
-library is not exhaustive of the entire Stripe API. It includes support for both Python and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
+The Stripe Agent Toolkit enables popular agent frameworks including Model Context Protocol (MCP), OpenAI's Agent SDK, LangChain, CrewAI, and Vercel's AI SDK to integrate with Stripe APIs through function calling. The
+library is not exhaustive of the entire Stripe API. It includes support for MCP, Python, and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
 
-Included below are basic instructions, but refer to the [Python](/python) and [TypeScript](/typescript) packages for more information.
+Included below are basic instructions, but refer to the [MCP](/modelcontextprotocol) [Python](/python), [TypeScript](/typescript) packages for more information.
+
+## Model Context Protocol
+
+Stripe hosts a remote MCP server at `https://mcp.stripe.com`. This allows secure MCP client access via OAuth. View the docs [here](https://docs.stripe.com/mcp#remote).
+
+The Stripe Agent Toolkit also exposes tools in the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/) format.  Or, to run a local Stripe MCP server using npx, use the following command:
+
+```bash
+npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
+```
 
 ## Python
 
@@ -176,52 +186,7 @@ const model = wrapLanguageModel({
 });
 ```
 
-## Model Context Protocol
 
-Stripe hosts a remote MCP server at `https://mcp.stripe.com`. View the docs [here](https://docs.stripe.com/mcp#remote).
-
-The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/).  To run a local Stripe MCP server using npx, use the following command:
-
-```bash
-npx -y @stripe/mcp --tools=all --api-key=YOUR_STRIPE_SECRET_KEY
-```
-
-Replace `YOUR_STRIPE_SECRET_KEY` with your actual Stripe secret key. Or, you could set the STRIPE_SECRET_KEY in your environment variables.
-
-Alternatively, you can set up your own MCP server. For example:
-
-```typescript
-import { StripeAgentToolkit } from "@stripe/agent-toolkit/modelcontextprotocol";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-
-const server = new StripeAgentToolkit({
-  secretKey: process.env.STRIPE_SECRET_KEY!,
-  configuration: {
-    actions: {
-      paymentLinks: {
-        create: true,
-      },
-      products: {
-        create: true,
-      },
-      prices: {
-        create: true,
-      },
-    },
-  },
-});
-
-async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error("Stripe MCP Server running on stdio");
-}
-
-main().catch((error) => {
-  console.error("Fatal error in main():", error);
-  process.exit(1);
-});
-```
 
 ## Supported API methods
 

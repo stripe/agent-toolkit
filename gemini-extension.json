@@ -1,0 +1,12 @@
+{
+  "name": "@stripe/gemini-mcp-extension",
+  "version": "0.1.0",
+  "mcpServers": {
+    "stripe": {
+      "httpUrl": "https://mcp.stripe.com",
+      "oauth": {
+        "enabled": true
+      }
+    }
+  }
+}

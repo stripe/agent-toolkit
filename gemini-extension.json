@@ -1,5 +1,5 @@
 {
-  "name": "@stripe/gemini-mcp-extension",
+  "name": "stripe-gemini-mcp-extension",
   "version": "0.1.0",
   "mcpServers": {
     "stripe": {

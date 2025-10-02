@@ -67,7 +67,6 @@ of if you're using Docker
 3. Start Gemini CLI: `gemini`.
 4. Go through the OAUTH flow: `/mcp auth stripe`.
 
-
 ## Available tools
 
 | Tool                   | Description                     |

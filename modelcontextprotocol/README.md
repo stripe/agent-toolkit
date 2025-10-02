@@ -60,6 +60,14 @@ of if you're using Docker
 
 ```
 
+### Usage with Gemini CLI
+
+1. Install [Gemini CLI](https://google-gemini.github.io/gemini-cli/#-installation) through your preferred method.
+2. Install the Stripe MCP extension: `gemini extensions install https://github.com/stripe/agent-toolkit`.
+3. Start Gemini CLI: `gemini`.
+4. Go through the OAUTH flow: `/mcp auth stripe`.
+
+
 ## Available tools
 
 | Tool                   | Description                     |

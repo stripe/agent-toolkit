@@ -1,0 +1,27 @@
+{
+  "name": "stripe-agent-toolkit-examples-ingestion",
+  "version": "0.1.0",
+  "description": "Examples for using Stripe Agent Toolkit ingestion module with OpenAI, Anthropic, and Gemini",
+  "main": "index.js",
+  "scripts": {
+    "openai": "tsx openai.ts",
+    "anthropic": "tsx anthropic.ts",
+    "gemini": "tsx gemini.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@stripe/agent-toolkit": "latest",
+    "dotenv": "^16.4.5",
+    "openai": "^5.20.1",
+    "@anthropic-ai/sdk": "^0.32.1",
+    "@google/generative-ai": "^0.21.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.4",
+    "tsx": "^4.7.0"
+  }
+}
+

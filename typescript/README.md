@@ -109,6 +109,36 @@ const model = wrapLanguageModel({
 
 This works with both `generateText` and `generateStream` from the Vercel AI SDK.
 
+## Usage Tracking / Ingestion
+
+For direct integration with OpenAI, Anthropic, and Gemini SDKs, you can use the ingestion module which provides drop-in wrappers that automatically track token usage and send billing events to Stripe.
+
+```typescript
+import { OpenAI } from '@stripe/agent-toolkit/ingestion';
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  stripe: {
+    stripeApiKey: process.env.STRIPE_API_KEY,
+    verbose: true, // Optional: log meter events to console
+  },
+});
+
+const response = await client.chat.completions.create({
+  model: 'gpt-4o-mini',
+  messages: [{ role: 'user', content: 'Hello!' }],
+  stripeCustomerId: 'cus_123456', // Your Stripe customer ID
+});
+// Token usage is automatically sent to Stripe
+```
+
+The ingestion module supports:
+- **OpenAI**: Chat completions (streaming & non-streaming), Responses API, Embeddings, Tool/Function calling
+- **Anthropic**: Messages (streaming & non-streaming), Tools, System prompts, Multi-turn conversations
+- **Gemini**: Text generation (streaming & non-streaming), Function calling, System instructions, Multi-turn chat
+
+For more information and examples, see the [ingestion examples](/typescript/examples/ingestion).
+
 ## Model Context Protocol
 
 The Stripe Agent Toolkit also supports the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/). See `/examples/modelcontextprotocol` for an example. The same configuration options are available, and the server can be run with all supported transports.

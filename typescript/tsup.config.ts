@@ -37,4 +37,12 @@ export default defineConfig([
     sourcemap: true,
     external: ['cloudflare:workers'],
   },
+  {
+    entry: ['src/ingestion/index.ts'],
+    outDir: 'ingestion',
+    format: ['cjs', 'esm'],
+    dts: true,
+    sourcemap: true,
+    external: ['openai', '@anthropic-ai/sdk', '@google/generative-ai'],
+  },
 ]);

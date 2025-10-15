@@ -137,4 +137,5 @@ dist
 /openai/
 /ai-sdk/
 /langchain/
+/ingestion/
 /modelcontextprotocol/

@@ -7,6 +7,7 @@ import type {
   ChatCompletionMessageToolCall,
   ChatCompletionToolMessageParam,
 } from 'openai/resources';
+import type { ChatCompletionMessageFunctionToolCall } from 'openai/resources/chat/completions';
 
 class StripeAgentToolkit {
   private _stripe: StripeAPI;
@@ -44,12 +45,12 @@ class StripeAgentToolkit {
   /**
    * Processes a single OpenAI tool call by executing the requested function.
    *
-   * @param {ChatCompletionMessageToolCall} toolCall - The tool call object from OpenAI containing
+   * @param {ChatCompletionMessageFunctionToolCall} toolCall - The tool call object from OpenAI containing
    *   function name, arguments, and ID.
    * @returns {Promise<ChatCompletionToolMessageParam>} A promise that resolves to a tool message
    *   object containing the result of the tool execution with the proper format for the OpenAI API.
    */
-  async handleToolCall(toolCall: ChatCompletionMessageToolCall) {
+  async handleToolCall(toolCall: ChatCompletionMessageFunctionToolCall) {
     const args = JSON.parse(toolCall.function.arguments);
     const response = await this._stripe.run(toolCall.function.name, args);
     return {

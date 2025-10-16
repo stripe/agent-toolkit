@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@langchain/core':
         specifier: ^0.3.6
-        version: 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.1))
+        version: 0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.1))
       '@modelcontextprotocol/sdk':
         specifier: ^1.17.1
         version: 1.17.1
@@ -70,8 +70,8 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.10.5)(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.8.3))
       openai:
-        specifier: ^4.86.1
-        version: 4.86.1(ws@8.18.0)(zod@3.24.1)
+        specifier: ^5.20.1
+        version: 5.23.2(ws@8.18.0)(zod@3.24.1)
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -5179,14 +5179,14 @@ snapshots:
     dependencies:
       lodash: 4.17.21
 
-  '@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.1))':
+  '@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       '@cfworker/json-schema': 4.1.0
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.16
-      langsmith: 0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.1))
+      langsmith: 0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -5196,14 +5196,14 @@ snapshots:
     transitivePeerDependencies:
       - openai
 
-  '@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.1))':
     dependencies:
       '@cfworker/json-schema': 4.1.0
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.16
-      langsmith: 0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      langsmith: 0.2.14(openai@5.23.2(ws@8.18.0)(zod@3.24.1))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -7500,17 +7500,6 @@ snapshots:
     optionalDependencies:
       openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
 
-  langsmith@0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.1)):
-    dependencies:
-      '@types/uuid': 10.0.0
-      commander: 10.0.1
-      p-queue: 6.6.2
-      p-retry: 4.6.2
-      semver: 7.6.3
-      uuid: 10.0.0
-    optionalDependencies:
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.1)
-
   langsmith@0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.4)):
     dependencies:
       '@types/uuid': 10.0.0
@@ -7521,6 +7510,17 @@ snapshots:
       uuid: 10.0.0
     optionalDependencies:
       openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
+
+  langsmith@0.2.14(openai@5.23.2(ws@8.18.0)(zod@3.24.1)):
+    dependencies:
+      '@types/uuid': 10.0.0
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      semver: 7.6.3
+      uuid: 10.0.0
+    optionalDependencies:
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.1)
 
   langsmith@0.2.14(openai@5.23.2(ws@8.18.0)(zod@3.24.4)):
     dependencies:
@@ -7771,21 +7771,6 @@ snapshots:
     dependencies:
       mimic-fn: 2.1.0
 
-  openai@4.86.1(ws@8.18.0)(zod@3.24.1):
-    dependencies:
-      '@types/node': 18.19.100
-      '@types/node-fetch': 2.6.11
-      abort-controller: 3.0.0
-      agentkeepalive: 4.5.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-    optionalDependencies:
-      ws: 8.18.0
-      zod: 3.24.1
-    transitivePeerDependencies:
-      - encoding
-
   openai@4.86.1(ws@8.18.0)(zod@3.24.4):
     dependencies:
       '@types/node': 18.19.100
@@ -7800,6 +7785,11 @@ snapshots:
       zod: 3.24.4
     transitivePeerDependencies:
       - encoding
+
+  openai@5.23.2(ws@8.18.0)(zod@3.24.1):
+    optionalDependencies:
+      ws: 8.18.0
+      zod: 3.24.1
 
   openai@5.23.2(ws@8.18.0)(zod@3.24.4):
     optionalDependencies:

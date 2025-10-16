@@ -20,9 +20,6 @@ importers:
       ai:
         specifier: ^3.4.7 || ^4.0.0
         version: 4.0.28(react@18.3.1)(zod@3.24.1)
-      openai:
-        specifier: ^4.86.1
-        version: 4.86.1(ws@8.18.0)(zod@3.24.1)
       stripe:
         specifier: ^17.5.0
         version: 17.5.0
@@ -33,9 +30,15 @@ importers:
         specifier: ^3.24.3
         version: 3.24.3(zod@3.24.1)
     devDependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^0.32.1
+        version: 0.32.1
       '@eslint/compat':
         specifier: ^1.2.4
         version: 1.2.4(eslint@9.17.0)
+      '@google/generative-ai':
+        specifier: ^0.21.0
+        version: 0.21.0
       '@types/jest':
         specifier: ^29.5.14
         version: 29.5.14
@@ -66,6 +69,9 @@ importers:
       jest:
         specifier: ^29.7.0
         version: 29.7.0(@types/node@22.10.5)(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.8.3))
+      openai:
+        specifier: ^4.86.1
+        version: 4.86.1(ws@8.18.0)(zod@3.24.1)
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
@@ -89,7 +95,7 @@ importers:
         version: 0.0.63(zod@3.24.4)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.7(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       ai:
         specifier: ^3.4.7 || ^4.0.0
         version: 4.3.12(react@18.3.1)(zod@3.24.4)
@@ -111,7 +117,7 @@ importers:
         version: 1.11.3
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.7(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       '@types/node':
         specifier: ^22.15.18
         version: 22.15.18
@@ -153,23 +159,51 @@ importers:
         specifier: ^4.15.2
         version: 4.15.2(@cloudflare/workers-types@4.20250515.0)
 
+  examples/ingestion:
+    dependencies:
+      '@anthropic-ai/sdk':
+        specifier: ^0.32.1
+        version: 0.32.1
+      '@google/generative-ai':
+        specifier: ^0.21.0
+        version: 0.21.0
+      '@stripe/agent-toolkit':
+        specifier: latest
+        version: 0.7.11(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.5.0
+      openai:
+        specifier: ^5.20.1
+        version: 5.23.2(ws@8.18.0)(zod@3.24.4)
+      zod:
+        specifier: ^3.22.4
+        version: 3.24.4
+    devDependencies:
+      '@types/node':
+        specifier: ^22.7.4
+        version: 22.15.18
+      tsx:
+        specifier: ^4.7.0
+        version: 4.19.4
+
   examples/langchain:
     dependencies:
       '@langchain/core':
         specifier: ^0.3.6
-        version: 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       '@langchain/openai':
         specifier: ^0.3.5
-        version: 0.3.5(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)
+        version: 0.3.5(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)
       '@stripe/agent-toolkit':
         specifier: latest
-        version: 0.7.7(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+        version: 0.7.7(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
       langchain:
         specifier: ^0.3.2
-        version: 0.3.2(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))(ws@8.18.0)
+        version: 0.3.2(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))(ws@8.18.0)
     devDependencies:
       '@types/node':
         specifier: ^22.7.4
@@ -297,6 +331,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@anthropic-ai/sdk@0.32.1':
+    resolution: {integrity: sha512-U9JwTrDvdQ9iWuABVsMLj8nJVwAyQz6QXvgLsVhryhCEPkLsbcP/MXxm+jYcAwLoV8ESbaTTjnD4kuAFa+Hyjg==}
 
   '@babel/code-frame@7.26.2':
     resolution: {integrity: sha512-RJlIHRueQgwWitWgF8OdFYGZX328Ax5BCemNGlqHfplnRT9ESi8JkFlvaVYbS+UubVY6dpv87Fs2u5M29iNFVQ==}
@@ -941,6 +978,10 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
+  '@google/generative-ai@0.21.0':
+    resolution: {integrity: sha512-7XhUbtnlkSEZK15kN3t+tzIMxsbKm/dSkKBFalj+20NvPKe1kBY7mR2P7vuijEn+f06z5+A8bVGKO0v39cr6Wg==}
+    engines: {node: '>=18.0.0'}
+
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1330,6 +1371,16 @@ packages:
 
   '@sinonjs/fake-timers@10.3.0':
     resolution: {integrity: sha512-V4BG07kuYSUkTCSBHG8G8TNhM+F19jXFWnQtzj+we8DrkpSBCee9Z3Ms8yiGer/dlmhe35/Xdgyo3/0rQKg7YA==}
+
+  '@stripe/agent-toolkit@0.7.11':
+    resolution: {integrity: sha512-8CXr1YONbrk/Guuh11zbn0renUAcFbcE2aUOhf1sNR9bMtNvhkZV6leT9Zzwf6tiGoNvDactK9700VpYgVBRVw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@langchain/core': ^0.3.6
+      '@modelcontextprotocol/sdk': ^1.17.1
+      agents: ^0.0.84
+      ai: ^3.4.7 || ^4.0.0
+      openai: ^4.86.1
 
   '@stripe/agent-toolkit@0.7.7':
     resolution: {integrity: sha512-BBDyP7cukCD41ipwX+u6SlEowyPOVT8l3CgwSM/jNq9IhOvEbCkRPKO6k1IeXZVqLWxlf7lyBtMo6hc+ISz9tA==}
@@ -3301,6 +3352,18 @@ packages:
       zod:
         optional: true
 
+  openai@5.23.2:
+    resolution: {integrity: sha512-MQBzmTulj+MM5O8SKEk/gL8a7s5mktS9zUtAkU257WjvobGc9nKcBuVwjyEEcb9SI8a8Y2G/mzn3vm9n1Jlleg==}
+    hasBin: true
+    peerDependencies:
+      ws: ^8.18.0
+      zod: ^3.23.8
+    peerDependenciesMeta:
+      ws:
+        optional: true
+      zod:
+        optional: true
+
   openapi-types@12.1.3:
     resolution: {integrity: sha512-N4YtSYJqghVu4iek2ZUvcN/0aqH1kRDuNqzcycDxhOUpg7GdvLa2F3DgS6yBNhInhv2r/6I0Flkn7CqL8+nIcw==}
 
@@ -4322,6 +4385,18 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
+  '@anthropic-ai/sdk@0.32.1':
+    dependencies:
+      '@types/node': 18.19.100
+      '@types/node-fetch': 2.6.11
+      abort-controller: 3.0.0
+      agentkeepalive: 4.5.0
+      form-data-encoder: 1.7.2
+      formdata-node: 4.4.1
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   '@babel/code-frame@7.26.2':
     dependencies:
       '@babel/helper-validator-identifier': 7.25.9
@@ -4807,6 +4882,8 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
+  '@google/generative-ai@0.21.0': {}
+
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -4917,7 +4994,7 @@ snapshots:
   '@jest/console@29.7.0':
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       jest-message-util: 29.7.0
       jest-util: 29.7.0
@@ -4930,14 +5007,14 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       ci-info: 3.9.0
       exit: 0.1.2
       graceful-fs: 4.2.11
       jest-changed-files: 29.7.0
-      jest-config: 29.7.0(@types/node@22.10.5)(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.8.3))
+      jest-config: 29.7.0(@types/node@22.15.18)(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.8.3))
       jest-haste-map: 29.7.0
       jest-message-util: 29.7.0
       jest-regex-util: 29.6.3
@@ -4962,7 +5039,7 @@ snapshots:
     dependencies:
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       jest-mock: 29.7.0
 
   '@jest/expect-utils@29.7.0':
@@ -4980,7 +5057,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@sinonjs/fake-timers': 10.3.0
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       jest-message-util: 29.7.0
       jest-mock: 29.7.0
       jest-util: 29.7.0
@@ -5002,7 +5079,7 @@ snapshots:
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
       '@jridgewell/trace-mapping': 0.3.25
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       collect-v8-coverage: 1.0.2
       exit: 0.1.2
@@ -5072,7 +5149,7 @@ snapshots:
       '@jest/schemas': 29.6.3
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       '@types/yargs': 17.0.33
       chalk: 4.1.2
 
@@ -5136,13 +5213,30 @@ snapshots:
     transitivePeerDependencies:
       - openai
 
-  '@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
+    dependencies:
+      '@cfworker/json-schema': 4.1.0
+      ansi-styles: 5.2.0
+      camelcase: 6.3.0
+      decamelize: 1.2.0
+      js-tiktoken: 1.0.16
+      langsmith: 0.2.14(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
+      mustache: 4.2.0
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      uuid: 10.0.0
+      zod: 3.24.1
+      zod-to-json-schema: 3.24.3(zod@3.24.1)
+    transitivePeerDependencies:
+      - openai
+
+  '@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
     dependencies:
       ansi-styles: 5.2.0
       camelcase: 6.3.0
       decamelize: 1.2.0
       js-tiktoken: 1.0.14
-      langsmith: 0.1.61(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      langsmith: 0.1.61(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       mustache: 4.2.0
       p-queue: 6.6.2
       p-retry: 4.6.2
@@ -5152,9 +5246,9 @@ snapshots:
     transitivePeerDependencies:
       - openai
 
-  '@langchain/openai@0.3.5(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)':
+  '@langchain/openai@0.3.5(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)':
     dependencies:
-      '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      '@langchain/core': 0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       js-tiktoken: 1.0.14
       openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
       zod: 3.24.4
@@ -5163,9 +5257,9 @@ snapshots:
       - encoding
       - ws
 
-  '@langchain/textsplitters@0.1.0(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))':
+  '@langchain/textsplitters@0.1.0(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))':
     dependencies:
-      '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      '@langchain/core': 0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       js-tiktoken: 1.0.14
 
   '@modelcontextprotocol/sdk@1.11.3':
@@ -5290,24 +5384,13 @@ snapshots:
     dependencies:
       '@sinonjs/commons': 3.0.1
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.11(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
     dependencies:
-      '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
-      '@modelcontextprotocol/sdk': 1.11.3
-      agents: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
-      ai: 4.3.15(react@18.3.1)(zod@3.24.4)
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
-      stripe: 17.7.0
-      zod: 3.24.4
-      zod-to-json-schema: 3.24.5(zod@3.24.4)
-
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
-    dependencies:
-      '@langchain/core': 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      '@langchain/core': 0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.17.1
       agents: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
-      ai: 4.3.12(react@18.3.1)(zod@3.24.4)
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
+      ai: 4.3.15(react@18.3.1)(zod@3.24.4)
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
       stripe: 17.7.0
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
@@ -5323,13 +5406,35 @@ snapshots:
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
 
-  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))':
+  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.11.3)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
     dependencies:
-      '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      '@langchain/core': 0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
+      '@modelcontextprotocol/sdk': 1.11.3
+      agents: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
+      ai: 4.3.15(react@18.3.1)(zod@3.24.4)
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
+      stripe: 17.7.0
+      zod: 3.24.4
+      zod-to-json-schema: 3.24.5(zod@3.24.4)
+
+  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.12(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
+    dependencies:
+      '@langchain/core': 0.3.27(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
+      '@modelcontextprotocol/sdk': 1.17.1
+      agents: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
+      ai: 4.3.12(react@18.3.1)(zod@3.24.4)
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
+      stripe: 17.7.0
+      zod: 3.24.4
+      zod-to-json-schema: 3.24.5(zod@3.24.4)
+
+  '@stripe/agent-toolkit@0.7.7(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(@modelcontextprotocol/sdk@1.17.1)(agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1))(ai@4.3.15(react@18.3.1)(zod@3.24.4))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))':
+    dependencies:
+      '@langchain/core': 0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       '@modelcontextprotocol/sdk': 1.17.1
       agents: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
       ai: 4.3.15(react@18.3.1)(zod@3.24.4)
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
       stripe: 17.7.0
       zod: 3.24.4
       zod-to-json-schema: 3.24.5(zod@3.24.4)
@@ -5369,7 +5474,7 @@ snapshots:
 
   '@types/graceful-fs@4.1.9':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
 
   '@types/istanbul-lib-coverage@2.0.6': {}
 
@@ -5401,7 +5506,7 @@ snapshots:
 
   '@types/node-fetch@2.6.11':
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       form-data: 4.0.0
 
   '@types/node@18.19.100':
@@ -6937,7 +7042,7 @@ snapshots:
       '@jest/expect': 29.7.0
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       co: 4.6.0
       dedent: 1.5.3
@@ -7007,6 +7112,37 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
+  jest-config@29.7.0(@types/node@22.15.18)(ts-node@10.9.2(@types/node@22.10.5)(typescript@5.8.3)):
+    dependencies:
+      '@babel/core': 7.26.0
+      '@jest/test-sequencer': 29.7.0
+      '@jest/types': 29.6.3
+      babel-jest: 29.7.0(@babel/core@7.26.0)
+      chalk: 4.1.2
+      ci-info: 3.9.0
+      deepmerge: 4.3.1
+      glob: 7.2.3
+      graceful-fs: 4.2.11
+      jest-circus: 29.7.0
+      jest-environment-node: 29.7.0
+      jest-get-type: 29.6.3
+      jest-regex-util: 29.6.3
+      jest-resolve: 29.7.0
+      jest-runner: 29.7.0
+      jest-util: 29.7.0
+      jest-validate: 29.7.0
+      micromatch: 4.0.8
+      parse-json: 5.2.0
+      pretty-format: 29.7.0
+      slash: 3.0.0
+      strip-json-comments: 3.1.1
+    optionalDependencies:
+      '@types/node': 22.15.18
+      ts-node: 10.9.2(@types/node@22.10.5)(typescript@5.8.3)
+    transitivePeerDependencies:
+      - babel-plugin-macros
+      - supports-color
+
   jest-diff@29.7.0:
     dependencies:
       chalk: 4.1.2
@@ -7031,7 +7167,7 @@ snapshots:
       '@jest/environment': 29.7.0
       '@jest/fake-timers': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       jest-mock: 29.7.0
       jest-util: 29.7.0
 
@@ -7041,7 +7177,7 @@ snapshots:
     dependencies:
       '@jest/types': 29.6.3
       '@types/graceful-fs': 4.1.9
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       anymatch: 3.1.3
       fb-watchman: 2.0.2
       graceful-fs: 4.2.11
@@ -7080,7 +7216,7 @@ snapshots:
   jest-mock@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       jest-util: 29.7.0
 
   jest-pnp-resolver@1.2.3(jest-resolve@29.7.0):
@@ -7115,7 +7251,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       emittery: 0.13.1
       graceful-fs: 4.2.11
@@ -7143,7 +7279,7 @@ snapshots:
       '@jest/test-result': 29.7.0
       '@jest/transform': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       cjs-module-lexer: 1.4.1
       collect-v8-coverage: 1.0.2
@@ -7189,7 +7325,7 @@ snapshots:
   jest-util@29.7.0:
     dependencies:
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       chalk: 4.1.2
       ci-info: 3.9.0
       graceful-fs: 4.2.11
@@ -7208,7 +7344,7 @@ snapshots:
     dependencies:
       '@jest/test-result': 29.7.0
       '@jest/types': 29.6.3
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       ansi-escapes: 4.3.2
       chalk: 4.1.2
       emittery: 0.13.1
@@ -7217,7 +7353,7 @@ snapshots:
 
   jest-worker@29.7.0:
     dependencies:
-      '@types/node': 22.10.5
+      '@types/node': 22.15.18
       jest-util: 29.7.0
       merge-stream: 2.0.0
       supports-color: 8.1.1
@@ -7333,15 +7469,15 @@ snapshots:
 
   kleur@3.0.3: {}
 
-  langchain@0.3.2(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(openai@4.86.1(ws@8.18.0)(zod@3.24.4))(ws@8.18.0):
+  langchain@0.3.2(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(openai@5.23.2(ws@8.18.0)(zod@3.24.4))(ws@8.18.0):
     dependencies:
-      '@langchain/core': 0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
-      '@langchain/openai': 0.3.5(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)
-      '@langchain/textsplitters': 0.1.0(@langchain/core@0.3.6(openai@4.86.1(ws@8.18.0)(zod@3.24.4)))
+      '@langchain/core': 0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
+      '@langchain/openai': 0.3.5(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))(ws@8.18.0)
+      '@langchain/textsplitters': 0.1.0(@langchain/core@0.3.6(openai@5.23.2(ws@8.18.0)(zod@3.24.4)))
       js-tiktoken: 1.0.14
       js-yaml: 4.1.0
       jsonpointer: 5.0.1
-      langsmith: 0.1.61(openai@4.86.1(ws@8.18.0)(zod@3.24.4))
+      langsmith: 0.1.61(openai@5.23.2(ws@8.18.0)(zod@3.24.4))
       openapi-types: 12.1.3
       p-retry: 4.6.2
       uuid: 10.0.0
@@ -7353,7 +7489,7 @@ snapshots:
       - openai
       - ws
 
-  langsmith@0.1.61(openai@4.86.1(ws@8.18.0)(zod@3.24.4)):
+  langsmith@0.1.61(openai@5.23.2(ws@8.18.0)(zod@3.24.4)):
     dependencies:
       '@types/uuid': 10.0.0
       commander: 10.0.1
@@ -7362,7 +7498,7 @@ snapshots:
       semver: 7.6.3
       uuid: 10.0.0
     optionalDependencies:
-      openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
 
   langsmith@0.2.14(openai@4.86.1(ws@8.18.0)(zod@3.24.1)):
     dependencies:
@@ -7385,6 +7521,17 @@ snapshots:
       uuid: 10.0.0
     optionalDependencies:
       openai: 4.86.1(ws@8.18.0)(zod@3.24.4)
+
+  langsmith@0.2.14(openai@5.23.2(ws@8.18.0)(zod@3.24.4)):
+    dependencies:
+      '@types/uuid': 10.0.0
+      commander: 10.0.1
+      p-queue: 6.6.2
+      p-retry: 4.6.2
+      semver: 7.6.3
+      uuid: 10.0.0
+    optionalDependencies:
+      openai: 5.23.2(ws@8.18.0)(zod@3.24.4)
 
   leven@3.1.0: {}
 
@@ -7653,6 +7800,11 @@ snapshots:
       zod: 3.24.4
     transitivePeerDependencies:
       - encoding
+
+  openai@5.23.2(ws@8.18.0)(zod@3.24.4):
+    optionalDependencies:
+      ws: 8.18.0
+      zod: 3.24.4
 
   openapi-types@12.1.3: {}
 

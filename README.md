@@ -186,30 +186,6 @@ const model = wrapLanguageModel({
 });
 ```
 
-#### Usage Tracking / Ingestion
-
-For direct integration with OpenAI, Anthropic, and Gemini SDKs, you can use the ingestion module which provides drop-in wrappers that automatically track token usage and send billing events to Stripe.
-
-```typescript
-import { OpenAI } from '@stripe/agent-toolkit/ingestion';
-
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  stripe: {
-    stripeApiKey: process.env.STRIPE_API_KEY,
-  },
-});
-
-const response = await client.chat.completions.create({
-  model: 'gpt-4o-mini',
-  messages: [{ role: 'user', content: 'Hello!' }],
-  stripeCustomerId: 'cus_123456',
-});
-// Token usage is automatically sent to Stripe
-```
-
-The ingestion module supports OpenAI, Anthropic, and Gemini with both streaming and non-streaming requests. For more information, see the [TypeScript ingestion examples](/typescript/examples/ingestion).
-
 
 
 ## Supported API methods

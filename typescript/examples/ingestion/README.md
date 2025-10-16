@@ -12,6 +12,13 @@ If you're building an AI application and want to implement usage-based billing w
 
 **No.** This is not a proxy service. Your API calls go directly from your application to the AI provider (OpenAI, Anthropic, or Gemini). This SDK simply wraps the official SDK clients to extract token usage from responses and report it to Stripe for billing.
 
+### Stripe Account Configuration
+
+Before using this toolkit, you'll need to configure your Stripe account for **Billing for LLM Tokens**. This feature automates all of the setup required to track billing for LLM tokens, including allowing you to add a desired percent markup for each model. 
+
+**Note:** Billing for LLM Tokens is currently in private preview. You can request access and learn more about setup in the [Stripe Token Billing documentation](https://docs.stripe.com/billing/token-billing).
+
+
 ## Installation
 
 ```bash
@@ -155,15 +162,6 @@ For comprehensive examples including streaming, tool calling, multi-turn convers
 - [`openai.ts`](./openai.ts) - All OpenAI features (chat, streaming, tools, responses API, embeddings)
 - [`anthropic.ts`](./anthropic.ts) - All Anthropic features (messages, streaming, tools)
 - [`gemini.ts`](./gemini.ts) - All Gemini features (generation, streaming, functions)
-
-
-## Setting Up Stripe Billing
-
-To use this SDK for billing, you'll need to:
-
-1. Create a [Stripe Meter](https://docs.stripe.com/api/billing/meter) named `token-billing-tokens`
-2. Set up a [Subscription with usage-based pricing](https://docs.stripe.com/billing/subscriptions/usage-based) that references your meter
-3. Use your Stripe API key and customer IDs with this SDK
 
 ## API Compatibility
 

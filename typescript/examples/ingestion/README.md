@@ -14,10 +14,9 @@ If you're building an AI application and want to implement usage-based billing w
 
 ### Stripe Account Configuration
 
-Before using this toolkit, you'll need to configure your Stripe account for **Billing for LLM Tokens**. This feature automates all of the setup required to track billing for LLM tokens, including allowing you to add a desired percent markup for each model. 
+Before using this toolkit, you'll need to configure your Stripe account for **Billing for LLM Tokens**. This feature automates all of the setup required to track billing for LLM tokens, including allowing you to add a desired percent markup for each model.
 
 **Note:** Billing for LLM Tokens is currently in private preview. You can request access and learn more about setup in the [Stripe Token Billing documentation](https://docs.stripe.com/billing/token-billing).
-
 
 ## Installation
 
@@ -26,7 +25,7 @@ npm install @stripe/agent-toolkit
 
 # Install only the SDK(s) you need:
 npm install openai                    # For OpenAI
-npm install @anthropic-ai/sdk         # For Anthropic  
+npm install @anthropic-ai/sdk         # For Anthropic
 npm install @google/generative-ai     # For Gemini
 ```
 
@@ -35,7 +34,7 @@ npm install @google/generative-ai     # For Gemini
 ### OpenAI
 
 ```typescript
-import { OpenAI } from '@stripe/agent-toolkit/ingestion'
+import {OpenAI} from '@stripe/agent-toolkit/ingestion';
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -43,13 +42,13 @@ const client = new OpenAI({
     stripeApiKey: process.env.STRIPE_API_KEY,
     verbose: true, // Optional: log meter events to console
   },
-})
+});
 
 const response = await client.chat.completions.create({
   model: 'gpt-4o-mini',
-  messages: [{ role: 'user', content: 'Hello!' }],
+  messages: [{role: 'user', content: 'Hello!'}],
   stripeCustomerId: 'cus_123456', // Your Stripe customer ID
-})
+});
 
 // Token usage is automatically sent to Stripe
 ```
@@ -59,7 +58,7 @@ const response = await client.chat.completions.create({
 ### Anthropic
 
 ```typescript
-import { Anthropic } from '@stripe/agent-toolkit/ingestion'
+import {Anthropic} from '@stripe/agent-toolkit/ingestion';
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -67,14 +66,14 @@ const client = new Anthropic({
     stripeApiKey: process.env.STRIPE_API_KEY,
     verbose: true,
   },
-})
+});
 
 const response = await client.messages.create({
   model: 'claude-3-5-sonnet-20241022',
   max_tokens: 1024,
-  messages: [{ role: 'user', content: 'Hello!' }],
+  messages: [{role: 'user', content: 'Hello!'}],
   stripeCustomerId: 'cus_123456',
-})
+});
 
 // Token usage is automatically sent to Stripe
 ```
@@ -84,7 +83,7 @@ const response = await client.messages.create({
 ### Gemini
 
 ```typescript
-import { GoogleGenerativeAI } from '@stripe/agent-toolkit/ingestion'
+import {GoogleGenerativeAI} from '@stripe/agent-toolkit/ingestion';
 
 const client = new GoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -92,14 +91,14 @@ const client = new GoogleGenerativeAI({
     stripeApiKey: process.env.STRIPE_API_KEY,
     verbose: true,
   },
-})
+});
 
-const model = client.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
+const model = client.getGenerativeModel({model: 'gemini-2.0-flash-exp'});
 
 const result = await model.generateContent({
-  contents: [{ role: 'user', parts: [{ text: 'Hello!' }] }],
+  contents: [{role: 'user', parts: [{text: 'Hello!'}]}],
   stripeCustomerId: 'cus_123456',
-})
+});
 
 // Token usage is automatically sent to Stripe
 ```
@@ -134,14 +133,14 @@ Separate events are sent for input tokens and output tokens.
 All clients require a `stripe` configuration object with your Stripe API key:
 
 ```typescript
-import { OpenAI } from '@stripe/agent-toolkit/ingestion'
+import {OpenAI} from '@stripe/agent-toolkit/ingestion';
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
   stripe: {
     stripeApiKey: process.env.STRIPE_API_KEY,
   },
-})
+});
 ```
 
 The `stripeCustomerId` parameter is optional on each API call. If omitted, no meter events will be sent to Stripe (useful for internal/test requests):
@@ -150,9 +149,9 @@ The `stripeCustomerId` parameter is optional on each API call. If omitted, no me
 // No billing event sent
 const response = await client.chat.completions.create({
   model: 'gpt-4o-mini',
-  messages: [{ role: 'user', content: 'Hello!' }],
+  messages: [{role: 'user', content: 'Hello!'}],
   // No stripeCustomerId provided
-})
+});
 ```
 
 ## Full Examples

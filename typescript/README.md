@@ -154,7 +154,7 @@ main().catch((error) => {
 If you're using Stripe's new [Billing for LLM Tokens](https://docs.stripe.com/billing/token-billing) feature, you can use the ingestion module to provide drop-in wrappers for OpenAI, Anthropic, and Gemini SDKs that automatically track token usage and send billing events to Stripe.
 
 ```typescript
-import { OpenAI } from '@stripe/agent-toolkit/ingestion';
+import {OpenAI} from '@stripe/agent-toolkit/ingestion';
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -166,13 +166,14 @@ const client = new OpenAI({
 
 const response = await client.chat.completions.create({
   model: 'gpt-4o-mini',
-  messages: [{ role: 'user', content: 'Hello!' }],
+  messages: [{role: 'user', content: 'Hello!'}],
   stripeCustomerId: 'cus_123456', // Your Stripe customer ID
 });
 // Token usage is automatically sent to Stripe
 ```
 
 The ingestion module supports:
+
 - **OpenAI**: Chat completions (streaming & non-streaming), Responses API, Embeddings, Tool/Function calling
 - **Anthropic**: Messages (streaming & non-streaming), Tools, System prompts, Multi-turn conversations
 - **Gemini**: Text generation (streaming & non-streaming), Function calling, System instructions, Multi-turn chat

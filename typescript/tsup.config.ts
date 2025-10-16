@@ -38,8 +38,8 @@ export default defineConfig([
     external: ['cloudflare:workers'],
   },
   {
-    entry: ['src/ingestion/index.ts'],
-    outDir: 'ingestion',
+    entry: ['src/token-metering/index.ts'],
+    outDir: 'token-metering',
     format: ['cjs', 'esm'],
     dts: true,
     sourcemap: true,

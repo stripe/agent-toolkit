@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import {GoogleGenerativeAI} from '@stripe/agent-toolkit/ingestion';
+import {GoogleGenerativeAI} from '@stripe/agent-toolkit/token-metering';
 import {SchemaType} from '@google/generative-ai';
 
 // Load environment variables from .env file

@@ -1,4 +1,4 @@
-# Stripe Agent Toolkit - Ingestion Module
+# Stripe Agent Toolkit - Token Metering Module
 
 Drop-in SDK wrappers for **OpenAI**, **Anthropic**, and **Gemini** that automatically track token usage and send billing events to Stripe.
 
@@ -34,7 +34,7 @@ npm install @google/generative-ai     # For Gemini
 ### OpenAI
 
 ```typescript
-import {OpenAI} from '@stripe/agent-toolkit/ingestion';
+import {OpenAI} from '@stripe/agent-toolkit/token-metering';
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -58,7 +58,7 @@ const response = await client.chat.completions.create({
 ### Anthropic
 
 ```typescript
-import {Anthropic} from '@stripe/agent-toolkit/ingestion';
+import {Anthropic} from '@stripe/agent-toolkit/token-metering';
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -83,7 +83,7 @@ const response = await client.messages.create({
 ### Gemini
 
 ```typescript
-import {GoogleGenerativeAI} from '@stripe/agent-toolkit/ingestion';
+import {GoogleGenerativeAI} from '@stripe/agent-toolkit/token-metering';
 
 const client = new GoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -133,7 +133,7 @@ Separate events are sent for input tokens and output tokens.
 All clients require a `stripe` configuration object with your Stripe API key:
 
 ```typescript
-import {OpenAI} from '@stripe/agent-toolkit/ingestion';
+import {OpenAI} from '@stripe/agent-toolkit/token-metering';
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

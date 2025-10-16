@@ -4,7 +4,7 @@
   "homepage": "https://github.com/stripe/agent-toolkit",
   "scripts": {
     "build": "tsup",
-    "clean": "rm -rf langchain ai-sdk modelcontextprotocol openai cloudflare ingestion",
+    "clean": "rm -rf langchain ai-sdk modelcontextprotocol openai cloudflare token-metering",
     "lint": "eslint \"./**/*.ts*\"",
     "prettier": "prettier './**/*.{js,ts,md,html,css}' --write",
     "prettier-check": "prettier './**/*.{js,ts,md,html,css}' --check",
@@ -37,10 +37,10 @@
       "require": "./cloudflare/index.js",
       "import": "./cloudflare/index.mjs"
     },
-    "./ingestion": {
-      "types": "./ingestion/index.d.ts",
-      "require": "./ingestion/index.js",
-      "import": "./ingestion/index.mjs"
+    "./token-metering": {
+      "types": "./token-metering/index.d.ts",
+      "require": "./token-metering/index.js",
+      "import": "./token-metering/index.mjs"
     }
   },
   "packageManager": "pnpm@9.11.0",
@@ -97,7 +97,7 @@
     "modelcontextprotocol/**/*",
     "openai/**/*",
     "cloudflare/**/*",
-    "ingestion/**/*",
+    "token-metering/**/*",
     "LICENSE",
     "README.md",
     "VERSION",

@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import {OpenAI} from '@stripe/agent-toolkit/ingestion';
+import {OpenAI} from '@stripe/agent-toolkit/token-metering';
 import {z} from 'zod';
 
 // Load environment variables from .env file

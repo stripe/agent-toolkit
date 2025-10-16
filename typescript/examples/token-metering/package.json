@@ -1,7 +1,7 @@
 {
-  "name": "stripe-agent-toolkit-examples-ingestion",
+  "name": "stripe-agent-toolkit-examples-token-metering",
   "version": "0.1.0",
-  "description": "Examples for using Stripe Agent Toolkit ingestion module with OpenAI, Anthropic, and Gemini",
+  "description": "Examples for using Stripe Agent Toolkit token-metering module with OpenAI, Anthropic, and Gemini",
   "main": "index.js",
   "scripts": {
     "openai": "tsx openai.ts",

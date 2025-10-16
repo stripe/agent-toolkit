@@ -5,7 +5,7 @@
  */
 
 import 'dotenv/config';
-import {Anthropic} from '@stripe/agent-toolkit/ingestion';
+import {Anthropic} from '@stripe/agent-toolkit/token-metering';
 
 // Load environment variables from .env file
 const STRIPE_API_KEY = process.env.STRIPE_API_KEY!;

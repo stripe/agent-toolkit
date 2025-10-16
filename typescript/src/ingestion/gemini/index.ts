@@ -161,7 +161,7 @@ class StripeTrackedGenerativeModel {
 
       // Also wrap the response promise
       const originalResponse = result.response;
-      const wrappedResponse = originalResponse.then((response) => {
+      const wrappedResponse = originalResponse.then((response: any) => {
         // The usage will already be logged from the stream
         return response;
       });
@@ -196,9 +196,7 @@ class StripeTrackedGenerativeModel {
   /**
    * Count tokens
    */
-  public async countTokens(
-    request: string | GenerateContentRequest
-  ): Promise<any> {
+  public countTokens(request: string | GenerateContentRequest): Promise<any> {
     return this.model.countTokens(request);
   }
 }
@@ -301,7 +299,7 @@ class StripeTrackedChatSession {
 
       // Also wrap the response promise
       const originalResponse = result.response;
-      const wrappedResponse = originalResponse.then((response) => {
+      const wrappedResponse = originalResponse.then((response: any) => {
         return response;
       });
 
@@ -323,7 +321,7 @@ class StripeTrackedChatSession {
   /**
    * Get chat history
    */
-  public async getHistory(): Promise<any> {
+  public getHistory(): Promise<any> {
     return this.chat.getHistory();
   }
 }

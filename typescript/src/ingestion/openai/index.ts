@@ -163,6 +163,7 @@ class WrappedCompletions extends Completions {
       }) as APIPromise<Stream<ChatCompletionChunk>>;
     } else {
       const wrappedPromise = parentPromise.then(
+        // eslint-disable-next-line require-await
         async (result) => {
           if ('choices' in result) {
             logUsageEvent(this.stripeConfig, {
@@ -174,6 +175,7 @@ class WrappedCompletions extends Completions {
           }
           return result;
         },
+        // eslint-disable-next-line require-await
         async (error: unknown) => {
           logUsageEvent(this.stripeConfig, {
             model: String(openAIParams.model ?? ''),
@@ -276,6 +278,7 @@ class WrappedResponses extends Responses {
       }) as APIPromise<Stream<OpenAIOriginal.Responses.ResponseStreamEvent>>;
     } else {
       const wrappedPromise = parentPromise.then(
+        // eslint-disable-next-line require-await
         async (result) => {
           if ('output' in result) {
             logUsageEvent(this.stripeConfig, {
@@ -287,6 +290,7 @@ class WrappedResponses extends Responses {
           }
           return result;
         },
+        // eslint-disable-next-line require-await
         async (error: unknown) => {
           logUsageEvent(this.stripeConfig, {
             model: String(openAIParams.model ?? ''),
@@ -321,6 +325,7 @@ class WrappedResponses extends Responses {
       const parentPromise = super.parse(openAIParams, options);
 
       const wrappedPromise = parentPromise.then(
+        // eslint-disable-next-line require-await
         async (result) => {
           logUsageEvent(this.stripeConfig, {
             model: String(openAIParams.model ?? ''),
@@ -330,6 +335,7 @@ class WrappedResponses extends Responses {
           });
           return result;
         },
+        // eslint-disable-next-line require-await
         async (error: unknown) => {
           logUsageEvent(this.stripeConfig, {
             model: String(openAIParams.model ?? ''),
@@ -372,6 +378,7 @@ class WrappedEmbeddings extends Embeddings {
     const parentPromise = super.create(openAIParams, options);
 
     const wrappedPromise = parentPromise.then(
+      // eslint-disable-next-line require-await
       async (result) => {
         logUsageEvent(this.stripeConfig, {
           model: openAIParams.model,
@@ -381,6 +388,7 @@ class WrappedEmbeddings extends Embeddings {
         });
         return result;
       },
+      // eslint-disable-next-line require-await
       async (error: unknown) => {
         logUsageEvent(this.stripeConfig, {
           model: openAIParams.model,

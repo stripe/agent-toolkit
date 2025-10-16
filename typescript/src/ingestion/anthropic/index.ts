@@ -137,6 +137,7 @@ class WrappedMessages extends AnthropicOriginal.Messages {
       }) as APIPromise<Stream<RawMessageStreamEvent>>;
     } else {
       const wrappedPromise = parentPromise.then(
+        // eslint-disable-next-line require-await
         async (result) => {
           if ('content' in result) {
             logUsageEvent(this.stripeConfig, {
@@ -148,6 +149,7 @@ class WrappedMessages extends AnthropicOriginal.Messages {
           }
           return result;
         },
+        // eslint-disable-next-line require-await
         async (error: unknown) => {
           logUsageEvent(this.stripeConfig, {
             model: anthropicParams.model,

@@ -143,16 +143,16 @@ async function sampleStreamingChatCompletionWithTools() {
     if (choice?.delta?.tool_calls) {
       for (const toolCall of choice.delta.tool_calls) {
         const index = toolCall.index;
-        if (index !== undefined) {
-          if (!toolCalls.has(index)) {
-            toolCalls.set(index, {id: '', name: '', arguments: ''});
-          }
-          const tc = toolCalls.get(index)!;
-          if (toolCall.id) tc.id = toolCall.id;
-          if (toolCall.function?.name) tc.name = toolCall.function.name;
-          if (toolCall.function?.arguments)
-            tc.arguments += toolCall.function.arguments;
+        if (index === undefined) continue;
+
+        if (!toolCalls.has(index)) {
+          toolCalls.set(index, {id: '', name: '', arguments: ''});
         }
+        const tc = toolCalls.get(index)!;
+        if (toolCall.id) tc.id = toolCall.id;
+        if (toolCall.function?.name) tc.name = toolCall.function.name;
+        if (toolCall.function?.arguments)
+          tc.arguments += toolCall.function.arguments;
       }
     }
 

@@ -10,11 +10,16 @@ interface StripeTrackedGoogleGenerativeAIConfig {
 
 /**
  * Normalize Gemini usage to our standard format
+ * Note: Gemini includes reasoning tokens separately in thoughtsTokenCount
+ * We add these to outputTokens for billing purposes
  */
 function normalizeGeminiUsage(usageMetadata: any) {
+  const baseOutputTokens = usageMetadata?.candidatesTokenCount ?? 0
+  const reasoningTokens = usageMetadata?.thoughtsTokenCount ?? 0
+  
   return {
     inputTokens: usageMetadata?.promptTokenCount ?? 0,
-    outputTokens: usageMetadata?.candidatesTokenCount ?? 0,
+    outputTokens: baseOutputTokens + reasoningTokens,
   }
 }
 

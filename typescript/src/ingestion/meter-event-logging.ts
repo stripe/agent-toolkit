@@ -35,6 +35,41 @@ export function normalizeResponsesUsage(usage: any): TokenUsage {
   }
 }
 
+/**
+ * Normalize model names to match Stripe's approved model list
+ */
+function normalizeModelName(provider: string, model: string): string {
+  if (provider === 'anthropic') {
+    // Remove date suffix (YYYYMMDD format at the end)
+    model = model.replace(/-\d{8}$/, '')
+    
+    // Remove -latest suffix
+    model = model.replace(/-latest$/, '')
+    
+    // Convert version number dashes to dots anywhere in the name
+    // Match patterns like claude-3-7, opus-4-1, sonnet-4-5, etc.
+    // This will convert any sequence of word-digit-digit to word-digit.digit
+    model = model.replace(/(-[a-z]+)?-(\d+)-(\d+)/g, '$1-$2.$3')
+    
+    return model
+  }
+  
+  if (provider === 'openai') {
+    // Exception: keep gpt-4o-2024-05-13 as is
+    if (model === 'gpt-4o-2024-05-13') {
+      return model
+    }
+    
+    // Remove date suffix in format -YYYY-MM-DD
+    model = model.replace(/-\d{4}-\d{2}-\d{2}$/, '')
+    
+    return model
+  }
+  
+  // For other providers (google), return as is
+  return model
+}
+
 function logMeterEventPayload(payload: any): void {
   console.log('='.repeat(80))
   console.log('STRIPE METER EVENT')
@@ -48,11 +83,13 @@ async function sendMeterEventsToStripe(config: StripeConfig, event: UsageEvent):
     return
   }
 
-  const stripe = new Stripe(config.stripeApiKey, {
-    apiVersion: '2025-09-30.preview' as any,
-  })
+  const stripe = new Stripe(config.stripeApiKey)
 
   const timestamp = new Date().toISOString()
+  
+  // Normalize the model name before sending to Stripe
+  const normalizedModel = normalizeModelName(event.provider, event.model)
+  const fullModelName = event.provider + '/' + normalizedModel
   
   try {
     if (event.usage.inputTokens > 0) {
@@ -62,7 +99,7 @@ async function sendMeterEventsToStripe(config: StripeConfig, event: UsageEvent):
         payload: {
           stripe_customer_id: event.stripeCustomerId,
           value: event.usage.inputTokens.toString(),
-          model: event.provider + '/' + event.model,
+          model: fullModelName,
           token_type: 'input',
         },
       }
@@ -80,7 +117,7 @@ async function sendMeterEventsToStripe(config: StripeConfig, event: UsageEvent):
         payload: {
           stripe_customer_id: event.stripeCustomerId,
           value: event.usage.outputTokens.toString(),
-          model: event.provider + '/' + event.model,
+          model: fullModelName,
           token_type: 'output',
         },
       }

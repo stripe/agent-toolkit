@@ -7,7 +7,7 @@ import type {
   ChatCompletionMessageToolCall,
   ChatCompletionToolMessageParam,
 } from 'openai/resources';
-import type { ChatCompletionMessageFunctionToolCall } from 'openai/resources/chat/completions';
+import type {ChatCompletionMessageFunctionToolCall} from 'openai/resources/chat/completions';
 
 class StripeAgentToolkit {
   private _stripe: StripeAPI;

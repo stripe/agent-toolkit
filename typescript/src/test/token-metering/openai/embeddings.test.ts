@@ -10,9 +10,10 @@ jest.mock('@/token-metering/meter-event-logging', () => ({
   logUsageEvent: jest.fn(),
 }));
 
-const mockLogUsageEvent = meterEventLogging.logUsageEvent as jest.MockedFunction<
-  typeof meterEventLogging.logUsageEvent
->;
+const mockLogUsageEvent =
+  meterEventLogging.logUsageEvent as jest.MockedFunction<
+    typeof meterEventLogging.logUsageEvent
+  >;
 
 describe('OpenAI Embeddings', () => {
   let client: StripeTrackedOpenAI;
@@ -214,4 +215,3 @@ describe('OpenAI Embeddings', () => {
     });
   });
 });
-

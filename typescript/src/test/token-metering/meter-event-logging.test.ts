@@ -167,9 +167,7 @@ describe('logUsageEvent', () => {
 
     (Stripe as unknown as jest.Mock).mockImplementation(() => mockStripe);
 
-    consoleErrorSpy = jest
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
+    consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
@@ -822,4 +820,3 @@ describe('logUsageEvent', () => {
     );
   });
 });
-

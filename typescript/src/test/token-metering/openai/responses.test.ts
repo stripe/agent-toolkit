@@ -10,9 +10,10 @@ jest.mock('@/token-metering/meter-event-logging', () => ({
   logUsageEvent: jest.fn(),
 }));
 
-const mockLogUsageEvent = meterEventLogging.logUsageEvent as jest.MockedFunction<
-  typeof meterEventLogging.logUsageEvent
->;
+const mockLogUsageEvent =
+  meterEventLogging.logUsageEvent as jest.MockedFunction<
+    typeof meterEventLogging.logUsageEvent
+  >;
 
 describe('OpenAI Responses - Non-streaming', () => {
   let client: StripeTrackedOpenAI;
@@ -31,19 +32,17 @@ describe('OpenAI Responses - Non-streaming', () => {
     });
 
     // Mock the parent class's create method
-    jest
-      .spyOn(OpenAIOriginal.Responses.prototype, 'create')
-      .mockResolvedValue({
-        id: 'resp_123',
-        object: 'response',
-        created: Date.now(),
-        model: 'gpt-4',
-        output: 'Hello!',
-        usage: {
-          input_tokens: 10,
-          output_tokens: 5,
-        },
-      } as any);
+    jest.spyOn(OpenAIOriginal.Responses.prototype, 'create').mockResolvedValue({
+      id: 'resp_123',
+      object: 'response',
+      created: Date.now(),
+      model: 'gpt-4',
+      output: 'Hello!',
+      usage: {
+        input_tokens: 10,
+        output_tokens: 5,
+      },
+    } as any);
   });
 
   afterEach(() => {
@@ -115,15 +114,13 @@ describe('OpenAI Responses - Non-streaming', () => {
   });
 
   it('should handle missing usage data', async () => {
-    jest
-      .spyOn(OpenAIOriginal.Responses.prototype, 'create')
-      .mockResolvedValue({
-        id: 'resp_123',
-        object: 'response',
-        created: Date.now(),
-        model: 'gpt-4',
-        output: 'Hello!',
-      } as any);
+    jest.spyOn(OpenAIOriginal.Responses.prototype, 'create').mockResolvedValue({
+      id: 'resp_123',
+      object: 'response',
+      created: Date.now(),
+      model: 'gpt-4',
+      output: 'Hello!',
+    } as any);
 
     await client.responses.create({
       model: 'gpt-4',
@@ -493,4 +490,3 @@ function createMockStream(chunks: any[]) {
     },
   };
 }
-

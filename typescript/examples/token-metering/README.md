@@ -4,7 +4,7 @@ Drop-in SDK wrappers for **OpenAI**, **Anthropic**, and **Gemini** that automati
 
 This is part of the [@stripe/agent-toolkit](https://github.com/stripe/agent-toolkit) package.
 
-## Why Use This?
+## Why use this?
 
 If you're building an AI application and want to implement usage-based billing with Stripe, this SDK handles all the token tracking and meter event reporting for you. Simply swap your AI SDK client with the wrapped version, and token usage is automatically sent to Stripe as meter events.
 

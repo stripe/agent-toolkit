@@ -162,6 +162,6 @@ For comprehensive examples including streaming, tool calling, multi-turn convers
 - [`anthropic.ts`](./anthropic.ts) - All Anthropic features (messages, streaming, tools)
 - [`gemini.ts`](./gemini.ts) - All Gemini features (generation, streaming, functions)
 
-## API Compatibility
+## API compatibility
 
 These wrappers are **drop-in replacements** for the official SDKs. All methods, types, and behaviors are preserved - we only add the `stripeCustomerId` parameter and automatic usage tracking.

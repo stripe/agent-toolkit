@@ -105,7 +105,7 @@ const result = await model.generateContent({
 
 **Supports:** Text generation (streaming & non-streaming), Function calling, System instructions, Multi-turn chat
 
-## How It Works
+## How it works
 
 When you make an API call with a `stripeCustomerId` parameter, the wrapper:
 

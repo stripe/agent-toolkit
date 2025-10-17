@@ -29,7 +29,7 @@ npm install @anthropic-ai/sdk         # For Anthropic
 npm install @google/generative-ai     # For Gemini
 ```
 
-## Quick Start
+## Quickstart
 
 ### OpenAI
 

@@ -154,7 +154,7 @@ const response = await client.chat.completions.create({
 });
 ```
 
-## Full Examples
+## Full examples
 
 For comprehensive examples including streaming, tool calling, multi-turn conversations, and more, see this directory:
 

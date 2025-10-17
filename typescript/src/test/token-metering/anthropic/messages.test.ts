@@ -549,6 +549,7 @@ function createMockStream(chunks: any[]) {
 
 function createMockStreamWithError(error: Error) {
   const iterator = {
+    // eslint-disable-next-line require-yield, @typescript-eslint/require-await
     async *[Symbol.asyncIterator]() {
       throw error;
     },
@@ -558,11 +559,13 @@ function createMockStreamWithError(error: Error) {
     ...iterator,
     tee() {
       const stream1 = {
+        // eslint-disable-next-line require-yield, @typescript-eslint/require-await
         async *[Symbol.asyncIterator]() {
           throw error;
         },
       };
       const stream2 = {
+        // eslint-disable-next-line require-yield, @typescript-eslint/require-await
         async *[Symbol.asyncIterator]() {
           throw error;
         },

@@ -550,6 +550,7 @@ function createMockStream(chunks: any[]) {
 
 function createMockStreamWithError(error: Error) {
   return {
+    // eslint-disable-next-line require-yield, @typescript-eslint/require-await
     async *[Symbol.asyncIterator]() {
       throw error;
     },

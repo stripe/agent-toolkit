@@ -210,7 +210,7 @@ describe('Gemini ChatSession - Non-streaming', () => {
     expect(mockChat.sendMessage).toHaveBeenCalledWith('Hello world');
   });
 
-  it('should pass through startChat parameters', async () => {
+  it('should pass through startChat parameters', () => {
     const model = client.getGenerativeModel({model: 'gemini-1.5-pro'});
     const history = [{role: 'user', parts: [{text: 'Hi'}]}];
 
@@ -596,6 +596,7 @@ function createMockStream(chunks: any[]) {
 
 function createMockStreamWithError(error: Error) {
   return {
+    // eslint-disable-next-line require-yield, @typescript-eslint/require-await
     async *[Symbol.asyncIterator]() {
       throw error;
     },

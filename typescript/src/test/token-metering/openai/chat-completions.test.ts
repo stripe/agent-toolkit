@@ -426,7 +426,7 @@ describe('OpenAI Chat Completions - Streaming', () => {
 
 // Helper functions to create mock streams
 function createMockStream(chunks: any[]) {
-  let index = 0;
+  const index = 0;
   const iterator = {
     async *[Symbol.asyncIterator]() {
       for (const chunk of chunks) {
@@ -459,6 +459,7 @@ function createMockStream(chunks: any[]) {
 
 function createMockStreamWithError(error: Error) {
   const iterator = {
+    // eslint-disable-next-line require-yield, @typescript-eslint/require-await
     async *[Symbol.asyncIterator]() {
       throw error;
     },
@@ -468,11 +469,13 @@ function createMockStreamWithError(error: Error) {
     ...iterator,
     tee() {
       const stream1 = {
+        // eslint-disable-next-line require-yield, @typescript-eslint/require-await
         async *[Symbol.asyncIterator]() {
           throw error;
         },
       };
       const stream2 = {
+        // eslint-disable-next-line require-yield, @typescript-eslint/require-await
         async *[Symbol.asyncIterator]() {
           throw error;
         },

@@ -12,7 +12,7 @@ If you're building an AI application and want to implement usage-based billing w
 
 **No.** This is not a proxy service. Your API calls go directly from your application to the AI provider (OpenAI, Anthropic, or Gemini). This SDK simply wraps the official SDK clients to extract token usage from responses and report it to Stripe for billing.
 
-### Stripe Account Configuration
+### Stripe account configuration
 
 Before using this toolkit, you'll need to configure your Stripe account for **Billing for LLM Tokens**. This feature automates all of the setup required to track billing for LLM tokens, including allowing you to add a desired percent markup for each model.
 

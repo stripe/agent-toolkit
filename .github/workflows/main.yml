@@ -11,6 +11,8 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
 jobs:
   typescript-build:
     name: Build - TypeScript

@@ -20,7 +20,7 @@ class StripeAPI {
           context?.mode === 'modelcontextprotocol'
             ? MCP_HEADER
             : TOOLKIT_HEADER,
-        version: '0.7.11',
+        version: '0.7.12',
         url: 'https://github.com/stripe/agent-toolkit',
       },
     });

@@ -13,6 +13,15 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "openai": [
+        "node_modules/openai"
+      ],
+      "@anthropic-ai/sdk": [
+        "node_modules/@anthropic-ai/sdk"
+      ],
+      "@google/generative-ai": [
+        "node_modules/@google/generative-ai"
       ]
     }
   },

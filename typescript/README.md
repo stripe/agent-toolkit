@@ -148,3 +148,34 @@ main().catch((error) => {
 
 [node-sdk]: https://github.com/stripe/stripe-node
 [api-keys]: https://dashboard.stripe.com/account/apikeys
+
+## Usage Tracking / Token Metering
+
+If you're using Stripe's new [Billing for LLM Tokens](https://docs.stripe.com/billing/token-billing) feature, you can use the token-metering module to provide drop-in wrappers for OpenAI, Anthropic, and Gemini SDKs that automatically track token usage and send billing events to Stripe.
+
+```typescript
+import {OpenAI} from '@stripe/agent-toolkit/token-metering';
+
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  stripe: {
+    stripeApiKey: process.env.STRIPE_API_KEY,
+    verbose: true, // Optional: log meter events to console
+  },
+});
+
+const response = await client.chat.completions.create({
+  model: 'gpt-4o-mini',
+  messages: [{role: 'user', content: 'Hello!'}],
+  stripeCustomerId: 'cus_123456', // Your Stripe customer ID
+});
+// Token usage is automatically sent to Stripe
+```
+
+The token-metering module supports:
+
+- **OpenAI**: Chat completions (streaming & non-streaming), Responses API, Embeddings, Tool/Function calling
+- **Anthropic**: Messages (streaming & non-streaming), Tools, System prompts, Multi-turn conversations
+- **Gemini**: Text generation (streaming & non-streaming), Function calling, System instructions, Multi-turn chat
+
+For more information and examples, see the [token-metering examples](/typescript/examples/token-metering).

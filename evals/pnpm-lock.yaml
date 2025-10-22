@@ -519,7 +519,7 @@ packages:
     engines: {node: '>=18'}
     peerDependencies:
       '@langchain/core': ^0.3.6
-      '@modelcontextprotocol/sdk': ^1.10.2
+      '@modelcontextprotocol/sdk': ^1.17.1
       agents: ^0.0.84
       ai: ^3.4.7 || ^4.0.0
       openai: ^4.86.1

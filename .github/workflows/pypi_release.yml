@@ -8,8 +8,6 @@ jobs:
     name: Build for PyPi
     runs-on: ubuntu-latest
     environment: pypi
-    permissions:
-      contents: read
 
     defaults:
       run:

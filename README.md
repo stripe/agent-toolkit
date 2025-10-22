@@ -190,25 +190,7 @@ const model = wrapLanguageModel({
 
 ## Supported API methods
 
-- [Cancel a subscription](https://docs.stripe.com/api/subscriptions/cancel)
-- [Create a coupon](https://docs.stripe.com/api/coupons/create)
-- [Create a customer](https://docs.stripe.com/api/customers/create)
-- [Create a payment link](https://docs.stripe.com/api/payment-link/create)
-- [Create a price](https://docs.stripe.com/api/prices/create)
-- [Create a product](https://docs.stripe.com/api/products/create)
-- [Create a refund](https://docs.stripe.com/api/refunds/create)
-- [Create an invoice item](https://docs.stripe.com/api/invoiceitems/create)
-- [Create an invoice](https://docs.stripe.com/api/invoices/create)
-- [Finalize an invoice](https://docs.stripe.com/api/invoices/finalize)
-- [List all coupons](https://docs.stripe.com/api/coupons/list)
-- [List all customers](https://docs.stripe.com/api/customers/list)
-- [List all disputes](https://docs.stripe.com/api/disputes/list)
-- [List all prices](https://docs.stripe.com/api/prices/list)
-- [List all products](https://docs.stripe.com/api/products/list)
-- [List all subscriptions](https://docs.stripe.com/api/subscriptions/list)
-- [Retrieve balance](https://docs.stripe.com/api/balance/balance_retrieve)
-- [Update a dispute](https://docs.stripe.com/api/disputes/update)
-- [Update a subscription](https://docs.stripe.com/api/subscriptions/update)
+See the [Stripe MCP](https://docs.stripe.com/mcp) docs for a list of supported methods.
 
 [python-sdk]: https://github.com/stripe/stripe-python
 [node-sdk]: https://github.com/stripe/stripe-node

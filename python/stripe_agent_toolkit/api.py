@@ -1,8 +1,4 @@
 """Util that calls Stripe."""
-Optimized Stripe API wrapper with dictionary-based method dispatch.
-Replaced O(n) elif chain with O(1) dictionary lookup for better performance
-as the number of supported methods grows.
-"""
 
 from __future__ import annotations
 

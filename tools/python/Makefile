@@ -14,6 +14,6 @@ test: venv
 	${VENV_NAME}/bin/python -m unittest discover tests
 
 build: venv
-	cp ../LICENSE LICENSE
+	cp ../../LICENSE LICENSE
 	${VENV_NAME}/bin/python -m build
 	rm LICENSE

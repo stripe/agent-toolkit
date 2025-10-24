@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./typescript
+        working-directory: ./tools/typescript
     permissions:
       contents: read
       id-token: write

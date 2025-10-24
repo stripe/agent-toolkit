@@ -1,13 +1,21 @@
-# Stripe Agent Toolkit
-
-The Stripe Agent Toolkit enables popular agent frameworks including Model Context Protocol (MCP), OpenAI's Agent SDK, LangChain, CrewAI, and Vercel's AI SDK to integrate with Stripe APIs through function calling. The
-library is not exhaustive of the entire Stripe API. It includes support for MCP, Python, and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
-
-Included below are basic instructions, but refer to the [MCP](/tools/modelcontextprotocol) [Python](/tools/python), [TypeScript](/tools/typescript) packages for more information.
+# Tools
 
 ## Model Context Protocol
 
 Stripe hosts a remote MCP server at `https://mcp.stripe.com`. This allows secure MCP client access via OAuth. View the docs [here](https://docs.stripe.com/mcp#remote).
+
+It can also be used to create autonomous agents.
+
+For a local MCP, see the [MCP](/modelcontextprotocol) package.
+
+## Agent Toolkit
+
+The Stripe Agent Toolkit enables popular agent frameworks including Model Context Protocol (MCP), OpenAI's Agent SDK, LangChain, CrewAI, and Vercel's AI SDK to integrate with Stripe APIs through function calling. The
+library is not exhaustive of the entire Stripe API. It includes support for MCP, Python, and TypeScript and is built directly on top of the Stripe [Python][python-sdk] and [Node][node-sdk] SDKs.
+
+Included below are basic instructions, but refer to [Python](/tools/python), [TypeScript](/tools/typescript) packages for more information.
+
+## Model Context Protocol
 
 The Stripe Agent Toolkit also exposes tools in the [Model Context Protocol (MCP)](https://modelcontextprotocol.com/) format. Or, to run a local Stripe MCP server using npx, use the following command:
 

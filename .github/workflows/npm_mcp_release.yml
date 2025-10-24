@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./modelcontextprotocol
+        working-directory: ./tools/modelcontextprotocol
     permissions:
       contents: read
       id-token: write

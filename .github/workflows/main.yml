@@ -18,7 +18,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./typescript
+        working-directory: ./tools/typescript
 
     steps:
       - name: Checkout
@@ -58,7 +58,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./modelcontextprotocol
+        working-directory: ./tools/modelcontextprotocol
 
     steps:
       - name: Checkout
@@ -98,7 +98,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./python
+        working-directory: ./tools/python
 
     steps:
       - name: Checkout

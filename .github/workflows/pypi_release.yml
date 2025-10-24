@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./python
+        working-directory: ./tools/python
 
     steps:
       - name: Checkout
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-dists
-          path: ./python/dist/
+          path: ./tools/python/dist/
 
   python-release:
     name: Publish to PyPi
@@ -55,7 +55,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./python
+        working-directory: ./tools/python
 
     permissions:
       id-token: write

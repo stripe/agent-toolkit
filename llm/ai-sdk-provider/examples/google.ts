@@ -21,10 +21,7 @@ async function main() {
   if (!process.env.STRIPE_CUSTOMER_ID) {
     throw new Error('STRIPE_CUSTOMER_ID environment variable is not set. Please set it in examples/.env');
   }
-  
-  console.log('Environment check passed ✓');
-  console.log(`API Key: ${process.env.STRIPE_API_KEY.substring(0, 7)}...`);
-  console.log(`Customer ID: ${process.env.STRIPE_CUSTOMER_ID}\n`);
+
 
   // Initialize the Stripe provider
   const stripe = createStripe({

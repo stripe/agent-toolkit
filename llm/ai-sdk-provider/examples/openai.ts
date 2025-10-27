@@ -22,10 +22,7 @@ async function main() {
   if (!process.env.STRIPE_CUSTOMER_ID) {
     console.warn('Warning: STRIPE_CUSTOMER_ID is not set. Some examples may fail.');
   }
-  
-  console.log('Environment check passed ✓');
-  console.log(`API Key: ${process.env.STRIPE_API_KEY.substring(0, 7)}...`);
-  console.log(`Customer ID: ${process.env.STRIPE_CUSTOMER_ID || 'not set'}\n`);
+
 
   // Initialize the Stripe provider
   const stripe = createStripe({

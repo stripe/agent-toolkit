@@ -1,0 +1,59 @@
+{
+  "name": "@stripe/ai-sdk-billing-wrapper",
+  "version": "0.1.0",
+  "description": "Wrapper for AI SDK providers that automatically reports token usage to Stripe meter events",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": [
+    "stripe",
+    "ai",
+    "billing",
+    "metering",
+    "ai-sdk",
+    "ai-sdk-provider"
+  ],
+  "author": "Stripe",
+  "license": "MIT",
+  "devDependencies": {
+    "@ai-sdk/anthropic": "^2.0.35",
+    "@ai-sdk/google": "^2.0.23",
+    "@ai-sdk/groq": "^2.0.24",
+    "@ai-sdk/openai": "^2.0.53",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.5",
+    "ai": "^5.0.76",
+    "dotenv": "^17.2.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@ai-sdk/provider": "^2.0.0",
+    "stripe": "^17.5.0"
+  },
+  "peerDependencies": {
+    "@ai-sdk/anthropic": "^1.0.5",
+    "@ai-sdk/google": "^1.0.9",
+    "@ai-sdk/openai": "^1.0.8",
+    "ai": "^3.4.7 || ^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@ai-sdk/anthropic": {
+      "optional": true
+    },
+    "@ai-sdk/google": {
+      "optional": true
+    },
+    "@ai-sdk/openai": {
+      "optional": true
+    },
+    "ai": {
+      "optional": true
+    }
+  }
+}

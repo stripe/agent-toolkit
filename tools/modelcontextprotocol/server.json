@@ -12,25 +12,5 @@
       "type": "streamable-http",
       "url": "https://mcp.stripe.com"
     }
-  ],
-  "packages": [
-    {
-      "registryType": "npm",
-      "identifier": "@stripe/mcp",
-      "version": "0.2.4",
-      "transport": {
-        "type": "stdio"
-      },
-      "environmentVariables": [
-        {
-          "description": "Your Stripe API secret key (required)",
-          "isRequired": true,
-          "format": "string",
-          "isSecret": true,
-          "name": "STRIPE_SECRET_KEY"
-        }
-      ]
-    }
   ]
 }
-

@@ -1,7 +1,7 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
-  "name": "com.stripe.mcp",
-  "description": "Model Context Protocol server for integrating with Stripe APIs through function calling. Supports customers, products, subscriptions, payments, and more.",
+  "name": "com.stripe/mcp",
+  "description": "MCP server integrating with Stripe - tools for customers, products, payments, and more.",
   "repository": {
     "url": "https://github.com/stripe/agent-toolkit",
     "source": "github"

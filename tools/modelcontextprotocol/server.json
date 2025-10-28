@@ -1,0 +1,36 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "com.stripe.mcp",
+  "description": "Model Context Protocol server for integrating with Stripe APIs through function calling. Supports customers, products, subscriptions, payments, and more.",
+  "repository": {
+    "url": "https://github.com/stripe/agent-toolkit",
+    "source": "github"
+  },
+  "version": "0.2.4",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.stripe.com"
+    }
+  ],
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@stripe/mcp",
+      "version": "0.2.4",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "Your Stripe API secret key (required)",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true,
+          "name": "STRIPE_SECRET_KEY"
+        }
+      ]
+    }
+  ]
+}
+

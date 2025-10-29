@@ -101,7 +101,7 @@ export function createTokenMeter(
   // Construct Stripe client with the API key
   const stripeClient = new Stripe(stripeApiKey, {
     appInfo: {
-      name: 'token-billing',
+      name: '@stripe/token-billing',
       version: '0.1.0',
     },
   });

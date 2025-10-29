@@ -39,7 +39,7 @@ export interface StripeProvider extends ProviderV2 {
  *
  * @example
  * ```ts
- * import { createStripe } from '@stripe/ai';
+ * import { createStripe } from '@stripe/ai-sdk/provider';
  *
  * const stripe = createStripe({
  *   apiKey: process.env.STRIPE_API_KEY,
@@ -80,6 +80,7 @@ export function createStripe(config: StripeProviderConfig = {}): StripeProvider 
         return {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${apiKey}`,
+          'User-Agent': `Stripe/v1 @stripe/ai-sdk/provider/0.1.0`,
           ...config.headers,
         };
       },
@@ -119,7 +120,7 @@ export function createStripe(config: StripeProviderConfig = {}): StripeProvider 
  *
  * @example
  * ```ts
- * import { stripe } from '@stripe/ai';
+ * import { stripe } from '@stripe/ai-sdk/provider';
  *
  * const model = stripe('openai/gpt-5', {
  *   customerId: 'cus_xxxxx'

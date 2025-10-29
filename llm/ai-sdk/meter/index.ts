@@ -40,7 +40,7 @@ export * from './types';
  *
  * @example
  * ```typescript
- * import { meteredModel } from '@stripe/ai/ai-sdk-billing-wrapper';
+ * import { meteredModel } from '@stripe/ai-sdk/meter';
  * import { openai } from '@ai-sdk/openai';
  * import { generateText } from 'ai';
  *

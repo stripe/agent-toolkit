@@ -2,6 +2,8 @@
 
 The Stripe AI SDK Provider enables seamless integration with leading AI models through Stripe's unified LLM proxy at `llm.stripe.com`. This custom provider for the Vercel AI SDK automatically tracks token usage and integrates with Stripe's billing system, making it easy to monetize AI features in your applications.
 
+> **Note:** This is part of the [`@stripe/ai-sdk`](../README.md) package. See the main README for an overview of all available tools.
+
 ## ⚠️ Private Preview Access Required
 
 **Please note:** The Stripe AI SDK Provider is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
@@ -21,10 +23,10 @@ Learn more about Stripe's Token Billing in the [Stripe Documentation](https://do
 
 ## Setup
 
-The Stripe AI SDK Provider is available in the `@stripe/ai-sdk-provider` module. You can install it with:
+The Stripe AI SDK Provider is available in the `@stripe/ai-sdk` package. You can install it with:
 
 ```bash
-npm install @stripe/ai-sdk-provider
+npm install @stripe/ai-sdk
 ```
 
 ## Provider Instance
@@ -32,7 +34,7 @@ npm install @stripe/ai-sdk-provider
 To create a Stripe provider instance, use the `createStripe` function:
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk-provider';
+import { createStripe } from '@stripe/ai-sdk/provider';
 
 const stripe = createStripe({
   apiKey: process.env.STRIPE_API_KEY,
@@ -95,7 +97,7 @@ const capableModel = stripe('anthropic/claude-opus-4');
 ### Generate Text
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk-provider';
+import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 
 const stripe = createStripe({
@@ -114,7 +116,7 @@ console.log(text);
 ### Stream Text
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk-provider';
+import { createStripe } from '@stripe/ai-sdk/provider';
 import { streamText } from 'ai';
 
 const stripe = createStripe({
@@ -135,7 +137,7 @@ for await (const chunk of result.textStream) {
 ### Tool Calling
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk-provider';
+import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 import { z } from 'zod';
 
@@ -167,7 +169,7 @@ console.log(result.text);
 ### Multi-turn Conversations
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk-provider';
+import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 
 const stripe = createStripe({
@@ -191,7 +193,7 @@ console.log(result.text);
 
 The Stripe provider offers flexible customer ID configuration to ensure accurate billing attribution. Customer IDs can be specified at three levels (in order of priority):
 
-### 1. Per-Request Override (Highest Priority)
+### 1. Per-Request Setting (Highest Priority)
 
 ```typescript
 await generateText({
@@ -218,41 +220,12 @@ await generateText({
 });
 ```
 
-### 3. Provider-Level Default
+### 3. Provider-Level Setting
 
 ```typescript
 const stripe = createStripe({
   apiKey: process.env.STRIPE_API_KEY,
-  customerId: 'cus_provider_default',
-});
-```
-
-## Advanced Features
-
-### Custom Headers
-
-Add custom headers to all requests:
-
-```typescript
-const stripe = createStripe({
-  apiKey: process.env.STRIPE_API_KEY,
-  customerId: 'cus_xxxxx',
-  headers: {
-    'X-Custom-Header': 'custom-value',
-  },
-});
-```
-
-### Model-Specific Settings
-
-Configure settings for individual models:
-
-```typescript
-const model = stripe('anthropic/claude-sonnet-4', {
-  customerId: 'cus_xxxxx',
-  headers: {
-    'X-Request-ID': 'unique-id',
-  },
+  customerId: 'cus_provider_level',
 });
 ```
 

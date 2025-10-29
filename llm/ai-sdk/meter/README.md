@@ -1,8 +1,10 @@
-# Stripe AI SDK Billing Wrapper
+# Metering utilities for Vercel AI SDK
 
-The Stripe AI SDK Billing Wrapper enables automatic token usage tracking and billing for any Vercel AI SDK language model. This wrapper intercepts AI SDK calls and automatically reports usage to Stripe meter events, making it easy to bill customers for their AI consumption.
+The Stripe AI SDK Meter enables automatic token usage tracking and billing for any Vercel AI SDK language model. This wrapper intercepts AI SDK calls and automatically reports usage to Stripe meter events, making it easy to bill customers for their AI consumption.
 
-## Why Use the AI SDK Billing Wrapper?
+> **Note:** This is part of the [`@stripe/ai-sdk`](../README.md) package. See the main README for an overview of all available tools.
+
+## Why Use the AI SDK Meter?
 
 - **Universal Compatibility**: Works with any AI SDK v2 provider (OpenAI, Anthropic, Google, and more)
 - **Automatic Usage Tracking**: Token consumption is automatically tracked and reported to Stripe
@@ -11,12 +13,12 @@ The Stripe AI SDK Billing Wrapper enables automatic token usage tracking and bil
 - **Non-Intrusive**: Preserves all original model functionality while adding billing capabilities
 - **Fire-and-Forget**: Billing events are sent asynchronously without blocking API responses
 
-Learn more about Stripe's Token Billing in the [Stripe Documentation](https://docs.stripe.com/billing/token-billing).
+Learn more about Stripe's Token Billing and request access to the latest features from the [Stripe Documentation](https://docs.stripe.com/billing/token-billing).
 
 ## Installation
 
 ```bash
-npm install @stripe/ai-sdk-billing-wrapper
+npm install @stripe/ai-sdk
 ```
 
 ## Basic Usage
@@ -24,7 +26,7 @@ npm install @stripe/ai-sdk-billing-wrapper
 Wrap any AI SDK v2 language model with `meteredModel` to enable automatic usage tracking:
 
 ```typescript
-import { meteredModel } from '@stripe/ai-sdk-billing-wrapper';
+import { meteredModel } from '@stripe/ai-sdk/meter';
 import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
 
@@ -71,7 +73,7 @@ The wrapper works with any AI SDK provider that implements the v2 specification 
 ### Streaming Responses
 
 ```typescript
-import { meteredModel } from '@stripe/ai-sdk-billing-wrapper';
+import { meteredModel } from '@stripe/ai-sdk/meter';
 import { anthropic } from '@ai-sdk/anthropic';
 import { streamText } from 'ai';
 
@@ -94,7 +96,7 @@ for await (const chunk of result.textStream) {
 ### Multi-turn Conversations
 
 ```typescript
-import { meteredModel } from '@stripe/ai-sdk-billing-wrapper';
+import { meteredModel } from '@stripe/ai-sdk/meter';
 import { google } from '@ai-sdk/google';
 import { generateText } from 'ai';
 
@@ -117,7 +119,7 @@ const result = await generateText({
 ### Using Different Providers
 
 ```typescript
-import { meteredModel } from '@stripe/ai-sdk-billing-wrapper';
+import { meteredModel } from '@stripe/ai-sdk/meter';
 import { openai } from '@ai-sdk/openai';
 import { anthropic } from '@ai-sdk/anthropic';
 import { google } from '@ai-sdk/google';

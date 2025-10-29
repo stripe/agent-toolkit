@@ -11,8 +11,7 @@ import {openai} from '@ai-sdk/openai';
 import {generateText, streamText} from 'ai';
 import {meteredModel} from '..';
 
-// Load .env from the llm folder
-config({path: resolve(__dirname, '../../.env')});
+config({path: resolve(__dirname, '.env')});
 
 // Load environment variables from .env file
 const STRIPE_API_KEY = process.env.STRIPE_API_KEY!;

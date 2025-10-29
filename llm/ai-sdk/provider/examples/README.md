@@ -103,7 +103,7 @@ Examples include:
 ### Basic Setup
 
 ```typescript
-import { createStripe } from '@stripe/ai';
+import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 
 const stripe = createStripe({

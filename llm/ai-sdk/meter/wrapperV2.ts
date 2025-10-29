@@ -25,7 +25,7 @@ export class AISDKWrapperV2 implements LanguageModelV2 {
     // Construct Stripe client with the API key
     this.stripeClient = new Stripe(config.stripeApiKey, {
       appInfo: {
-        name: 'ai-sdk-billing-wrapper',
+        name: '@stripe/ai-sdk/meter',
         version: '0.1.0',
       },
     });

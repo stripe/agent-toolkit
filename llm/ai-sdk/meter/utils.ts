@@ -3,7 +3,7 @@
  */
 
 import type {LanguageModelV2StreamPart} from '@ai-sdk/provider';
-import type {Provider} from '../shared/types';
+import type {Provider} from './meter-event-types';
 
 /**
  * Determines the provider type from a given model provider string.

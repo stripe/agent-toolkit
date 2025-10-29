@@ -9,18 +9,12 @@
     "skipLibCheck": true,
     "strict": true,
     "module": "NodeNext",
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
+      "@/*": ["src/*"]
     }
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "examples"
-  ]
+  "include": ["**/*.ts"],
+  "exclude": ["node_modules", "examples"]
 }

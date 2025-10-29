@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createPricePrompt = (_context: Context = {}) => `
 This tool will create a price in Stripe. If a product has not already been specified, a product should be created first.
@@ -49,11 +49,11 @@ export const createPriceAnnotations = () => ({
   title: 'Create price',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_price',
   name: 'Create Price',
   description: createPricePrompt(context),
-  parameters: createPriceParameters(context),
+  inputSchema: createPriceParameters(context),
   annotations: createPriceAnnotations(),
   actions: {
     prices: {

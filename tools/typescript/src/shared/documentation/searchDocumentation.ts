@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 export const searchDocumentationPrompt = (_context: Context = {}) => `
 This tool will take in a user question about integrating with Stripe in their application, then search and retrieve relevant Stripe documentation to answer the question.
 
@@ -67,11 +67,11 @@ export const searchDocumentation = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'search_stripe_documentation',
   name: 'Search Stripe Documentation',
   description: searchDocumentationPrompt(context),
-  parameters: searchDocumentationParameters(context),
+  inputSchema: searchDocumentationParameters(context),
   annotations: searchDocumentationAnnotations(),
   actions: {
     documentation: {

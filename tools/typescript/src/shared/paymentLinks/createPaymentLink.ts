@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createPaymentLinkPrompt = (_context: Context = {}) => `
 This tool will create a payment link in Stripe.
@@ -64,11 +64,11 @@ export const createPaymentLinkParameters = (_context: Context = {}) =>
       .describe('The URL to redirect to after the payment is completed.'),
   });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_payment_link',
   name: 'Create Payment Link',
   description: createPaymentLinkPrompt(context),
-  parameters: createPaymentLinkParameters(context),
+  inputSchema: createPaymentLinkParameters(context),
   annotations: createPaymentLinkAnnotations(),
   actions: {
     paymentLinks: {

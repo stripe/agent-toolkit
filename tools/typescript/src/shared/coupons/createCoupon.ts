@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createCouponPrompt = (_context: Context = {}) => `
 This tool will create a coupon in Stripe.
@@ -86,11 +86,11 @@ export const createCoupon = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_coupon',
   name: 'Create Coupon',
   description: createCouponPrompt(context),
-  parameters: createCouponParameters(context),
+  inputSchema: createCouponParameters(context),
   annotations: createCouponAnnotations(),
   actions: {
     coupons: {

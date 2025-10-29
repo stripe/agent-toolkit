@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listPaymentIntentsPrompt = (context: Context = {}) => {
   const customerArg = context.customer
@@ -72,11 +72,11 @@ export const listPaymentIntentsParameters = (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_payment_intents',
   name: 'List Payment Intents',
   description: listPaymentIntentsPrompt(context),
-  parameters: listPaymentIntentsParameters(context),
+  inputSchema: listPaymentIntentsParameters(context),
   annotations: listPaymentIntentsAnnotations(),
   actions: {
     paymentIntents: {

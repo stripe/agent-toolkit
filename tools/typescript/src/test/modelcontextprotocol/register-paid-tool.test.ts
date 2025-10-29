@@ -1,4 +1,4 @@
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {registerPaidTool} from '../../modelcontextprotocol/register-paid-tool';
 import Stripe from 'stripe';

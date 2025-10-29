@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listSubscriptions = async (
   stripe: Stripe,
@@ -91,11 +91,11 @@ export const listSubscriptionsAnnotations = () => ({
   title: 'List subscriptions',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_subscriptions',
   name: 'List Subscriptions',
   description: listSubscriptionsPrompt(context),
-  parameters: listSubscriptionsParameters(context),
+  inputSchema: listSubscriptionsParameters(context),
   annotations: listSubscriptionsAnnotations(),
   actions: {
     subscriptions: {

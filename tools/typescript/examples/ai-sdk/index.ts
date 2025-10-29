@@ -1,9 +1,6 @@
 import {StripeAgentToolkit} from '@stripe/agent-toolkit/ai-sdk';
 import {openai} from '@ai-sdk/openai';
-import {
-  generateText,
-  experimental_wrapLanguageModel as wrapLanguageModel,
-} from 'ai';
+import {generateText, wrapLanguageModel, stepCountIs} from 'ai';
 
 require('dotenv').config();
 
@@ -25,7 +22,7 @@ const stripeAgentToolkit = new StripeAgentToolkit({
 });
 
 const model = wrapLanguageModel({
-  model: openai('gpt-4o'),
+  model: openai.languageModel('gpt-4o'),
   middleware: stripeAgentToolkit.middleware({
     billing: {
       customer: process.env.STRIPE_CUSTOMER_ID!,
@@ -40,10 +37,13 @@ const model = wrapLanguageModel({
 (async () => {
   const result = await generateText({
     model: model,
+
     tools: {
       ...stripeAgentToolkit.getTools(),
     },
-    maxSteps: 5,
+
+    stopWhen: stepCountIs(5),
+
     prompt:
       'Create a payment link for a new product called "test" with a price of $100. Come up with a funny description about buy bots, maybe a haiku.',
   });

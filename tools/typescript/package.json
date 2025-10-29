@@ -1,6 +1,6 @@
 {
   "name": "@stripe/agent-toolkit",
-  "version": "0.7.12",
+  "version": "0.8.0",
   "homepage": "https://github.com/stripe/ai",
   "scripts": {
     "build": "tsup",

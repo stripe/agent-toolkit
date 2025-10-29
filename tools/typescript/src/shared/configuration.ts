@@ -1,4 +1,4 @@
-import type {Tool} from './tools';
+import type {StripeToolDefinition} from './tools';
 
 // Actions restrict the subset of API calls that can be made. They should
 // be used in conjunction with Restricted API Keys. Setting a permission to false
@@ -53,7 +53,7 @@ export type Configuration = {
 };
 
 export const isToolAllowed = (
-  tool: Tool,
+  tool: StripeToolDefinition,
   configuration: Configuration
 ): boolean => {
   return Object.keys(tool.actions).every((resource) => {

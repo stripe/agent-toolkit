@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listPrices = async (
   stripe: Stripe,
@@ -53,11 +53,11 @@ It takes two arguments.
 - limit (int, optional): The number of prices to return.
 `;
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_prices',
   name: 'List Prices',
   description: listPricesPrompt(context),
-  parameters: listPricesParameters(context),
+  inputSchema: listPricesParameters(context),
   annotations: listPricesAnnotations(),
   actions: {
     prices: {

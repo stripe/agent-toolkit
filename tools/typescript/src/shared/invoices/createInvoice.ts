@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createInvoicePrompt = (context: Context = {}) => {
   const customerArg = context.customer
@@ -75,11 +75,11 @@ export const createInvoice = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_invoice',
   name: 'Create Invoice',
   description: createInvoicePrompt(context),
-  parameters: createInvoiceParameters(context),
+  inputSchema: createInvoiceParameters(context),
   annotations: createInvoiceAnnotations(),
   actions: {
     invoices: {

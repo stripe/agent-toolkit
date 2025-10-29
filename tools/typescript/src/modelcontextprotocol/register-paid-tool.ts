@@ -1,4 +1,4 @@
-import {z, type ZodRawShape} from 'zod';
+import {z, type ZodRawShape} from 'zod/v3';
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
 import type {CallToolResult} from '@modelcontextprotocol/sdk/types.js';
@@ -36,7 +36,7 @@ export async function registerPaidTool<Args extends ZodRawShape>(
   const stripe = new Stripe(options.stripeSecretKey, {
     appInfo: {
       name: 'stripe-agent-toolkit-mcp-payments',
-      version: '0.7.11',
+      version: '0.8.0',
       url: 'https://github.com/stripe/ai',
     },
   });

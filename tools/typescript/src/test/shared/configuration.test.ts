@@ -1,4 +1,4 @@
-import z from 'zod';
+import {z} from 'zod/v3';
 import {isToolAllowed} from '@/shared/configuration';
 
 describe('isToolAllowed', () => {
@@ -7,7 +7,7 @@ describe('isToolAllowed', () => {
       method: 'test',
       name: 'Test',
       description: 'Test',
-      parameters: z.object({
+      inputSchema: z.object({
         foo: z.string(),
       }),
       annotations: {
@@ -51,7 +51,7 @@ describe('isToolAllowed', () => {
       method: 'test',
       name: 'Test',
       description: 'Test',
-      parameters: z.object({
+      inputSchema: z.object({
         foo: z.string(),
       }),
       annotations: {
@@ -95,7 +95,7 @@ describe('isToolAllowed', () => {
       method: 'test',
       name: 'Test',
       description: 'Test',
-      parameters: z.object({
+      inputSchema: z.object({
         foo: z.string(),
       }),
       annotations: {

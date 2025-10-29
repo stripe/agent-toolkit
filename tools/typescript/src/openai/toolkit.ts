@@ -32,7 +32,7 @@ class StripeAgentToolkit {
       function: {
         name: tool.method,
         description: tool.description,
-        parameters: zodToJsonSchema(tool.parameters),
+        inputSchema: zodToJsonSchema(tool.inputSchema),
       },
     }));
   }

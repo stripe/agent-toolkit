@@ -1,6 +1,6 @@
 {
   "name": "@stripe/mcp",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "homepage": "https://github.com/stripe/agent-toolkit/tree/main/modelcontextprotocol",
   "description": "A command line tool for setting up Stripe MCP server",
   "bin": "dist/index.js",
@@ -53,5 +53,15 @@
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "form-data": "^4.0.4",
+      "@babel/helpers": "^7.26.10",
+      "jsondiffpatch": "^0.7.2",
+      "brace-expansion": "^2.0.2",
+      "@eslint/plugin-kit": "^0.3.4",
+      "tmp": "^0.2.4"
+    }
   }
 }

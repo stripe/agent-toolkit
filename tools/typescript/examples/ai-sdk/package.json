@@ -8,12 +8,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@ai-sdk/openai": "^0.0.63",
-    "@stripe/agent-toolkit": "latest",
-    "ai": "^3.4.7 || ^4.0.0",
-    "dotenv": "^16.4.5"
+    "@ai-sdk/openai": "^2.0.57",
+    "@stripe/agent-toolkit": "^0.7.11",
+    "ai": "^5.0.82",
+    "dotenv": "^17.2.3"
   },
   "devDependencies": {
-    "@types/node": "^22.7.4"
+    "@types/node": "^24.9.2"
   }
 }

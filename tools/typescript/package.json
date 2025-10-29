@@ -67,14 +67,14 @@
   },
   "dependencies": {
     "stripe": "^17.5.0",
-    "zod": "^3.24.1",
-    "zod-to-json-schema": "^3.24.3"
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.24.6"
   },
   "peerDependencies": {
     "openai": "^4.86.1",
     "@langchain/core": "^0.3.6",
     "@modelcontextprotocol/sdk": "^1.17.1",
-    "ai": "^3.4.7 || ^4.0.0",
+    "ai": "^5.0.0",
     "agents": ">=0.0.84"
   },
   "workspaces": [

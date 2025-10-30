@@ -6,7 +6,7 @@ The Stripe AI SDK Meter enables automatic token usage tracking and billing for a
 
 ## Private preview access required
 
-**Please note:** The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
+The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you don't have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 

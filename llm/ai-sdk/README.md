@@ -12,7 +12,7 @@ The Stripe AI SDK provides comprehensive tools for integrating AI models with St
 
 This package contains two main components:
 
-### 1. **Provider** (`@stripe/ai-sdk/provider`)
+### **Provider** (`@stripe/ai-sdk/provider`)
 
 A custom Vercel AI SDK provider that routes requests through Stripe's LLM proxy at `llm.stripe.com`, enabling automatic usage tracking and billing integration.
 
@@ -41,7 +41,7 @@ const { text } = await generateText({
 
 [→ Full Provider Documentation](./provider/README.md)
 
-### 2. **Meter** (`@stripe/ai-sdk/meter`)
+### **Meter** (`@stripe/ai-sdk/meter`)
 
 A wrapper utility that adds billing tracking to any Vercel AI SDK language model, allowing you to use your preferred provider while still tracking usage in Stripe.
 

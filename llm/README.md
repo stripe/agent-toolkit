@@ -4,7 +4,7 @@ This directory contains two packages for tracking and billing LLM token usage wi
 
 ## Private preview access required
 
-**Please note:** Stripe Billing for LLM Tokens is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
+Stripe Billing for LLM Tokens is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you don't have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 

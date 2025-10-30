@@ -44,10 +44,10 @@ const stripeLLM = createStripe({
 
 ### Configuration options
 
-- **`apiKey`** (required): Your Stripe API key from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys)
-- **`customerId`** (optional): Default customer ID to attribute usage to
-- **`baseURL`** (optional): Custom base URL (defaults to `https://llm.stripe.com`)
-- **`headers`** (optional): Additional headers to include in requests
+- `apiKey` (required): Your Stripe API key from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys)
+- `customerId` (optional): Default customer ID to attribute usage to
+- `baseURL` (optional): Custom base URL (defaults to `https://llm.stripe.com`)
+- `headers` (optional): Additional headers to include in requests
 
 ## Supported models
 
@@ -161,7 +161,7 @@ console.log(result.text);
 
 The Stripe provider offers flexible customer ID configuration to ensure accurate billing attribution. Customer IDs can be specified at three levels (in order of priority):
 
-### 1. Per-request setting (highest priority)
+### Per-request setting (highest priority)
 
 ```typescript
 await generateText({
@@ -175,7 +175,7 @@ await generateText({
 });
 ```
 
-### 2. Model-level setting
+### Model-level setting
 
 ```typescript
 const model = stripe('openai/gpt-5', {
@@ -188,7 +188,7 @@ await generateText({
 });
 ```
 
-### 3. Provider-level setting
+### Provider-level setting
 
 ```typescript
 const stripeLLM = createStripe({
@@ -215,18 +215,18 @@ console.log(result.usage);
 
 The Stripe provider supports the following AI SDK features:
 
-- ✅ **Text Generation**: Both streaming and non-streaming
-- ✅ **Multi-turn Conversations**: Complex conversation histories
-- ✅ **Streaming**: Real-time token streaming
-- ✅ **Temperature & Sampling**: All standard generation parameters
-- ✅ **Stop Sequences**: Custom stop sequence support
-- ✅ **Token Limits**: Max output tokens configuration
+- **Text Generation**: Both streaming and non-streaming
+- **Multi-turn Conversations**: Complex conversation histories
+- **Streaming**: Real-time token streaming
+- **Temperature & Sampling**: All standard generation parameters
+- **Stop Sequences**: Custom stop sequence support
+- **Token Limits**: Max output tokens configuration
 
 ### Feature limitations
 
-- ❌ **Tool Calling**: Function calling and tool use are not currently supported by the llm.stripe.com API
-- ❌ **Text Embeddings**: Embedding models are not yet supported
-- ❌ **Image Generation**: Image models are not yet supported
+- **Tool Calling**: Function calling and tool use aren't currently supported by the llm.stripe.com API
+- **Text Embeddings**: Embedding models aren't supported yet
+- **Image Generation**: Image models aren't supported yet
 
 ## Additional resources
 

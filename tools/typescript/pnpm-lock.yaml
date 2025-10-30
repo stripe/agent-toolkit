@@ -18,6 +18,9 @@ importers:
 
   .:
     dependencies:
+      '@ai-sdk/provider':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@langchain/core':
         specifier: ^0.3.6
         version: 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.25.76))
@@ -25,7 +28,7 @@ importers:
         specifier: ^1.17.1
         version: 1.17.1
       agents:
-        specifier: '>=0.0.84'
+        specifier: ^0.0.84
         version: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
       ai:
         specifier: ^5.0.0
@@ -95,7 +98,7 @@ importers:
   examples/ai-sdk:
     dependencies:
       '@ai-sdk/openai':
-        specifier: ^2.0.0
+        specifier: ^2.0.58
         version: 2.0.58(zod@3.25.76)
       '@stripe/agent-toolkit':
         specifier: workspace:*

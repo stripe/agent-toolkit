@@ -1,15 +1,18 @@
 import StripeAPI from '../shared/api';
 import tools from '../shared/tools';
 import {isToolAllowed, type Configuration} from '../shared/configuration';
-import type {LanguageModelMiddleware, LanguageModelUsage} from 'ai';
+import type {
+  LanguageModelV2Middleware,
+  LanguageModelV2Usage,
+} from '@ai-sdk/provider';
 import StripeTool from './tool';
 
 type ProviderTool = ReturnType<typeof StripeTool>;
 type WrapGenerateOptions = Parameters<
-  NonNullable<LanguageModelMiddleware['wrapGenerate']>
+  NonNullable<LanguageModelV2Middleware['wrapGenerate']>
 >[0];
 type WrapStreamOptions = Parameters<
-  NonNullable<LanguageModelMiddleware['wrapStream']>
+  NonNullable<LanguageModelV2Middleware['wrapStream']>
 >[0];
 
 type StripeMiddlewareConfig = {
@@ -54,8 +57,8 @@ class StripeAgentToolkit {
     });
   }
 
-  middleware(config: StripeMiddlewareConfig): LanguageModelMiddleware {
-    const bill = async (usage?: LanguageModelUsage) => {
+  middleware(config: StripeMiddlewareConfig): LanguageModelV2Middleware {
+    const bill = async (usage?: LanguageModelV2Usage) => {
       if (!config.billing || !usage) {
         return;
       }

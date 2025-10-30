@@ -1,4 +1,4 @@
-# Stripe Token Billing
+# Stripe Token Meter
 
 Generic token metering for native AI SDKs with automatic Stripe billing integration. Track and bill token usage from OpenAI, Anthropic, and Google Gemini without any framework dependencies.
 
@@ -8,7 +8,7 @@ Generic token metering for native AI SDKs with automatic Stripe billing integrat
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 
-## Why use Stripe Token Billing?
+## Why use Stripe Token Meter?
 
 - **Native SDK Support**: Works directly with native AI SDKs (OpenAI, Anthropic, Google)
 - **No Framework Required**: Direct integration without Vercel AI SDK or other frameworks
@@ -20,7 +20,7 @@ Generic token metering for native AI SDKs with automatic Stripe billing integrat
 ## Installation
 
 ```bash
-npm install @stripe/token-billing
+npm install @stripe/token-meter
 ```
 
 ## Supported providers
@@ -35,7 +35,7 @@ npm install @stripe/token-billing
 
 ```typescript
 import OpenAI from 'openai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -53,7 +53,7 @@ meter.trackUsage(response, 'cus_xxxxx');
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -72,7 +72,7 @@ meter.trackUsage(response, 'cus_xxxxx');
 
 ```typescript
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -150,7 +150,7 @@ Wraps a Google Gemini streaming response for usage tracking.
 
 ```typescript
 import OpenAI from 'openai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -173,7 +173,7 @@ for await (const chunk of meteredStream) {
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -198,7 +198,7 @@ for await (const event of meteredStream) {
 
 ```typescript
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -221,7 +221,7 @@ for await (const chunk of meteredStream.stream) {
 
 ```typescript
 import OpenAI from 'openai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -240,7 +240,7 @@ console.log('Output:', response.output);
 
 ```typescript
 import OpenAI from 'openai';
-import { createTokenMeter } from '@stripe/token-billing';
+import { createTokenMeter } from '@stripe/token-meter';
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const meter = createTokenMeter(process.env.STRIPE_API_KEY);
@@ -308,12 +308,12 @@ The token meter handles errors gracefully:
 Full TypeScript support with type definitions for all providers:
 
 ```typescript
-import type { TokenMeter, SupportedResponse, SupportedStream } from '@stripe/token-billing';
+import type { TokenMeter, SupportedResponse, SupportedStream } from '@stripe/token-meter';
 ```
 
 ## Comparison with AI SDK Meter
 
-### Use Token Billing when
+### Use Token Meter when
 - You're using native SDKs (OpenAI, Anthropic, Google) directly
 - You don't want to depend on Vercel AI SDK
 - You need maximum control over API parameters

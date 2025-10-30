@@ -1,7 +1,7 @@
 {
-  "name": "@stripe/token-billing",
+  "name": "@stripe/token-meter",
   "version": "0.1.0",
-  "description": "Generic token billing for AI SDKs with Stripe integration",
+  "description": "Generic token metering for AI SDKs with Stripe integration",
   "main": "index.ts",
   "scripts": {
     "test": "jest",

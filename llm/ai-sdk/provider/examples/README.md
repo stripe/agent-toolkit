@@ -106,7 +106,7 @@ Examples include:
 import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 
-const stripe = createStripe({
+const stripeLLM = createStripe({
   apiKey: process.env.STRIPE_API_KEY!,
   customerId: process.env.STRIPE_CUSTOMER_ID, // Optional default
 });
@@ -140,7 +140,7 @@ const model = stripe('openai/gpt-5', {
 
 3. **Provider-level default**:
 ```typescript
-const stripe = createStripe({
+const stripeLLM = createStripe({
   apiKey: '...',
   customerId: 'cus_default'
 });

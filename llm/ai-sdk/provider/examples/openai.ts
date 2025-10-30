@@ -24,7 +24,7 @@ async function main() {
 
 
   // Initialize the Stripe provider
-  const stripe = createStripe({
+  const stripeLLM = createStripe({
     apiKey: process.env.STRIPE_API_KEY!,
     customerId: process.env.STRIPE_CUSTOMER_ID, // Optional default customer ID
   });
@@ -33,7 +33,7 @@ async function main() {
 
   // Basic text generation
   const result1 = await generateText({
-    model: stripe('openai/gpt-5', {
+    model: stripeLLM('openai/gpt-5', {
       customerId: process.env.STRIPE_CUSTOMER_ID!, // Model-level customer ID
     }),
     prompt: 'What are the three primary colors?',
@@ -52,7 +52,7 @@ async function main() {
 
   // Streaming response
   const result2 = await streamText({
-    model: stripe('openai/gpt-4.1'),
+    model: stripeLLM('openai/gpt-4.1'),
     prompt: streamPrompt,
     providerOptions: {
       stripe: {
@@ -87,7 +87,7 @@ async function main() {
 
   // Multi-turn conversation
   const result3 = await generateText({
-    model: stripe('openai/gpt-4.1-mini', {
+    model: stripeLLM('openai/gpt-4.1-mini', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     messages: [
@@ -105,7 +105,7 @@ async function main() {
 
   // Using reasoning model
   const result4 = await generateText({
-    model: stripe('openai/o3', {
+    model: stripeLLM('openai/o3', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt:

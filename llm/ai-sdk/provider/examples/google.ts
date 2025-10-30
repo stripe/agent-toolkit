@@ -24,7 +24,7 @@ async function main() {
 
 
   // Initialize the Stripe provider
-  const stripe = createStripe({
+  const stripeLLM = createStripe({
     apiKey: process.env.STRIPE_API_KEY!,
     customerId: process.env.STRIPE_CUSTOMER_ID!, // Default customer ID
   });
@@ -33,7 +33,7 @@ async function main() {
 
   // Basic text generation
   const result1 = await generateText({
-    model: stripe('google/gemini-2.5-pro'),
+    model: stripeLLM('google/gemini-2.5-pro'),
     prompt: 'What are the main differences between Python and JavaScript?',
   });
 
@@ -45,7 +45,7 @@ async function main() {
 
   // Streaming response with the faster Gemini model
   const result2 = await streamText({
-    model: stripe('google/gemini-2.5-flash', {
+    model: stripeLLM('google/gemini-2.5-flash', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt: 'Write a short story about a robot learning to paint.',
@@ -61,7 +61,7 @@ async function main() {
 
   // Multi-turn conversation
   const result3 = await generateText({
-    model: stripe('google/gemini-2.0-flash'),
+    model: stripeLLM('google/gemini-2.0-flash'),
     messages: [
       {role: 'user', content: 'What is machine learning?'},
       {
@@ -86,7 +86,7 @@ async function main() {
 
   // Using the lite model for faster, cheaper responses
   const result4 = await generateText({
-    model: stripe('google/gemini-2.5-flash-lite', {
+    model: stripeLLM('google/gemini-2.5-flash-lite', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt: 'List 5 programming languages.',
@@ -101,7 +101,7 @@ async function main() {
 
   // Long-form content generation
   const result5 = await generateText({
-    model: stripe('google/gemini-2.5-pro', {
+    model: stripeLLM('google/gemini-2.5-pro', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt:

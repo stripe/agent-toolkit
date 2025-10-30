@@ -2,8 +2,6 @@
 
 The Stripe AI SDK Provider enables seamless integration with leading AI models through Stripe's unified LLM proxy at `llm.stripe.com`. This custom provider for the Vercel AI SDK automatically tracks token usage and integrates with Stripe's billing system, making it easy to monetize AI features in your applications.
 
-> **Note:** This is part of the [`@stripe/ai-sdk`](../README.md) package. See the main README for an overview of all available tools.
-
 ## ⚠️ Private Preview Access Required
 
 **Please note:** The Stripe AI SDK Provider is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
@@ -23,10 +21,10 @@ Learn more about Stripe's Token Billing in the [Stripe Documentation](https://do
 
 ## Setup
 
-The Stripe AI SDK Provider is available in the `@stripe/ai-sdk` package. You can install it with:
+The Stripe AI SDK Provider is available in the `@stripe/ai-sdk-provider` module. You can install it with:
 
 ```bash
-npm install @stripe/ai-sdk
+npm install @stripe/ai-sdk-provider
 ```
 
 ## Provider Instance
@@ -34,7 +32,7 @@ npm install @stripe/ai-sdk
 To create a Stripe provider instance, use the `createStripe` function:
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk/provider';
+import { createStripe } from '@stripe/ai-sdk-provider';
 
 const stripeLLM = createStripe({
   apiKey: process.env.STRIPE_API_KEY,
@@ -97,7 +95,7 @@ const capableModel = stripe('anthropic/claude-opus-4');
 ### Generate Text
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk/provider';
+import { createStripe } from '@stripe/ai-sdk-provider';
 import { generateText } from 'ai';
 
 const stripeLLM = createStripe({
@@ -116,7 +114,7 @@ console.log(text);
 ### Stream Text
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk/provider';
+import { createStripe } from '@stripe/ai-sdk-provider';
 import { streamText } from 'ai';
 
 const stripeLLM = createStripe({
@@ -134,10 +132,42 @@ for await (const chunk of result.textStream) {
 }
 ```
 
+### Tool Calling
+
+```typescript
+import { createStripe } from '@stripe/ai-sdk-provider';
+import { generateText } from 'ai';
+import { z } from 'zod';
+
+const stripeLLM = createStripe({
+  apiKey: process.env.STRIPE_API_KEY,
+  customerId: 'cus_xxxxx',
+});
+
+const result = await generateText({
+  model: stripe('anthropic/claude-sonnet-4'),
+  prompt: 'What is the weather in San Francisco?',
+  tools: {
+    getWeather: {
+      description: 'Get the current weather for a location',
+      parameters: z.object({
+        location: z.string().describe('The city name'),
+      }),
+      execute: async ({ location }) => ({
+        temperature: 72,
+        condition: 'Sunny',
+      }),
+    },
+  },
+});
+
+console.log(result.text);
+```
+
 ### Multi-turn Conversations
 
 ```typescript
-import { createStripe } from '@stripe/ai-sdk/provider';
+import { createStripe } from '@stripe/ai-sdk-provider';
 import { generateText } from 'ai';
 
 const stripeLLM = createStripe({
@@ -213,20 +243,15 @@ console.log(result.usage);
 
 ## Supported AI SDK Features
 
-The Stripe provider supports the following AI SDK features:
+The Stripe provider supports all core AI SDK features:
 
 - ✅ **Text Generation**: Both streaming and non-streaming
+- ✅ **Tool Calling**: Full function calling support
 - ✅ **Multi-turn Conversations**: Complex conversation histories
 - ✅ **Streaming**: Real-time token streaming
 - ✅ **Temperature & Sampling**: All standard generation parameters
 - ✅ **Stop Sequences**: Custom stop sequence support
 - ✅ **Token Limits**: Max output tokens configuration
-
-### Feature Limitations
-
-- ❌ **Tool Calling**: Function calling and tool use are not currently supported by the llm.stripe.com API
-- ❌ **Text Embeddings**: Embedding models are not yet supported
-- ❌ **Image Generation**: Image models are not yet supported
 
 ## Additional Resources
 

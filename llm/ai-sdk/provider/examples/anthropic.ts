@@ -24,7 +24,7 @@ async function main() {
 
 
   // Initialize the Stripe provider
-  const stripe = createStripe({
+  const stripeLLM = createStripe({
     apiKey: process.env.STRIPE_API_KEY!,
     customerId: process.env.STRIPE_CUSTOMER_ID!, // Default customer ID
   });
@@ -33,7 +33,7 @@ async function main() {
 
   // Basic text generation
   const result1 = await generateText({
-    model: stripe('anthropic/claude-sonnet-4'),
+    model: stripeLLM('anthropic/claude-sonnet-4'),
     prompt: 'Explain quantum computing in simple terms.',
   });
 
@@ -45,7 +45,7 @@ async function main() {
 
   // Streaming response with the most capable Claude model
   const result2 = await streamText({
-    model: stripe('anthropic/claude-opus-4', {
+    model: stripeLLM('anthropic/claude-opus-4', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt: 'Write a poem about the ocean and its mysteries.',
@@ -61,7 +61,7 @@ async function main() {
 
   // Multi-turn conversation
   const result3 = await generateText({
-    model: stripe('anthropic/claude-3-7-sonnet', {
+    model: stripeLLM('anthropic/claude-3-7-sonnet', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     messages: [
@@ -83,7 +83,7 @@ async function main() {
 
   // Using the fastest Claude model
   const result4 = await generateText({
-    model: stripe('anthropic/claude-3-5-haiku', {
+    model: stripeLLM('anthropic/claude-3-5-haiku', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt: 'What are the benefits of functional programming?',
@@ -98,7 +98,7 @@ async function main() {
 
   // Complex reasoning task
   const result5 = await generateText({
-    model: stripe('anthropic/claude-opus-4-1', {
+    model: stripeLLM('anthropic/claude-opus-4-1', {
       customerId: process.env.STRIPE_CUSTOMER_ID!,
     }),
     prompt:
@@ -114,7 +114,7 @@ async function main() {
 
   // Override customer ID for a specific call
   const result7 = await generateText({
-    model: stripe('anthropic/claude-3-haiku'),
+    model: stripeLLM('anthropic/claude-3-haiku'),
     prompt: 'What is the speed of light?',
     providerOptions: {
       stripe: {

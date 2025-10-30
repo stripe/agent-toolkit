@@ -28,7 +28,7 @@ A custom Vercel AI SDK provider that routes requests through Stripe's LLM proxy 
 import { createStripe } from '@stripe/ai-sdk/provider';
 import { generateText } from 'ai';
 
-const stripe = createStripe({
+const stripeLLM = createStripe({
   apiKey: process.env.STRIPE_API_KEY,
   customerId: 'cus_xxxxx',
 });
@@ -100,7 +100,7 @@ npm install @stripe/ai-sdk
 import { createStripe } from '@stripe/ai-sdk/provider';
 import { streamText } from 'ai';
 
-const stripe = createStripe({
+const stripeLLM = createStripe({
   apiKey: process.env.STRIPE_API_KEY,
   customerId: 'cus_xxxxx',
 });

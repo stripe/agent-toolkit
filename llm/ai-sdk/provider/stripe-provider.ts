@@ -41,7 +41,7 @@ export interface StripeProvider extends ProviderV2 {
  * ```ts
  * import { createStripe } from '@stripe/ai-sdk/provider';
  *
- * const stripe = createStripe({
+ * const stripeLLM = createStripe({
  *   apiKey: process.env.STRIPE_API_KEY,
  *   customerId: 'cus_xxxxx' // Optional default customer ID
  * });

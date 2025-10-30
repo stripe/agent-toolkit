@@ -107,7 +107,7 @@ const stripeLLM = createStripe({
 
 // Works with any supported model
 const result = await streamText({
-  model: stripe('anthropic/claude-sonnet-4'),
+  model: stripeLLM('anthropic/claude-sonnet-4'),
   prompt: 'Write a short story about AI.',
 });
 

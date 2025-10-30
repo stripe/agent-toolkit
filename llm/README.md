@@ -10,7 +10,7 @@ This directory contains two packages for tracking and billing LLM token usage wi
 
 ## Packages
 
-### ai-sdk
+### `@stripe/ai-sdk`
 
 The Stripe AI SDK provides tools for integrating AI models with Stripe's billing infrastructure when using the Vercel AI SDK. It includes two components:
 

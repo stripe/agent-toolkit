@@ -20,7 +20,7 @@ The Stripe AI SDK provides tools for integrating AI models with Stripe's billing
 
 [View ai-sdk documentation](./ai-sdk/README.md)
 
-### token-meter
+### `@stripe/token-meter`
 
 The Stripe Token Meter provides generic token metering for native AI SDKs with automatic Stripe billing integration. Unlike the ai-sdk package, this works directly with native SDKs from OpenAI, Anthropic, and Google Gemini without requiring the Vercel AI SDK or any other framework.
 

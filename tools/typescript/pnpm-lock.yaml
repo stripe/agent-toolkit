@@ -18,6 +18,9 @@ importers:
 
   .:
     dependencies:
+      '@ai-sdk/provider':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@langchain/core':
         specifier: ^0.3.6
         version: 0.3.27(openai@4.86.1(ws@8.18.0)(zod@3.25.76))
@@ -95,8 +98,8 @@ importers:
   examples/ai-sdk:
     dependencies:
       '@ai-sdk/openai':
-        specifier: ^2.0.0
-        version: 2.0.57(zod@3.25.76)
+        specifier: ^2.0.58
+        version: 2.0.58(zod@3.25.76)
       '@stripe/agent-toolkit':
         specifier: workspace:*
         version: link:../..
@@ -212,8 +215,8 @@ packages:
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
 
-  '@ai-sdk/openai@2.0.57':
-    resolution: {integrity: sha512-ad2e4Ah9KdLnchMcWFv2FfU1JCwm50b3+UZq2VhkO8qLYEh2kh/aVQomZyAsIbx5ft5nOv2KmDwZrefXkeKttQ==}
+  '@ai-sdk/openai@2.0.58':
+    resolution: {integrity: sha512-eBEpuO6DF4j+ZESs0JPtT9+xjkdnTvOqEHZ3D8JTnCk0HZ/xMR3WQGXqolzckcQS+qzMXCiefDX2gk8cTP9M7A==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -3985,7 +3988,7 @@ snapshots:
       '@vercel/oidc': 3.0.3
       zod: 3.25.76
 
-  '@ai-sdk/openai@2.0.57(zod@3.25.76)':
+  '@ai-sdk/openai@2.0.58(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)

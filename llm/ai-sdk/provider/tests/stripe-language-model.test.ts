@@ -229,7 +229,7 @@ describe('StripeLanguageModel', () => {
   });
 
   describe('tools support', () => {
-    it('should convert function tools to OpenAI format', () => {
+    it('should throw error when tools are provided', () => {
       const options: LanguageModelV2CallOptions = {
         prompt: [],
         tools: [
@@ -248,16 +248,13 @@ describe('StripeLanguageModel', () => {
         ],
       };
 
-      // @ts-expect-error - Accessing private method for testing
-      const {args} = model.getArgs(options);
-
-      expect(args.tools).toHaveLength(1);
-      expect(args.tools![0].type).toBe('function');
-      expect((args.tools![0] as any).function.name).toBe('getWeather');
-      expect((args.tools![0] as any).function.parameters).toBeDefined();
+      expect(() => {
+        // @ts-expect-error - Accessing private method for testing
+        model.getArgs(options);
+      }).toThrow('Tool calling is not supported by the Stripe AI SDK Provider');
     });
 
-    it('should map tool choice "auto"', () => {
+    it('should throw error when tool choice is provided with tools', () => {
       const options: LanguageModelV2CallOptions = {
         prompt: [],
         tools: [
@@ -270,51 +267,26 @@ describe('StripeLanguageModel', () => {
         toolChoice: {type: 'auto'},
       };
 
-      // @ts-expect-error - Accessing private method for testing
-      const {args} = model.getArgs(options);
-
-      expect(args.tool_choice).toBe('auto');
+      expect(() => {
+        // @ts-expect-error - Accessing private method for testing
+        model.getArgs(options);
+      }).toThrow('Tool calling is not supported by the Stripe AI SDK Provider');
     });
 
-    it('should map tool choice "required"', () => {
+    it('should not throw error when no tools are provided', () => {
       const options: LanguageModelV2CallOptions = {
-        prompt: [],
-        tools: [
+        prompt: [
           {
-            type: 'function',
-            name: 'test',
-            inputSchema: {type: 'object', properties: {}},
+            role: 'user',
+            content: [{type: 'text', text: 'Hello'}],
           },
         ],
-        toolChoice: {type: 'required'},
       };
 
-      // @ts-expect-error - Accessing private method for testing
-      const {args} = model.getArgs(options);
-
-      expect(args.tool_choice).toBe('required');
-    });
-
-    it('should map specific tool choice', () => {
-      const options: LanguageModelV2CallOptions = {
-        prompt: [],
-        tools: [
-          {
-            type: 'function',
-            name: 'getWeather',
-            inputSchema: {type: 'object', properties: {}},
-          },
-        ],
-        toolChoice: {type: 'tool', toolName: 'getWeather'},
-      };
-
-      // @ts-expect-error - Accessing private method for testing
-      const {args} = model.getArgs(options);
-
-      expect(args.tool_choice).toEqual({
-        type: 'function',
-        function: {name: 'getWeather'},
-      });
+      expect(() => {
+        // @ts-expect-error - Accessing private method for testing
+        model.getArgs(options);
+      }).not.toThrow();
     });
   });
 

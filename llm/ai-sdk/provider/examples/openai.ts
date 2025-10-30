@@ -9,7 +9,6 @@ import {config} from 'dotenv';
 import {resolve} from 'path';
 import {generateText, streamText} from 'ai';
 import {createStripe} from '..';
-import {z} from 'zod';
 
 // Load .env from the examples folder
 config({path: resolve(__dirname, '.env')});
@@ -115,37 +114,6 @@ async function main() {
 
   console.log('Response:', result4.text);
   console.log('Usage:', result4.usage);
-  console.log('\n');
-
-  console.log('=== Example 5: Using tool calls with GPT-5 ===\n');
-
-  // Tool calling
-  const result5 = await generateText({
-    model: stripe('openai/gpt-5', {
-      customerId: process.env.STRIPE_CUSTOMER_ID!,
-    }),
-    prompt: 'What is the weather in San Francisco and New York?',
-    tools: {
-      getWeather: {
-        description: 'Get the current weather for a location',
-        inputSchema: z.object({
-          location: z.string().describe('The city name'),
-        }) as any,
-        execute: async ({location}: {location: string}) => {
-          // Mock weather data
-          return {
-            location,
-            temperature: 72,
-            condition: 'Sunny',
-          };
-        },
-      },
-    },
-  });
-
-  console.log('Response:', result5.text);
-  console.log('Tool calls:', result5.toolCalls);
-  console.log('Usage:', result5.usage);
   console.log('\n');
 
   console.log('=== All examples completed! ===');

@@ -261,6 +261,15 @@ export class StripeLanguageModel implements LanguageModelV2 {
     // Convert AI SDK prompt to OpenAI-compatible format
     const messages = convertToOpenAIMessages(options.prompt);
 
+    // Check if tools are provided and throw error (tool calling not supported by Stripe API)
+    if (options.tools && options.tools.length > 0) {
+      throw new Error(
+        'Tool calling is not supported by the Stripe AI SDK Provider. ' +
+        'The llm.stripe.com API does not currently support function calling or tool use. ' +
+        'Please remove the tools parameter from your request.'
+      );
+    }
+
     // Prepare tools if provided
     const tools =
       options.tools && options.tools.length > 0

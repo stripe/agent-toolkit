@@ -4,7 +4,7 @@ The Stripe AI SDK provides comprehensive tools for integrating AI models with St
 
 ## Private preview access required
 
-**Please note:** The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
+The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 
@@ -18,10 +18,9 @@ A custom Vercel AI SDK provider that routes requests through Stripe's LLM proxy 
 
 **Key Features:**
 - **Unified API**: Access OpenAI, Google Gemini, and Anthropic Claude through a single interface
-- **Automatic Tracking**: Token usage is automatically reported to Stripe
-- **Built-in Billing**: Seamlessly integrate AI costs into your Stripe billing workflow
-- **Customer Attribution**: Automatically attribute usage to specific customers
-- **Production-Ready**: Enterprise-grade infrastructure with Stripe's reliability
+- **Automatic tracking**: Token usage is automatically reported to Stripe
+- **Built-in billing**: Seamlessly integrate AI costs into your Stripe billing workflow
+- **Customer attribution**: Automatically attribute usage to specific customers
 
 **Quick Start:**
 ```typescript

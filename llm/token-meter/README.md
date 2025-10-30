@@ -4,7 +4,7 @@ Generic token metering for native AI SDKs with automatic Stripe billing integrat
 
 ## Private preview access required
 
-**Please note:** Stripe Billing for LLM Tokens is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
+Stripe Billing for LLM Tokens is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 

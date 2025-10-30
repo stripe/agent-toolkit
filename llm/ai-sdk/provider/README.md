@@ -6,7 +6,7 @@ The Stripe AI SDK Provider enables seamless integration with leading AI models t
 
 ## Private preview access required
 
-**Please note:** The Stripe AI SDK Provider is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
+The Stripe AI SDK Provider is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 

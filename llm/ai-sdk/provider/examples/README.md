@@ -29,11 +29,11 @@ STRIPE_API_KEY=sk_test_...
 STRIPE_CUSTOMER_ID=cus_...
 ```
 
-## Running Examples
+## Running examples
 
 Each example file demonstrates different use cases. Run them from the examples directory:
 
-### OpenAI Models
+### OpenAI models
 ```bash
 cd examples
 npx ts-node openai.ts
@@ -46,7 +46,7 @@ Examples include:
 - Reasoning models (o3)
 - Tool calling
 
-### Google Gemini Models
+### Google Gemini models
 ```bash
 npx ts-node google.ts
 ```
@@ -57,7 +57,7 @@ Examples include:
 - Using Gemini Lite models
 - Custom headers
 
-### Anthropic Claude Models
+### Anthropic Claude models
 ```bash
 npx ts-node anthropic.ts
 ```
@@ -69,7 +69,7 @@ Examples include:
 - Tool calling
 - Per-call customer ID override
 
-## Supported Models
+## Supported models
 
 ### OpenAI
 - `openai/gpt-5`
@@ -98,9 +98,9 @@ Examples include:
 - `anthropic/claude-3-5-haiku`
 - `anthropic/claude-3-haiku`
 
-## Usage Patterns
+## Usage patterns
 
-### Basic Setup
+### Basic setup
 
 ```typescript
 import { createStripe } from '@stripe/ai-sdk/provider';
@@ -114,7 +114,7 @@ const stripeLLM = createStripe({
 const model = stripe('openai/gpt-5');
 ```
 
-### Customer ID Options
+### Customer ID options
 
 You can specify the customer ID in three ways (in order of priority):
 
@@ -161,7 +161,7 @@ for await (const chunk of result.textStream) {
 }
 ```
 
-### Tool Calling
+### Tool calling
 
 ```typescript
 const result = await generateText({
@@ -185,14 +185,14 @@ const result = await generateText({
 });
 ```
 
-## How It Works
+## How it works
 
 1. All requests are routed to `https://llm.stripe.com/chat/completions`
 2. Your Stripe API key is included as the `Authorization` header
 3. The customer ID is included as the `X-Stripe-Customer-ID` header
 4. Stripe automatically tracks token usage and bills the customer according to your Token Billing configuration
 
-## Learn More
+## Learn more
 
 - [Stripe Token Billing Documentation](https://stripe.com/docs)
 - [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)

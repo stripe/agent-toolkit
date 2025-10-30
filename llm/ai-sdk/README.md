@@ -2,7 +2,7 @@
 
 The Stripe AI SDK provides comprehensive tools for integrating AI models with Stripe's billing infrastructure. This unified package includes both a custom Vercel AI SDK provider and metering utilities for tracking token usage across any AI SDK provider.
 
-## ⚠️ Private Preview Access Required
+## Private preview access required
 
 **Please note:** The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
@@ -17,11 +17,11 @@ This package contains two main components:
 A custom Vercel AI SDK provider that routes requests through Stripe's LLM proxy at `llm.stripe.com`, enabling automatic usage tracking and billing integration.
 
 **Key Features:**
-- 🎯 **Unified API**: Access OpenAI, Google Gemini, and Anthropic Claude through a single interface
-- 📊 **Automatic Tracking**: Token usage is automatically reported to Stripe
-- 💰 **Built-in Billing**: Seamlessly integrate AI costs into your Stripe billing workflow
-- 👥 **Customer Attribution**: Automatically attribute usage to specific customers
-- 🔒 **Production-Ready**: Enterprise-grade infrastructure with Stripe's reliability
+- **Unified API**: Access OpenAI, Google Gemini, and Anthropic Claude through a single interface
+- **Automatic Tracking**: Token usage is automatically reported to Stripe
+- **Built-in Billing**: Seamlessly integrate AI costs into your Stripe billing workflow
+- **Customer Attribution**: Automatically attribute usage to specific customers
+- **Production-Ready**: Enterprise-grade infrastructure with Stripe's reliability
 
 **Quick Start:**
 ```typescript
@@ -46,11 +46,11 @@ const { text } = await generateText({
 A wrapper utility that adds billing tracking to any Vercel AI SDK language model, allowing you to use your preferred provider while still tracking usage in Stripe.
 
 **Key Features:**
-- 🌐 **Universal Compatibility**: Works with any AI SDK v2 provider
-- 🔌 **Non-Intrusive**: Preserves all original model functionality
-- 🚀 **Fire-and-Forget**: Billing events are sent asynchronously
-- 📈 **Automatic Metering**: Token consumption is automatically tracked
-- 🎯 **Customer Attribution**: Attribute usage to specific customers
+- **Universal Compatibility**: Works with any AI SDK v2 provider
+- **Non-Intrusive**: Preserves all original model functionality
+- **Fire-and-Forget**: Billing events are sent asynchronously
+- **Automatic Metering**: Token consumption is automatically tracked
+- **Customer Attribution**: Attribute usage to specific customers
 
 **Quick Start:**
 ```typescript
@@ -78,7 +78,7 @@ const { text } = await generateText({
 npm install @stripe/ai-sdk
 ```
 
-## Which Should I Use?
+## Which should I use?
 
 ### Use the **Provider** when:
 - You want a unified interface to multiple AI providers
@@ -92,9 +92,9 @@ npm install @stripe/ai-sdk
 - You need direct access to the native provider APIs
 - You're integrating into an existing codebase
 
-## Usage Examples
+## Usage examples
 
-### Provider Example
+### Provider example
 
 ```typescript
 import { createStripe } from '@stripe/ai-sdk/provider';
@@ -116,7 +116,7 @@ for await (const chunk of result.textStream) {
 }
 ```
 
-### Meter Example
+### Meter example
 
 ```typescript
 import { meteredModel } from '@stripe/ai-sdk/meter';
@@ -139,15 +139,15 @@ for await (const chunk of result.textStream) {
 }
 ```
 
-## Supported Models
+## Supported models
 
-### Provider Models
+### Provider models
 The provider supports models from:
 - **OpenAI**: GPT-5, GPT-4.1, o3, o1, and more
 - **Google**: Gemini 2.5 Pro, Gemini 2.5 Flash, and more
 - **Anthropic**: Claude Opus 4, Claude Sonnet 4, Claude Haiku, and more
 
-### Meter Compatibility
+### Meter compatibility
 The meter works with any AI SDK v2 provider, including:
 - OpenAI (`@ai-sdk/openai`)
 - Anthropic (`@ai-sdk/anthropic`)
@@ -156,7 +156,7 @@ The meter works with any AI SDK v2 provider, including:
 - Amazon Bedrock
 - And any custom v2 provider
 
-## Token Usage Tracking
+## Token usage tracking
 
 Both components automatically report token usage to Stripe meter events:
 

@@ -2,13 +2,13 @@
 
 Generic token metering for native AI SDKs with automatic Stripe billing integration. Track and bill token usage from OpenAI, Anthropic, and Google Gemini without any framework dependencies.
 
-## ⚠️ Private Preview Access Required
+## Private preview access required
 
 **Please note:** Stripe Billing for LLM Tokens is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 
-## Why Use Stripe Token Billing?
+## Why use Stripe Token Billing?
 
 - **Native SDK Support**: Works directly with native AI SDKs (OpenAI, Anthropic, Google)
 - **No Framework Required**: Direct integration without Vercel AI SDK or other frameworks
@@ -23,13 +23,13 @@ Generic token metering for native AI SDKs with automatic Stripe billing integrat
 npm install @stripe/token-billing
 ```
 
-## Supported Providers
+## Supported providers
 
 - **OpenAI**: Chat Completions, Responses API, Embeddings (streaming and non-streaming)
 - **Anthropic**: Messages API (streaming and non-streaming)
 - **Google Gemini**: GenerateContent API (streaming and non-streaming)
 
-## Quick Start
+## Quick start
 
 ### OpenAI
 
@@ -83,7 +83,7 @@ const response = await model.generateContent('Hello!');
 meter.trackUsage(response.response, 'cus_xxxxx');
 ```
 
-## API Reference
+## API reference
 
 ### `createTokenMeter(stripeApiKey, config?)`
 
@@ -104,7 +104,7 @@ Tracks usage from a non-streaming response (fire-and-forget).
 - `response`: The response object from OpenAI, Anthropic, or Google
 - `customerId` (string): Stripe customer ID to attribute usage to
 
-**Supported Response Types:**
+**Supported response types:**
 - `OpenAI.ChatCompletion`
 - `OpenAI.Responses.Response`
 - `OpenAI.CreateEmbeddingResponse`
@@ -146,7 +146,7 @@ Wraps a Google Gemini streaming response for usage tracking.
 
 ## Examples
 
-### OpenAI Streaming
+### OpenAI streaming
 
 ```typescript
 import OpenAI from 'openai';
@@ -169,7 +169,7 @@ for await (const chunk of meteredStream) {
 }
 ```
 
-### Anthropic Streaming
+### Anthropic streaming
 
 ```typescript
 import Anthropic from '@anthropic-ai/sdk';
@@ -194,7 +194,7 @@ for await (const event of meteredStream) {
 }
 ```
 
-### Google Gemini Streaming
+### Google Gemini streaming
 
 ```typescript
 import { GoogleGenerativeAI } from '@google/generative-ai';
@@ -236,7 +236,7 @@ meter.trackUsage(response, 'cus_xxxxx');
 console.log('Output:', response.output);
 ```
 
-### OpenAI Embeddings
+### OpenAI embeddings
 
 ```typescript
 import OpenAI from 'openai';
@@ -254,7 +254,7 @@ meter.trackUsage(response, 'cus_xxxxx');
 console.log('Embedding dimensions:', response.data[0].embedding.length);
 ```
 
-## How It Works
+## How it works
 
 The token meter:
 
@@ -265,11 +265,11 @@ The token meter:
 
 For streaming responses, the meter wraps the stream and reports usage after the stream completes.
 
-## Stripe Meter Events
+## Stripe meter events
 
 Each API call generates meter events sent to Stripe:
 
-**Input Tokens Event:**
+**Input tokens event:**
 ```javascript
 {
   event_name: 'token-billing-tokens',
@@ -282,7 +282,7 @@ Each API call generates meter events sent to Stripe:
 }
 ```
 
-**Output Tokens Event:**
+**Output tokens event:**
 ```javascript
 {
   event_name: 'token-billing-tokens',
@@ -295,7 +295,7 @@ Each API call generates meter events sent to Stripe:
 }
 ```
 
-## Error Handling
+## Error handling
 
 The token meter handles errors gracefully:
 
@@ -303,7 +303,7 @@ The token meter handles errors gracefully:
 - **Missing Usage Data**: Handles responses without usage information
 - **Invalid Provider**: Logs a warning for unrecognized providers
 
-## TypeScript Support
+## TypeScript support
 
 Full TypeScript support with type definitions for all providers:
 
@@ -313,19 +313,19 @@ import type { TokenMeter, SupportedResponse, SupportedStream } from '@stripe/tok
 
 ## Comparison with AI SDK Meter
 
-### Use Token Billing when:
+### Use Token Billing when
 - You're using native SDKs (OpenAI, Anthropic, Google) directly
 - You don't want to depend on Vercel AI SDK
 - You need maximum control over API parameters
 - You're working with embeddings or specialized APIs
 
-### Use AI SDK Meter when:
+### Use AI SDK Meter when
 - You're already using Vercel AI SDK
 - You want a unified interface across providers
 - You need AI SDK-specific features (tool calling abstractions, etc.)
 - You prefer the AI SDK's streaming abstractions
 
-## Additional Resources
+## Additional resources
 
 - [Stripe Meter Events Documentation](https://docs.stripe.com/api/billing/meter-event)
 - [Stripe Token Billing Documentation](https://docs.stripe.com/billing/token-billing)

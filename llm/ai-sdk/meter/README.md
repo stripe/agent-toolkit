@@ -4,13 +4,13 @@ The Stripe AI SDK Meter enables automatic token usage tracking and billing for a
 
 > **Note:** This is part of the [`@stripe/ai-sdk`](../README.md) package. See the main README for an overview of all available tools.
 
-## ⚠️ Private Preview Access Required
+## Private preview access required
 
 **Please note:** The Stripe AI SDK is currently only available to organizations participating in the Billing for LLM Tokens Private Preview. If you do not have access and would like to request it, please visit:
 
 **[Request Access to Billing for LLM Tokens Private Preview](https://docs.stripe.com/billing/token-billing)**
 
-## Why Use the AI SDK Meter?
+## Why use the AI SDK Meter?
 
 - **Universal Compatibility**: Works with any AI SDK v2 provider (OpenAI, Anthropic, Google, and more)
 - **Automatic Usage Tracking**: Token consumption is automatically tracked and reported to Stripe
@@ -27,7 +27,7 @@ Learn more about Stripe's Token Billing and request access to the latest feature
 npm install @stripe/ai-sdk
 ```
 
-## Basic Usage
+## Basic usage
 
 Wrap any AI SDK v2 language model with `meteredModel` to enable automatic usage tracking:
 
@@ -48,7 +48,7 @@ const { text } = await generateText({
 });
 ```
 
-## API Reference
+## API reference
 
 ### `meteredModel(model, stripeApiKey, stripeCustomerId)`
 
@@ -62,11 +62,11 @@ Wraps a Vercel AI SDK language model to automatically report usage to Stripe met
 **Returns:**
 The wrapped model with identical functionality plus automatic usage tracking.
 
-## Supported Providers
+## Supported providers
 
 The wrapper works with any AI SDK provider that implements the v2 specification (`LanguageModelV2`):
 
-**Example Supported Providers:**
+**Example supported providers:**
 - OpenAI (`@ai-sdk/openai`)
 - Anthropic (`@ai-sdk/anthropic`)
 - Google Gemini (`@ai-sdk/google`)
@@ -76,7 +76,7 @@ The wrapper works with any AI SDK provider that implements the v2 specification 
 
 ## Examples
 
-### Streaming Responses
+### Streaming responses
 
 ```typescript
 import { meteredModel } from '@stripe/ai-sdk/meter';
@@ -99,7 +99,7 @@ for await (const chunk of result.textStream) {
 }
 ```
 
-### Multi-turn Conversations
+### Multi-turn conversations
 
 ```typescript
 import { meteredModel } from '@stripe/ai-sdk/meter';
@@ -122,7 +122,7 @@ const result = await generateText({
 });
 ```
 
-### Using Different Providers
+### Using different providers
 
 ```typescript
 import { meteredModel } from '@stripe/ai-sdk/meter';
@@ -155,7 +155,7 @@ const geminiModel = meteredModel(
 );
 ```
 
-## How It Works
+## How it works
 
 The wrapper intercepts calls to the underlying language model and:
 
@@ -166,11 +166,11 @@ The wrapper intercepts calls to the underlying language model and:
 
 For streaming responses, the wrapper collects usage information from the final stream chunk and reports it after the stream completes.
 
-## Stripe Meter Events
+## Stripe meter events
 
 Each API call generates meter events sent to Stripe:
 
-**Input Tokens Event:**
+**Input tokens event:**
 ```javascript
 {
   event_name: 'token-billing-tokens',
@@ -183,7 +183,7 @@ Each API call generates meter events sent to Stripe:
 }
 ```
 
-**Output Tokens Event:**
+**Output tokens event:**
 ```javascript
 {
   event_name: 'token-billing-tokens',
@@ -196,7 +196,7 @@ Each API call generates meter events sent to Stripe:
 }
 ```
 
-## Error Handling
+## Error handling
 
 The wrapper handles errors gracefully:
 
@@ -205,7 +205,7 @@ The wrapper handles errors gracefully:
 - **Stripe API Errors**: Logged to console but don't interrupt AI generation
 - **Missing Usage Data**: Handles responses without usage information
 
-## Additional Resources
+## Additional resources
 
 - [Stripe Meter Events Documentation](https://docs.stripe.com/api/billing/meter-event)
 - [Stripe Token Billing Documentation](https://docs.stripe.com/billing/token-billing)

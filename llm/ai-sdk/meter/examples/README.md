@@ -35,11 +35,11 @@ ANTHROPIC_API_KEY=sk-ant-...
 GOOGLE_GENERATIVE_AI_API_KEY=...
 ```
 
-## Running Examples
+## Running examples
 
 Run examples from the examples directory using ts-node:
 
-### OpenAI Examples
+### OpenAI examples
 
 ```bash
 npx ts-node openai.ts
@@ -53,7 +53,7 @@ Demonstrates:
 - Different GPT models (GPT-4o-mini, GPT-4)
 - Max tokens configuration
 
-### Anthropic Claude Examples
+### Anthropic Claude examples
 
 ```bash
 npx ts-node anthropic.ts
@@ -67,7 +67,7 @@ Demonstrates:
 - Claude Haiku for faster responses
 - Max tokens configuration
 
-### Google Gemini Examples
+### Google Gemini examples
 
 ```bash
 npx ts-node google.ts
@@ -80,7 +80,7 @@ Demonstrates:
 - Multi-turn conversations
 - Temperature control
 
-## How It Works
+## How it works
 
 The `meteredModel` wrapper automatically:
 
@@ -89,7 +89,7 @@ The `meteredModel` wrapper automatically:
 3. **Reports to Stripe**: Sends meter events to Stripe after each generation
 4. **Handles Streaming**: Works with both streaming and non-streaming responses
 
-## Basic Usage Pattern
+## Basic usage pattern
 
 ```typescript
 import { meteredModel } from '@stripe/ai-sdk-billing-wrapper';
@@ -108,7 +108,7 @@ const { text } = await generateText({
 });
 ```
 
-## Supported Providers
+## Supported providers
 
 The wrapper works with any AI SDK provider that implements the v2 specification (`LanguageModelV2`):
 
@@ -121,13 +121,13 @@ The wrapper works with any AI SDK provider that implements the v2 specification 
 - Together AI (via `createOpenAI`)
 - Any custom provider implementing `LanguageModelV2`
 
-**Not Supported:**
+**Not supported:**
 - Groq (`@ai-sdk/groq`) - uses v1 specification
 - Any provider using `LanguageModelV1`
 
 The wrapper enforces v2-only models at TypeScript compile time.
 
-## Stripe Meter Events
+## Stripe meter events
 
 Each API call generates meter events sent to Stripe:
 
@@ -149,7 +149,7 @@ Metadata included:
 - Input tokens
 - Output tokens
 
-## Error Handling
+## Error handling
 
 The wrapper handles errors gracefully:
 
@@ -158,7 +158,7 @@ The wrapper handles errors gracefully:
 - **Stripe API Errors**: Logged but don't interrupt the AI generation
 - **Missing Tokens**: Handles responses without usage information
 
-## Additional Resources
+## Additional resources
 
 - [Stripe Meter Events Documentation](https://docs.stripe.com/api/billing/meter-event)
 - [Stripe Token Billing Documentation](https://docs.stripe.com/billing/token-billing)

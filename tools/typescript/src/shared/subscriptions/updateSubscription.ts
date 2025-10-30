@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const updateSubscriptionPrompt = (_context: Context = {}): string => {
   return `This tool will update an existing subscription in Stripe. If changing an existing subscription item, the existing subscription item has to be set to deleted and the new one has to be added.
@@ -84,11 +84,11 @@ export const updateSubscriptionAnnotations = () => ({
   title: 'Update subscription',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'update_subscription',
   name: 'Update Subscription',
   description: updateSubscriptionPrompt(context),
-  parameters: updateSubscriptionParameters(context),
+  inputSchema: updateSubscriptionParameters(context),
   annotations: updateSubscriptionAnnotations(),
   actions: {
     subscriptions: {

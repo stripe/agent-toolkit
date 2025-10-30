@@ -1,5 +1,5 @@
 import {searchDocumentation} from '@/shared/documentation/searchDocumentation';
-import {z} from 'zod';
+import {z} from 'zod/v3';
 import {searchDocumentationParameters} from '@/shared/documentation/searchDocumentation';
 
 const Stripe = jest.fn().mockImplementation(() => ({}));

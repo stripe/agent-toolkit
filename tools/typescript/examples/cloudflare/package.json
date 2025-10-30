@@ -19,8 +19,8 @@
   },
   "dependencies": {
     "@cloudflare/workers-oauth-provider": "^0.0.5",
-    "@modelcontextprotocol/sdk": "1.11.3",
-    "@stripe/agent-toolkit": "latest",
+    "@modelcontextprotocol/sdk": "^1.17.1",
+    "@stripe/agent-toolkit": "workspace:*",
     "@types/node": "^22.15.18",
     "add": "^2.0.6",
     "agents": "^0.0.84",
@@ -28,7 +28,7 @@
     "emoji-from-text": "^1.1.13",
     "hono": "^4.10.3",
     "stripe": "^18.1.0",
-    "zod": "^3.24.4"
+    "zod": "^3.25.76"
   },
   "pnpm": {}
 }

@@ -2,11 +2,21 @@
   "name": "@stripe/token-meter",
   "version": "0.1.0",
   "description": "Generic token metering for AI SDKs with Stripe integration",
-  "main": "index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
   "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "clean": "rm -rf dist",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "stripe",
@@ -15,17 +25,26 @@
     "tokens",
     "metering"
   ],
-  "author": "Stripe",
+  "author": "Stripe <support@stripe.com> (https://stripe.com/)",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist/**/*",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
   "devDependencies": {
     "@anthropic-ai/sdk": "^0.67.0",
     "@google/generative-ai": "^0.24.1",
-    "@types/jest": "^29.5.14",
+    "@types/jest": "^30.0.0",
     "@types/node": "^22.10.5",
     "dotenv": "^17.2.3",
-    "jest": "^29.7.0",
+    "jest": "^30.2.0",
     "openai": "^6.6.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.4.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },

@@ -1,3 +1,5 @@
+![Hero GIF](https://stripe.dev/images/badges/ai-banner.gif)
+
 # Stripe Agent Toolkit
 
 The Stripe Agent Toolkit enables popular agent frameworks including Model Context Protocol (MCP), OpenAI's Agent SDK, LangChain, CrewAI, and Vercel's AI SDK to integrate with Stripe APIs through function calling. The

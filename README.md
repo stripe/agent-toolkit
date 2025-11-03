@@ -7,7 +7,7 @@ This repo is the one-stop shop for building AI-powered products and businesses o
 It contains a collection of SDKs to help you integrate Stripe with LLMs and agent frameworks, including: 
 
 * [`@stripe/agent-toolkit`](/tools/typescript) - for integrating Stripe APIs with popular agent frameworks through function calling—available in [Python](/tools/python) and [TypeScript](/tools/typescript).
-* [`@stripe/ai-sdk`](/llm/ai-sdk) - for integrating Stripe's billing infrastructure with the [`ai`](https://npm.im/ai) and [`@ai-sdk`](https://ai-sdk.dev/) libraries.
+* [`@stripe/ai-sdk`](/llm/ai-sdk) - for integrating Stripe's billing infrastructure with Vercel's [`ai`](https://npm.im/ai) and [`@ai-sdk`](https://ai-sdk.dev/) libraries.
 * [`@stripe/token-meter`](/llm/token-meter) - for integrating Stripe's billing infrastructure with native SDKs from OpenAI, Anthropic, and Google Gemini, without any framework dependencies.
 
 ## Model Context Protocol (MCP)

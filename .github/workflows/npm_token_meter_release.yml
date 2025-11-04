@@ -1,0 +1,33 @@
+name: NPM Release @stripe/token-meter
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+  mcp-release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./llm/token-meter
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.11.0
+
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: pnpm install
+      - run: pnpm run test
+      - run: pnpm run build
+      - run: npm publish --ignore-scripts --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

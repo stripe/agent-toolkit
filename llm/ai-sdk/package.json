@@ -1,6 +1,6 @@
 {
   "name": "@stripe/ai-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Stripe AI SDK - Provider and metering utilities for Vercel AI SDK",
   "exports": {
     "./provider": {
@@ -64,9 +64,9 @@
     "zod": "^3.24.1"
   },
   "peerDependencies": {
-    "@ai-sdk/anthropic": "^1.0.5",
-    "@ai-sdk/google": "^1.0.9",
-    "@ai-sdk/openai": "^1.0.8",
+    "@ai-sdk/anthropic": "^2.0.41",
+    "@ai-sdk/google": "^2.0.27",
+    "@ai-sdk/openai": "^2.0.59",
     "ai": "^3.4.7 || ^4.0.0 || ^5.0.0"
   },
   "peerDependenciesMeta": {

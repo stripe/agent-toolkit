@@ -57,7 +57,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stripe/agent-toolkit/tree/main"
+    "url": "https://github.com/stripe/ai/tree/main"
   },
   "icon": "stripe_icon.png"
 }

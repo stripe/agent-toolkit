@@ -61,7 +61,7 @@ class StripeAPI(BaseModel):
         stripe.set_app_info(
             "stripe-agent-toolkit-python",
             version="0.6.1",
-            url="https://github.com/stripe/agent-toolkit",
+            url="https://github.com/stripe/ai",
         )
 
     def create_meter_event(

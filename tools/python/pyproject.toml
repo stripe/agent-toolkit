@@ -10,8 +10,8 @@ authors = [
 keywords = ["stripe", "api", "payments"]
 
 [project.urls]
-"Bug Tracker" = "https://github.com/stripe/agent-toolkit/issues"
-"Source Code" = "https://github.com/stripe/agent-toolkit"
+"Bug Tracker" = "https://github.com/stripe/ai/issues"
+"Source Code" = "https://github.com/stripe/ai"
 
 [tool.setuptools.packages.find]
 include = ["stripe_agent_toolkit*"]

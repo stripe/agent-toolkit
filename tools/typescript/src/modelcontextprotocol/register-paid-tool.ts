@@ -37,7 +37,7 @@ export async function registerPaidTool<Args extends ZodRawShape>(
     appInfo: {
       name: 'stripe-agent-toolkit-mcp-payments',
       version: '0.7.11',
-      url: 'https://github.com/stripe/agent-toolkit',
+      url: 'https://github.com/stripe/ai',
     },
   });
 

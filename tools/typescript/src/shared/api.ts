@@ -21,7 +21,7 @@ class StripeAPI {
             ? MCP_HEADER
             : TOOLKIT_HEADER,
         version: '0.7.11',
-        url: 'https://github.com/stripe/agent-toolkit',
+        url: 'https://github.com/stripe/ai',
       },
     });
     this.stripe = stripeClient;

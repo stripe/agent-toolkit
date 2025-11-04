@@ -3,7 +3,7 @@
   "name": "com.stripe/mcp",
   "description": "MCP server integrating with Stripe - tools for customers, products, payments, and more.",
   "repository": {
-    "url": "https://github.com/stripe/agent-toolkit",
+    "url": "https://github.com/stripe/ai",
     "source": "github"
   },
   "version": "0.2.4",

@@ -1,7 +1,7 @@
 {
   "name": "@stripe/agent-toolkit",
   "version": "0.7.12",
-  "homepage": "https://github.com/stripe/agent-toolkit",
+  "homepage": "https://github.com/stripe/ai",
   "scripts": {
     "build": "tsup",
     "clean": "rm -rf langchain ai-sdk modelcontextprotocol openai cloudflare",

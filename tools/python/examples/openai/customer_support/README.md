@@ -1,6 +1,6 @@
 # Email Support Agent
 
-Sample app to help you automate your email support. Powered by OpenAI's Agent SDK and [Stripe Agent Toolkit](https://github.com/stripe/agent-toolkit).
+Sample app to help you automate your email support. Powered by OpenAI's Agent SDK and [Stripe Agent Toolkit](https://github.com/stripe/ai).
 
 Customize this agent to fit your own needs by cloning and modifying [support_agent.py](./support_agent.py).
 

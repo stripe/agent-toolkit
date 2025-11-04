@@ -1,14 +1,24 @@
-name: NPM Release @stripe/mcp
+name: NPM Release
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      working_directory:
+        description: 'Package to release'
+        required: true
+        type: choice
+        options:
+          - './tools/typescript'
+          - './tools/modelcontextprotocol'
+          - './llm/ai-sdk'
+          - './llm/token-meter'
 
 jobs:
-  mcp-release:
+  npm-release:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./tools/modelcontextprotocol
+        working-directory: ${{ inputs.working_directory }}
     permissions:
       contents: read
       id-token: write
@@ -25,9 +35,10 @@ jobs:
         with:
           node-version: "20.x"
           registry-url: "https://registry.npmjs.org"
+
       - run: pnpm install
-      - run: pnpm run test
-      - run: pnpm run build
+      - run: pnpm run test --if-present
+      - run: pnpm run build --if-present
       - run: npm publish --ignore-scripts --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

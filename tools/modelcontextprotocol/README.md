@@ -73,29 +73,7 @@ of if you're using Docker
 
 ## Available tools
 
-| Tool                   | Description                     |
-| ---------------------- | ------------------------------- |
-| `balance.read`         | Retrieve balance information    |
-| `coupons.create`       | Create a new coupon             |
-| `coupons.read`         | Read coupon information         |
-| `customers.create`     | Create a new customer           |
-| `customers.read`       | Read customer information       |
-| `disputes.read`        | Read disputes information       |
-| `disputes.update`      | Update an existing dispute      |
-| `documentation.read`   | Search Stripe documentation     |
-| `invoiceItems.create`  | Create a new invoice item       |
-| `invoices.create`      | Create a new invoice            |
-| `invoices.read`        | Read invoice information        |
-| `invoices.update`      | Update an existing invoice      |
-| `paymentIntents.read`  | Read payment intent information |
-| `paymentLinks.create`  | Create a new payment link       |
-| `prices.create`        | Create a new price              |
-| `prices.read`          | Read price information          |
-| `products.create`      | Create a new product            |
-| `products.read`        | Read product information        |
-| `refunds.create`       | Create a new refund             |
-| `subscriptions.read`   | Read subscription information   |
-| `subscriptions.update` | Update subscription information |
+See the [Stripe MCP documentation](https://docs.stripe.com/mcp#tools) for a list of tools.
 
 ## Debugging the Server
 

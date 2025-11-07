@@ -60,7 +60,7 @@ class StripeAPI(BaseModel):
         stripe.api_key = secret_key
         stripe.set_app_info(
             "stripe-agent-toolkit-python",
-            version="0.6.1",
+            version="0.6.2",
             url="https://github.com/stripe/ai",
         )
 

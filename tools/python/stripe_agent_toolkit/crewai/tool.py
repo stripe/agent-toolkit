@@ -7,7 +7,7 @@ from __future__ import annotations
 from typing import Any, Optional, Type
 from pydantic import BaseModel
 
-from crewai_tools import BaseTool
+from crewai.tools import BaseTool
 
 from ..api import StripeAPI
 

@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import {z} from 'zod/v3';
+import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
 import type {StripeToolDefinition} from '@/shared/tools';
 

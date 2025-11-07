@@ -22,7 +22,7 @@ const stripeAgentToolkit = new StripeAgentToolkit({
 });
 
 const model = wrapLanguageModel({
-  model: openai('gpt-4o'),
+  model: openai('gpt-5'),
   middleware: stripeAgentToolkit.middleware({
     billing: {
       customer: process.env.STRIPE_CUSTOMER_ID!,

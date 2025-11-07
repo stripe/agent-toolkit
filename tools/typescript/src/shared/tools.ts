@@ -1,4 +1,4 @@
-import {z} from 'zod/v3';
+import {z} from 'zod';
 
 import createCustomerTool from '@/shared/customers/createCustomer';
 import listCustomersTool from '@/shared/customers/listCustomers';

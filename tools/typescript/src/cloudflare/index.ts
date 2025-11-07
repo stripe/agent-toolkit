@@ -1,4 +1,4 @@
-import {z, ZodRawShape} from 'zod/v3';
+import {z, ZodRawShape} from 'zod';
 import {ToolCallback} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {registerPaidTool} from '../modelcontextprotocol/register-paid-tool';

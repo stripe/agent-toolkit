@@ -1,5 +1,5 @@
 import {tool} from 'ai';
-import {z} from 'zod/v3';
+import {z} from 'zod';
 import StripeAPI from '../shared/api';
 
 export default function StripeTool(

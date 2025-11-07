@@ -1,5 +1,5 @@
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
-import {z} from 'zod/v3';
+import {z} from 'zod';
 import {
   PaymentState,
   experimental_PaidMcpAgent as PaidMcpAgent,

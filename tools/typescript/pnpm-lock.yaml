@@ -31,8 +31,8 @@ importers:
         specifier: ^0.0.84
         version: 0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1)
       ai:
-        specifier: ^5.0.0
-        version: 5.0.82(zod@3.25.76)
+        specifier: ^5.0.89
+        version: 5.0.89(zod@3.25.76)
       openai:
         specifier: ^4.86.1
         version: 4.86.1(ws@8.18.0)(zod@3.25.76)
@@ -104,8 +104,8 @@ importers:
         specifier: workspace:*
         version: link:../..
       ai:
-        specifier: ^5.0.83
-        version: 5.0.83(zod@3.25.76)
+        specifier: ^5.0.89
+        version: 5.0.89(zod@3.25.76)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -209,14 +209,8 @@ importers:
 
 packages:
 
-  '@ai-sdk/gateway@2.0.3':
-    resolution: {integrity: sha512-/vCoMKtod+A74/BbkWsaAflWKz1ovhX5lmJpIaXQXtd6gyexZncjotBTbFM8rVJT9LKJ/Kx7iVVo3vh+KT+IJg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.25.76 || ^4.1.8
-
-  '@ai-sdk/gateway@2.0.4':
-    resolution: {integrity: sha512-YakzaijPayJI244AOAXX+29WY+6i40vbvyMggfBB5D75ui8GyJPHvD/1TCSdD8lUyD4/QJvi9xSQ26QnPjmhag==}
+  '@ai-sdk/gateway@2.0.7':
+    resolution: {integrity: sha512-/AI5AKi4vOK9SEb8Z1dfXkhsJ5NAfWsoJQc96B/mzn2KIrjw5occOjIwD06scuhV9xWlghCoXJT1sQD9QH/tyg==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -235,6 +229,12 @@ packages:
 
   '@ai-sdk/provider-utils@3.0.14':
     resolution: {integrity: sha512-CYRU6L7IlR7KslSBVxvlqlybQvXJln/PI57O8swhOaDIURZbjRP2AY3igKgUsrmWqqnFFUHP+AwTN8xqJAknnA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/provider-utils@3.0.16':
+    resolution: {integrity: sha512-lsWQY9aDXHitw7C1QRYIbVGmgwyT98TF3MfM8alNIXKpdJdi+W782Rzd9f1RyOfgRmZ08gJ2EYNDhWNK7RqpEA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -1382,14 +1382,8 @@ packages:
       react:
         optional: true
 
-  ai@5.0.82:
-    resolution: {integrity: sha512-wmZZfsU40qB77umrcj3YzMSk6cUP5gxLXZDPfiSQLBLegTVXPUdSJC603tR7JB5JkhBDzN5VLaliuRKQGKpUXg==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.25.76 || ^4.1.8
-
-  ai@5.0.83:
-    resolution: {integrity: sha512-tMc1wqc9khzETBN0X4/MHw9RbeP5uKFdoG5sUIUJ3p7lSgfDU6yZMwT6jrnA3Nk2AvxM0T43P1h2LfPlBSwGKA==}
+  ai@5.0.89:
+    resolution: {integrity: sha512-8Nq+ZojGacQrupoJEQLrTDzT5VtR3gyp5AaqFSV3tzsAXlYQ9Igb7QE3yeoEdzOk5IRfDwWL7mDCUD+oBg1hDA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -4007,17 +4001,10 @@ packages:
 
 snapshots:
 
-  '@ai-sdk/gateway@2.0.3(zod@3.25.76)':
+  '@ai-sdk/gateway@2.0.7(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
-      '@vercel/oidc': 3.0.3
-      zod: 3.25.76
-
-  '@ai-sdk/gateway@2.0.4(zod@3.25.76)':
-    dependencies:
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
+      '@ai-sdk/provider-utils': 3.0.16(zod@3.25.76)
       '@vercel/oidc': 3.0.3
       zod: 3.25.76
 
@@ -4035,6 +4022,13 @@ snapshots:
       zod: 3.25.76
 
   '@ai-sdk/provider-utils@3.0.14(zod@3.25.76)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.0
+      '@standard-schema/spec': 1.0.0
+      eventsource-parser: 3.0.6
+      zod: 3.25.76
+
+  '@ai-sdk/provider-utils@3.0.16(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@standard-schema/spec': 1.0.0
@@ -5216,19 +5210,11 @@ snapshots:
     optionalDependencies:
       react: 18.3.1
 
-  ai@5.0.82(zod@3.25.76):
+  ai@5.0.89(zod@3.25.76):
     dependencies:
-      '@ai-sdk/gateway': 2.0.3(zod@3.25.76)
+      '@ai-sdk/gateway': 2.0.7(zod@3.25.76)
       '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
-      '@opentelemetry/api': 1.9.0
-      zod: 3.25.76
-
-  ai@5.0.83(zod@3.25.76):
-    dependencies:
-      '@ai-sdk/gateway': 2.0.4(zod@3.25.76)
-      '@ai-sdk/provider': 2.0.0
-      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
+      '@ai-sdk/provider-utils': 3.0.16(zod@3.25.76)
       '@opentelemetry/api': 1.9.0
       zod: 3.25.76
 

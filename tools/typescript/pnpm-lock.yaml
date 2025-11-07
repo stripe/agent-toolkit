@@ -104,8 +104,8 @@ importers:
         specifier: workspace:*
         version: link:../..
       ai:
-        specifier: ^5.0.0
-        version: 5.0.82(zod@3.25.76)
+        specifier: ^5.0.83
+        version: 5.0.83(zod@3.25.76)
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -211,6 +211,12 @@ packages:
 
   '@ai-sdk/gateway@2.0.3':
     resolution: {integrity: sha512-/vCoMKtod+A74/BbkWsaAflWKz1ovhX5lmJpIaXQXtd6gyexZncjotBTbFM8rVJT9LKJ/Kx7iVVo3vh+KT+IJg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  '@ai-sdk/gateway@2.0.4':
+    resolution: {integrity: sha512-YakzaijPayJI244AOAXX+29WY+6i40vbvyMggfBB5D75ui8GyJPHvD/1TCSdD8lUyD4/QJvi9xSQ26QnPjmhag==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -1366,8 +1372,8 @@ packages:
     peerDependencies:
       react: '*'
 
-  ai@4.3.15:
-    resolution: {integrity: sha512-TYKRzbWg6mx/pmTadlAEIhuQtzfHUV0BbLY72+zkovXwq/9xhcH24IlQmkyBpElK6/4ArS0dHdOOtR1jOPVwtg==}
+  ai@4.3.19:
+    resolution: {integrity: sha512-dIE2bfNpqHN3r6IINp9znguYdhIOheKW2LDigAMrgt/upT3B8eBGPSCblENvaZGoq+hxaN9fSMzjWpbqloP+7Q==}
     engines: {node: '>=18'}
     peerDependencies:
       react: ^18 || ^19 || ^19.0.0-rc
@@ -1378,6 +1384,12 @@ packages:
 
   ai@5.0.82:
     resolution: {integrity: sha512-wmZZfsU40qB77umrcj3YzMSk6cUP5gxLXZDPfiSQLBLegTVXPUdSJC603tR7JB5JkhBDzN5VLaliuRKQGKpUXg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.25.76 || ^4.1.8
+
+  ai@5.0.83:
+    resolution: {integrity: sha512-tMc1wqc9khzETBN0X4/MHw9RbeP5uKFdoG5sUIUJ3p7lSgfDU6yZMwT6jrnA3Nk2AvxM0T43P1h2LfPlBSwGKA==}
     engines: {node: '>=18'}
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
@@ -1733,6 +1745,15 @@ packages:
 
   debug@4.4.1:
     resolution: {integrity: sha512-KcKCqiftBJcZr++7ykoDIEwSa3XWowTfNPo92BYxjXiyYEVrUQh2aLyhxBCwww+heortUFxEJYcRzosstTEBYQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+
+  debug@4.4.3:
+    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
     engines: {node: '>=6.0'}
     peerDependencies:
       supports-color: '*'
@@ -3389,6 +3410,11 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  semver@7.7.3:
+    resolution: {integrity: sha512-SdsKMrI9TdgjdweUSR9MweHA4EJ8YxHn8DFaDisvhVlUOe4BF1tLD7GAj0lIqWVl+dPb/rExr0Btby5loQm20Q==}
+    engines: {node: '>=10'}
+    hasBin: true
+
   send@1.2.0:
     resolution: {integrity: sha512-uaW0WwXKpL9blXE2o0bRhoL2EGXIrZxQ2ZQ4mgcfoBxdFmQold+qWsD2jLrfZ0trjKL6vOw0j//eAwcALFjKSw==}
     engines: {node: '>= 18'}
@@ -3982,6 +4008,13 @@ packages:
 snapshots:
 
   '@ai-sdk/gateway@2.0.3(zod@3.25.76)':
+    dependencies:
+      '@ai-sdk/provider': 2.0.0
+      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
+      '@vercel/oidc': 3.0.3
+      zod: 3.25.76
+
+  '@ai-sdk/gateway@2.0.4(zod@3.25.76)':
     dependencies:
       '@ai-sdk/provider': 2.0.0
       '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
@@ -5046,7 +5079,7 @@ snapshots:
       '@typescript-eslint/types': 8.8.0
       '@typescript-eslint/typescript-estree': 8.8.0(typescript@5.8.3)
       '@typescript-eslint/visitor-keys': 8.8.0
-      debug: 4.4.1
+      debug: 4.4.3
       eslint: 9.17.0
     optionalDependencies:
       typescript: 5.8.3
@@ -5096,11 +5129,11 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.8.0
       '@typescript-eslint/visitor-keys': 8.8.0
-      debug: 4.4.1
+      debug: 4.4.3
       fast-glob: 3.3.3
       is-glob: 4.0.3
       minimatch: 9.0.5
-      semver: 7.7.2
+      semver: 7.7.3
       ts-api-utils: 1.4.3(typescript@5.8.3)
     optionalDependencies:
       typescript: 5.8.3
@@ -5160,7 +5193,7 @@ snapshots:
   agents@0.0.84(@cloudflare/workers-types@4.20250515.0)(react@18.3.1):
     dependencies:
       '@modelcontextprotocol/sdk': 1.17.1
-      ai: 4.3.15(react@18.3.1)(zod@3.25.76)
+      ai: 4.3.19(react@18.3.1)(zod@3.25.76)
       cron-schedule: 5.0.4
       nanoid: 3.3.11
       partyserver: 0.0.71(@cloudflare/workers-types@4.20250515.0)
@@ -5171,7 +5204,7 @@ snapshots:
       - '@cloudflare/workers-types'
       - supports-color
 
-  ai@4.3.15(react@18.3.1)(zod@3.25.76):
+  ai@4.3.19(react@18.3.1)(zod@3.25.76):
     dependencies:
       '@ai-sdk/provider': 1.1.3
       '@ai-sdk/provider-utils': 2.2.8(zod@3.25.76)
@@ -5186,6 +5219,14 @@ snapshots:
   ai@5.0.82(zod@3.25.76):
     dependencies:
       '@ai-sdk/gateway': 2.0.3(zod@3.25.76)
+      '@ai-sdk/provider': 2.0.0
+      '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
+      '@opentelemetry/api': 1.9.0
+      zod: 3.25.76
+
+  ai@5.0.83(zod@3.25.76):
+    dependencies:
+      '@ai-sdk/gateway': 2.0.4(zod@3.25.76)
       '@ai-sdk/provider': 2.0.0
       '@ai-sdk/provider-utils': 3.0.14(zod@3.25.76)
       '@opentelemetry/api': 1.9.0
@@ -5573,6 +5614,10 @@ snapshots:
       ms: 2.1.3
 
   debug@4.4.1:
+    dependencies:
+      ms: 2.1.3
+
+  debug@4.4.3:
     dependencies:
       ms: 2.1.3
 
@@ -7460,6 +7505,8 @@ snapshots:
   semver@7.6.3: {}
 
   semver@7.7.2: {}
+
+  semver@7.7.3: {}
 
   send@1.2.0:
     dependencies:

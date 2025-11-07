@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const finalizeInvoiceParameters = (
   _context: Context = {}
@@ -47,11 +47,11 @@ export const finalizeInvoiceAnnotations = () => ({
   title: 'Finalize invoice',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'finalize_invoice',
   name: 'Finalize Invoice',
   description: finalizeInvoicePrompt(context),
-  parameters: finalizeInvoiceParameters(context),
+  inputSchema: finalizeInvoiceParameters(context),
   annotations: finalizeInvoiceAnnotations(),
   actions: {
     invoices: {

@@ -11,7 +11,7 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "openai": "^4.86.1",
-    "@stripe/agent-toolkit": "latest"
+    "@stripe/agent-toolkit": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.7.4"

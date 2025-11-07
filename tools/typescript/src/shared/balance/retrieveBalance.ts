@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const retrieveBalancePrompt = (_context: Context = {}) => `
 This tool will retrieve the balance from Stripe. It takes no input.
@@ -36,11 +36,11 @@ export const retrieveBalance = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'retrieve_balance',
   name: 'Retrieve Balance',
   description: retrieveBalancePrompt(context),
-  parameters: retrieveBalanceParameters(context),
+  inputSchema: retrieveBalanceParameters(context),
   annotations: retrieveBalanceAnnotations(),
   actions: {
     balance: {

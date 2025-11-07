@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createCustomerPrompt = (_context: Context = {}) => `
 This tool will create a customer in Stripe.
@@ -44,11 +44,11 @@ export const createCustomer = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_customer',
   name: 'Create Customer',
   description: createCustomerPrompt(context),
-  parameters: createCustomerParameters(context),
+  inputSchema: createCustomerParameters(context),
   annotations: createCustomerAnnotations(),
   actions: {
     customers: {

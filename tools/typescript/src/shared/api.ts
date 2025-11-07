@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 
 import type {Context} from './configuration';
-import tools, {Tool} from './tools';
+import tools, {StripeToolDefinition} from './tools';
 
 const TOOLKIT_HEADER = 'stripe-agent-toolkit-typescript';
 const MCP_HEADER = 'stripe-mcp';
@@ -11,7 +11,7 @@ class StripeAPI {
 
   context: Context;
 
-  tools: Tool[];
+  tools: StripeToolDefinition[];
 
   constructor(secretKey: string, context?: Context) {
     const stripeClient = new Stripe(secretKey, {
@@ -20,7 +20,7 @@ class StripeAPI {
           context?.mode === 'modelcontextprotocol'
             ? MCP_HEADER
             : TOOLKIT_HEADER,
-        version: '0.7.11',
+        version: '0.8.1',
         url: 'https://github.com/stripe/ai',
       },
     });

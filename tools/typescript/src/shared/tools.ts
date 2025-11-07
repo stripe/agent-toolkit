@@ -26,11 +26,11 @@ import updateDisputeTool from '@/shared/disputes/updateDispute';
 import {Context} from './configuration';
 import Stripe from 'stripe';
 
-export type Tool = {
+export type StripeToolDefinition = {
   method: string;
   name: string;
   description: string;
-  parameters: z.ZodObject<any, any, any, any>;
+  inputSchema: z.ZodObject<any, any, any, any>;
   annotations: {
     destructiveHint?: boolean;
     idempotentHint?: boolean;
@@ -46,7 +46,7 @@ export type Tool = {
   execute: (stripe: Stripe, context: Context, params: any) => Promise<any>;
 };
 
-const tools = (context: Context): Tool[] => [
+const tools = (context: Context): StripeToolDefinition[] => [
   createCustomerTool(context),
   listCustomersTool(context),
   createProductTool(context),

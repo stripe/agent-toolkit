@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const createRefundPrompt = (_context: Context = {}) => `
 This tool will refund a payment intent in Stripe.
@@ -55,11 +55,11 @@ export const createRefundAnnotations = () => ({
   title: 'Create refund',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_refund',
   name: 'Create Refund',
   description: createRefundPrompt(context),
-  parameters: createRefundParameters(context),
+  inputSchema: createRefundParameters(context),
   annotations: createRefundAnnotations(),
   actions: {
     refunds: {

@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listCouponsPrompt = (_context: Context = {}) => `
 This tool will fetch a list of Coupons from Stripe.
@@ -54,11 +54,11 @@ export const listCoupons = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_coupons',
   name: 'List Coupons',
   description: listCouponsPrompt(context),
-  parameters: listCouponsParameters(context),
+  inputSchema: listCouponsParameters(context),
   annotations: listCouponsAnnotations(),
   actions: {
     coupons: {

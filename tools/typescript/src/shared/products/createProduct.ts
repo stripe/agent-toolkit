@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 export const createProductPrompt = (_context: Context = {}) => `
 This tool will create a product in Stripe.
 
@@ -44,11 +44,11 @@ export const createProductAnnotations = () => ({
   title: 'Create product',
 });
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'create_product',
   name: 'Create Product',
   description: createProductPrompt(context),
-  parameters: createProductParameters(context),
+  inputSchema: createProductParameters(context),
   annotations: createProductAnnotations(),
   actions: {
     products: {

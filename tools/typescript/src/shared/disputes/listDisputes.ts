@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listDisputesPrompt = (_context: Context = {}) => `
 This tool will fetch a list of disputes in Stripe.
@@ -62,11 +62,11 @@ export const listDisputes = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_disputes',
   name: 'List Disputes',
   description: listDisputesPrompt(context),
-  parameters: listDisputesParameters(context),
+  inputSchema: listDisputesParameters(context),
   annotations: listDisputesAnnotations(),
   actions: {
     disputes: {

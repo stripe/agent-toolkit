@@ -29,7 +29,7 @@ class StripeAgentToolkit implements BaseToolkit {
           this._stripe,
           tool.method,
           tool.description,
-          tool.parameters
+          tool.inputSchema
         )
     );
   }

@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listInvoices = async (
   stripe: Stripe,
@@ -79,11 +79,11 @@ It takes one argument:
 - invoice (str): The ID of the invoice to finalize.
 `;
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_invoices',
   name: 'List Invoices',
   description: listInvoicesPrompt(context),
-  parameters: listInvoicesParameters(context),
+  inputSchema: listInvoicesParameters(context),
   annotations: listInvoicesAnnotations(),
   actions: {
     invoices: {

@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const listCustomersPrompt = (_context: Context = {}) => `
 This tool will fetch a list of Customers from Stripe.
@@ -55,11 +55,11 @@ export const listCustomers = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'list_customers',
   name: 'List Customers',
   description: listCustomersPrompt(context),
-  parameters: listCustomersParameters(context),
+  inputSchema: listCustomersParameters(context),
   annotations: listCustomersAnnotations(),
   actions: {
     customers: {

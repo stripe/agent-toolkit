@@ -2,11 +2,18 @@ import StripeAPI from '../shared/api';
 import tools from '../shared/tools';
 import {isToolAllowed, type Configuration} from '../shared/configuration';
 import type {
-  CoreTool,
-  LanguageModelV1StreamPart,
-  Experimental_LanguageModelV1Middleware as LanguageModelV1Middleware,
-} from 'ai';
+  LanguageModelV2Middleware,
+  LanguageModelV2Usage,
+} from '@ai-sdk/provider';
 import StripeTool from './tool';
+
+type ProviderTool = ReturnType<typeof StripeTool>;
+type WrapGenerateOptions = Parameters<
+  NonNullable<LanguageModelV2Middleware['wrapGenerate']>
+>[0];
+type WrapStreamOptions = Parameters<
+  NonNullable<LanguageModelV2Middleware['wrapStream']>
+>[0];
 
 type StripeMiddlewareConfig = {
   billing?: {
@@ -22,7 +29,7 @@ type StripeMiddlewareConfig = {
 class StripeAgentToolkit {
   private _stripe: StripeAPI;
 
-  tools: {[key: string]: CoreTool};
+  tools: Record<string, ProviderTool>;
 
   constructor({
     secretKey,
@@ -45,60 +52,54 @@ class StripeAgentToolkit {
         this._stripe,
         tool.method,
         tool.description,
-        tool.parameters
+        tool.inputSchema
       );
     });
   }
 
-  middleware(config: StripeMiddlewareConfig): LanguageModelV1Middleware {
-    const bill = async ({
-      promptTokens,
-      completionTokens,
-    }: {
-      promptTokens: number;
-      completionTokens: number;
-    }) => {
-      if (config.billing) {
-        if (config.billing.meters.input) {
-          await this._stripe.createMeterEvent({
-            event: config.billing.meters.input,
-            customer: config.billing.customer,
-            value: promptTokens.toString(),
-          });
-        }
-        if (config.billing.meters.output) {
-          await this._stripe.createMeterEvent({
-            event: config.billing.meters.output,
-            customer: config.billing.customer,
-            value: completionTokens.toString(),
-          });
-        }
+  middleware(config: StripeMiddlewareConfig): LanguageModelV2Middleware {
+    const bill = async (usage?: LanguageModelV2Usage) => {
+      if (!config.billing || !usage) {
+        return;
+      }
+
+      const {inputTokens, outputTokens} = usage;
+      const inputValue = (inputTokens ?? 0).toString();
+      const outputValue = (outputTokens ?? 0).toString();
+
+      if (config.billing.meters.input) {
+        await this._stripe.createMeterEvent({
+          event: config.billing.meters.input,
+          customer: config.billing.customer,
+          value: inputValue,
+        });
+      }
+
+      if (config.billing.meters.output) {
+        await this._stripe.createMeterEvent({
+          event: config.billing.meters.output,
+          customer: config.billing.customer,
+          value: outputValue,
+        });
       }
     };
 
     return {
-      wrapGenerate: async ({doGenerate}) => {
+      wrapGenerate: async ({doGenerate}: WrapGenerateOptions) => {
         const result = await doGenerate();
 
-        if (config.billing) {
-          await bill(result.usage);
-        }
+        await bill(result.usage);
 
         return result;
       },
 
-      wrapStream: async ({doStream}) => {
+      wrapStream: async ({doStream}: WrapStreamOptions) => {
         const {stream, ...rest} = await doStream();
 
-        const transformStream = new TransformStream<
-          LanguageModelV1StreamPart,
-          LanguageModelV1StreamPart
-        >({
+        const transformStream = new TransformStream<any, any>({
           async transform(chunk, controller) {
-            if (chunk.type === 'finish') {
-              if (config.billing) {
-                await bill(chunk.usage);
-              }
+            if (chunk?.type === 'finish') {
+              await bill(chunk.usage);
             }
 
             controller.enqueue(chunk);
@@ -113,7 +114,7 @@ class StripeAgentToolkit {
     };
   }
 
-  getTools(): {[key: string]: CoreTool} {
+  getTools(): Record<string, ProviderTool> {
     return this.tools;
   }
 }

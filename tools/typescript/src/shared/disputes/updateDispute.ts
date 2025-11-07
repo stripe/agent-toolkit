@@ -1,7 +1,7 @@
 import Stripe from 'stripe';
 import {z} from 'zod';
 import type {Context} from '@/shared/configuration';
-import type {Tool} from '@/shared/tools';
+import type {StripeToolDefinition} from '@/shared/tools';
 
 export const updateDisputePrompt = (_context: Context = {}) => `
 When you receive a dispute, contacting your customer is always the best first step. If that doesn't work, you can submit evidence to help resolve the dispute in your favor. This tool helps.
@@ -84,11 +84,11 @@ export const updateDispute = async (
   }
 };
 
-const tool = (context: Context): Tool => ({
+const tool = (context: Context): StripeToolDefinition => ({
   method: 'update_dispute',
   name: 'Update Dispute',
   description: updateDisputePrompt(context),
-  parameters: updateDisputeParameters(context),
+  inputSchema: updateDisputeParameters(context),
   annotations: updateDisputeAnnotations(),
   actions: {
     disputes: {

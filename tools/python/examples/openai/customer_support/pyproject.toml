@@ -8,7 +8,7 @@ dependencies = [
     "imaplib2==3.6",
     "python-decouple==3.8",
     "openai-agents==0.5.0",
-    "stripe-agent-toolkit>=0.6.1",
+    "stripe-agent-toolkit>=0.6.2",
     "stripe>=13.2.0",
     "urllib3<3",
     "markdown==3.7"

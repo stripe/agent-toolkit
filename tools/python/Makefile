@@ -1,14 +1,13 @@
-VENV_NAME?=venv
-PIP?=pip
+VENV_NAME?=.venv
+UV?=uv
 PYTHON?=python3.11
 DEFAULT_TEST_ENV?=py311
 
-venv: $(VENV_NAME)/bin/activate
+venv: $(VENV_NAME)/bin/python
 
-$(VENV_NAME)/bin/activate: requirements.txt
-	@test -d $(VENV_NAME) || $(PYTHON) -m venv --clear $(VENV_NAME)
-	${VENV_NAME}/bin/python -m pip install -r requirements.txt
-	@touch $(VENV_NAME)/bin/activate
+$(VENV_NAME)/bin/python: requirements.txt
+	$(UV) venv --python $(PYTHON) $(VENV_NAME)
+	$(UV) pip install --python $(VENV_NAME)/bin/python -r requirements.txt
 
 test: venv
 	${VENV_NAME}/bin/python -m unittest discover tests

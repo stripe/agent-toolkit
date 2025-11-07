@@ -109,13 +109,16 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v2
+
       - name: Install
         run: make venv
 
       - name: Build
         run: |
           set -x
-          source venv/bin/activate
+          source .venv/bin/activate
           rm -rf build dist *.egg-info
           make build
           python -m twine check dist/*

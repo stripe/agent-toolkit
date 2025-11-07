@@ -10,7 +10,7 @@ You don't need this source code unless you want to modify the package. If you ju
 want to use the package, just run:
 
 ```sh
-pip install stripe-agent-toolkit
+uv pip install stripe-agent-toolkit
 ```
 
 ### Requirements
@@ -72,7 +72,7 @@ stripe_agent_toolkit = StripeAgentToolkit(
 ## Development
 
 ```
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+uv venv --python 3.11
+source .venv/bin/activate
+uv pip install -r requirements.txt
 ```

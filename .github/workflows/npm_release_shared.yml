@@ -37,8 +37,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - run: pnpm install
-      - run: pnpm run test --if-present
-      - run: pnpm run build --if-present
+      - run: pnpm run --if-present test
+      - run: pnpm run --if-present build
       - run: npm publish --ignore-scripts --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

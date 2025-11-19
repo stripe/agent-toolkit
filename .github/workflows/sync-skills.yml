@@ -25,7 +25,7 @@ jobs:
       
       - name: Run sync script
         env:
-          STRIPE_API_KEY: ${{ secrets.MCP_STRIPE_API_KEY }}
+          MCP_STRIPE_API_KEY: ${{ secrets.MCP_STRIPE_API_KEY }}
         run: node skills/sync.js
       
       # This action will only create a PR if there are actual changes to the file

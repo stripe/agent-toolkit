@@ -41,7 +41,7 @@ Use Stripe Checkout for hosted payment pages, Payment Intents for custom payment
 ### stripe
 
 **Connection:** HTTPS API endpoint at `https://mcp.stripe.com`
-**Authentication:** Stripe secret key (configured via Kiro Powers)
+**Authorization:** Use OAuth to connect to the Stripe MCP server
 
 ## Best Practices
 
@@ -357,6 +357,4 @@ const paymentIntent = createPaymentIntent({
 
 ---
 
-**Package:** Stripe MCP Server
-**Source:** Official Stripe
 **License:** Proprietary

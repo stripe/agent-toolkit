@@ -19,6 +19,6 @@ Provide a quick reference for Stripe test card numbers:
    - Expiry/CVC info (any future date and any 3-digit CVC)
 4. Use clear visual indicators (✓ for success, ⚠️ for auth required, ✗ for decline)
 5. Mention that these only work in test mode
-6. Provide link to full testing documentation: https://stripe.com/docs/testing
+6. Provide link to full testing documentation: https://docs.stripe.com/testing.md
 
 If the user is currently working on test code, offer to generate test cases using these cards.

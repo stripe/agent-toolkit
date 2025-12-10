@@ -7,8 +7,8 @@
   "plugins": [
     {
       "name": "stripe-tools",
-      "source": "./claude_code_plugins",
-      "description": "Stripe Tools",
+      "source": "./providers/claude/stripe/",
+      "description": "Stripe",
       "version": "0.1.0",
       "author": {
         "name": "Stripe"

@@ -1,6 +1,6 @@
 ---
-name: Stripe Best Practices
-description: Best practices for building a Stripe integrations
+name: stripe-best-practices
+description: Best practices for building Stripe integrations. Use when implementing payment processing, checkout flows, subscriptions, webhooks, Connect platforms, or any Stripe API integration.
 ---
 
 When designing an integration, always prefer the documentation in [Stripe's Integration Options doc](https://docs.stripe.com/payments/payment-methods/integration-options.md)

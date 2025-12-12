@@ -1,5 +1,5 @@
 {
-  "name": "stripe-plugin",
+  "name": "stripe",
   "description": "Stripe development plugin for Claude",
   "version": "0.1.0",
   "author": {

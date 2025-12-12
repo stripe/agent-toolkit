@@ -1,6 +1,6 @@
 {
-  "name": "stripe-tools",
-  "description": "Stripe development tools",
+  "name": "stripe-plugin",
+  "description": "Stripe development plugin for Claude",
   "version": "0.1.0",
   "author": {
     "name": "Stripe",

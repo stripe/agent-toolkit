@@ -6,7 +6,7 @@
   },
   "plugins": [
     {
-      "name": "stripe-tools",
+      "name": "stripe-plugin",
       "source": "./providers/claude/stripe/",
       "description": "Stripe",
       "version": "0.1.0",

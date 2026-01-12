@@ -1,34 +1,80 @@
 import Stripe from 'stripe';
 
 import type {Context} from './configuration';
-import tools, {StripeToolDefinition} from './tools';
+import {StripeMcpClient, McpTool} from './mcp-client';
 
 const TOOLKIT_HEADER = 'stripe-agent-toolkit-typescript';
 const MCP_HEADER = 'stripe-mcp';
+const VERSION = '0.9.0';
 
 class StripeAPI {
+  // Stripe SDK is kept ONLY for billing middleware (createMeterEvent)
   stripe: Stripe;
 
   context: Context;
 
-  tools: StripeToolDefinition[];
+  private mcpClient: StripeMcpClient;
+  private initialized = false;
 
   constructor(secretKey: string, context?: Context) {
+    // Stripe SDK only used for createMeterEvent (billing middleware)
     const stripeClient = new Stripe(secretKey, {
       appInfo: {
         name:
-          context?.mode === 'modelcontextprotocol'
-            ? MCP_HEADER
-            : TOOLKIT_HEADER,
-        version: '0.8.1',
+          context?.mode === 'modelcontextprotocol' ? MCP_HEADER : TOOLKIT_HEADER,
+        version: VERSION,
         url: 'https://github.com/stripe/ai',
       },
     });
     this.stripe = stripeClient;
     this.context = context || {};
-    this.tools = tools(this.context);
+
+    // MCP client for all tool operations
+    this.mcpClient = new StripeMcpClient({
+      secretKey,
+      context: {
+        account: context?.account,
+        customer: context?.customer,
+      },
+    });
   }
 
+  /**
+   * Async initialization - connects to MCP server.
+   * Must be called before using tools via run().
+   */
+  async initialize(): Promise<void> {
+    if (this.initialized) {
+      return;
+    }
+    await this.mcpClient.connect();
+    this.initialized = true;
+  }
+
+  /**
+   * Check if the API has been initialized.
+   */
+  isInitialized(): boolean {
+    return this.initialized;
+  }
+
+  /**
+   * Get tools from MCP server (after initialization).
+   * Returns tool definitions with JSON Schema input schemas.
+   */
+  getRemoteTools(): McpTool[] {
+    if (!this.initialized) {
+      throw new Error(
+        'StripeAPI not initialized. Call initialize() before accessing tools.'
+      );
+    }
+    return this.mcpClient.getTools();
+  }
+
+  /**
+   * Billing middleware - stays as direct SDK call.
+   * This is used by AI SDK middleware for metered billing.
+   */
   async createMeterEvent({
     event,
     customer,
@@ -50,16 +96,27 @@ class StripeAPI {
     );
   }
 
-  async run(method: string, arg: any) {
-    const tool = this.tools.find((t) => t.method === method);
-    if (tool) {
-      const output = JSON.stringify(
-        await tool.execute(this.stripe, this.context, arg)
+  /**
+   * Execute a tool via MCP (replaces local execution).
+   * @param method - The tool method name (e.g., 'create_customer')
+   * @param arg - The tool arguments
+   * @returns JSON string result
+   */
+  async run(method: string, arg: Record<string, unknown>): Promise<string> {
+    if (!this.initialized) {
+      throw new Error(
+        'StripeAPI not initialized. Call initialize() before running tools.'
       );
-      return output;
-    } else {
-      throw new Error('Invalid method ' + method);
     }
+    return this.mcpClient.callTool(method, arg);
+  }
+
+  /**
+   * Close the MCP connection.
+   */
+  async close(): Promise<void> {
+    await this.mcpClient.disconnect();
+    this.initialized = false;
   }
 }
 

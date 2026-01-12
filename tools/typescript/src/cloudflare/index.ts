@@ -21,12 +21,47 @@ export type PaymentProps = {
   userEmail: string;
 };
 
+/**
+ * Base class for creating paid MCP agents in Cloudflare Workers.
+ *
+ * **IMPORTANT: Edge Runtime Limitations**
+ * The MCP-based Stripe tool execution (via mcp.stripe.com) may have
+ * connection limitations in Cloudflare Workers edge runtime due to
+ * persistent connection requirements. For production use, consider:
+ * - Using a Durable Object to maintain connections
+ * - Implementing a connection-per-request pattern
+ * - Testing thoroughly in your specific edge environment
+ *
+ * @example
+ * ```typescript
+ * class MyPaidAgent extends experimental_PaidMcpAgent<Env, State, Props> {
+ *   async init() {
+ *     this.paidTool(
+ *       'premium_feature',
+ *       'A premium feature that requires payment',
+ *       { input: z.string() },
+ *       async (args) => ({ content: [{ type: 'text', text: 'Result' }] }),
+ *       {
+ *         paymentReason: 'Access premium features',
+ *         checkout: { line_items: [{ price: 'price_xxx', quantity: 1 }] }
+ *       }
+ *     );
+ *   }
+ * }
+ * ```
+ */
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export abstract class experimental_PaidMcpAgent<
   Bindings extends Env,
   State extends PaymentState,
   Props extends PaymentProps,
 > extends McpAgent<Bindings, State, Props> {
+  /**
+   * Register a paid tool that requires payment before execution.
+   *
+   * Note: This uses registerPaidTool which makes direct Stripe SDK calls
+   * for billing operations (customer lookup, checkout sessions, etc.).
+   */
   paidTool<Args extends ZodRawShape>(
     toolName: string,
     toolDescription: string,

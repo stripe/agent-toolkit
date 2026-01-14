@@ -9,7 +9,7 @@ export interface McpClientConfig {
   secretKey: string;
   context?: {
     account?: string;
-    customer?: string;
+    // Note: customer is passed at call-time in tool args, not at connection time
   };
 }
 
@@ -34,6 +34,7 @@ export class StripeMcpClient {
   private connected = false;
   private tools: McpTool[] = [];
   private config: McpClientConfig;
+  private connectPromise: Promise<void> | null = null;
 
   constructor(config: McpClientConfig) {
     this.config = config;
@@ -46,10 +47,7 @@ export class StripeMcpClient {
     if (config.context?.account) {
       headers['Stripe-Account'] = config.context.account;
     }
-
-    if (config.context?.customer) {
-      headers['X-Stripe-Customer'] = config.context.customer;
-    }
+    // Note: customer is passed at call-time in tool args, not as a header
 
     this.transport = new StreamableHTTPClientTransport(
       new URL(MCP_SERVER_URL),
@@ -92,10 +90,26 @@ export class StripeMcpClient {
   }
 
   async connect(): Promise<void> {
+    // Use promise lock to prevent concurrent connection attempts
+    if (this.connectPromise) {
+      return this.connectPromise;
+    }
+
     if (this.connected) {
       return;
     }
 
+    this.connectPromise = this.doConnect();
+    try {
+      await this.connectPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this.connectPromise = null;
+      throw error;
+    }
+  }
+
+  private async doConnect(): Promise<void> {
     try {
       await this.client.connect(this.transport);
       const result = await this.client.listTools();
@@ -164,6 +178,7 @@ export class StripeMcpClient {
       await this.client.close();
       this.connected = false;
       this.tools = [];
+      this.connectPromise = null;
     }
   }
 }

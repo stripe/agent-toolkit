@@ -4,77 +4,7 @@ import {CallbackManagerForToolRun} from '@langchain/core/callbacks/manager';
 import {RunnableConfig} from '@langchain/core/runnables';
 import StripeAPI from '../shared/api';
 import {isToolAllowedByName, type Configuration} from '../shared/configuration';
-import type {McpTool} from '../shared/mcp-client';
-
-/**
- * Convert a JSON Schema to a basic Zod schema.
- * This is a simplified conversion that handles common cases.
- */
-function jsonSchemaToZod(schema: McpTool['inputSchema']): z.ZodObject<any> {
-  if (!schema || schema.type !== 'object') {
-    return z.object({}).passthrough();
-  }
-
-  const properties = schema.properties || {};
-  const required = new Set(schema.required || []);
-
-  const shape: Record<string, z.ZodType> = {};
-
-  for (const [key, propSchema] of Object.entries(properties)) {
-    const prop = propSchema as {
-      type?: string;
-      description?: string;
-      enum?: string[];
-      items?: {type?: string};
-    };
-
-    let zodType: z.ZodType;
-
-    switch (prop.type) {
-      case 'string':
-        if (prop.enum) {
-          zodType = z.enum(prop.enum as [string, ...string[]]);
-        } else {
-          zodType = z.string();
-        }
-        break;
-      case 'number':
-      case 'integer':
-        zodType = z.number();
-        break;
-      case 'boolean':
-        zodType = z.boolean();
-        break;
-      case 'array':
-        const itemType = (prop.items as {type?: string})?.type;
-        if (itemType === 'string') {
-          zodType = z.array(z.string());
-        } else if (itemType === 'number' || itemType === 'integer') {
-          zodType = z.array(z.number());
-        } else {
-          zodType = z.array(z.unknown());
-        }
-        break;
-      case 'object':
-        zodType = z.object({}).passthrough();
-        break;
-      default:
-        zodType = z.unknown();
-    }
-
-    if (prop.description) {
-      zodType = zodType.describe(prop.description);
-    }
-
-    if (!required.has(key)) {
-      zodType = zodType.optional();
-    }
-
-    shape[key] = zodType;
-  }
-
-  return z.object(shape).passthrough();
-}
+import {jsonSchemaToZod} from '../shared/schema-utils';
 
 /**
  * A LangChain StructuredTool that executes Stripe operations via MCP.
@@ -113,8 +43,24 @@ class StripeAgentToolkit implements BaseToolkit {
   private _stripe: StripeAPI;
   private _configuration: Configuration;
   private _initialized = false;
+  private _initPromise: Promise<void> | null = null;
+  private _tools: StripeTool[] = [];
 
-  tools: StripeTool[];
+  /**
+   * The tools available in the toolkit.
+   * @deprecated Access tools via getTools() after calling initialize().
+   * Direct property access will return empty array if not initialized.
+   */
+  get tools(): StripeTool[] {
+    if (!this._initialized) {
+      console.warn(
+        '[StripeAgentToolkit] Accessing tools before initialization. ' +
+          'Call await toolkit.initialize() first, or use createStripeAgentToolkit() factory. ' +
+          'Tools will be empty until initialized.'
+      );
+    }
+    return this._tools;
+  }
 
   constructor({
     secretKey,
@@ -125,7 +71,6 @@ class StripeAgentToolkit implements BaseToolkit {
   }) {
     this._stripe = new StripeAPI(secretKey, configuration.context);
     this._configuration = configuration;
-    this.tools = [];
   }
 
   /**
@@ -133,10 +78,26 @@ class StripeAgentToolkit implements BaseToolkit {
    * Must be called before using tools.
    */
   async initialize(): Promise<void> {
+    // Use promise lock to prevent concurrent initialization
+    if (this._initPromise) {
+      return this._initPromise;
+    }
+
     if (this._initialized) {
       return;
     }
 
+    this._initPromise = this.doInitialize();
+    try {
+      await this._initPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this._initPromise = null;
+      throw error;
+    }
+  }
+
+  private async doInitialize(): Promise<void> {
     await this._stripe.initialize();
 
     // Get tools from MCP and filter by configuration
@@ -146,7 +107,7 @@ class StripeAgentToolkit implements BaseToolkit {
     );
 
     // Convert MCP tools to LangChain StructuredTools
-    this.tools = filteredTools.map((remoteTool) => {
+    this._tools = filteredTools.map((remoteTool) => {
       const zodSchema = jsonSchemaToZod(remoteTool.inputSchema);
       return new StripeTool(
         this._stripe,
@@ -175,7 +136,7 @@ class StripeAgentToolkit implements BaseToolkit {
         'StripeAgentToolkit not initialized. Call await toolkit.initialize() first.'
       );
     }
-    return this.tools;
+    return this._tools;
   }
 
   /**
@@ -184,7 +145,8 @@ class StripeAgentToolkit implements BaseToolkit {
   async close(): Promise<void> {
     await this._stripe.close();
     this._initialized = false;
-    this.tools = [];
+    this._initPromise = null;
+    this._tools = [];
   }
 }
 

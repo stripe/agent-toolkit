@@ -10,8 +10,24 @@ class StripeAgentToolkit {
   private _stripe: StripeAPI;
   private _configuration: Configuration;
   private _initialized = false;
+  private _initPromise: Promise<void> | null = null;
+  private _tools: ChatCompletionTool[] = [];
 
-  tools: ChatCompletionTool[];
+  /**
+   * The tools available in the toolkit.
+   * @deprecated Access tools via getTools() after calling initialize().
+   * Direct property access will return empty array if not initialized.
+   */
+  get tools(): ChatCompletionTool[] {
+    if (!this._initialized) {
+      console.warn(
+        '[StripeAgentToolkit] Accessing tools before initialization. ' +
+          'Call await toolkit.initialize() first, or use createStripeAgentToolkit() factory. ' +
+          'Tools will be empty until initialized.'
+      );
+    }
+    return this._tools;
+  }
 
   constructor({
     secretKey,
@@ -22,7 +38,6 @@ class StripeAgentToolkit {
   }) {
     this._stripe = new StripeAPI(secretKey, configuration.context);
     this._configuration = configuration;
-    this.tools = [];
   }
 
   /**
@@ -30,10 +45,26 @@ class StripeAgentToolkit {
    * Must be called before using tools.
    */
   async initialize(): Promise<void> {
+    // Use promise lock to prevent concurrent initialization
+    if (this._initPromise) {
+      return this._initPromise;
+    }
+
     if (this._initialized) {
       return;
     }
 
+    this._initPromise = this.doInitialize();
+    try {
+      await this._initPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this._initPromise = null;
+      throw error;
+    }
+  }
+
+  private async doInitialize(): Promise<void> {
     await this._stripe.initialize();
 
     // Get tools from MCP and filter by configuration
@@ -44,7 +75,7 @@ class StripeAgentToolkit {
 
     // Convert MCP tools to OpenAI ChatCompletionTool format
     // MCP already provides JSON Schema, which OpenAI expects
-    this.tools = filteredTools.map((tool) => ({
+    this._tools = filteredTools.map((tool) => ({
       type: 'function' as const,
       function: {
         name: tool.name,
@@ -73,7 +104,7 @@ class StripeAgentToolkit {
         'StripeAgentToolkit not initialized. Call await toolkit.initialize() first.'
       );
     }
-    return this.tools;
+    return this._tools;
   }
 
   /**
@@ -108,7 +139,8 @@ class StripeAgentToolkit {
   async close(): Promise<void> {
     await this._stripe.close();
     this._initialized = false;
-    this.tools = [];
+    this._initPromise = null;
+    this._tools = [];
   }
 }
 

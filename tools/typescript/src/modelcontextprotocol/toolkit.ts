@@ -2,6 +2,7 @@ import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import {RequestHandlerExtra} from '@modelcontextprotocol/sdk/shared/protocol.js';
 import {Configuration, isToolAllowedByName} from '../shared/configuration';
 import {StripeMcpClient, McpTool} from '../shared/mcp-client';
+import {jsonSchemaToZodShape} from '../shared/schema-utils';
 import Stripe from 'stripe';
 
 const VERSION = '0.9.0';
@@ -11,6 +12,7 @@ class StripeAgentToolkit extends McpServer {
   private _stripe: Stripe;
   private _configuration: Configuration;
   private _initialized = false;
+  private _initPromise: Promise<void> | null = null;
 
   constructor({
     secretKey,
@@ -27,11 +29,11 @@ class StripeAgentToolkit extends McpServer {
     this._configuration = configuration;
 
     // MCP client for connecting to mcp.stripe.com
+    // Note: customer is passed at call-time in tool args, not at connection time
     this._mcpClient = new StripeMcpClient({
       secretKey,
       context: {
         account: configuration.context?.account,
-        customer: configuration.context?.customer,
       },
     });
 
@@ -50,10 +52,26 @@ class StripeAgentToolkit extends McpServer {
    * Must be called after construction and before the server starts handling requests.
    */
   async initialize(): Promise<void> {
+    // Use promise lock to prevent concurrent initialization
+    if (this._initPromise) {
+      return this._initPromise;
+    }
+
     if (this._initialized) {
       return;
     }
 
+    this._initPromise = this.doInitialize();
+    try {
+      await this._initPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this._initPromise = null;
+      throw error;
+    }
+  }
+
+  private async doInitialize(): Promise<void> {
     await this._mcpClient.connect();
 
     // Get tools from remote MCP and register as local proxies
@@ -73,16 +91,14 @@ class StripeAgentToolkit extends McpServer {
    * Register a tool that proxies execution to mcp.stripe.com
    */
   private registerProxyTool(remoteTool: McpTool): void {
-    // Convert JSON Schema to shape for MCP tool registration
-    const inputSchema = remoteTool.inputSchema || {
-      type: 'object',
-      properties: {},
-    };
+    // Convert JSON Schema to Zod shape for MCP SDK tool registration
+    // This properly handles the 'required' field and type validation
+    const zodShape = jsonSchemaToZodShape(remoteTool.inputSchema);
 
     this.tool(
       remoteTool.name,
       remoteTool.description || remoteTool.name,
-      inputSchema.properties || {},
+      zodShape,
       async (args: Record<string, unknown>, _extra: RequestHandlerExtra<any, any>) => {
         try {
           const result = await this._mcpClient.callTool(remoteTool.name, args);
@@ -132,6 +148,7 @@ class StripeAgentToolkit extends McpServer {
   async close(): Promise<void> {
     await this._mcpClient.disconnect();
     this._initialized = false;
+    this._initPromise = null;
   }
 }
 

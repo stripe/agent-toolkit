@@ -15,6 +15,7 @@ class StripeAPI {
 
   private mcpClient: StripeMcpClient;
   private initialized = false;
+  private initPromise: Promise<void> | null = null;
 
   constructor(secretKey: string, context?: Context) {
     // Stripe SDK only used for createMeterEvent (billing middleware)
@@ -30,11 +31,11 @@ class StripeAPI {
     this.context = context || {};
 
     // MCP client for all tool operations
+    // Note: customer is passed at call-time in tool args, not at connection time
     this.mcpClient = new StripeMcpClient({
       secretKey,
       context: {
         account: context?.account,
-        customer: context?.customer,
       },
     });
   }
@@ -44,9 +45,26 @@ class StripeAPI {
    * Must be called before using tools via run().
    */
   async initialize(): Promise<void> {
+    // Use promise lock to prevent concurrent initialization
+    if (this.initPromise) {
+      return this.initPromise;
+    }
+
     if (this.initialized) {
       return;
     }
+
+    this.initPromise = this.doInitialize();
+    try {
+      await this.initPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this.initPromise = null;
+      throw error;
+    }
+  }
+
+  private async doInitialize(): Promise<void> {
     await this.mcpClient.connect();
     this.initialized = true;
   }
@@ -117,6 +135,7 @@ class StripeAPI {
   async close(): Promise<void> {
     await this.mcpClient.disconnect();
     this.initialized = false;
+    this.initPromise = null;
   }
 }
 

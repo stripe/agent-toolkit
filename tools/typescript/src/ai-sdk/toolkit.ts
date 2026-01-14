@@ -2,7 +2,7 @@ import {tool, Tool} from 'ai';
 import {z} from 'zod';
 import StripeAPI from '../shared/api';
 import {isToolAllowedByName, type Configuration} from '../shared/configuration';
-import type {McpTool} from '../shared/mcp-client';
+import {jsonSchemaToZod} from '../shared/schema-utils';
 import type {
   LanguageModelV2Middleware,
   LanguageModelV2Usage,
@@ -29,83 +29,28 @@ type StripeMiddlewareConfig = {
   };
 };
 
-/**
- * Convert a JSON Schema to a basic Zod schema.
- * This is a simplified conversion that handles common cases.
- * For complex schemas, consider build-time generation.
- */
-function jsonSchemaToZod(schema: McpTool['inputSchema']): z.ZodType {
-  if (!schema || schema.type !== 'object') {
-    return z.object({}).passthrough();
-  }
-
-  const properties = schema.properties || {};
-  const required = new Set(schema.required || []);
-
-  const shape: Record<string, z.ZodType> = {};
-
-  for (const [key, propSchema] of Object.entries(properties)) {
-    const prop = propSchema as {
-      type?: string;
-      description?: string;
-      enum?: string[];
-      items?: {type?: string};
-    };
-
-    let zodType: z.ZodType;
-
-    switch (prop.type) {
-      case 'string':
-        if (prop.enum) {
-          zodType = z.enum(prop.enum as [string, ...string[]]);
-        } else {
-          zodType = z.string();
-        }
-        break;
-      case 'number':
-      case 'integer':
-        zodType = z.number();
-        break;
-      case 'boolean':
-        zodType = z.boolean();
-        break;
-      case 'array':
-        const itemType = (prop.items as {type?: string})?.type;
-        if (itemType === 'string') {
-          zodType = z.array(z.string());
-        } else if (itemType === 'number' || itemType === 'integer') {
-          zodType = z.array(z.number());
-        } else {
-          zodType = z.array(z.unknown());
-        }
-        break;
-      case 'object':
-        zodType = z.object({}).passthrough();
-        break;
-      default:
-        zodType = z.unknown();
-    }
-
-    if (prop.description) {
-      zodType = zodType.describe(prop.description);
-    }
-
-    if (!required.has(key)) {
-      zodType = zodType.optional();
-    }
-
-    shape[key] = zodType;
-  }
-
-  return z.object(shape).passthrough();
-}
-
 class StripeAgentToolkit {
   private _stripe: StripeAPI;
   private _configuration: Configuration;
   private _initialized = false;
+  private _initPromise: Promise<void> | null = null;
+  private _tools: Record<string, ProviderTool> = {};
 
-  tools: Record<string, ProviderTool>;
+  /**
+   * The tools available in the toolkit.
+   * @deprecated Access tools via getTools() after calling initialize().
+   * Direct property access will return empty object if not initialized.
+   */
+  get tools(): Record<string, ProviderTool> {
+    if (!this._initialized) {
+      console.warn(
+        '[StripeAgentToolkit] Accessing tools before initialization. ' +
+          'Call await toolkit.initialize() first, or use createStripeAgentToolkit() factory. ' +
+          'Tools will be empty until initialized.'
+      );
+    }
+    return this._tools;
+  }
 
   constructor({
     secretKey,
@@ -116,7 +61,6 @@ class StripeAgentToolkit {
   }) {
     this._stripe = new StripeAPI(secretKey, configuration.context);
     this._configuration = configuration;
-    this.tools = {};
   }
 
   /**
@@ -124,10 +68,26 @@ class StripeAgentToolkit {
    * Must be called before using tools.
    */
   async initialize(): Promise<void> {
+    // Use promise lock to prevent concurrent initialization
+    if (this._initPromise) {
+      return this._initPromise;
+    }
+
     if (this._initialized) {
       return;
     }
 
+    this._initPromise = this.doInitialize();
+    try {
+      await this._initPromise;
+    } catch (error) {
+      // Reset promise on failure so retry is possible
+      this._initPromise = null;
+      throw error;
+    }
+  }
+
+  private async doInitialize(): Promise<void> {
     await this._stripe.initialize();
 
     // Get tools from MCP and filter by configuration
@@ -140,7 +100,7 @@ class StripeAgentToolkit {
     for (const remoteTool of filteredTools) {
       const zodSchema = jsonSchemaToZod(remoteTool.inputSchema);
 
-      this.tools[remoteTool.name] = tool({
+      this._tools[remoteTool.name] = tool({
         description: remoteTool.description || remoteTool.name,
         inputSchema: zodSchema,
         execute: async (args: z.infer<typeof zodSchema>) => {
@@ -229,7 +189,7 @@ class StripeAgentToolkit {
         'StripeAgentToolkit not initialized. Call await toolkit.initialize() first.'
       );
     }
-    return this.tools;
+    return this._tools;
   }
 
   /**
@@ -238,7 +198,8 @@ class StripeAgentToolkit {
   async close(): Promise<void> {
     await this._stripe.close();
     this._initialized = false;
-    this.tools = {};
+    this._initPromise = null;
+    this._tools = {};
   }
 }
 

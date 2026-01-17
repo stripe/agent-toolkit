@@ -53,7 +53,7 @@ const run = async () => {
   console.log(`Found ${prompts.length} prompts`);
   for (const prompt of prompts) {
     const content = await getMCPPrompt(prompt.name);
-    const outputPath = path.join(__dirname, `${prompt.name}.md`);
+    const outputPath = path.join(__dirname, `${prompt.name}/SKILL.md`);
 
     const skillFileContent = `---
 description: ${prompt.description}
